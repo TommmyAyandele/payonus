@@ -195,9 +195,9 @@ function ProductSection() {
 
         <div className="fade-up" style={{ display:"grid", gridTemplateColumns:topCols, gap: isMobile ? 12 : 24, marginBottom: isMobile ? 12 : 24 }}>
           {PRODUCT_CARDS_TOP.map(p => (
-            <div key={p.title} className="product-card" style={{ ...card, height:topH }} onMouseMove={onTilt} onMouseLeave={onTiltLeave}>
+            <div key={p.title} className="product-card" style={card} onMouseMove={onTilt} onMouseLeave={onTiltLeave}>
               <img src={p.image} alt={p.title} className="product-card-img"
-                style={{ width:"100%", height: topH ? "100%" : undefined, display:"block", objectFit:"cover", objectPosition:"top left" }} />
+                style={{ width:"100%", height: topH, display:"block", objectFit:"cover", objectPosition:"top left" }} />
               {!isMobile && (
                 <div style={{ padding:"14px 20px" }}>
                   <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:15, color:T.dark }}>{p.title}</span>
@@ -210,7 +210,8 @@ function ProductSection() {
         <div className="fade-up" style={{ display:"grid", gridTemplateColumns:botCols, gap: isMobile ? 12 : 24 }}>
           {PRODUCT_CARDS_BOTTOM.map(p => (
             <div key={p.title} className="product-card" style={card} onMouseMove={onTilt} onMouseLeave={onTiltLeave}>
-              <img src={p.image} alt={p.title} className="product-card-img" style={{ width:"100%", display:"block" }} />
+              <img src={p.image} alt={p.title} className="product-card-img"
+                style={{ width:"100%", display:"block" }} />
               {!isMobile && (
                 <div style={{ padding:"14px 20px" }}>
                   <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:15, color:T.dark }}>{p.title}</span>
