@@ -63,7 +63,7 @@ function Hero() {
   const hPad    = isMobile ? 20 : isTablet ? 48 : 80;
   const h1Size  = isMobile ? 44 : isTablet ? 64 : 90;
   const subSize = isMobile ? 16 : isTablet ? 18 : 20;
-  const logoH   = isMobile ? 112 : 126;
+  const logoH   = isMobile ? 180 : 126;
 
   return (
     <section
@@ -73,7 +73,7 @@ function Hero() {
     >
       {/* World map */}
       <div className="map-rotate" style={{ position:"absolute", left:"50%", top:"50%", pointerEvents:"none", width: isMobile ? 900 : 1600, zIndex:0 }}>
-        <img src="/world-map-dots.png" alt="" aria-hidden style={{ display:"block", width:"100%", opacity:0.10 }} />
+        <img src="/world-map-dots.png" alt="" aria-hidden style={{ display:"block", width:"100%", opacity:0.18 }} />
       </div>
 
       {/* Text content — left-aligned, vertically centred between nav and logo bar */}

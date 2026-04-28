@@ -80,8 +80,8 @@ export default function ComplianceSection() {
   const { isMobile, isTablet } = useBreakpoint();
   const hPad     = isMobile ? 20 : isTablet ? 48 : 80;
   const h2Size   = isMobile ? 28 : isTablet ? 38 : 48;
-  const cardCols = isMobile ? "1fr" : "1fr 1fr";
-  const gap      = isMobile ? 32 : isTablet ? 48 : 64;
+  const cardCols = "1fr 1fr";
+  const gap      = isMobile ? 20 : isTablet ? 40 : 56;
 
   const ref = React.useRef<HTMLElement>(null);
   const [on, setOn] = React.useState(false);
@@ -108,21 +108,15 @@ export default function ComplianceSection() {
       ref={ref}
       id="compliance"
       style={{
-        width:           "100%",
-        background:      "#FAFAF8",
-        height:          "100vh",
-        paddingTop:      94,
-        boxSizing:       "border-box",
-        overflow:        "hidden",
-        scrollSnapAlign: "start",
+        width:      "100%",
+        background: "#FAFAF8",
+        padding:    isMobile ? "60px 0" : "94px 0 80px",
       }}
     >
       <div style={{
         maxWidth:      1440,
         margin:        "0 auto",
-        padding:       `${isMobile ? 16 : 28}px ${hPad}px`,
-        boxSizing:     "border-box",
-        height:        "100%",
+        padding:       `0 ${hPad}px`,
         display:       "flex",
         flexDirection: "column",
       }}>
@@ -185,10 +179,10 @@ export default function ComplianceSection() {
             <div key={card.title} className="compliance-card" style={{
               background:    "#FFFFFF",
               borderRadius:  12,
-              padding:       "20px 24px",
+              padding:       isMobile ? "16px" : "20px 24px",
               display:       "flex",
               flexDirection: "column",
-              gap:           12,
+              gap:           10,
             }}>
               {/* Icon + Title row */}
               <div style={{ display: "flex", alignItems: "center", gap: 12 }}>

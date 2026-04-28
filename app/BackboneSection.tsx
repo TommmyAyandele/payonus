@@ -67,16 +67,12 @@ export default function BackboneSection() {
       ref={ref}
       id="backbone"
       style={{
-        width:           "100%",
-        background:      "#FAFAF8",
-        height:          "100vh",
-        paddingTop:      94,
-        boxSizing:       "border-box",
-        overflow:        "hidden",
-        scrollSnapAlign: "start",
+        width:      "100%",
+        background: "#FAFAF8",
+        padding:    isMobile ? "60px 0" : "94px 0 80px",
       }}
     >
-      <div style={{ maxWidth:1440, margin:"0 auto", padding:`${isMobile ? 32 : 56}px ${hPad}px`, boxSizing:"border-box" }}>
+      <div style={{ maxWidth:1440, margin:"0 auto", padding:`0 ${hPad}px` }}>
 
         <h2 style={{
           ...fade("0s"),

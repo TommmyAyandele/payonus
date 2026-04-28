@@ -387,7 +387,7 @@ export default function PayoutsPage() {
         width: "100%",
         background: T.bg,
         paddingTop: isMobile ? 32 : isTablet ? 56 : 72,
-        ...(isMobile ? { paddingBottom: 32 } : { height: "calc(100vh + 220px)" }),
+        ...(isMobile ? { paddingBottom: 60, minHeight: "100vh" } : { height: "calc(100vh + 220px)" }),
         overflow: "hidden",
       }}>
 
@@ -405,7 +405,7 @@ export default function PayoutsPage() {
             <img key={n} src="/world-map-dots.png" aria-hidden style={{
               display: "block",
               width: "100%",
-              opacity: 0.10,
+              opacity: 0.18,
             }} />
           ))}
         </div>
