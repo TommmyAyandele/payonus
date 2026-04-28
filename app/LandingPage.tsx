@@ -63,7 +63,7 @@ function Hero() {
   const hPad    = isMobile ? 20 : isTablet ? 48 : 80;
   const h1Size  = isMobile ? 44 : isTablet ? 64 : 90;
   const subSize = isMobile ? 16 : isTablet ? 18 : 20;
-  const logoH   = isMobile ? 80 : 126;
+  const logoH   = isMobile ? 112 : 126;
 
   return (
     <section
@@ -193,19 +193,25 @@ function ProductSection() {
           Built for operations that can't afford a delay. Every product in the payonus suite is designed to eliminate payment friction at scale.
         </p>
 
-        <div className="fade-up" style={{ display:"grid", gridTemplateColumns:topCols, gap: isMobile ? 16 : 24, marginBottom: isMobile ? 16 : 24 }}>
+        <div className="fade-up" style={{ display:"grid", gridTemplateColumns:topCols, gap: isMobile ? 12 : 24, marginBottom: isMobile ? 12 : 24 }}>
           {PRODUCT_CARDS_TOP.map(p => (
             <div key={p.title} className="product-card" style={{ ...card, height:topH }} onMouseMove={onTilt} onMouseLeave={onTiltLeave}>
               <img src={p.image} alt={p.title} className="product-card-img"
                 style={{ width:"100%", height: topH ? "100%" : undefined, display:"block", objectFit:"cover", objectPosition:"top left" }} />
+              <div style={{ padding: isMobile ? "10px 14px" : "14px 20px" }}>
+                <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize: isMobile ? 13 : 15, color:T.dark }}>{p.title}</span>
+              </div>
             </div>
           ))}
         </div>
 
-        <div className="fade-up" style={{ display:"grid", gridTemplateColumns:botCols, gap: isMobile ? 16 : 24 }}>
+        <div className="fade-up" style={{ display:"grid", gridTemplateColumns:botCols, gap: isMobile ? 12 : 24 }}>
           {PRODUCT_CARDS_BOTTOM.map(p => (
             <div key={p.title} className="product-card" style={card} onMouseMove={onTilt} onMouseLeave={onTiltLeave}>
               <img src={p.image} alt={p.title} className="product-card-img" style={{ width:"100%", display:"block" }} />
+              <div style={{ padding: isMobile ? "10px 14px" : "14px 20px" }}>
+                <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize: isMobile ? 13 : 15, color:T.dark }}>{p.title}</span>
+              </div>
             </div>
           ))}
         </div>
