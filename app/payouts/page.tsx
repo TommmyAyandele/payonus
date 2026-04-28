@@ -387,7 +387,7 @@ export default function PayoutsPage() {
         width: "100%",
         background: T.bg,
         paddingTop: isMobile ? 32 : isTablet ? 56 : 72,
-        ...(isMobile || isTablet ? { paddingBottom: isMobile ? 32 : 48 } : { height: "calc(100vh + 220px)" }),
+        ...(isMobile ? { paddingBottom: 32 } : { height: "calc(100vh + 220px)" }),
         overflow: "hidden",
       }}>
 
@@ -405,8 +405,7 @@ export default function PayoutsPage() {
             <img key={n} src="/world-map-dots.png" aria-hidden style={{
               display: "block",
               width: "100%",
-              opacity: 0.22,
-              filter: "invert(1) sepia(1) saturate(3) hue-rotate(215deg)",
+              opacity: 0.10,
             }} />
           ))}
         </div>
@@ -470,10 +469,12 @@ export default function PayoutsPage() {
 
           </div>
 
-          {/* Browser wireframe — scales proportionally to container width */}
-          <div style={{ width:"100%", maxWidth:1140, marginTop: isMobile ? 24 : isTablet ? 40 : 56 }}>
-            <BrowserWireframeResponsive />
-          </div>
+          {/* Browser wireframe — desktop and tablet only, scales proportionally */}
+          {!isMobile && (
+            <div style={{ width:"100%", maxWidth:1140, marginTop: isTablet ? 40 : 56 }}>
+              <BrowserWireframeResponsive />
+            </div>
+          )}
 
         </div>
       </section>
