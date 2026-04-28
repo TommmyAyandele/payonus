@@ -157,7 +157,8 @@ function ProductSection() {
   const secPad  = isMobile ? "48px 0 32px" : "100px 0 80px";
   const topCols = isMobile ? "1fr" : "1fr 1fr";
   const botCols = isMobile ? "1fr" : isTablet ? "1fr 1fr" : "1fr 1fr 1fr";
-  const topH    = isMobile ? undefined : 420;
+  const cardH   = isMobile ? 220 : undefined;
+  const topH    = isMobile ? cardH : 420;
   const descSz  = isMobile ? 22 : isTablet ? 32 : 42;
 
   const card: React.CSSProperties = {
@@ -211,7 +212,7 @@ function ProductSection() {
           {PRODUCT_CARDS_BOTTOM.map(p => (
             <div key={p.title} className="product-card" style={card} onMouseMove={onTilt} onMouseLeave={onTiltLeave}>
               <img src={p.image} alt={p.title} className="product-card-img"
-                style={{ width:"100%", display:"block" }} />
+                style={{ width:"100%", height: cardH, display:"block", objectFit:"cover", objectPosition:"top left" }} />
               {!isMobile && (
                 <div style={{ padding:"14px 20px" }}>
                   <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:15, color:T.dark }}>{p.title}</span>
