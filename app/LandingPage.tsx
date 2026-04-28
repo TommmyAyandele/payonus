@@ -61,7 +61,7 @@ function Hero() {
   };
 
   const hPad    = isMobile ? 20 : isTablet ? 48 : 80;
-  const h1Size  = isMobile ? 44 : isTablet ? 64 : 90;
+  const h1Size  = isMobile ? 62 : isTablet ? 64 : 90;
   const subSize = isMobile ? 16 : isTablet ? 18 : 20;
   const logoH   = isMobile ? 96 : 126;
 
@@ -123,9 +123,9 @@ function Hero() {
 
       {/* Logo bar */}
       <div style={{ position:"absolute", left:0, bottom:0, width:"100%", height:logoH, overflow:"hidden" }}>
-        <div className="marquee-track" style={{ display:"flex", alignItems:"center" }}>
-          <img src="/logo-bar.png" alt="Trusted by industry-leading businesses" style={{ display:"block", height:logoH, width:"auto", flexShrink:0 }} />
-          <img src="/logo-bar.png" aria-hidden style={{ display:"block", height:logoH, width:"auto", flexShrink:0 }} />
+        <div className="marquee-track" style={{ display:"flex", width:"200%", height:"100%" }}>
+          <img src="/logo-bar.png" alt="Trusted by industry-leading businesses" style={{ display:"block", width:"50%", height:"100%", objectFit:"cover", flexShrink:0 }} />
+          <img src="/logo-bar.png" aria-hidden style={{ display:"block", width:"50%", height:"100%", objectFit:"cover", flexShrink:0 }} />
         </div>
       </div>
 
@@ -198,9 +198,11 @@ function ProductSection() {
             <div key={p.title} className="product-card" style={{ ...card, height:topH }} onMouseMove={onTilt} onMouseLeave={onTiltLeave}>
               <img src={p.image} alt={p.title} className="product-card-img"
                 style={{ width:"100%", height: topH ? "100%" : undefined, display:"block", objectFit:"cover", objectPosition:"top left" }} />
-              <div style={{ padding: isMobile ? "10px 14px" : "14px 20px" }}>
-                <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize: isMobile ? 13 : 15, color:T.dark }}>{p.title}</span>
-              </div>
+              {!isMobile && (
+                <div style={{ padding:"14px 20px" }}>
+                  <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:15, color:T.dark }}>{p.title}</span>
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -209,9 +211,11 @@ function ProductSection() {
           {PRODUCT_CARDS_BOTTOM.map(p => (
             <div key={p.title} className="product-card" style={card} onMouseMove={onTilt} onMouseLeave={onTiltLeave}>
               <img src={p.image} alt={p.title} className="product-card-img" style={{ width:"100%", display:"block" }} />
-              <div style={{ padding: isMobile ? "10px 14px" : "14px 20px" }}>
-                <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize: isMobile ? 13 : 15, color:T.dark }}>{p.title}</span>
-              </div>
+              {!isMobile && (
+                <div style={{ padding:"14px 20px" }}>
+                  <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:15, color:T.dark }}>{p.title}</span>
+                </div>
+              )}
             </div>
           ))}
         </div>

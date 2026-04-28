@@ -386,16 +386,25 @@ export default function PayoutsPage() {
         position: "relative",
         width: "100%",
         background: T.bg,
-        paddingTop: isMobile ? 32 : isTablet ? 56 : 72,
-        ...(isMobile ? { paddingBottom: 60, minHeight: "100vh" } : { height: "calc(100vh + 220px)" }),
         overflow: "hidden",
+        ...(isMobile ? {
+          minHeight: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          paddingTop: 80,
+          paddingBottom: 80,
+        } : {
+          paddingTop: isTablet ? 56 : 72,
+          height: "calc(100vh + 220px)",
+        }),
       }}>
 
-        {/* World map dots — endless vertical scroll (two stacked copies for seamless loop) */}
+        {/* World map dots */}
         <div style={{
           position: "absolute",
           top: 0, left: "50%",
-          width: isMobile ? 900 : 1600,
+          width: isMobile ? 860 : 1600,
           pointerEvents: "none",
           zIndex: 0,
           animation: "mapScrollY 38s linear infinite",
@@ -405,20 +414,38 @@ export default function PayoutsPage() {
             <img key={n} src="/world-map-dots.png" aria-hidden style={{
               display: "block",
               width: "100%",
-              opacity: 0.14,
+              opacity: isMobile ? 0.18 : 0.14,
               filter: "invert(1)",
             }} />
           ))}
         </div>
 
-        {/* Centering wrapper — same pattern as landing page hero */}
-        <div style={{ position:"relative", zIndex:1, maxWidth:1440, margin:"0 auto", padding:`0 ${hPad}px`, width:"100%", boxSizing:"border-box", display:"flex", flexDirection:"column", alignItems:"center" }}>
+        {/* Centering wrapper */}
+        <div style={{
+          position: "relative", zIndex: 1,
+          maxWidth: 1440, margin: "0 auto",
+          padding: `0 ${hPad}px`,
+          width: "100%", boxSizing: "border-box",
+          display: "flex", flexDirection: "column",
+          alignItems: isMobile ? "center" : "center",
+        }}>
 
-          {/* Text content block — fixed width, left-aligned text inside */}
-          <div style={{ width: isMobile ? "100%" : isTablet ? "100%" : 700, display:"flex", flexDirection:"column", gap: isMobile ? 14 : 24 }}>
+          {/* Content block */}
+          <div style={{
+            width: isMobile ? "100%" : isTablet ? "100%" : 700,
+            display: "flex", flexDirection: "column",
+            gap: isMobile ? 28 : 24,
+            alignItems: isMobile ? "center" : "flex-start",
+            textAlign: isMobile ? "center" : "left",
+          }}>
 
-            <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14, color:T.orange }}>
-              · Payouts
+            <span style={{
+              fontFamily: "DM Sans, sans-serif", fontWeight: 500,
+              fontSize: isMobile ? 12 : 14,
+              letterSpacing: "0.08em", textTransform: "uppercase",
+              color: T.orange,
+            }}>
+              Payouts
             </span>
 
             <h1 style={{
@@ -426,7 +453,7 @@ export default function PayoutsPage() {
               fontFamily: "Rubik, sans-serif",
               fontStyle: "italic",
               fontWeight: 500,
-              fontSize: isMobile ? 44 : isTablet ? 66 : 90,
+              fontSize: isMobile ? 62 : isTablet ? 66 : 90,
               lineHeight: 1.05,
               letterSpacing: "-0.02em",
               color: T.headingBlack,
@@ -441,19 +468,19 @@ export default function PayoutsPage() {
               fontFamily: "Rubik, sans-serif",
               fontStyle: "italic",
               fontWeight: 400,
-              fontSize: isMobile ? 15 : 16,
-              lineHeight: 1.6,
+              fontSize: isMobile ? 16 : 16,
+              lineHeight: 1.65,
               color: T.muted,
-              maxWidth: 440,
+              maxWidth: isMobile ? 320 : 440,
             }}>
               Send bulk or single payouts to vendors, contractors, and partners across 14+ African markets — in seconds, not days.
             </p>
 
-            <div style={{ display:"flex", flexWrap:"wrap", gap:12 }}>
+            <div style={{ display:"flex", flexWrap:"wrap", gap:12, justifyContent: isMobile ? "center" : "flex-start" }}>
               <button style={{
                 fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14,
                 color:T.white, background:T.primary, border:"none", borderRadius:4,
-                padding:"11px 24px", cursor:"pointer", transition:"opacity .15s",
+                padding:"13px 28px", cursor:"pointer", transition:"opacity .15s",
               }}
                 onMouseEnter={e => (e.currentTarget.style.opacity = "0.88")}
                 onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
@@ -600,22 +627,27 @@ export default function PayoutsPage() {
               <div className="flag-scroll-track" style={{
                 display: "flex",
                 flexDirection: "column",
-                gap: isMobile ? 20 : 40,
+                width: "100%",
+                gap: isMobile ? 12 : 40,
                 willChange: "transform",
               }}>
                 {[...FLAG_ROWS, ...FLAG_ROWS].map((row, rowIdx) => (
-                  <div key={rowIdx} style={{ display:"flex", gap: isMobile ? 20 : 40 }}>
+                  <div key={rowIdx} style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(4, 1fr)",
+                    gap: isMobile ? 12 : 40,
+                  }}>
                     {row.map((m, j) => (
                       <div key={j} style={{
-                        flex: "1 0 0",
-                        aspectRatio: "4/3",
+                        aspectRatio: "1",
                         borderRadius: "50%",
                         overflow: "hidden",
+                        minWidth: 0,
                       }}>
                         <img
                           src={`https://flagcdn.com/w160/${m.code}.png`}
                           alt={m.name}
-                          style={{ width:"100%", height:"100%", objectFit:"cover" }}
+                          style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }}
                         />
                       </div>
                     ))}
