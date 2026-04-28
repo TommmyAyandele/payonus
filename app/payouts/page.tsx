@@ -405,7 +405,7 @@ export default function PayoutsPage() {
           paddingTop: 80,
           paddingBottom: 80,
         } : {
-          height: "calc(100vh + 220px)",
+          height: "calc(100vh + 520px)",
         }),
       }}>
 
@@ -437,7 +437,7 @@ export default function PayoutsPage() {
             height: "100vh",
             display: "flex",
             alignItems: "center",
-            zIndex: 1,
+            zIndex: 2,
           }}>
             <div style={{
               maxWidth: 1440, margin: "0 auto",
@@ -499,11 +499,11 @@ export default function PayoutsPage() {
           </div>
         )}
 
-        {/* Desktop/tablet: wireframe anchored to section bottom, clips at fold */}
+        {/* Desktop/tablet: wireframe peeks ~80px above fold, well below text */}
         {!isMobile && (
           <div style={{
             position: "absolute",
-            bottom: 0, left: 0, right: 0,
+            top: "calc(100vh - 80px)", left: 0, right: 0,
             zIndex: 1,
           }}>
             <div style={{ maxWidth: 1440, margin: "0 auto", padding: `0 ${hPad}px`, boxSizing: "border-box" }}>
