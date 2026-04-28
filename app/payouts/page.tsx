@@ -405,9 +405,6 @@ export default function PayoutsPage() {
           paddingTop: 80,
           paddingBottom: 80,
         } : {
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
           height: "calc(100vh + 220px)",
         }),
       }}>
@@ -432,91 +429,141 @@ export default function PayoutsPage() {
           ))}
         </div>
 
-        {/* Hero content wrapper */}
-        <div style={{
-          position: "relative", zIndex: 1,
-          maxWidth: 1440, margin: "0 auto",
-          padding: `0 ${hPad}px`,
-          width: "100%", boxSizing: "border-box",
-          display: "flex", flexDirection: "column",
-          alignItems: "flex-start",
-        }}>
-
-          {/* Content block */}
+        {/* Desktop/tablet: text layer pinned to viewport height, truly centred */}
+        {!isMobile && (
           <div style={{
-            width: isMobile ? "100%" : isTablet ? "100%" : 700,
-            display: "flex", flexDirection: "column",
-            gap: isMobile ? 28 : 24,
-            alignItems: "flex-start",
-            textAlign: "left",
+            position: "absolute",
+            top: 0, left: 0, right: 0,
+            height: "100vh",
+            display: "flex",
+            alignItems: "center",
+            zIndex: 1,
           }}>
-
-            <span style={{
-              fontFamily: "DM Sans, sans-serif", fontWeight: 500,
-              fontSize: isMobile ? 12 : 14,
-              letterSpacing: "0.08em", textTransform: "uppercase",
-              color: T.orange,
+            <div style={{
+              maxWidth: 1440, margin: "0 auto",
+              padding: `0 ${hPad}px`,
+              width: "100%", boxSizing: "border-box",
             }}>
-              Payouts
-            </span>
+              <div style={{
+                width: isTablet ? "100%" : 700,
+                display: "flex", flexDirection: "column",
+                gap: 24,
+                alignItems: "flex-start",
+                textAlign: "left",
+              }}>
+                <span style={{
+                  fontFamily: "DM Sans, sans-serif", fontWeight: 500,
+                  fontSize: 14, letterSpacing: "0.08em", textTransform: "uppercase",
+                  color: T.orange,
+                }}>Payouts</span>
 
-            <h1 style={{
-              margin: 0,
-              fontFamily: "Rubik, sans-serif",
-              fontStyle: "italic",
-              fontWeight: 500,
-              fontSize: isMobile ? 62 : isTablet ? 66 : 90,
-              lineHeight: 1.05,
-              letterSpacing: "-0.02em",
-              color: T.headingBlack,
-            }}>
-              Pay anyone,<br />
-              anywhere<br />
-              across <span style={{ color: T.primary }}>Africa.</span>
-            </h1>
+                <h1 style={{
+                  margin: 0,
+                  fontFamily: "Rubik, sans-serif", fontStyle: "italic", fontWeight: 500,
+                  fontSize: isTablet ? 66 : 90,
+                  lineHeight: 1.05, letterSpacing: "-0.02em",
+                  color: T.headingBlack,
+                }}>
+                  Pay anyone,<br />anywhere<br />
+                  across <span style={{ color: T.primary }}>Africa.</span>
+                </h1>
 
-            <p style={{
-              margin: 0,
-              fontFamily: "Rubik, sans-serif",
-              fontStyle: "italic",
-              fontWeight: 400,
-              fontSize: 16,
-              lineHeight: 1.65,
-              color: T.muted,
-              maxWidth: isMobile ? 320 : 440,
-            }}>
-              Send bulk or single payouts to vendors, contractors, and partners across 14+ African markets — in seconds, not days.
-            </p>
+                <p style={{
+                  margin: 0,
+                  fontFamily: "Rubik, sans-serif", fontStyle: "italic", fontWeight: 400,
+                  fontSize: 16, lineHeight: 1.65, color: T.muted, maxWidth: 440,
+                }}>
+                  Send bulk or single payouts to vendors, contractors, and partners across 14+ African markets — in seconds, not days.
+                </p>
 
-            <div style={{ display:"flex", flexWrap:"wrap", gap:12, justifyContent: "flex-start" }}>
-              <button style={{
-                fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14,
-                color:T.white, background:T.primary, border:"none", borderRadius:4,
-                padding:"13px 28px", cursor:"pointer", transition:"opacity .15s",
-              }}
-                onMouseEnter={e => (e.currentTarget.style.opacity = "0.88")}
-                onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
-              >Get Started</button>
-              <button style={{
-                fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14,
-                color:T.muted, background:"transparent", border:`1px solid ${T.muted}`,
-                borderRadius:4, padding:"11px 24px", cursor:"pointer", transition:"background .15s",
-              }}
-                onMouseEnter={e => (e.currentTarget.style.background = "#E9DDFF")}
-                onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
-              >Contact Sales</button>
+                <div style={{ display:"flex", flexWrap:"wrap", gap:12 }}>
+                  <button style={{
+                    fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14,
+                    color:T.white, background:T.primary, border:"none", borderRadius:4,
+                    padding:"13px 28px", cursor:"pointer", transition:"opacity .15s",
+                  }}
+                    onMouseEnter={e => (e.currentTarget.style.opacity = "0.88")}
+                    onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
+                  >Get Started</button>
+                  <button style={{
+                    fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14,
+                    color:T.muted, background:"transparent", border:`1px solid ${T.muted}`,
+                    borderRadius:4, padding:"11px 24px", cursor:"pointer", transition:"background .15s",
+                  }}
+                    onMouseEnter={e => (e.currentTarget.style.background = "#E9DDFF")}
+                    onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
+                  >Contact Sales</button>
+                </div>
+              </div>
             </div>
-
           </div>
+        )}
 
-          {/* Browser wireframe — desktop and tablet only, scales proportionally */}
-          {!isMobile && (
-            <div style={{ width:"100%", maxWidth:1140, marginTop: isTablet ? 40 : 56 }}>
-              <BrowserWireframeResponsive />
+        {/* Desktop/tablet: wireframe anchored to section bottom, clips at fold */}
+        {!isMobile && (
+          <div style={{
+            position: "absolute",
+            bottom: 0, left: 0, right: 0,
+            zIndex: 1,
+          }}>
+            <div style={{ maxWidth: 1440, margin: "0 auto", padding: `0 ${hPad}px`, boxSizing: "border-box" }}>
+              <div style={{ maxWidth: 1140 }}>
+                <BrowserWireframeResponsive />
+              </div>
             </div>
-          )}
+          </div>
+        )}
 
-        </div>
+        {/* Mobile: text in normal flex flow */}
+        {isMobile && (
+          <div style={{ position: "relative", zIndex: 1, maxWidth: 1440, margin: "0 auto", padding: `0 ${hPad}px`, width: "100%", boxSizing: "border-box" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 28, alignItems: "flex-start", textAlign: "left" }}>
+              <span style={{
+                fontFamily: "DM Sans, sans-serif", fontWeight: 500,
+                fontSize: 12, letterSpacing: "0.08em", textTransform: "uppercase",
+                color: T.orange,
+              }}>Payouts</span>
+
+              <h1 style={{
+                margin: 0,
+                fontFamily: "Rubik, sans-serif", fontStyle: "italic", fontWeight: 500,
+                fontSize: 62, lineHeight: 1.05, letterSpacing: "-0.02em",
+                color: T.headingBlack,
+              }}>
+                Pay anyone,<br />anywhere<br />
+                across <span style={{ color: T.primary }}>Africa.</span>
+              </h1>
+
+              <p style={{
+                margin: 0,
+                fontFamily: "Rubik, sans-serif", fontStyle: "italic", fontWeight: 400,
+                fontSize: 16, lineHeight: 1.65, color: T.muted, maxWidth: 320,
+              }}>
+                Send bulk or single payouts to vendors, contractors, and partners across 14+ African markets — in seconds, not days.
+              </p>
+
+              <div style={{ display:"flex", flexWrap:"wrap", gap:12 }}>
+                <button style={{
+                  fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14,
+                  color:T.white, background:T.primary, border:"none", borderRadius:4,
+                  padding:"13px 28px", cursor:"pointer", transition:"opacity .15s",
+                }}
+                  onMouseEnter={e => (e.currentTarget.style.opacity = "0.88")}
+                  onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
+                >Get Started</button>
+                <button style={{
+                  fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14,
+                  color:T.muted, background:"transparent", border:`1px solid ${T.muted}`,
+                  borderRadius:4, padding:"11px 24px", cursor:"pointer", transition:"background .15s",
+                }}
+                  onMouseEnter={e => (e.currentTarget.style.background = "#E9DDFF")}
+                  onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
+                >Contact Sales</button>
+              </div>
+            </div>
+          </div>
+        )}
+
       </section>
 
       {/* ══════════════════════════════
