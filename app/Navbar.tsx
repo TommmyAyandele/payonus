@@ -174,7 +174,7 @@ export default function Navbar({ scrolled }: { scrolled: boolean }) {
         </div>
 
         {productsOpen && (
-          <div onMouseEnter={open} onMouseLeave={close} style={{ position:"absolute", top:"100%", left:0, width:"100%", background:T.white, boxShadow:"0 12px 40px rgba(0,0,0,0.10)", borderTop:`1px solid ${T.borderLight}`, zIndex:10 }}>
+          <div onMouseEnter={open} onMouseLeave={close} style={{ position:"absolute", top:"100%", left:0, width:"100%", background:"#F8F5FF", boxShadow:"0 12px 40px rgba(96,9,255,0.08)", borderTop:`1px solid #E9DDFF`, zIndex:10 }}>
             <div style={{ maxWidth:1440, margin:"0 auto", padding:`24px ${hPad}px 32px`, display:"grid", gridTemplateColumns: isTablet ? "1fr 1fr" : "1fr 1fr 1fr", gap:4 }}>
               {PRODUCTS.map(p => (
                 <a key={p.title} href={p.href} style={{ display:"flex", alignItems:"center", gap:14, padding:"14px 16px", textDecoration:"none", borderRadius:10, transition:"background .15s" }}

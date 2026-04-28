@@ -20,6 +20,33 @@ function useScrollReveal() {
   }, []);
 }
 
+/* ─── RESPONSIVE WIREFRAME WRAPPER ─── */
+function BrowserWireframeResponsive() {
+  const outerRef = React.useRef<HTMLDivElement>(null);
+  const [zoom, setZoom] = React.useState(1);
+  const NATURAL_W = 1100;
+
+  React.useEffect(() => {
+    const update = () => {
+      if (!outerRef.current) return;
+      const w = outerRef.current.offsetWidth;
+      setZoom(Math.min(1, w / NATURAL_W));
+    };
+    update();
+    const ro = new ResizeObserver(update);
+    if (outerRef.current) ro.observe(outerRef.current);
+    return () => ro.disconnect();
+  }, []);
+
+  return (
+    <div ref={outerRef} style={{ width: "100%", overflow: "hidden" }}>
+      <div style={{ zoom, width: NATURAL_W }}>
+        <BrowserWireframe />
+      </div>
+    </div>
+  );
+}
+
 /* ─── BROWSER WIREFRAME ─── */
 function BrowserWireframe() {
   /* Shimmer style applied to every skeleton placeholder block */
@@ -359,9 +386,8 @@ export default function PayoutsPage() {
         position: "relative",
         width: "100%",
         background: T.bg,
-        paddingTop: isMobile ? 48 : 72,
-        /* desktop: fixed to viewport height so wireframe clips at the bottom edge */
-        ...(isMobile ? { paddingBottom: 48 } : { height: "calc(100vh + 220px)" }),
+        paddingTop: isMobile ? 32 : isTablet ? 56 : 72,
+        ...(isMobile || isTablet ? { paddingBottom: isMobile ? 32 : 48 } : { height: "calc(100vh + 220px)" }),
         overflow: "hidden",
       }}>
 
@@ -389,7 +415,7 @@ export default function PayoutsPage() {
         <div style={{ position:"relative", zIndex:1, maxWidth:1440, margin:"0 auto", padding:`0 ${hPad}px`, width:"100%", boxSizing:"border-box", display:"flex", flexDirection:"column", alignItems:"center" }}>
 
           {/* Text content block — fixed width, left-aligned text inside */}
-          <div style={{ width: isMobile ? "100%" : 700, display:"flex", flexDirection:"column", gap: isMobile ? 16 : 24 }}>
+          <div style={{ width: isMobile ? "100%" : isTablet ? "100%" : 700, display:"flex", flexDirection:"column", gap: isMobile ? 14 : 24 }}>
 
             <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14, color:T.orange }}>
               · Payouts
@@ -444,9 +470,9 @@ export default function PayoutsPage() {
 
           </div>
 
-          {/* Browser wireframe — centered, wider than text block, clips at section bottom */}
-          <div style={{ width:"100%", maxWidth:1140, marginTop: isMobile ? 40 : 56 }}>
-            <BrowserWireframe />
+          {/* Browser wireframe — scales proportionally to container width */}
+          <div style={{ width:"100%", maxWidth:1140, marginTop: isMobile ? 24 : isTablet ? 40 : 56 }}>
+            <BrowserWireframeResponsive />
           </div>
 
         </div>
@@ -669,40 +695,28 @@ export default function PayoutsPage() {
       <section style={{
         width: "100%",
         background: T.bg,
-        padding: `${isMobile ? 60 : 80}px 0`,
-        overflow: "hidden",
+        padding: `${isMobile ? 48 : 80}px 0`,
       }}>
         <div style={{ maxWidth: 1440, margin: "0 auto", padding: `0 ${hPad}px` }}>
-          <div style={{
-            display: "grid",
-            gridTemplateColumns: isMobile || isTablet ? "1fr" : "2fr 1fr 1fr",
-            gap: isMobile ? 36 : 48,
-            alignItems: "start",
-          }}>
-
-            {/* Left */}
-            <div>
+          {isMobile || isTablet ? (
+            /* ── Mobile / Tablet: just the CTA ── */
+            <div style={{ maxWidth: 560 }}>
               <h2 style={{
-                margin: "0 0 16px",
-                fontFamily: "Rubik, sans-serif", fontStyle: "italic",
-                fontWeight: 700,
-                fontSize: isMobile ? 28 : isTablet ? 36 : 44,
-                lineHeight: 1.1,
-                color: T.headingBlack,
+                margin: "0 0 14px",
+                fontFamily: "Rubik, sans-serif", fontStyle: "italic", fontWeight: 500,
+                fontSize: isMobile ? 28 : 36, lineHeight: 1.1, color: T.headingBlack,
               }}>
                 Ready to start paying{" "}
                 <span style={{ color: T.primary }}>without friction?</span>
               </h2>
-
               <p style={{
-                margin: "0 0 32px",
+                margin: "0 0 28px",
                 fontFamily: "DM Sans, sans-serif", fontWeight: 400,
-                fontSize: 15, lineHeight: 1.65, color: T.muted, maxWidth: 440,
+                fontSize: 15, lineHeight: 1.65, color: T.muted,
               }}>
                 Set up your first payout in minutes. No lengthy onboarding, no waiting weeks for approval.
               </p>
-
-              <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
                 <button
                   className="cta-pulse"
                   style={{
@@ -711,16 +725,8 @@ export default function PayoutsPage() {
                     fontFamily: "DM Sans, sans-serif", fontWeight: 500, fontSize: 14,
                     color: T.white, background: T.primary,
                     border: "none", borderRadius: 6, padding: "12px 20px", cursor: "pointer",
-                    transition: "transform 0.4s cubic-bezier(0.16,1,0.3,1)",
                   }}
                   onClick={ripple}
-                  onMouseMove={e => {
-                    const r = e.currentTarget.getBoundingClientRect();
-                    const x = (e.clientX - r.left - r.width  / 2) * 0.25;
-                    const y = (e.clientY - r.top  - r.height / 2) * 0.25;
-                    e.currentTarget.style.transform = `translate(${x}px,${y}px)`;
-                  }}
-                  onMouseLeave={e => { e.currentTarget.style.transform = ""; }}
                 >
                   Get Started
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
@@ -738,49 +744,86 @@ export default function PayoutsPage() {
                 >Contact Sales</button>
               </div>
             </div>
+          ) : (
+            /* ── Desktop: full 3-column layout ── */
+            <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr", gap: 48, alignItems: "start" }}>
+              <div>
+                <h2 style={{
+                  margin: "0 0 16px",
+                  fontFamily: "Rubik, sans-serif", fontStyle: "italic", fontWeight: 500,
+                  fontSize: 44, lineHeight: 1.1, color: T.headingBlack,
+                }}>
+                  Ready to start paying{" "}
+                  <span style={{ color: T.primary }}>without friction?</span>
+                </h2>
+                <p style={{
+                  margin: "0 0 32px",
+                  fontFamily: "DM Sans, sans-serif", fontWeight: 400,
+                  fontSize: 15, lineHeight: 1.65, color: T.muted, maxWidth: 440,
+                }}>
+                  Set up your first payout in minutes. No lengthy onboarding, no waiting weeks for approval.
+                </p>
+                <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+                  <button
+                    className="cta-pulse"
+                    style={{
+                      position: "relative", overflow: "hidden",
+                      display: "flex", alignItems: "center", gap: 8,
+                      fontFamily: "DM Sans, sans-serif", fontWeight: 500, fontSize: 14,
+                      color: T.white, background: T.primary,
+                      border: "none", borderRadius: 6, padding: "12px 20px", cursor: "pointer",
+                      transition: "transform 0.4s cubic-bezier(0.16,1,0.3,1)",
+                    }}
+                    onClick={ripple}
+                    onMouseMove={e => {
+                      const r = e.currentTarget.getBoundingClientRect();
+                      const x = (e.clientX - r.left - r.width  / 2) * 0.25;
+                      const y = (e.clientY - r.top  - r.height / 2) * 0.25;
+                      e.currentTarget.style.transform = `translate(${x}px,${y}px)`;
+                    }}
+                    onMouseLeave={e => { e.currentTarget.style.transform = ""; }}
+                  >
+                    Get Started
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                      <path d="M9 18l6-6-6-6" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </button>
+                  <button style={{
+                    fontFamily: "DM Sans, sans-serif", fontWeight: 400, fontSize: 14,
+                    color: T.muted, background: "transparent",
+                    border: `1px solid ${T.muted}`, borderRadius: 6,
+                    padding: "12px 20px", cursor: "pointer", transition: "background .15s",
+                  }}
+                    onMouseEnter={e => (e.currentTarget.style.background = "#E9DDFF")}
+                    onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
+                  >Contact Sales</button>
+                </div>
+              </div>
 
-            {/* Middle */}
-            <div>
-              <IconBox>
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" stroke={T.primary} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-                  <circle cx="7" cy="7" r="1.2" fill={T.primary}/>
-                </svg>
-              </IconBox>
-              <p style={{
-                margin: "0 0 8px",
-                fontFamily: "DM Sans, sans-serif", fontWeight: 700, fontSize: 16,
-                lineHeight: 1.3, color: T.dark,
-              }}>See what you'll pay</p>
-              <p style={{
-                margin: "0 0 14px",
-                fontFamily: "DM Sans, sans-serif", fontWeight: 400, fontSize: 13.5,
-                lineHeight: 1.65, color: "#6B6877",
-              }}>Integrated per-transaction pricing with no hidden fees.</p>
-              <LinkArrow label="Pricing details" />
+              <div>
+                <IconBox>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                    <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" stroke={T.primary} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                    <circle cx="7" cy="7" r="1.2" fill={T.primary}/>
+                  </svg>
+                </IconBox>
+                <p style={{ margin:"0 0 8px", fontFamily:"DM Sans, sans-serif", fontWeight:700, fontSize:16, lineHeight:1.3, color:T.dark }}>See what you'll pay</p>
+                <p style={{ margin:"0 0 14px", fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:13.5, lineHeight:1.65, color:"#6B6877" }}>Integrated per-transaction pricing with no hidden fees.</p>
+                <LinkArrow label="Pricing details" />
+              </div>
+
+              <div>
+                <IconBox>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                    <path d="M16 18l6-6-6-6M8 6l-6 6 6 6" stroke={T.primary} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </IconBox>
+                <p style={{ margin:"0 0 8px", fontFamily:"DM Sans, sans-serif", fontWeight:700, fontSize:16, lineHeight:1.3, color:T.dark }}>Start building</p>
+                <p style={{ margin:"0 0 14px", fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:13.5, lineHeight:1.65, color:"#6B6877" }}>Get up and running with Payonus in as little as 30 minutes.</p>
+                <LinkArrow label="Integration options" />
+              </div>
             </div>
-
-            {/* Right */}
-            <div>
-              <IconBox>
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                  <path d="M16 18l6-6-6-6M8 6l-6 6 6 6" stroke={T.primary} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </IconBox>
-              <p style={{
-                margin: "0 0 8px",
-                fontFamily: "DM Sans, sans-serif", fontWeight: 700, fontSize: 16,
-                lineHeight: 1.3, color: T.dark,
-              }}>Start building</p>
-              <p style={{
-                margin: "0 0 14px",
-                fontFamily: "DM Sans, sans-serif", fontWeight: 400, fontSize: 13.5,
-                lineHeight: 1.65, color: "#6B6877",
-              }}>Get up and running with Payonus in as little as 30 minutes.</p>
-              <LinkArrow label="Integration options" />
-            </div>
-
-          </div>
+          )}
         </div>
       </section>
 
