@@ -405,7 +405,9 @@ export default function PayoutsPage() {
           paddingTop: 80,
           paddingBottom: 80,
         } : {
-          paddingTop: isTablet ? 56 : 72,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
           height: "calc(100vh + 220px)",
         }),
       }}>
