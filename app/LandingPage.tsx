@@ -157,7 +157,7 @@ function ProductSection() {
   const secPad  = isMobile ? "48px 0 32px" : "100px 0 80px";
   const topCols = isMobile ? "1fr" : "1fr 1fr";
   const botCols = isMobile ? "1fr" : isTablet ? "1fr 1fr" : "1fr 1fr 1fr";
-  const cardH   = isMobile ? 220 : undefined;
+  const cardH   = isMobile ? 260 : undefined;
   const topH    = isMobile ? cardH : 420;
   const descSz  = isMobile ? 22 : isTablet ? 32 : 42;
 
@@ -199,11 +199,9 @@ function ProductSection() {
             <div key={p.title} className="product-card" style={card} onMouseMove={onTilt} onMouseLeave={onTiltLeave}>
               <img src={p.image} alt={p.title} className="product-card-img"
                 style={{ width:"100%", height: topH, display:"block", objectFit:"cover", objectPosition:"top left" }} />
-              {!isMobile && (
-                <div style={{ padding:"14px 20px" }}>
-                  <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:15, color:T.dark }}>{p.title}</span>
-                </div>
-              )}
+              <div style={{ padding: isMobile ? "10px 14px" : "14px 20px" }}>
+                <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:14, color:T.dark }}>{p.title}</span>
+              </div>
             </div>
           ))}
         </div>
@@ -213,11 +211,9 @@ function ProductSection() {
             <div key={p.title} className="product-card" style={card} onMouseMove={onTilt} onMouseLeave={onTiltLeave}>
               <img src={p.image} alt={p.title} className="product-card-img"
                 style={{ width:"100%", height: cardH, display:"block", objectFit:"cover", objectPosition:"top left" }} />
-              {!isMobile && (
-                <div style={{ padding:"14px 20px" }}>
-                  <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:15, color:T.dark }}>{p.title}</span>
-                </div>
-              )}
+              <div style={{ padding: isMobile ? "10px 14px" : "14px 20px" }}>
+                <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:14, color:T.dark }}>{p.title}</span>
+              </div>
             </div>
           ))}
         </div>
