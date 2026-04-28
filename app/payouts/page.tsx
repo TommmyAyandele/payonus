@@ -634,20 +634,20 @@ export default function PayoutsPage() {
             </div>
 
             {/* Right: endless vertical flag scroll */}
-            <div style={{ position:"relative", overflow:"hidden", height: isMobile ? 360 : 580 }}>
+            <div style={{ position:"relative", overflow:"hidden", height: isMobile ? 280 : 460, maxWidth: isMobile ? "100%" : 380 }}>
               {/* Scrolling track — 6 rows (3 unique × 2) for seamless loop */}
               <div className="flag-scroll-track" style={{
                 display: "flex",
                 flexDirection: "column",
                 width: "100%",
-                gap: isMobile ? 12 : 40,
+                gap: isMobile ? 8 : 16,
                 willChange: "transform",
               }}>
                 {[...FLAG_ROWS, ...FLAG_ROWS].map((row, rowIdx) => (
                   <div key={rowIdx} style={{
                     display: "grid",
                     gridTemplateColumns: "repeat(4, 1fr)",
-                    gap: isMobile ? 12 : 40,
+                    gap: isMobile ? 8 : 16,
                   }}>
                     {row.map((m, j) => (
                       <div key={j} style={{
