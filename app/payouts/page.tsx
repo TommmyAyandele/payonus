@@ -320,9 +320,14 @@ export default function PayoutsPage() {
   useScrollReveal();
   const { isMobile, isTablet } = useBreakpoint();
   const [scrolled, setScrolled] = React.useState(false);
+  const [scrollPct, setScrollPct] = React.useState(0);
 
   React.useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 20);
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollPct(max > 0 ? window.scrollY / max : 0);
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -377,6 +382,11 @@ export default function PayoutsPage() {
         .flag-scroll-track:hover { animation-play-state: paused; }
       `}</style>
 
+      {/* Scroll progress bar */}
+      <div style={{ position:"fixed", top:0, left:0, right:0, height:3, zIndex:200, pointerEvents:"none" }}>
+        <div style={{ height:"100%", width:`${scrollPct * 100}%`, background:"linear-gradient(90deg,#6009FF 0%,#F4B249 100%)", transition:"width 0.1s linear", borderRadius:"0 2px 2px 0", boxShadow:"0 0 8px rgba(96,9,255,0.4)" }} />
+      </div>
+
       <Navbar scrolled={scrolled} />
 
       {/* ══════════════════════════════
@@ -420,14 +430,14 @@ export default function PayoutsPage() {
           ))}
         </div>
 
-        {/* Centering wrapper */}
+        {/* Hero content wrapper */}
         <div style={{
           position: "relative", zIndex: 1,
           maxWidth: 1440, margin: "0 auto",
           padding: `0 ${hPad}px`,
           width: "100%", boxSizing: "border-box",
           display: "flex", flexDirection: "column",
-          alignItems: isMobile ? "center" : "center",
+          alignItems: "flex-start",
         }}>
 
           {/* Content block */}
@@ -435,8 +445,8 @@ export default function PayoutsPage() {
             width: isMobile ? "100%" : isTablet ? "100%" : 700,
             display: "flex", flexDirection: "column",
             gap: isMobile ? 28 : 24,
-            alignItems: isMobile ? "center" : "flex-start",
-            textAlign: isMobile ? "center" : "left",
+            alignItems: "flex-start",
+            textAlign: "left",
           }}>
 
             <span style={{
@@ -468,7 +478,7 @@ export default function PayoutsPage() {
               fontFamily: "Rubik, sans-serif",
               fontStyle: "italic",
               fontWeight: 400,
-              fontSize: isMobile ? 16 : 16,
+              fontSize: 16,
               lineHeight: 1.65,
               color: T.muted,
               maxWidth: isMobile ? 320 : 440,
@@ -476,7 +486,7 @@ export default function PayoutsPage() {
               Send bulk or single payouts to vendors, contractors, and partners across 14+ African markets — in seconds, not days.
             </p>
 
-            <div style={{ display:"flex", flexWrap:"wrap", gap:12, justifyContent: isMobile ? "center" : "flex-start" }}>
+            <div style={{ display:"flex", flexWrap:"wrap", gap:12, justifyContent: "flex-start" }}>
               <button style={{
                 fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14,
                 color:T.white, background:T.primary, border:"none", borderRadius:4,

@@ -54,7 +54,6 @@ export default function BackboneSection() {
   const lblSize  = isMobile ? 24 : isTablet ? 30 : 36;
   const statCols = isMobile ? "1fr" : "1fr 1fr 1fr";
   const statGap  = isMobile ? 32 : 0;
-  const bannerH  = isMobile ? 260 : isTablet ? 300 : 417;
 
   const fade = (delay: string): React.CSSProperties => ({
     transition: `opacity 0.6s ${delay} ${EASE}, transform 0.6s ${delay} ${EASE}`,
@@ -110,17 +109,6 @@ export default function BackboneSection() {
           ))}
         </div>
 
-        {!isMobile && (
-          <div style={{ width:"100%", height:bannerH, borderRadius:16, overflow:"hidden", boxSizing:"border-box", ...fade("0.24s") }}>
-            <img src="/backbone-hero.png" alt="Abstract 3D twisted ribbon shapes in gold and purple" className="banner-inner-image" />
-          </div>
-        )}
-
-        {isMobile && (
-          <div style={{ width:"100%", height:bannerH, borderRadius:12, overflow:"hidden", ...fade("0.24s") }}>
-            <img src="/backbone-hero.png" alt="" style={{ width:"100%", height:"100%", objectFit:"cover" }} />
-          </div>
-        )}
 
       </div>
     </section>
