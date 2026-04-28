@@ -54,7 +54,7 @@ export default function BackboneSection() {
   const lblSize  = isMobile ? 24 : isTablet ? 30 : 36;
   const statCols = isMobile ? "1fr" : "1fr 1fr 1fr";
   const statGap  = isMobile ? 32 : 0;
-  const bannerH  = isMobile ? 180 : isTablet ? 280 : 417;
+  const bannerH  = isMobile ? 260 : isTablet ? 300 : 417;
 
   const fade = (delay: string): React.CSSProperties => ({
     transition: `opacity 0.6s ${delay} ${EASE}, transform 0.6s ${delay} ${EASE}`,

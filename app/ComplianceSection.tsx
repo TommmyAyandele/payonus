@@ -80,8 +80,8 @@ export default function ComplianceSection() {
   const { isMobile, isTablet } = useBreakpoint();
   const hPad     = isMobile ? 20 : isTablet ? 48 : 80;
   const h2Size   = isMobile ? 28 : isTablet ? 38 : 48;
-  const cardCols = "1fr 1fr";
-  const gap      = isMobile ? 20 : isTablet ? 40 : 56;
+  const cardCols = isMobile ? "1fr" : "1fr 1fr";
+  const gap      = isMobile ? 28 : isTablet ? 40 : 56;
 
   const ref = React.useRef<HTMLElement>(null);
   const [on, setOn] = React.useState(false);
@@ -179,10 +179,10 @@ export default function ComplianceSection() {
             <div key={card.title} className="compliance-card" style={{
               background:    "#FFFFFF",
               borderRadius:  12,
-              padding:       isMobile ? "16px" : "20px 24px",
+              padding:       isMobile ? "20px" : "20px 24px",
               display:       "flex",
               flexDirection: "column",
-              gap:           10,
+              gap:           12,
             }}>
               {/* Icon + Title row */}
               <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
@@ -243,17 +243,17 @@ export default function ComplianceSection() {
           <div className="compliance-marquee-track">
             {[...PILLS, ...PILLS].map((pill, i) => (
               <div key={i} style={{
-                display:    "inline-flex",
-                alignItems: "center",
-                gap:        8,
-                padding:    "9px 22px",
-                border:     "1.5px solid #D0D5DD",
+                display:      "inline-flex",
+                alignItems:   "center",
+                gap:          6,
+                padding:      isMobile ? "6px 14px" : "9px 22px",
+                border:       "1.5px solid #D0D5DD",
                 borderRadius: 999,
                 background:   "transparent",
                 whiteSpace:   "nowrap",
                 flexShrink:   0,
               }}>
-                <svg width="17" height="17" viewBox="0 0 16 16" fill="none">
+                <svg width={isMobile ? 13 : 17} height={isMobile ? 13 : 17} viewBox="0 0 16 16" fill="none">
                   <circle cx="8" cy="8" r="7" stroke="#12B76A" strokeWidth="1.5"/>
                   <path d="M5 8l2 2 4-4" stroke="#12B76A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
@@ -261,7 +261,7 @@ export default function ComplianceSection() {
                   fontFamily: "DM Sans, sans-serif",
                   fontStyle:  "italic",
                   fontWeight: 500,
-                  fontSize:   14,
+                  fontSize:   isMobile ? 11 : 14,
                   color:      "#1C1B1F",
                 }}>
                   {pill}

@@ -63,7 +63,7 @@ function Hero() {
   const hPad    = isMobile ? 20 : isTablet ? 48 : 80;
   const h1Size  = isMobile ? 44 : isTablet ? 64 : 90;
   const subSize = isMobile ? 16 : isTablet ? 18 : 20;
-  const logoH   = isMobile ? 180 : 126;
+  const logoH   = isMobile ? 96 : 126;
 
   return (
     <section
@@ -73,7 +73,7 @@ function Hero() {
     >
       {/* World map */}
       <div className="map-rotate" style={{ position:"absolute", left:"50%", top:"50%", pointerEvents:"none", width: isMobile ? 900 : 1600, zIndex:0 }}>
-        <img src="/world-map-dots.png" alt="" aria-hidden style={{ display:"block", width:"100%", opacity:0.18 }} />
+        <img src="/world-map-dots.png" alt="" aria-hidden style={{ display:"block", width:"100%", opacity:0.14, filter:"invert(1)" }} />
       </div>
 
       {/* Text content — left-aligned, vertically centred between nav and logo bar */}
@@ -123,9 +123,9 @@ function Hero() {
 
       {/* Logo bar */}
       <div style={{ position:"absolute", left:0, bottom:0, width:"100%", height:logoH, overflow:"hidden" }}>
-        <div className="marquee-track" style={{ display:"flex", height:"100%" }}>
-          <img src="/logo-bar.png" alt="Trusted by industry-leading businesses" style={{ height:"100%", width:"auto", flexShrink:0 }} />
-          <img src="/logo-bar.png" aria-hidden style={{ height:"100%", width:"auto", flexShrink:0 }} />
+        <div className="marquee-track" style={{ display:"flex", alignItems:"center" }}>
+          <img src="/logo-bar.png" alt="Trusted by industry-leading businesses" style={{ display:"block", height:logoH, width:"auto", flexShrink:0 }} />
+          <img src="/logo-bar.png" aria-hidden style={{ display:"block", height:logoH, width:"auto", flexShrink:0 }} />
         </div>
       </div>
 

@@ -405,7 +405,8 @@ export default function PayoutsPage() {
             <img key={n} src="/world-map-dots.png" aria-hidden style={{
               display: "block",
               width: "100%",
-              opacity: 0.18,
+              opacity: 0.14,
+              filter: "invert(1)",
             }} />
           ))}
         </div>
