@@ -67,13 +67,13 @@ function Hero() {
 
   return (
     <section
-      style={{ position:"relative", width:"100%", height:"100vh", background:T.bg, overflow:"hidden", scrollSnapAlign:"start" }}
+      style={{ position:"relative", width:"100%", height:"100vh", background:T.bg, overflow:"hidden" }}
       onMouseMove={onParallax}
       onMouseLeave={onParallaxLeave}
     >
       {/* World map */}
       <div className="map-rotate" style={{ position:"absolute", left:"50%", top:"50%", pointerEvents:"none", width: isMobile ? 900 : 1600, zIndex:0 }}>
-        <img src="/world-map-dots.png" alt="" aria-hidden style={{ display:"block", width:"100%", opacity:0.18, filter:"invert(1)", mixBlendMode:"multiply" }} />
+        <img src="/world-map-dots.png" alt="" aria-hidden style={{ display:"block", width:"100%", opacity:0.10 }} />
       </div>
 
       {/* Text content — left-aligned, vertically centred between nav and logo bar */}
@@ -123,9 +123,9 @@ function Hero() {
 
       {/* Logo bar */}
       <div style={{ position:"absolute", left:0, bottom:0, width:"100%", height:logoH, overflow:"hidden" }}>
-        <div className="marquee-track" style={{ display:"flex", width:"200%" }}>
-          <img src="/logo-bar.png" alt="Trusted by industry-leading businesses" style={{ width:"50%", height:logoH, objectFit:"cover", flexShrink:0 }} />
-          <img src="/logo-bar.png" aria-hidden style={{ width:"50%", height:logoH, objectFit:"cover", flexShrink:0 }} />
+        <div className="marquee-track" style={{ display:"flex", height:"100%" }}>
+          <img src="/logo-bar.png" alt="Trusted by industry-leading businesses" style={{ height:"100%", width:"auto", flexShrink:0 }} />
+          <img src="/logo-bar.png" aria-hidden style={{ height:"100%", width:"auto", flexShrink:0 }} />
         </div>
       </div>
 
@@ -182,7 +182,7 @@ function ProductSection() {
   };
 
   return (
-    <section id="products" style={{ width:"100%", background:T.white, padding:secPad, scrollSnapAlign:"start", scrollMarginTop:94 }}>
+    <section id="products" style={{ width:"100%", background:T.white, padding:secPad }}>
       <div style={{ maxWidth:1440, margin:"0 auto", padding:`0 ${hPad}px` }}>
 
         <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14, letterSpacing:"0.0094em", color:T.orange, display:"block", marginBottom:20 }}>
@@ -218,27 +218,24 @@ function ProductSection() {
 /* ─── ROOT ─── */
 export default function PayonUsLandingPage() {
   useScrollReveal();
-  const scrollRef  = React.useRef<HTMLDivElement>(null);
   const [scrolled, setScrolled]   = React.useState(false);
   const [scrollPct, setScrollPct] = React.useState(0);
 
   React.useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
     const onScroll = () => {
-      setScrolled(el.scrollTop > 20);
-      const max = el.scrollHeight - el.clientHeight;
-      setScrollPct(max > 0 ? el.scrollTop / max : 0);
+      setScrolled(window.scrollY > 20);
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollPct(max > 0 ? window.scrollY / max : 0);
     };
-    el.addEventListener("scroll", onScroll, { passive: true });
-    return () => el.removeEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
     <>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Archivo:wght@600&display=swap');
-        html, body { margin:0; padding:0; background:${T.bg}; height:100%; overflow:hidden; }
+        html, body { margin:0; padding:0; background:${T.bg}; }
         *, *::before, *::after { box-sizing:border-box; }
         img { display:block; }
 
@@ -247,13 +244,13 @@ export default function PayonUsLandingPage() {
         .marquee-track { animation: marquee 32s linear infinite; }
         .marquee-track:hover { animation-play-state: paused; }
 
-        /* World map rotation */
+        /* World map drift */
         @keyframes mapDrift {
-          0%   { transform: translate(-50%,-50%) translate(0px,    0px);   }
-          25%  { transform: translate(-50%,-50%) translate(18px,  -14px);  }
-          50%  { transform: translate(-50%,-50%) translate(8px,    16px);  }
-          75%  { transform: translate(-50%,-50%) translate(-16px,  6px);   }
-          100% { transform: translate(-50%,-50%) translate(0px,    0px);   }
+          0%   { transform: translate(-50%,-50%) translate(0px,   0px);  }
+          25%  { transform: translate(-50%,-50%) translate(18px, -14px); }
+          50%  { transform: translate(-50%,-50%) translate(8px,   16px); }
+          75%  { transform: translate(-50%,-50%) translate(-16px, 6px);  }
+          100% { transform: translate(-50%,-50%) translate(0px,   0px);  }
         }
         .map-rotate { animation: mapDrift 24s ease-in-out infinite; will-change: transform; }
 
@@ -267,22 +264,15 @@ export default function PayonUsLandingPage() {
         .fade-up:nth-child(2) { transition-delay: 0.12s; }
         .fade-up:nth-child(3) { transition-delay: 0.22s; }
 
-        /* Product image crossfade */
-        @keyframes imgIn { from { opacity:0; transform:scale(0.975); } to { opacity:1; transform:scale(1); } }
-        .product-img-in { animation: imgIn 0.4s cubic-bezier(0.16,1,0.3,1) forwards; }
-
-        /* Scroll hint */
+        /* Scroll hint bounce */
         @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0);} 55%{transform:translateX(-50%) translateY(6px);} }
         .scroll-hint { animation: bounce 2s ease-in-out infinite; }
 
-        /* smooth scroll */
         html { scroll-behavior: smooth; }
 
-        /* Product card — 3D tilt handled via JS; img scale stays CSS */
         .product-card { cursor: pointer; }
         .product-card-img { transition: transform 0.4s cubic-bezier(0.16,1,0.3,1); transform-origin: top center; display: block; }
         .product-card:hover .product-card-img { transform: scale(1.03); }
-
       `}</style>
 
       {/* ── Scroll progress bar ── */}
@@ -290,18 +280,14 @@ export default function PayonUsLandingPage() {
         <div style={{ height:"100%", width:`${scrollPct * 100}%`, background:"linear-gradient(90deg,#6009FF 0%,#F4B249 100%)", transition:"width 0.1s linear", borderRadius:"0 2px 2px 0", boxShadow:"0 0 8px rgba(96,9,255,0.4)" }} />
       </div>
 
-      <div ref={scrollRef} style={{ height:"100vh", overflowY:"scroll", scrollSnapType:"y mandatory", background:T.bg }}>
-        <Navbar scrolled={scrolled} />
-        <Hero />
-        <ProductSection />
-        <BackboneSection />
-        <ComplianceSection />
-        <TestimonialsSection />
-        <div style={{ scrollSnapAlign: "start", height: "100vh", display: "flex", flexDirection: "column" }}>
-          <CTASection />
-          <Footer />
-        </div>
-      </div>
+      <Navbar scrolled={scrolled} />
+      <Hero />
+      <ProductSection />
+      <BackboneSection />
+      <ComplianceSection />
+      <TestimonialsSection />
+      <CTASection />
+      <Footer />
     </>
   );
 }

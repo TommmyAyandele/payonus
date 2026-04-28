@@ -33,8 +33,9 @@ export function Logo({ height = 30 }: { height?: number }) {
 
 export default function Navbar({ scrolled }: { scrolled: boolean }) {
   const { isMobile, isTablet } = useBreakpoint();
-  const [productsOpen, setProductsOpen] = React.useState(false);
-  const [mobileOpen,   setMobileOpen]   = React.useState(false);
+  const [productsOpen,    setProductsOpen]    = React.useState(false);
+  const [mobileOpen,      setMobileOpen]      = React.useState(false);
+  const [productsExpanded,setProductsExpanded] = React.useState(false);
   const timer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const open  = () => { if (timer.current) clearTimeout(timer.current); setProductsOpen(true);  };
@@ -78,19 +79,54 @@ export default function Navbar({ scrolled }: { scrolled: boolean }) {
             </button>
           </div>
           <div style={{
-            maxHeight: mobileOpen ? 480 : 0,
+            maxHeight: mobileOpen ? 720 : 0,
             overflow: "hidden",
             transition: "max-height 0.38s cubic-bezier(0.16,1,0.3,1)",
             borderTop: mobileOpen ? `1px solid ${T.borderLight}` : "none",
           }}>
             <div style={{ padding:`12px ${hPad}px 24px`, display:"flex", flexDirection:"column", gap:2 }}>
-              {["Products","Company","Developers","Support","Pricing"].map(l => (
+
+              {/* Products accordion */}
+              <div>
+                <div
+                  onClick={() => setProductsExpanded(o => !o)}
+                  style={{ ...nl, fontSize:16, padding:"12px 8px", cursor:"pointer", justifyContent:"space-between", userSelect:"none" }}
+                  onMouseEnter={e => (e.currentTarget.style.background = "#F5EFF7")}
+                  onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
+                >
+                  Products
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style={{ transform: productsExpanded ? "rotate(180deg)" : "rotate(0deg)", transition:"transform .22s", flexShrink:0 }}>
+                    <path d="M6 9l6 6 6-6" stroke={T.dark} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+                <div style={{ maxHeight: productsExpanded ? 400 : 0, overflow:"hidden", transition:"max-height 0.3s cubic-bezier(0.16,1,0.3,1)" }}>
+                  <div style={{ paddingLeft:8, paddingBottom:8, display:"flex", flexDirection:"column", gap:2 }}>
+                    {PRODUCTS.map(p => (
+                      <a key={p.title} href={p.href}
+                        style={{ ...nl, fontSize:14, padding:"10px 10px", gap:12 }}
+                        onClick={() => { setMobileOpen(false); setProductsExpanded(false); }}
+                        onMouseEnter={e => (e.currentTarget.style.background = "#F5EFF7")}
+                        onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
+                      >
+                        <img src={p.icon} width={32} height={32} style={{ flexShrink:0 }} />
+                        <div>
+                          <div style={{ fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:14, color:T.dark }}>{p.title}</div>
+                          <div style={{ fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:12, color:T.muted }}>{p.desc}</div>
+                        </div>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {["Company","Developers","Support","Pricing"].map(l => (
                 <a key={l} href="#" style={{ ...nl, fontSize:16, padding:"12px 8px" }}
                   onClick={() => setMobileOpen(false)}
                   onMouseEnter={e => (e.currentTarget.style.background = "#F5EFF7")}
                   onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
                 >{l}</a>
               ))}
+
               <div style={{ display:"flex", gap:12, marginTop:16 }}>
                 <button style={{ flex:1, fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14, color:T.muted, background:"transparent", border:`1px solid ${T.muted}`, borderRadius:4, padding:"11px 16px", cursor:"pointer" }}>Demo Checkout</button>
                 <button style={{ flex:1, fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14, color:T.white, background:T.primary, border:"none", borderRadius:4, padding:"11px 16px", cursor:"pointer" }}>Get Started</button>
@@ -138,17 +174,17 @@ export default function Navbar({ scrolled }: { scrolled: boolean }) {
         </div>
 
         {productsOpen && (
-          <div onMouseEnter={open} onMouseLeave={close} style={{ position:"absolute", top:"100%", left:0, width:"100%", background:T.white, boxShadow:"0 8px 32px rgba(0,0,0,0.09)", borderTop:`1px solid ${T.borderLight}`, zIndex:10 }}>
-            <div style={{ maxWidth:1440, margin:"0 auto", padding:`18px ${hPad + 28}px 32px`, display:"flex", flexWrap:"wrap", gap:"8px 40px" }}>
+          <div onMouseEnter={open} onMouseLeave={close} style={{ position:"absolute", top:"100%", left:0, width:"100%", background:T.white, boxShadow:"0 12px 40px rgba(0,0,0,0.10)", borderTop:`1px solid ${T.borderLight}`, zIndex:10 }}>
+            <div style={{ maxWidth:1440, margin:"0 auto", padding:`24px ${hPad}px 32px`, display:"grid", gridTemplateColumns: isTablet ? "1fr 1fr" : "1fr 1fr 1fr", gap:4 }}>
               {PRODUCTS.map(p => (
-                <a key={p.title} href={p.href} style={{ display:"flex", alignItems:"flex-start", gap:16, width: isTablet ? "calc(50% - 20px)" : 300, padding:"14px", textDecoration:"none", borderRadius:8, transition:"background .15s" }}
+                <a key={p.title} href={p.href} style={{ display:"flex", alignItems:"center", gap:14, padding:"14px 16px", textDecoration:"none", borderRadius:10, transition:"background .15s" }}
                   onMouseEnter={e => (e.currentTarget.style.background = "#F5EFF7")}
                   onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
                 >
                   <img src={p.icon} alt={p.title} width={45} height={45} style={{ flexShrink:0 }} />
                   <div>
-                    <div style={{ fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:16, color:T.dark, marginBottom:2 }}>{p.title}</div>
-                    <div style={{ fontFamily:"Inter, DM Sans, sans-serif", fontWeight:400, fontSize:13.5, color:T.muted }}>{p.desc}</div>
+                    <div style={{ fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:15, color:T.dark, marginBottom:3 }}>{p.title}</div>
+                    <div style={{ fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:13, color:T.muted, lineHeight:1.4 }}>{p.desc}</div>
                   </div>
                 </a>
               ))}
