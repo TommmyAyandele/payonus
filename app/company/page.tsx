@@ -181,10 +181,30 @@ export default function CompanyPage() {
           HERO
       ══════════════════════════════ */}
       <section style={{
+        position:"relative",
         width:"100%", background:T.bg,
-        padding: isMobile ? "56px 0 60px" : isTablet ? "72px 0 72px" : "88px 0 80px",
+        overflow:"hidden",
+        padding: isMobile ? "56px 0 60px" : isTablet ? "72px 0 72px" : "80px 0 80px",
       }}>
-        <div style={{ maxWidth:1440, margin:"0 auto", padding:`0 ${hPad}px` }}>
+        {/* Background concentric-oval vector */}
+        {!isMobile && (
+          <img
+            src="/hero-vector.png"
+            aria-hidden
+            style={{
+              position:"absolute",
+              top:"50%", left:"50%",
+              transform:"translate(-20%, -50%)",
+              width: isTablet ? 600 : 780,
+              opacity:0.55,
+              pointerEvents:"none",
+              zIndex:0,
+              userSelect:"none",
+            }}
+          />
+        )}
+
+        <div style={{ position:"relative", zIndex:1, maxWidth:1440, margin:"0 auto", padding:`0 ${hPad}px` }}>
           <div style={{
             display:"grid",
             gridTemplateColumns: isMobile ? "1fr" : "52fr 48fr",
@@ -236,21 +256,48 @@ export default function CompanyPage() {
               </div>
             </div>
 
-            {/* Right: 3 stacked portrait photos */}
+            {/* Right: 3 stacked portrait photos — exact Figma stagger */}
             {!isMobile && (
-              <div className="fade-up d2" style={{ display:"flex", flexDirection:"column", gap:14 }}>
-                {/* Photo 1 — top */}
-                <div style={{ width:"88%", marginLeft:"auto", height: isTablet ? 140 : 168, borderRadius:14, overflow:"hidden", background:"#D9D0E8" }}>
-                  <img src="/company-hero-1.jpg" alt="Team member" style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }} />
+              <div className="fade-up d2" style={{ display:"flex", flexDirection:"column", gap: isTablet ? 12 : 16 }}>
+
+                {/* Photo 1 — top, narrower, right-aligned: man with network overlay */}
+                <div style={{ alignSelf:"flex-end", width:"82%", borderRadius:16, overflow:"hidden" }}>
+                  <img
+                    src="/company-hero-1.png"
+                    alt="Team member with technology network"
+                    style={{ width:"100%", height: isTablet ? 160 : 195, objectFit:"cover", objectPosition:"center top", display:"block" }}
+                  />
                 </div>
-                {/* Photo 2 — middle, largest */}
-                <div style={{ width:"100%", height: isTablet ? 180 : 216, borderRadius:14, overflow:"hidden", background:"#C8D0C8" }}>
-                  <img src="/company-hero-2.jpg" alt="Team collaboration" style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }} />
+
+                {/* Photo 2 — middle, widest: two people in meeting */}
+                <div style={{ alignSelf:"flex-start", width:"96%", marginLeft:"auto", borderRadius:16, overflow:"hidden" }}>
+                  <img
+                    src="/company-hero-2.png"
+                    alt="Team collaboration"
+                    style={{ width:"100%", height: isTablet ? 185 : 220, objectFit:"cover", objectPosition:"center", display:"block" }}
+                  />
                 </div>
-                {/* Photo 3 — bottom */}
-                <div style={{ width:"88%", marginLeft:"auto", height: isTablet ? 150 : 186, borderRadius:14, overflow:"hidden", background:"#D5C8B8" }}>
-                  <img src="/company-hero-3.jpg" alt="Customer" style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }} />
+
+                {/* Photo 3 — bottom, narrower, right-aligned: older woman with phone */}
+                <div style={{ alignSelf:"flex-end", width:"82%", borderRadius:16, overflow:"hidden" }}>
+                  <img
+                    src="/company-hero-3.png"
+                    alt="Customer using mobile payment"
+                    style={{ width:"100%", height: isTablet ? 170 : 205, objectFit:"cover", objectPosition:"center top", display:"block" }}
+                  />
                 </div>
+
+              </div>
+            )}
+
+            {/* Mobile: show photos in a horizontal scroll strip */}
+            {isMobile && (
+              <div style={{ display:"flex", gap:12, overflowX:"auto", paddingBottom:4 }}>
+                {["/company-hero-1.png","/company-hero-2.png","/company-hero-3.png"].map((src, i) => (
+                  <div key={i} style={{ flexShrink:0, width:200, height:160, borderRadius:12, overflow:"hidden" }}>
+                    <img src={src} alt={`Team ${i+1}`} style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }} />
+                  </div>
+                ))}
               </div>
             )}
           </div>
@@ -263,7 +310,6 @@ export default function CompanyPage() {
       <section style={{
         width:"100%", background:T.bg,
         padding: isMobile ? "56px 0 52px" : isTablet ? "80px 0 72px" : "96px 0 88px",
-        borderTop:`1px solid ${T.borderLight}`,
         borderBottom:`1px solid ${T.borderLight}`,
       }}>
         <div style={{ maxWidth:1440, margin:"0 auto", padding:`0 ${hPad}px` }}>
@@ -285,64 +331,75 @@ export default function CompanyPage() {
       {/* ══════════════════════════════
           MISSION / VISION
       ══════════════════════════════ */}
-      <section style={{ width:"100%", background:"#EAE4FF" }}>
-        {/* Text columns */}
-        <div style={{ maxWidth:1440, margin:"0 auto", padding:`${isMobile ? 56 : 80}px ${hPad}px ${isMobile ? 40 : 56}px` }}>
-          <div style={{
-            display:"grid",
-            gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
-            gap: isMobile ? 48 : isTablet ? 52 : 80,
-          }}>
-            {/* Our Mission */}
-            <div className="fade-up">
-              <span style={{ display:"block", marginBottom:16, fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14, color:NAVY }}>
-                • Our Mission
-              </span>
-              <h2 style={{
-                margin:"0 0 20px",
-                fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:700,
-                fontSize: isMobile ? 22 : isTablet ? 26 : 32, lineHeight:1.22, color:T.headingBlack,
-              }}>
-                Make moving money across Africa simple, instant, and accessible for every business.
-              </h2>
-              <p style={{ margin:0, fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:15, lineHeight:1.75, color:T.dark }}>
-                We eliminate the friction, delays, and complexity that have held back African commerce for decades. Whether it's paying vendors, receiving customer payments, or moving funds across borders — Payonus makes it seamless.
-              </p>
-            </div>
+      <section style={{ width:"100%", background:"#ECE6FF" }}>
+        <div style={{ maxWidth:1440, margin:"0 auto", padding:`${isMobile ? 56 : 80}px ${hPad}px ${isMobile ? 56 : 80}px` }}>
 
-            {/* Our Vision */}
-            <div className="fade-up d1">
-              <span style={{ display:"block", marginBottom:16, fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14, color:NAVY }}>
-                • Our Vision
-              </span>
-              <h2 style={{
-                margin:"0 0 20px",
-                fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:700,
-                fontSize: isMobile ? 22 : isTablet ? 26 : 32, lineHeight:1.22, color:T.headingBlack,
-              }}>
-                A future where financial borders no longer limit African potential.
-              </h2>
-              <p style={{ margin:0, fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:15, lineHeight:1.75, color:T.dark }}>
-                We envision a continent where any business — from a Lagos startup to a Nairobi merchant — can send and receive money instantly across 50+ African markets, just like sending a WhatsApp message.
-              </p>
-            </div>
-          </div>
-        </div>
+          {isMobile ? (
+            /* Mobile: Mission text → Mission image → Vision text → Vision image */
+            <div style={{ display:"flex", flexDirection:"column", gap:40 }}>
+              {/* Mission */}
+              <div className="fade-up">
+                <span style={{ display:"block", marginBottom:16, fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14, color:NAVY }}>• Our Mission</span>
+                <h2 style={{ margin:"0 0 20px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:700, fontSize:22, lineHeight:1.22, color:T.headingBlack }}>
+                  Make moving money across Africa simple, instant, and accessible for every business.
+                </h2>
+                <p style={{ margin:"0 0 24px", fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:15, lineHeight:1.75, color:T.dark }}>
+                  We eliminate the friction, delays, and complexity that have held back African commerce for decades. Whether it's paying vendors, receiving customer payments, or moving funds across borders — Payonus makes it seamless.
+                </p>
+                <div style={{ height:240, borderRadius:16, overflow:"hidden" }}>
+                  <img src="/company-mission.png" alt="Our Mission" style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center", display:"block" }} />
+                </div>
+              </div>
 
-        {/* Photo pair — inside columns, with padding and rounded corners */}
-        <div className="fade-up" style={{ maxWidth:1440, margin:"0 auto", padding:`0 ${hPad}px ${isMobile ? 56 : 80}px` }}>
-          <div style={{
-            display:"grid",
-            gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
-            gap: isMobile ? 16 : 24,
-          }}>
-            <div style={{ height: isMobile ? 240 : isTablet ? 320 : 400, borderRadius:16, overflow:"hidden", background:"#B8C4A8" }}>
-              <img src="/company-mission.jpg" alt="Our Mission" style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center", display:"block" }} />
+              {/* Vision */}
+              <div className="fade-up d1">
+                <span style={{ display:"block", marginBottom:16, fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14, color:NAVY }}>• Our Vision</span>
+                <h2 style={{ margin:"0 0 20px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:700, fontSize:22, lineHeight:1.22, color:T.headingBlack }}>
+                  A future where financial borders no longer limit African potential.
+                </h2>
+                <p style={{ margin:"0 0 24px", fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:15, lineHeight:1.75, color:T.dark }}>
+                  We envision a continent where any business — from a Lagos startup to a Nairobi merchant — can send and receive money instantly across 50+ African markets, just like sending a WhatsApp message.
+                </p>
+                <div style={{ height:240, borderRadius:16, overflow:"hidden" }}>
+                  <img src="/company-vision.png" alt="Our Vision" style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center", display:"block" }} />
+                </div>
+              </div>
             </div>
-            <div style={{ height: isMobile ? 240 : isTablet ? 320 : 400, borderRadius:16, overflow:"hidden", background:"#D4A843" }}>
-              <img src="/company-vision.jpg" alt="Our Vision" style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center", display:"block" }} />
-            </div>
-          </div>
+          ) : (
+            /* Desktop/Tablet: text row then image row side-by-side */
+            <>
+              <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap: isTablet ? 52 : 80, marginBottom: isTablet ? 40 : 56 }}>
+                <div className="fade-up">
+                  <span style={{ display:"block", marginBottom:16, fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14, color:NAVY }}>• Our Mission</span>
+                  <h2 style={{ margin:"0 0 20px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:700, fontSize: isTablet ? 26 : 32, lineHeight:1.22, color:T.headingBlack }}>
+                    Make moving money across Africa simple, instant, and accessible for every business.
+                  </h2>
+                  <p style={{ margin:0, fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:15, lineHeight:1.75, color:T.dark }}>
+                    We eliminate the friction, delays, and complexity that have held back African commerce for decades. Whether it's paying vendors, receiving customer payments, or moving funds across borders — Payonus makes it seamless.
+                  </p>
+                </div>
+                <div className="fade-up d1">
+                  <span style={{ display:"block", marginBottom:16, fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14, color:NAVY }}>• Our Vision</span>
+                  <h2 style={{ margin:"0 0 20px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:700, fontSize: isTablet ? 26 : 32, lineHeight:1.22, color:T.headingBlack }}>
+                    A future where financial borders no longer limit African potential.
+                  </h2>
+                  <p style={{ margin:0, fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:15, lineHeight:1.75, color:T.dark }}>
+                    We envision a continent where any business — from a Lagos startup to a Nairobi merchant — can send and receive money instantly across 50+ African markets, just like sending a WhatsApp message.
+                  </p>
+                </div>
+              </div>
+
+              <div className="fade-up" style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:24 }}>
+                <div style={{ height: isTablet ? 320 : 400, borderRadius:16, overflow:"hidden" }}>
+                  <img src="/company-mission.png" alt="Our Mission" style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center", display:"block" }} />
+                </div>
+                <div style={{ height: isTablet ? 320 : 400, borderRadius:16, overflow:"hidden" }}>
+                  <img src="/company-vision.png" alt="Our Vision" style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center", display:"block" }} />
+                </div>
+              </div>
+            </>
+          )}
+
         </div>
       </section>
 
