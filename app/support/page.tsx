@@ -20,6 +20,42 @@ function useScrollReveal() {
   }, []);
 }
 
+/* ─── HERO BACKGROUND SVG ─── */
+function HeroBg() {
+  return (
+    <svg
+      aria-hidden
+      style={{ position:"absolute", top:0, left:0, width:"100%", height:"100%", pointerEvents:"none", zIndex:0 }}
+      viewBox="0 0 1440 640"
+      preserveAspectRatio="xMidYMid slice"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g className="hero-wg1">
+        <path d="M-50 620 C100 600 220 570 380 540 C480 522 560 505 660 480 C780 450 880 410 990 355 C1090 305 1190 240 1320 175 C1380 145 1420 122 1460 102" stroke="rgba(114,82,195,0.28)" strokeWidth="1.4"/>
+        <path d="M-50 640 C80 632 160 615 270 600 C360 587 420 588 480 578 C545 566 585 550 650 536 C730 518 810 495 900 466 C1000 433 1100 387 1200 325 C1290 270 1370 210 1440 160" stroke="rgba(114,82,195,0.22)" strokeWidth="1.2"/>
+        <path d="M-100 640 C20 638 80 626 160 618 C205 613 235 618 265 611 C305 602 330 586 375 575 C435 559 490 547 555 531 C635 510 720 487 815 457 C920 423 1020 376 1125 312 C1215 256 1315 190 1440 134" stroke="rgba(90,60,180,0.22)" strokeWidth="1.1"/>
+      </g>
+      <g className="hero-wg2">
+        <path d="M200 640 C290 634 380 620 480 607 C560 596 615 600 665 591 C715 580 748 563 800 549 C870 529 945 507 1030 477 C1125 443 1215 394 1308 330 C1376 281 1415 242 1440 218" stroke="rgba(114,82,195,0.16)" strokeWidth="1.1"/>
+        <path d="M-100 600 C50 585 160 558 300 538 C400 522 468 509 545 488 C630 464 710 443 800 416 C905 384 1015 336 1115 272 C1205 216 1310 149 1440 98" stroke="rgba(140,100,210,0.20)" strokeWidth="0.9"/>
+        <path d="M-50 580 C100 565 200 540 330 522 C420 507 490 495 568 474 C650 450 730 430 825 402 C925 370 1030 322 1135 256 C1224 200 1325 133 1440 85" stroke="rgba(140,100,210,0.16)" strokeWidth="0.9"/>
+      </g>
+      <g className="hero-wg3">
+        <line x1="1060" y1="640" x2="1180" y2="260" stroke="rgba(114,82,195,0.16)" strokeWidth="1"/>
+        <line x1="1120" y1="640" x2="1220" y2="220" stroke="rgba(114,82,195,0.13)" strokeWidth="1"/>
+        <line x1="1180" y1="640" x2="1265" y2="180" stroke="rgba(114,82,195,0.11)" strokeWidth="0.9"/>
+        <line x1="1240" y1="640" x2="1310" y2="140" stroke="rgba(114,82,195,0.09)" strokeWidth="0.9"/>
+        <line x1="1300" y1="640" x2="1360" y2="100" stroke="rgba(114,82,195,0.07)" strokeWidth="0.9"/>
+      </g>
+      <g className="hero-wg4">
+        <path d="M-50 635 C100 620 230 593 380 572 C470 558 540 546 620 525 C710 500 800 474 905 440 C1010 403 1110 356 1210 291 C1295 236 1375 180 1440 138" stroke="rgba(196,148,80,0.16)" strokeWidth="0.9"/>
+        <path d="M-50 640 C80 632 190 610 320 593 C410 580 480 570 555 553 C640 532 725 510 820 482 C920 450 1020 403 1125 338 C1212 283 1308 218 1440 160" stroke="rgba(196,148,80,0.11)" strokeWidth="0.9"/>
+      </g>
+    </svg>
+  );
+}
+
 /* ─── RIPPLE ─── */
 function ripple(e: React.MouseEvent<HTMLButtonElement>) {
   const btn = e.currentTarget;
@@ -113,30 +149,12 @@ export default function SupportPage() {
           HERO
       ══════════════════════════════ */}
       <section style={{
-        position:"relative", width:"100%", background:"#060613",
+        position:"relative", width:"100%", background:T.bg,
         overflow:"hidden",
-        padding: isMobile ? "80px 0 140px" : "100px 0 180px",
+        padding: isMobile ? "64px 0 80px" : "88px 0 120px",
       }}>
-        {/* Wireframe terrain image */}
-        <img
-          src="/support-hero-bg.png"
-          alt=""
-          aria-hidden
-          style={{
-            position:"absolute", top:0, left:0, width:"100%", height:"100%",
-            objectFit:"cover", objectPosition:"center",
-            pointerEvents:"none", zIndex:0, opacity:0.72,
-          }}
-        />
-        {/* Gradient fade to page background */}
-        <div style={{
-          position:"absolute", bottom:0, left:0, right:0,
-          height:"40%",
-          background:"linear-gradient(to bottom, transparent, #FAFAF8)",
-          zIndex:1, pointerEvents:"none",
-        }}/>
-
-        <div style={{position:"relative",zIndex:2,maxWidth:1440,margin:"0 auto",padding:`0 ${hPad}px`}}>
+        <HeroBg />
+        <div style={{position:"relative",zIndex:1,maxWidth:1440,margin:"0 auto",padding:`0 ${hPad}px`}}>
 
           <span className="fade-up" style={{
             display:"block", marginBottom: isMobile ? 20 : 28,
@@ -148,7 +166,7 @@ export default function SupportPage() {
             margin:`0 0 ${isMobile ? 20 : 28}px`,
             fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500,
             fontSize: isMobile ? 52 : isTablet ? 72 : 90,
-            lineHeight:1.04, letterSpacing:"-0.02em", color:"#FFFFFF",
+            lineHeight:1.04, letterSpacing:"-0.02em", color:T.headingBlack,
             maxWidth: 760,
           }}>
             We're here when it matters.
@@ -157,8 +175,7 @@ export default function SupportPage() {
           <p className="fade-up d2" style={{
             margin:0,
             fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400,
-            fontSize: isMobile ? 15 : 17, lineHeight:1.7,
-            color:"rgba(255,255,255,0.65)",
+            fontSize: isMobile ? 15 : 17, lineHeight:1.7, color:T.muted,
             maxWidth: 520,
           }}>
             Payments don't stop at 5pm — and neither do we. Every plan includes access to our support team across chat, email, and phone.
