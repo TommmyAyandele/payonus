@@ -47,22 +47,30 @@ function HeroBg() {
       preserveAspectRatio="xMidYMid slice"
       fill="none"
     >
-      <path d="M-50 680 C100 660 220 630 380 600 C480 582 560 565 660 540 C780 510 880 470 990 415 C1090 365 1190 300 1320 235 C1380 205 1420 182 1460 162" stroke="rgba(114,82,195,0.22)" strokeWidth="1.2"/>
-      <path d="M-50 700 C80 692 160 675 270 660 C360 647 420 648 480 638 C545 626 585 610 650 596 C730 578 810 555 900 526 C1000 493 1100 447 1200 385 C1290 330 1370 270 1440 220" stroke="rgba(114,82,195,0.18)" strokeWidth="1.1"/>
-      <path d="M100 700 C180 693 260 678 370 665 C450 654 510 657 565 647 C620 635 655 618 710 604 C785 584 860 562 945 533 C1045 499 1140 451 1240 387 C1325 332 1390 272 1440 236" stroke="rgba(114,82,195,0.15)" strokeWidth="1"/>
-      <path d="M-100 700 C20 698 80 686 160 678 C205 673 235 678 265 671 C305 662 330 646 375 635 C435 619 490 607 555 591 C635 570 720 547 815 517 C920 483 1020 436 1125 372 C1215 316 1315 250 1440 194" stroke="rgba(90,60,180,0.20)" strokeWidth="0.9"/>
-      <path d="M200 700 C290 694 380 680 480 667 C560 656 615 660 665 651 C715 640 748 623 800 609 C870 589 945 567 1030 537 C1125 503 1215 454 1308 390 C1376 341 1415 302 1440 278" stroke="rgba(114,82,195,0.12)" strokeWidth="1"/>
-      <path d="M-100 660 C50 645 160 618 300 598 C400 582 468 569 545 548 C630 524 710 503 800 476 C905 444 1015 396 1115 332 C1205 276 1310 209 1440 158" stroke="rgba(140,100,210,0.18)" strokeWidth="0.8"/>
-      <path d="M-50 640 C100 625 200 600 330 582 C420 567 490 555 568 534 C650 510 730 490 825 462 C925 430 1030 382 1135 316 C1224 260 1325 193 1440 145" stroke="rgba(140,100,210,0.14)" strokeWidth="0.8"/>
-      <line x1="1060" y1="700" x2="1180" y2="320" stroke="rgba(114,82,195,0.12)" strokeWidth="0.9"/>
-      <line x1="1120" y1="700" x2="1220" y2="280" stroke="rgba(114,82,195,0.10)" strokeWidth="0.9"/>
-      <line x1="1180" y1="700" x2="1265" y2="240" stroke="rgba(114,82,195,0.09)" strokeWidth="0.9"/>
-      <line x1="1240" y1="700" x2="1310" y2="200" stroke="rgba(114,82,195,0.08)" strokeWidth="0.9"/>
-      <line x1="1300" y1="700" x2="1360" y2="160" stroke="rgba(114,82,195,0.07)" strokeWidth="0.9"/>
-      <line x1="1360" y1="700" x2="1410" y2="120" stroke="rgba(114,82,195,0.06)" strokeWidth="0.9"/>
-      <line x1="1410" y1="700" x2="1445" y2="90"  stroke="rgba(114,82,195,0.05)" strokeWidth="0.9"/>
-      <path d="M-50 695 C100 680 230 653 380 632 C470 618 540 606 620 585 C710 560 800 534 905 500 C1010 463 1110 416 1210 351 C1295 296 1375 240 1440 198" stroke="rgba(196,148,80,0.12)" strokeWidth="0.8"/>
-      <path d="M-50 700 C80 692 190 670 320 653 C410 640 480 630 555 613 C640 592 725 570 820 542 C920 510 1020 463 1125 398 C1212 343 1308 278 1440 220" stroke="rgba(196,148,80,0.09)" strokeWidth="0.8"/>
+      <g style={{ animation:"waveFlow1 14s ease-in-out infinite" }}>
+        <path d="M-50 680 C100 660 220 630 380 600 C480 582 560 565 660 540 C780 510 880 470 990 415 C1090 365 1190 300 1320 235 C1380 205 1420 182 1460 162" stroke="rgba(114,82,195,0.22)" strokeWidth="1.2"/>
+        <path d="M-50 700 C80 692 160 675 270 660 C360 647 420 648 480 638 C545 626 585 610 650 596 C730 578 810 555 900 526 C1000 493 1100 447 1200 385 C1290 330 1370 270 1440 220" stroke="rgba(114,82,195,0.18)" strokeWidth="1.1"/>
+        <path d="M100 700 C180 693 260 678 370 665 C450 654 510 657 565 647 C620 635 655 618 710 604 C785 584 860 562 945 533 C1045 499 1140 451 1240 387 C1325 332 1390 272 1440 236" stroke="rgba(114,82,195,0.15)" strokeWidth="1"/>
+        <path d="M-100 700 C20 698 80 686 160 678 C205 673 235 678 265 671 C305 662 330 646 375 635 C435 619 490 607 555 591 C635 570 720 547 815 517 C920 483 1020 436 1125 372 C1215 316 1315 250 1440 194" stroke="rgba(90,60,180,0.20)" strokeWidth="0.9"/>
+      </g>
+      <g style={{ animation:"waveFlow2 10s ease-in-out infinite" }}>
+        <path d="M200 700 C290 694 380 680 480 667 C560 656 615 660 665 651 C715 640 748 623 800 609 C870 589 945 567 1030 537 C1125 503 1215 454 1308 390 C1376 341 1415 302 1440 278" stroke="rgba(114,82,195,0.12)" strokeWidth="1"/>
+        <path d="M-100 660 C50 645 160 618 300 598 C400 582 468 569 545 548 C630 524 710 503 800 476 C905 444 1015 396 1115 332 C1205 276 1310 209 1440 158" stroke="rgba(140,100,210,0.18)" strokeWidth="0.8"/>
+        <path d="M-50 640 C100 625 200 600 330 582 C420 567 490 555 568 534 C650 510 730 490 825 462 C925 430 1030 382 1135 316 C1224 260 1325 193 1440 145" stroke="rgba(140,100,210,0.14)" strokeWidth="0.8"/>
+      </g>
+      <g style={{ animation:"waveFlow3 17s ease-in-out infinite" }}>
+        <line x1="1060" y1="700" x2="1180" y2="320" stroke="rgba(114,82,195,0.12)" strokeWidth="0.9"/>
+        <line x1="1120" y1="700" x2="1220" y2="280" stroke="rgba(114,82,195,0.10)" strokeWidth="0.9"/>
+        <line x1="1180" y1="700" x2="1265" y2="240" stroke="rgba(114,82,195,0.09)" strokeWidth="0.9"/>
+        <line x1="1240" y1="700" x2="1310" y2="200" stroke="rgba(114,82,195,0.08)" strokeWidth="0.9"/>
+        <line x1="1300" y1="700" x2="1360" y2="160" stroke="rgba(114,82,195,0.07)" strokeWidth="0.9"/>
+        <line x1="1360" y1="700" x2="1410" y2="120" stroke="rgba(114,82,195,0.06)" strokeWidth="0.9"/>
+        <line x1="1410" y1="700" x2="1445" y2="90"  stroke="rgba(114,82,195,0.05)" strokeWidth="0.9"/>
+      </g>
+      <g style={{ animation:"waveFlow2 12s ease-in-out infinite reverse" }}>
+        <path d="M-50 695 C100 680 230 653 380 632 C470 618 540 606 620 585 C710 560 800 534 905 500 C1010 463 1110 416 1210 351 C1295 296 1375 240 1440 198" stroke="rgba(196,148,80,0.12)" strokeWidth="0.8"/>
+        <path d="M-50 700 C80 692 190 670 320 653 C410 640 480 630 555 613 C640 592 725 570 820 542 C920 510 1020 463 1125 398 C1212 343 1308 278 1440 220" stroke="rgba(196,148,80,0.09)" strokeWidth="0.8"/>
+      </g>
     </svg>
   );
 }
@@ -136,6 +144,10 @@ export default function PricingPage() {
         .ripple-effect{position:absolute;border-radius:50%;background:rgba(255,255,255,.35);animation:rippleOut .55s ease-out forwards;pointer-events:none;}
 
         @keyframes ctaPulse{0%,100%{box-shadow:0 0 0 0 rgba(96,9,255,.40);}60%{box-shadow:0 0 0 14px rgba(96,9,255,0);}}
+
+        @keyframes waveFlow1{0%,100%{transform:translate(0px,0px);}50%{transform:translate(-24px,-10px);}}
+        @keyframes waveFlow2{0%,100%{transform:translate(-8px,0px);}50%{transform:translate(16px,-14px);}}
+        @keyframes waveFlow3{0%,100%{transform:translate(0px,4px);}50%{transform:translate(12px,-6px);}}
         .cta-pulse{animation:ctaPulse 2.8s ease-in-out infinite;}
 
         .pricing-card{transition:transform .28s cubic-bezier(.16,1,.3,1),box-shadow .28s;}
@@ -306,33 +318,61 @@ export default function PricingPage() {
             Everything side<br />by <span style={{color:T.primary}}>side.</span>
           </h2>
 
-          <div className="fade-up d2" style={{overflowX:"auto", WebkitOverflowScrolling:"touch" as "touch"}}>
-            <table style={{minWidth:640,fontFamily:"DM Sans, sans-serif"}}>
-              <thead>
-                <tr>
-                  {["Country/Currency","Transaction Type","Payment Method","Fee Type","Fee","Fee Cap"].map(h=>(
-                    <th key={h} style={{
-                      padding:"0 20px 16px 0",
-                      fontWeight:600, fontSize:13, color:T.dark,
-                      borderBottom:`2px solid ${T.borderLight}`,
-                      whiteSpace:"nowrap" as "nowrap",
-                    }}>{h}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {TABLE_ROWS.map((row,i)=>(
-                  <tr key={i}>
-                    <td style={{padding:"14px 20px 14px 0",fontSize:14,fontWeight:500,color:T.dark,whiteSpace:"nowrap" as "nowrap",borderBottom:`1px solid ${T.borderLight}`}}>{row.country}</td>
-                    <td style={{padding:"14px 20px 14px 0",fontSize:14,color:T.muted,borderBottom:`1px solid ${T.borderLight}`}}>{row.type}</td>
-                    <td style={{padding:"14px 20px 14px 0",fontSize:14,color:T.muted,borderBottom:`1px solid ${T.borderLight}`}}>{row.method}</td>
-                    <td style={{padding:"14px 20px 14px 0",fontSize:14,color:T.muted,borderBottom:`1px solid ${T.borderLight}`}}>{row.feeType}</td>
-                    <td style={{padding:"14px 20px 14px 0",fontSize:14,fontWeight:600,color:T.dark,borderBottom:`1px solid ${T.borderLight}`}}>{row.fee}</td>
-                    <td style={{padding:"14px 0 14px 0",fontSize:14,color:T.muted,borderBottom:`1px solid ${T.borderLight}`}}>{row.cap}</td>
-                  </tr>
+          <div className="fade-up d2">
+            {isMobile ? (
+              <div style={{ display:"flex", flexDirection:"column", gap:12 }}>
+                {TABLE_ROWS.map((row,i) => (
+                  <div key={i} style={{
+                    background:T.white, border:`1px solid ${T.borderLight}`,
+                    borderRadius:14, padding:"18px 20px",
+                  }}>
+                    <div style={{ fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:14, color:T.dark, marginBottom:14 }}>{row.country}</div>
+                    <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"10px 16px" }}>
+                      {[
+                        { label:"Type",   value:row.type,   bold:false },
+                        { label:"Method", value:row.method, bold:false },
+                        { label:"Fee",    value:row.fee,    bold:true  },
+                        { label:"Cap",    value:row.cap,    bold:false },
+                      ].map(({ label, value, bold }) => (
+                        <div key={label}>
+                          <div style={{ fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:10, color:T.muted, marginBottom:3, textTransform:"uppercase", letterSpacing:"0.06em" }}>{label}</div>
+                          <div style={{ fontFamily:"DM Sans, sans-serif", fontWeight: bold ? 700 : 500, fontSize: bold ? 16 : 13, color: bold ? T.primary : T.dark }}>{value}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 ))}
-              </tbody>
-            </table>
+              </div>
+            ) : (
+              <div style={{overflowX:"auto"}}>
+                <table style={{minWidth:640,fontFamily:"DM Sans, sans-serif"}}>
+                  <thead>
+                    <tr>
+                      {["Country/Currency","Transaction Type","Payment Method","Fee Type","Fee","Fee Cap"].map(h=>(
+                        <th key={h} style={{
+                          padding:"0 20px 16px 0",
+                          fontWeight:600, fontSize:13, color:T.dark,
+                          borderBottom:`2px solid ${T.borderLight}`,
+                          whiteSpace:"nowrap" as "nowrap",
+                        }}>{h}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {TABLE_ROWS.map((row,i)=>(
+                      <tr key={i}>
+                        <td style={{padding:"14px 20px 14px 0",fontSize:14,fontWeight:500,color:T.dark,whiteSpace:"nowrap" as "nowrap",borderBottom:`1px solid ${T.borderLight}`}}>{row.country}</td>
+                        <td style={{padding:"14px 20px 14px 0",fontSize:14,color:T.muted,borderBottom:`1px solid ${T.borderLight}`}}>{row.type}</td>
+                        <td style={{padding:"14px 20px 14px 0",fontSize:14,color:T.muted,borderBottom:`1px solid ${T.borderLight}`}}>{row.method}</td>
+                        <td style={{padding:"14px 20px 14px 0",fontSize:14,color:T.muted,borderBottom:`1px solid ${T.borderLight}`}}>{row.feeType}</td>
+                        <td style={{padding:"14px 20px 14px 0",fontSize:14,fontWeight:600,color:T.dark,borderBottom:`1px solid ${T.borderLight}`}}>{row.fee}</td>
+                        <td style={{padding:"14px 0 14px 0",fontSize:14,color:T.muted,borderBottom:`1px solid ${T.borderLight}`}}>{row.cap}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
           </div>
 
         </div>

@@ -70,75 +70,176 @@ export default function Navbar({ scrolled }: { scrolled: boolean }) {
             <button
               aria-label="Toggle menu"
               onClick={() => setMobileOpen(o => !o)}
-              style={{ background:"none", border:"none", padding:8, cursor:"pointer", lineHeight:0 }}
+              style={{
+                background: mobileOpen ? "#EDE9FF" : "none",
+                border: mobileOpen ? "1px solid #D4C8F5" : "1px solid transparent",
+                borderRadius:8, padding:8, cursor:"pointer", lineHeight:0,
+                transition:"background .2s, border-color .2s",
+              }}
             >
               {mobileOpen
-                ? <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke={T.dark} strokeWidth="2" strokeLinecap="round"/></svg>
-                : <svg width="22" height="16" viewBox="0 0 22 16" fill="none"><rect y="0"  width="22" height="2" rx="1" fill={T.dark}/><rect y="7"  width="22" height="2" rx="1" fill={T.dark}/><rect y="14" width="22" height="2" rx="1" fill={T.dark}/></svg>
+                ? <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke={T.primary} strokeWidth="2" strokeLinecap="round"/></svg>
+                : <svg width="22" height="16" viewBox="0 0 22 16" fill="none"><rect y="0" width="22" height="2" rx="1" fill={T.dark}/><rect y="7" width="22" height="2" rx="1" fill={T.dark}/><rect y="14" width="22" height="2" rx="1" fill={T.dark}/></svg>
               }
             </button>
           </div>
-          <div style={{
-            maxHeight: mobileOpen ? 720 : 0,
-            overflow: "hidden",
-            transition: "max-height 0.38s cubic-bezier(0.16,1,0.3,1)",
-            borderTop: mobileOpen ? `1px solid ${T.borderLight}` : "none",
-          }}>
-            <div style={{ padding:`12px ${hPad}px 24px`, display:"flex", flexDirection:"column", gap:2 }}>
+        </nav>
 
-              {/* Products accordion */}
+        {/* Full-screen overlay */}
+        {mobileOpen && (
+          <div style={{
+            position:"fixed", top:0, left:0, right:0, bottom:0,
+            background:T.bg, zIndex:200,
+            display:"flex", flexDirection:"column",
+            overflowY:"auto",
+            animation:"menuSlideIn .22s cubic-bezier(.16,1,.3,1)",
+          }}>
+            {/* Overlay header */}
+            <div style={{
+              display:"flex", justifyContent:"space-between", alignItems:"center",
+              padding:`14px ${hPad}px`,
+              borderBottom:`1px solid ${T.borderLight}`,
+              flexShrink:0,
+            }}>
+              <Logo />
+              <button
+                onClick={() => setMobileOpen(false)}
+                aria-label="Close menu"
+                style={{
+                  background:"#EDE9FF", border:"1px solid #D4C8F5",
+                  borderRadius:8, padding:8, cursor:"pointer", lineHeight:0,
+                }}
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <path d="M18 6L6 18M6 6l12 12" stroke={T.primary} strokeWidth="2" strokeLinecap="round"/>
+                </svg>
+              </button>
+            </div>
+
+            {/* Menu links */}
+            <div style={{ flex:1, padding:`16px ${hPad}px 24px`, display:"flex", flexDirection:"column", gap:4 }}>
+
+              {/* Products — distinct accordion */}
               <div>
-                <div
+                <button
                   onClick={() => setProductsExpanded(o => !o)}
-                  style={{ ...nl, fontSize:16, padding:"12px 8px", cursor:"pointer", justifyContent:"space-between", userSelect:"none" }}
-                  onMouseEnter={e => (e.currentTarget.style.background = "#F5EFF7")}
-                  onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
+                  style={{
+                    width:"100%", border:"none", cursor:"pointer",
+                    display:"flex", justifyContent:"space-between", alignItems:"center",
+                    padding:"14px 16px", borderRadius:12,
+                    fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:17,
+                    color: productsExpanded ? T.primary : T.dark,
+                    background: productsExpanded ? "#EDE9FF" : "transparent",
+                    transition:"background .2s, color .2s",
+                    textAlign:"left",
+                  }}
+                  onMouseEnter={e => { if (!productsExpanded) e.currentTarget.style.background = "#F5EFF7"; }}
+                  onMouseLeave={e => { if (!productsExpanded) e.currentTarget.style.background = "transparent"; }}
                 >
                   Products
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style={{ transform: productsExpanded ? "rotate(180deg)" : "rotate(0deg)", transition:"transform .22s", flexShrink:0 }}>
-                    <path d="M6 9l6 6 6-6" stroke={T.dark} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style={{ transform: productsExpanded ? "rotate(180deg)" : "rotate(0deg)", transition:"transform .22s", flexShrink:0 }}>
+                    <path d="M6 9l6 6 6-6" stroke={productsExpanded ? T.primary : T.muted} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
-                </div>
-                <div style={{ maxHeight: productsExpanded ? 400 : 0, overflow:"hidden", transition:"max-height 0.3s cubic-bezier(0.16,1,0.3,1)" }}>
-                  <div style={{ paddingLeft:8, paddingBottom:8, display:"flex", flexDirection:"column", gap:2 }}>
+                </button>
+
+                {/* Products submenu — visually distinct card */}
+                {productsExpanded && (
+                  <div style={{
+                    background:"#F5EEFF",
+                    border:"1px solid #DDD0FF",
+                    borderRadius:16,
+                    padding:"10px",
+                    marginTop:6,
+                    display:"flex", flexDirection:"column", gap:2,
+                  }}>
                     {PRODUCTS.map(p => (
                       <a key={p.title} href={p.href}
-                        style={{ ...nl, fontSize:14, padding:"10px 10px", gap:12 }}
+                        style={{
+                          display:"flex", alignItems:"center", gap:14,
+                          padding:"12px 10px", borderRadius:12,
+                          textDecoration:"none", background:"transparent",
+                          transition:"background .15s",
+                        }}
                         onClick={() => { setMobileOpen(false); setProductsExpanded(false); }}
-                        onMouseEnter={e => (e.currentTarget.style.background = "#F5EFF7")}
+                        onMouseEnter={e => (e.currentTarget.style.background = "#EDE9FF")}
                         onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
                       >
-                        <img src={p.icon} width={32} height={32} style={{ flexShrink:0 }} />
+                        <div style={{
+                          width:44, height:44, flexShrink:0,
+                          background:T.white, borderRadius:10,
+                          display:"flex", alignItems:"center", justifyContent:"center",
+                          boxShadow:"0 2px 8px rgba(96,9,255,0.10)",
+                          border:"1px solid #EDE9FF",
+                        }}>
+                          <img src={p.icon} width={26} height={26} style={{ display:"block" }} />
+                        </div>
                         <div>
-                          <div style={{ fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:14, color:T.dark }}>{p.title}</div>
+                          <div style={{ fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:14, color:T.dark, marginBottom:2 }}>{p.title}</div>
                           <div style={{ fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:12, color:T.muted }}>{p.desc}</div>
                         </div>
                       </a>
                     ))}
                   </div>
-                </div>
+                )}
               </div>
 
+              {/* Regular nav links */}
               {[
                 { label:"Company",    href:"/company" },
                 { label:"Developers", href:"#"        },
                 { label:"Support",    href:"#"        },
                 { label:"Pricing",    href:"/pricing" },
               ].map(({ label, href }) => (
-                <a key={label} href={href} style={{ ...nl, fontSize:16, padding:"12px 8px" }}
-                  onClick={() => setMobileOpen(false)}
+                <a key={label} href={href}
+                  style={{
+                    display:"block",
+                    fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:17, color:T.dark,
+                    padding:"14px 16px", borderRadius:12,
+                    textDecoration:"none", background:"transparent", transition:"background .15s",
+                  }}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setMobileOpen(false);
+                    if (href !== "#") window.location.href = href;
+                  }}
                   onMouseEnter={e => (e.currentTarget.style.background = "#F5EFF7")}
                   onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
                 >{label}</a>
               ))}
+            </div>
 
-              <div style={{ display:"flex", gap:12, marginTop:16 }}>
-                <button style={{ flex:1, fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14, color:T.muted, background:"transparent", border:`1px solid ${T.muted}`, borderRadius:4, padding:"11px 16px", cursor:"pointer" }}>Demo Checkout</button>
-                <button style={{ flex:1, fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14, color:T.white, background:T.primary, border:"none", borderRadius:4, padding:"11px 16px", cursor:"pointer" }}>Get Started</button>
-              </div>
+            {/* Bottom CTA */}
+            <div style={{
+              padding:`20px ${hPad}px 40px`,
+              borderTop:`1px solid ${T.borderLight}`,
+              display:"flex", flexDirection:"column", gap:12,
+              flexShrink:0,
+            }}>
+              <button
+                style={{
+                  fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:15,
+                  color:T.white, background:T.primary,
+                  border:"none", borderRadius:10,
+                  padding:"16px", cursor:"pointer", width:"100%",
+                  transition:"opacity .15s",
+                }}
+                onMouseEnter={e => (e.currentTarget.style.opacity="0.88")}
+                onMouseLeave={e => (e.currentTarget.style.opacity="1")}
+              >Get Started</button>
+              <button
+                style={{
+                  fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:15,
+                  color:T.muted, background:"transparent",
+                  border:`1px solid ${T.borderLight}`, borderRadius:10,
+                  padding:"14px", cursor:"pointer", width:"100%",
+                  transition:"background .15s",
+                }}
+                onMouseEnter={e => (e.currentTarget.style.background="#E9DDFF")}
+                onMouseLeave={e => (e.currentTarget.style.background="transparent")}
+              >Demo Checkout</button>
             </div>
           </div>
-        </nav>
+        )}
       </div>
     );
   }
