@@ -123,7 +123,7 @@ export default function Navbar({ scrolled }: { scrolled: boolean }) {
                 { label:"Company",    href:"/company" },
                 { label:"Developers", href:"#"        },
                 { label:"Support",    href:"#"        },
-                { label:"Pricing",    href:"#"        },
+                { label:"Pricing",    href:"/pricing" },
               ].map(({ label, href }) => (
                 <a key={label} href={href} style={{ ...nl, fontSize:16, padding:"12px 8px" }}
                   onClick={() => setMobileOpen(false)}
