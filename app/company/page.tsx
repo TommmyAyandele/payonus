@@ -164,6 +164,13 @@ export default function CompanyPage() {
         .hero-scroll-track { display:flex; gap:12px; width:max-content; animation:scrollX 18s linear infinite; }
         .hero-scroll-track:hover { animation-play-state:paused; }
 
+        @keyframes float1 { 0%,100%{transform:translateY(0px);} 50%{transform:translateY(-16px);} }
+        @keyframes float2 { 0%,100%{transform:translateY(-10px);} 50%{transform:translateY(10px);} }
+        @keyframes float3 { 0%,100%{transform:translateY(-6px);} 50%{transform:translateY(14px);} }
+        .hero-photo-1 { animation:float1 4.2s ease-in-out infinite; }
+        .hero-photo-2 { animation:float2 5.1s ease-in-out infinite; }
+        .hero-photo-3 { animation:float3 4.7s ease-in-out infinite; }
+
         .principle-card:hover { background:#F8F5FF !important; }
 
         .job-card { transition:transform 0.28s cubic-bezier(0.16,1,0.3,1),box-shadow 0.28s cubic-bezier(0.16,1,0.3,1); }
@@ -228,8 +235,8 @@ export default function CompanyPage() {
 
               <h1 className="fade-up d1" style={{
                 margin:`0 0 ${isMobile ? 16 : 22}px`,
-                fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:900,
-                fontSize: isMobile ? 44 : isTablet ? 58 : 76,
+                fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500,
+                fontSize: isMobile ? 44 : isTablet ? 62 : 90,
                 lineHeight:1.05, letterSpacing:"-0.02em", color:T.headingBlack,
               }}>
                 Building the rails<br />for a borderless<br />
@@ -239,7 +246,7 @@ export default function CompanyPage() {
               <p className="fade-up d2" style={{
                 margin:`0 0 ${isMobile ? 28 : 36}px`,
                 fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400,
-                fontSize: isMobile ? 15 : 16, lineHeight:1.7, color:T.muted, maxWidth:440,
+                fontSize: isMobile ? 16 : 20, lineHeight:1.6, color:T.muted, maxWidth:520,
               }}>
                 Payonus is on a mission to make moving money across Africa as simple, fast, and reliable as sending a message. Founded in Lagos, built for the continent.
               </p>
@@ -260,16 +267,16 @@ export default function CompanyPage() {
               </div>
             </div>
 
-            {/* Right: 3 photos — fixed 208.8×174px, staggered right-alignment */}
+            {/* Right: 3 photos — fixed 208.8×174px, staggered + floating */}
             {!isMobile && (
               <div className="fade-up d2" style={{ display:"flex", flexDirection:"column", alignItems:"flex-end", gap:20 }}>
-                <div style={{ width:208.8, height:174, borderRadius:16, overflow:"hidden", flexShrink:0, marginRight:60 }}>
+                <div className="hero-photo-1" style={{ width:208.8, height:174, borderRadius:16, overflow:"hidden", flexShrink:0, marginRight:60 }}>
                   <img src="/company-hero-1.png" alt="Team member with technology network" style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top" }} />
                 </div>
-                <div style={{ width:208.8, height:174, borderRadius:16, overflow:"hidden", flexShrink:0 }}>
+                <div className="hero-photo-2" style={{ width:208.8, height:174, borderRadius:16, overflow:"hidden", flexShrink:0 }}>
                   <img src="/company-hero-2.png" alt="Team collaboration" style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center" }} />
                 </div>
-                <div style={{ width:208.8, height:174, borderRadius:16, overflow:"hidden", flexShrink:0, marginRight:90 }}>
+                <div className="hero-photo-3" style={{ width:208.8, height:174, borderRadius:16, overflow:"hidden", flexShrink:0, marginRight:90 }}>
                   <img src="/company-hero-3.png" alt="Customer using mobile payment" style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top" }} />
                 </div>
               </div>
