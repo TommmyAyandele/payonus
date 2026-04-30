@@ -128,9 +128,9 @@ export default function SupportPage() {
         .support-card{transition:transform .28s cubic-bezier(.16,1,.3,1),box-shadow .28s;}
         .support-card:hover{transform:translateY(-4px);box-shadow:0 20px 56px rgba(96,9,255,.10);}
 
-        fieldset.form-field{border:1px solid ${T.borderLight};border-radius:8px;padding:2px 14px 14px;background:transparent;margin:0;transition:border-color .18s;}
+        fieldset.form-field{border:1px solid ${T.borderLight};border-radius:8px;padding:2px 14px 14px;background:#FFFFFF;margin:0;transition:border-color .18s;}
         fieldset.form-field:focus-within{border-color:${T.primary};}
-        fieldset.form-field legend{font-family:"DM Sans",sans-serif;font-weight:400;font-size:12px;color:${T.muted};padding:0 4px;margin-left:-4px;line-height:1;}
+        fieldset.form-field legend{font-family:"DM Sans",sans-serif;font-weight:400;font-size:12px;color:${T.muted};padding:0 4px;margin-left:-4px;line-height:1;background:#FFFFFF;}
         fieldset.form-field input,fieldset.form-field textarea{width:100%;border:none;outline:none;font-family:"DM Sans",sans-serif;font-size:14px;color:${T.dark};background:transparent;padding:0;resize:none;}
 
         .footer-link{position:relative;display:inline-block;}
@@ -198,7 +198,7 @@ export default function SupportPage() {
 
           <h2 className="fade-up d1" style={{
             margin:`0 0 ${isMobile ? 40 : 56}px`,
-            fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:700,
+            fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500,
             fontSize: isMobile ? 32 : isTablet ? 44 : 56,
             lineHeight:1.1, color:T.headingBlack,
           }}>
@@ -225,7 +225,7 @@ export default function SupportPage() {
                   <path d="M11 17l11 8 11-8" stroke={T.primary} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-              <h3 style={{margin:"0 0 12px",fontFamily:"DM Sans, sans-serif",fontWeight:700,fontSize:20,color:T.dark}}>Email Support</h3>
+              <h3 style={{margin:"0 0 12px",fontFamily:"DM Sans, sans-serif",fontWeight:500,fontSize:20,color:T.dark}}>Email Support</h3>
               <p style={{margin:"0 0 28px",fontFamily:"DM Sans, sans-serif",fontWeight:400,fontSize:14,lineHeight:1.65,color:T.muted,flex:1}}>
                 Send us a detailed message and our team will respond within 4 business hours. Best for complex integration questions.
               </p>
@@ -256,7 +256,7 @@ export default function SupportPage() {
                   <path d="M12 15a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-7l-5 4v-4h-4a2 2 0 0 1-2-2V15z" stroke={T.primary} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-              <h3 style={{margin:"0 0 12px",fontFamily:"DM Sans, sans-serif",fontWeight:700,fontSize:20,color:T.dark}}>Live Chat</h3>
+              <h3 style={{margin:"0 0 12px",fontFamily:"DM Sans, sans-serif",fontWeight:500,fontSize:20,color:T.dark}}>Live Chat</h3>
               <p style={{margin:"0 0 28px",fontFamily:"DM Sans, sans-serif",fontWeight:400,fontSize:14,lineHeight:1.65,color:T.muted,flex:1}}>
                 Chat with a real person — no bots, no scripts. Available for Growth and Enterprise accounts during business hours.
               </p>
@@ -287,7 +287,7 @@ export default function SupportPage() {
                   <path d="M16.4 13.5h-2.9a1.5 1.5 0 0 0-1.5 1.5c0 10.49 8.51 19 19 19a1.5 1.5 0 0 0 1.5-1.5v-2.9a1.5 1.5 0 0 0-1.5-1.5l-3.97-.99a1.5 1.5 0 0 0-1.45.38l-1.75 1.75a15.07 15.07 0 0 1-6.52-6.52l1.76-1.76a1.5 1.5 0 0 0 .37-1.45L17.9 15a1.5 1.5 0 0 0-1.5-1.5z" stroke={T.primary} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-              <h3 style={{margin:"0 0 12px",fontFamily:"DM Sans, sans-serif",fontWeight:700,fontSize:20,color:T.dark}}>Phone Support</h3>
+              <h3 style={{margin:"0 0 12px",fontFamily:"DM Sans, sans-serif",fontWeight:500,fontSize:20,color:T.dark}}>Phone Support</h3>
               <p style={{margin:"0 0 28px",fontFamily:"DM Sans, sans-serif",fontWeight:400,fontSize:14,lineHeight:1.65,color:T.muted,flex:1}}>
                 Speak directly with our technical team. Reserved for Enterprise accounts with dedicated support packages.
               </p>
@@ -313,7 +313,7 @@ export default function SupportPage() {
       {/* ══════════════════════════════
           FAQs + CONTACT FORM
       ══════════════════════════════ */}
-      <section style={{width:"100%",background:T.bg,padding: isMobile ? "64px 0 80px" : "88px 0 112px"}}>
+      <section style={{width:"100%",background:"#F0EFEB",padding: isMobile ? "64px 0 80px" : "88px 0 112px"}}>
         <div style={{maxWidth:1440,margin:"0 auto",padding:`0 ${hPad}px`}}>
           <div style={{
             display:"grid",
@@ -332,7 +332,7 @@ export default function SupportPage() {
 
               <h2 className="fade-up d1" style={{
                 margin:`0 0 ${isMobile ? 36 : 48}px`,
-                fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:700,
+                fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500,
                 fontSize: isMobile ? 34 : 46,
                 lineHeight:1.1, color:T.headingBlack,
               }}>
@@ -385,7 +385,7 @@ export default function SupportPage() {
             <div className="fade-up d1">
               <h3 style={{
                 margin:"0 0 8px",
-                fontFamily:"DM Sans, sans-serif", fontWeight:700,
+                fontFamily:"DM Sans, sans-serif", fontWeight:500,
                 fontSize: isMobile ? 22 : 26,
                 color:T.dark,
               }}>Still have Questions?</h3>

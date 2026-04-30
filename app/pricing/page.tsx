@@ -309,7 +309,7 @@ export default function PricingPage() {
 
           <h2 className="fade-up d1" style={{
             margin:`0 0 ${isMobile ? 40 : 56}px`,
-            fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:700,
+            fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500,
             fontSize: isMobile ? 34 : isTablet ? 46 : 58,
             lineHeight:1.1, color:T.headingBlack,
           }}>
@@ -395,7 +395,7 @@ export default function PricingPage() {
 
           <h2 className="fade-up d1" style={{
             margin:`0 0 ${isMobile ? 40 : 56}px`,
-            fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:700,
+            fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500,
             fontSize: isMobile ? 32 : isTablet ? 44 : 56,
             lineHeight:1.1, color:T.headingBlack,
           }}>
@@ -463,7 +463,7 @@ export default function PricingPage() {
             <div className="fade-up">
               <h2 style={{
                 margin:"0 0 16px",
-                fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:700,
+                fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500,
                 fontSize: isMobile ? 30 : isTablet ? 38 : 48,
                 lineHeight:1.08, color:T.headingBlack, maxWidth:440,
               }}>

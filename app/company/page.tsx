@@ -309,7 +309,7 @@ export default function CompanyPage() {
           <div className="fade-up">
             <p style={{
               margin:`0 0 ${isMobile ? 28 : 36}px`,
-              fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:700,
+              fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500,
               fontSize: isMobile ? 22 : isTablet ? 34 : 48,
               lineHeight:1.18, color:NAVY,
             }}>
@@ -333,7 +333,7 @@ export default function CompanyPage() {
               {/* Mission */}
               <div className="fade-up">
                 <span style={{ display:"block", marginBottom:16, fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14, color:NAVY }}>• Our Mission</span>
-                <h2 style={{ margin:"0 0 20px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:700, fontSize:22, lineHeight:1.22, color:T.headingBlack }}>
+                <h2 style={{ margin:"0 0 20px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:22, lineHeight:1.22, color:T.headingBlack }}>
                   Make moving money across Africa simple, instant, and accessible for every business.
                 </h2>
                 <p style={{ margin:"0 0 24px", fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:15, lineHeight:1.75, color:T.dark }}>
@@ -347,7 +347,7 @@ export default function CompanyPage() {
               {/* Vision */}
               <div className="fade-up d1">
                 <span style={{ display:"block", marginBottom:16, fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14, color:NAVY }}>• Our Vision</span>
-                <h2 style={{ margin:"0 0 20px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:700, fontSize:22, lineHeight:1.22, color:T.headingBlack }}>
+                <h2 style={{ margin:"0 0 20px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:22, lineHeight:1.22, color:T.headingBlack }}>
                   A future where financial borders no longer limit African potential.
                 </h2>
                 <p style={{ margin:"0 0 24px", fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:15, lineHeight:1.75, color:T.dark }}>
@@ -364,7 +364,7 @@ export default function CompanyPage() {
               <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap: isTablet ? 52 : 80, marginBottom: isTablet ? 40 : 56 }}>
                 <div className="fade-up">
                   <span style={{ display:"block", marginBottom:16, fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14, color:NAVY }}>• Our Mission</span>
-                  <h2 style={{ margin:"0 0 20px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:700, fontSize: isTablet ? 26 : 32, lineHeight:1.22, color:T.headingBlack }}>
+                  <h2 style={{ margin:"0 0 20px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize: isTablet ? 26 : 32, lineHeight:1.22, color:T.headingBlack }}>
                     Make moving money across Africa simple, instant, and accessible for every business.
                   </h2>
                   <p style={{ margin:0, fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:15, lineHeight:1.75, color:T.dark }}>
@@ -373,7 +373,7 @@ export default function CompanyPage() {
                 </div>
                 <div className="fade-up d1">
                   <span style={{ display:"block", marginBottom:16, fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14, color:NAVY }}>• Our Vision</span>
-                  <h2 style={{ margin:"0 0 20px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:700, fontSize: isTablet ? 26 : 32, lineHeight:1.22, color:T.headingBlack }}>
+                  <h2 style={{ margin:"0 0 20px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize: isTablet ? 26 : 32, lineHeight:1.22, color:T.headingBlack }}>
                     A future where financial borders no longer limit African potential.
                   </h2>
                   <p style={{ margin:0, fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:15, lineHeight:1.75, color:T.dark }}>
@@ -468,7 +468,7 @@ export default function CompanyPage() {
 
           <h2 className="fade-up d1" style={{
             margin:`0 0 ${isMobile ? 16 : 20}px`,
-            fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:700,
+            fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500,
             fontSize: isMobile ? 30 : isTablet ? 40 : 52,
             lineHeight:1.08, color:T.headingBlack,
           }}>
@@ -535,7 +535,7 @@ export default function CompanyPage() {
             <div className="fade-up">
               <h2 style={{
                 margin:"0 0 16px",
-                fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:700,
+                fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500,
                 fontSize: isMobile ? 28 : isTablet ? 36 : 48,
                 lineHeight:1.08, color:T.headingBlack, maxWidth:480,
               }}>
