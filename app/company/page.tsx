@@ -142,7 +142,7 @@ export default function CompanyPage() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700;1,900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap');
         html, body { margin:0; padding:0; background:${T.bg}; }
         *, *::before, *::after { box-sizing:border-box; }
         img { display:block; }
@@ -159,6 +159,10 @@ export default function CompanyPage() {
 
         @keyframes ctaPulse { 0%,100%{box-shadow:0 0 0 0 rgba(96,9,255,0.40);} 60%{box-shadow:0 0 0 14px rgba(96,9,255,0);} }
         .cta-pulse { animation:ctaPulse 2.8s ease-in-out infinite; }
+
+        @keyframes scrollX { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+        .hero-scroll-track { display:flex; gap:12px; width:max-content; animation:scrollX 18s linear infinite; }
+        .hero-scroll-track:hover { animation-play-state:paused; }
 
         .principle-card:hover { background:#F8F5FF !important; }
 
@@ -224,7 +228,7 @@ export default function CompanyPage() {
 
               <h1 className="fade-up d1" style={{
                 margin:`0 0 ${isMobile ? 16 : 22}px`,
-                fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:700,
+                fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:900,
                 fontSize: isMobile ? 44 : isTablet ? 58 : 76,
                 lineHeight:1.05, letterSpacing:"-0.02em", color:T.headingBlack,
               }}>
@@ -256,48 +260,31 @@ export default function CompanyPage() {
               </div>
             </div>
 
-            {/* Right: 3 stacked portrait photos — exact Figma stagger */}
+            {/* Right: 3 photos — fixed 208.8×174px, staggered right-alignment */}
             {!isMobile && (
-              <div className="fade-up d2" style={{ display:"flex", flexDirection:"column", gap: isTablet ? 12 : 16 }}>
-
-                {/* Photo 1 — top, narrower, right-aligned: man with network overlay */}
-                <div style={{ alignSelf:"flex-end", width:"82%", borderRadius:16, overflow:"hidden" }}>
-                  <img
-                    src="/company-hero-1.png"
-                    alt="Team member with technology network"
-                    style={{ width:"100%", height: isTablet ? 160 : 195, objectFit:"cover", objectPosition:"center top", display:"block" }}
-                  />
+              <div className="fade-up d2" style={{ display:"flex", flexDirection:"column", alignItems:"flex-end", gap:20 }}>
+                <div style={{ width:208.8, height:174, borderRadius:16, overflow:"hidden", flexShrink:0, marginRight:60 }}>
+                  <img src="/company-hero-1.png" alt="Team member with technology network" style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top" }} />
                 </div>
-
-                {/* Photo 2 — middle, widest: two people in meeting */}
-                <div style={{ alignSelf:"flex-start", width:"96%", marginLeft:"auto", borderRadius:16, overflow:"hidden" }}>
-                  <img
-                    src="/company-hero-2.png"
-                    alt="Team collaboration"
-                    style={{ width:"100%", height: isTablet ? 185 : 220, objectFit:"cover", objectPosition:"center", display:"block" }}
-                  />
+                <div style={{ width:208.8, height:174, borderRadius:16, overflow:"hidden", flexShrink:0 }}>
+                  <img src="/company-hero-2.png" alt="Team collaboration" style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center" }} />
                 </div>
-
-                {/* Photo 3 — bottom, narrower, right-aligned: older woman with phone */}
-                <div style={{ alignSelf:"flex-end", width:"82%", borderRadius:16, overflow:"hidden" }}>
-                  <img
-                    src="/company-hero-3.png"
-                    alt="Customer using mobile payment"
-                    style={{ width:"100%", height: isTablet ? 170 : 205, objectFit:"cover", objectPosition:"center top", display:"block" }}
-                  />
+                <div style={{ width:208.8, height:174, borderRadius:16, overflow:"hidden", flexShrink:0, marginRight:90 }}>
+                  <img src="/company-hero-3.png" alt="Customer using mobile payment" style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top" }} />
                 </div>
-
               </div>
             )}
 
-            {/* Mobile: show photos in a horizontal scroll strip */}
+            {/* Mobile: endless auto-scrolling marquee */}
             {isMobile && (
-              <div style={{ display:"flex", gap:12, overflowX:"auto", paddingBottom:4 }}>
-                {["/company-hero-1.png","/company-hero-2.png","/company-hero-3.png"].map((src, i) => (
-                  <div key={i} style={{ flexShrink:0, width:200, height:160, borderRadius:12, overflow:"hidden" }}>
-                    <img src={src} alt={`Team ${i+1}`} style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }} />
-                  </div>
-                ))}
+              <div style={{ overflow:"hidden", width:"100%", marginLeft:-20, marginRight:-20, paddingLeft:20 }}>
+                <div className="hero-scroll-track">
+                  {[1,2,3,1,2,3].map((num, i) => (
+                    <div key={i} style={{ flexShrink:0, width:208.8, height:174, borderRadius:14, overflow:"hidden" }}>
+                      <img src={`/company-hero-${num}.png`} alt={`Team ${num}`} style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }} />
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
           </div>
@@ -313,7 +300,7 @@ export default function CompanyPage() {
         borderBottom:`1px solid ${T.borderLight}`,
       }}>
         <div style={{ maxWidth:1440, margin:"0 auto", padding:`0 ${hPad}px` }}>
-          <div className="fade-up" style={{ maxWidth: isMobile ? "100%" : isTablet ? 700 : 900 }}>
+          <div className="fade-up">
             <p style={{
               margin:`0 0 ${isMobile ? 28 : 36}px`,
               fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:700,
