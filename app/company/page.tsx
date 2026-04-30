@@ -218,8 +218,8 @@ export default function CompanyPage() {
         <div style={{ position:"relative", zIndex:1, maxWidth:1440, margin:"0 auto", padding:`0 ${hPad}px` }}>
           <div style={{
             display:"grid",
-            gridTemplateColumns: isMobile ? "1fr" : "52fr 48fr",
-            gap: isMobile ? 48 : isTablet ? 56 : 80,
+            gridTemplateColumns: isMobile ? "1fr" : "62fr 38fr",
+            gap: isMobile ? 48 : isTablet ? 40 : 48,
             alignItems:"center",
           }}>
 
@@ -284,7 +284,7 @@ export default function CompanyPage() {
 
             {/* Mobile: endless auto-scrolling marquee */}
             {isMobile && (
-              <div style={{ overflow:"hidden", width:"100%", marginLeft:-20, marginRight:-20, paddingLeft:20 }}>
+              <div style={{ overflow:"hidden", marginLeft:-20, marginRight:-20 }}>
                 <div className="hero-scroll-track">
                   {[1,2,3,1,2,3].map((num, i) => (
                     <div key={i} style={{ flexShrink:0, width:208.8, height:174, borderRadius:14, overflow:"hidden" }}>
@@ -304,7 +304,6 @@ export default function CompanyPage() {
       <section style={{
         width:"100%", background:T.bg,
         padding: isMobile ? "56px 0 52px" : isTablet ? "80px 0 72px" : "96px 0 88px",
-        borderBottom:`1px solid ${T.borderLight}`,
       }}>
         <div style={{ maxWidth:1440, margin:"0 auto", padding:`0 ${hPad}px` }}>
           <div className="fade-up">
@@ -523,7 +522,6 @@ export default function CompanyPage() {
       <section style={{
         width:"100%", background:T.bg,
         padding: isMobile ? "64px 0" : "88px 0 108px",
-        borderTop:`1px solid ${T.borderLight}`,
       }}>
         <div style={{ maxWidth:1440, margin:"0 auto", padding:`0 ${hPad}px` }}>
           <div style={{
