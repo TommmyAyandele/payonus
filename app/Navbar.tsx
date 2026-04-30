@@ -119,12 +119,17 @@ export default function Navbar({ scrolled }: { scrolled: boolean }) {
                 </div>
               </div>
 
-              {["Company","Developers","Support","Pricing"].map(l => (
-                <a key={l} href="#" style={{ ...nl, fontSize:16, padding:"12px 8px" }}
+              {[
+                { label:"Company",    href:"/company" },
+                { label:"Developers", href:"#"        },
+                { label:"Support",    href:"#"        },
+                { label:"Pricing",    href:"#"        },
+              ].map(({ label, href }) => (
+                <a key={label} href={href} style={{ ...nl, fontSize:16, padding:"12px 8px" }}
                   onClick={() => setMobileOpen(false)}
                   onMouseEnter={e => (e.currentTarget.style.background = "#F5EFF7")}
                   onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
-                >{l}</a>
+                >{label}</a>
               ))}
 
               <div style={{ display:"flex", gap:12, marginTop:16 }}>
@@ -151,8 +156,13 @@ export default function Navbar({ scrolled }: { scrolled: boolean }) {
                   <img src="/icons/icon-chevron.svg" alt="" width={14} height={14} style={{ transform: productsOpen ? "rotate(0deg)" : "rotate(180deg)", transition:"transform .2s" }} />
                 </a>
               </div>
-              {["Company","Developers","Support","Pricing"].map(label => (
-                <a key={label} href="#" style={nl}
+              {[
+                { label:"Company",    href:"/company"    },
+                { label:"Developers", href:"#"           },
+                { label:"Support",    href:"#"           },
+                { label:"Pricing",    href:"#"           },
+              ].map(({ label, href }) => (
+                <a key={label} href={href} style={nl}
                   onMouseEnter={e => (e.currentTarget.style.background = "#F5EFF7")}
                   onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
                 >{label}</a>
