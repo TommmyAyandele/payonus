@@ -185,10 +185,10 @@ export default function Navbar({ scrolled }: { scrolled: boolean }) {
 
               {/* Regular nav links */}
               {[
-                { label:"Company",    href:"/company" },
-                { label:"Developers", href:"#"        },
-                { label:"Support",    href:"#"        },
-                { label:"Pricing",    href:"/pricing" },
+                { label:"Company",    href:"/company"  },
+                { label:"Developers", href:"#"         },
+                { label:"Support",    href:"/support"  },
+                { label:"Pricing",    href:"/pricing"  },
               ].map(({ label, href }) => (
                 <a key={label} href={href}
                   style={{
@@ -260,7 +260,7 @@ export default function Navbar({ scrolled }: { scrolled: boolean }) {
               {[
                 { label:"Company",    href:"/company"    },
                 { label:"Developers", href:"#"           },
-                { label:"Support",    href:"#"           },
+                { label:"Support",    href:"/support"    },
                 { label:"Pricing",    href:"/pricing"    },
               ].map(({ label, href }) => (
                 <a key={label} href={href} style={nl}
