@@ -188,7 +188,7 @@ export default function PricingPage() {
           {/* Heading */}
           <h1 className="fade-up d1" style={{
             margin:`0 0 ${isMobile ? 16 : 20}px`,
-            fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:700,
+            fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500,
             fontSize: isMobile ? 52 : isTablet ? 68 : 84,
             lineHeight:1.04, letterSpacing:"-0.02em", color:T.headingBlack,
           }}>
