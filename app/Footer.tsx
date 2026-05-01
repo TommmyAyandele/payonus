@@ -14,10 +14,9 @@ const COLS: { heading: string; links: { label: string; href: string }[] }[] = [
   {
     heading: "Payonus",
     links: [
-      { label: "About",    href: "#" },
-      { label: "Blog",     href: "#" },
-      { label: "Careers",  href: "#" },
-      { label: "Contact",  href: "#" },
+      { label: "About",   href: "/company" },
+      { label: "Careers", href: "/company" },
+      { label: "Contact", href: "/support" },
     ],
   },
   {
@@ -33,11 +32,11 @@ const COLS: { heading: string; links: { label: string; href: string }[] }[] = [
   {
     heading: "Developers",
     links: [
-      { label: "Documentation", href: "/docs"       },
-      { label: "API Reference",  href: "/docs"       },
-      { label: "SDKs",           href: "/docs"       },
-      { label: "Status",         href: "#"           },
-      { label: "Changelog",      href: "/docs"       },
+      { label: "Documentation", href: "/docs" },
+      { label: "API Reference",  href: "/docs" },
+      { label: "SDKs",           href: "/docs" },
+      { label: "Status",         href: "/docs" },
+      { label: "Changelog",      href: "/docs" },
     ],
   },
   {
