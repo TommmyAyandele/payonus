@@ -10,22 +10,43 @@ const COPY      = "#49454F";
 const DIVIDER   = "rgba(96,9,255,0.18)";
 const ICON_RING = "rgba(96,9,255,0.28)";
 
-const COLS = [
+const COLS: { heading: string; links: { label: string; href: string }[] }[] = [
   {
     heading: "Payonus",
-    links:   ["About", "Blog", "Careers", "Contact"],
+    links: [
+      { label: "About",    href: "#" },
+      { label: "Blog",     href: "#" },
+      { label: "Careers",  href: "#" },
+      { label: "Contact",  href: "#" },
+    ],
   },
   {
     heading: "Products",
-    links:   ["Payin", "Collections", "Settlements", "Payment API", "Analytics"],
+    links: [
+      { label: "Payouts",     href: "/payouts"     },
+      { label: "Collections", href: "/collections" },
+      { label: "Settlements", href: "/settlements" },
+      { label: "Payment API", href: "/payment-api" },
+      { label: "Analytics",   href: "/analytics"   },
+    ],
   },
   {
     heading: "Developers",
-    links:   ["Documentation", "API Reference", "SDKs", "Status", "Changelog"],
+    links: [
+      { label: "Documentation", href: "/docs"       },
+      { label: "API Reference",  href: "/docs"       },
+      { label: "SDKs",           href: "/docs"       },
+      { label: "Status",         href: "#"           },
+      { label: "Changelog",      href: "/docs"       },
+    ],
   },
   {
     heading: "Legal",
-    links:   ["Terms of Service", "Privacy Policy", "Cookies Policy"],
+    links: [
+      { label: "Terms of Service", href: "#" },
+      { label: "Privacy Policy",   href: "#" },
+      { label: "Cookies Policy",   href: "#" },
+    ],
   },
 ];
 
@@ -106,8 +127,8 @@ export default function Footer() {
               <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
                 {col.links.map(link => (
                   <a
-                    key={link}
-                    href="#"
+                    key={link.label}
+                    href={link.href}
                     className="footer-link"
                     style={{
                       fontFamily:     "DM Sans, sans-serif",
@@ -120,7 +141,7 @@ export default function Footer() {
                     onMouseEnter={e => (e.currentTarget.style.color = "#6009FF")}
                     onMouseLeave={e => (e.currentTarget.style.color = LINK)}
                   >
-                    {link}
+                    {link.label}
                   </a>
                 ))}
               </div>

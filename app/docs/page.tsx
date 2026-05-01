@@ -212,12 +212,12 @@ export default function DocsPage() {
 
           {/* ══ Hero ══ */}
           <div id="introduction" style={{ scrollMarginTop:100, marginBottom:32 }}>
-            <h1 style={{ margin:"0 0 10px", fontFamily:"DM Sans,sans-serif", fontWeight:700, fontSize:isMobile?30:38, color:T.dark, lineHeight:1.2 }}>
+            <h1 style={{ margin:"0 0 12px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?34:46, color:T.dark, lineHeight:1.1, letterSpacing:"-0.01em" }}>
               Payonus{" "}
               <span style={{ color:T.primary }}>Developer</span>{" "}
               Docs
             </h1>
-            <p style={{ margin:"0 0 24px", fontFamily:"DM Sans,sans-serif", fontWeight:400, fontSize:15, lineHeight:1.65, color:T.muted, maxWidth:560 }}>
+            <p style={{ margin:"0 0 24px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:15, lineHeight:1.65, color:T.muted, maxWidth:560 }}>
               Everything you need to build payment flows across Africa. One REST API, consistent conventions, and SDKs for every major language.
             </p>
 
@@ -248,8 +248,8 @@ export default function DocsPage() {
 
           {/* ══ Quick Start ══ */}
           <div id="quick-start" style={{ scrollMarginTop:100 }}>
-            <h2 style={{ margin:"0 0 10px", fontFamily:"DM Sans,sans-serif", fontWeight:700, fontSize:isMobile?22:26, color:T.dark }}>Quick Start</h2>
-            <p style={{ margin:"0 0 32px", fontFamily:"DM Sans,sans-serif", fontWeight:400, fontSize:14, lineHeight:1.7, color:T.muted, maxWidth:580 }}>
+            <h2 style={{ margin:"0 0 10px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?22:28, color:T.dark }}>Quick Start</h2>
+            <p style={{ margin:"0 0 32px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:14, lineHeight:1.7, color:T.muted, maxWidth:580 }}>
               To start making API calls you'll need a Payonus account and a secret key. All requests must be authenticated — unauthenticated requests return <code style={{ fontFamily:"monospace", fontSize:13, background:"#F3F4F6", padding:"1px 6px", borderRadius:4 }}>401 Unauthorized</code>.
             </p>
 
@@ -321,8 +321,8 @@ export default function DocsPage() {
 
           {/* ══ Authentication ══ */}
           <div id="authentication" style={{ scrollMarginTop:100 }}>
-            <h2 style={{ margin:"0 0 10px", fontFamily:"DM Sans,sans-serif", fontWeight:700, fontSize:isMobile?22:26, color:T.dark }}>Authentication</h2>
-            <p style={{ margin:"0 0 4px", fontFamily:"DM Sans,sans-serif", fontWeight:400, fontSize:14, lineHeight:1.7, color:T.muted, maxWidth:560 }}>
+            <h2 style={{ margin:"0 0 10px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?22:28, color:T.dark }}>Authentication</h2>
+            <p style={{ margin:"0 0 4px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:14, lineHeight:1.7, color:T.muted, maxWidth:560 }}>
               Include your key in the Authorization header of every request using the Bearer scheme.
             </p>
             <CodeBlock>
@@ -334,8 +334,8 @@ export default function DocsPage() {
 
           {/* ══ Error Handling ══ */}
           <div id="error-handling" style={{ scrollMarginTop:100 }}>
-            <h2 style={{ margin:"0 0 10px", fontFamily:"DM Sans,sans-serif", fontWeight:700, fontSize:isMobile?22:26, color:T.dark }}>Error Handling</h2>
-            <p style={{ margin:"0 0 4px", fontFamily:"DM Sans,sans-serif", fontWeight:400, fontSize:14, lineHeight:1.7, color:T.muted, maxWidth:560 }}>
+            <h2 style={{ margin:"0 0 10px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?22:28, color:T.dark }}>Error Handling</h2>
+            <p style={{ margin:"0 0 4px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:14, lineHeight:1.7, color:T.muted, maxWidth:560 }}>
               All errors return a standard JSON body with code, message, and optional param. HTTP status codes follow REST conventions.
             </p>
             <CodeBlock>
@@ -353,8 +353,8 @@ export default function DocsPage() {
 
           {/* ══ Webhook ══ */}
           <div id="webhooks-overview" style={{ scrollMarginTop:100 }}>
-            <h2 style={{ margin:"0 0 10px", fontFamily:"DM Sans,sans-serif", fontWeight:700, fontSize:isMobile?22:26, color:T.dark }}>Webhook</h2>
-            <p style={{ margin:"0 0 24px", fontFamily:"DM Sans,sans-serif", fontWeight:400, fontSize:14, lineHeight:1.7, color:T.muted, maxWidth:580 }}>
+            <h2 style={{ margin:"0 0 10px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?22:28, color:T.dark }}>Webhook</h2>
+            <p style={{ margin:"0 0 24px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:14, lineHeight:1.7, color:T.muted, maxWidth:580 }}>
               Payonus sends webhook events when things happen — a payout settles, a collection comes in, a transfer fails. Configure endpoints under Settings → Webhooks.
             </p>
 
@@ -382,7 +382,7 @@ export default function DocsPage() {
 
           {/* ══ Verify Signatures ══ */}
           <div id="verify-signatures" style={{ scrollMarginTop:100 }}>
-            <h2 style={{ margin:"0 0 10px", fontFamily:"DM Sans,sans-serif", fontWeight:700, fontSize:isMobile?22:26, color:T.dark }}>Verify signatures</h2>
+            <h2 style={{ margin:"0 0 10px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?22:28, color:T.dark }}>Verify signatures</h2>
             <CodeBlock>
               <Kw c="#C792EA">import</Kw> crypto <Kw c="#C792EA">from</Kw> <Kw c="#C3E88D">'crypto'</Kw>;{"\n\n"}
               <Kw c="#C792EA">function</Kw> <Kw c="#82AAFF">verifyWebhook</Kw>(rawBody, signature, secret) {"{\n"}
