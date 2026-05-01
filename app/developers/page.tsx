@@ -176,7 +176,7 @@ function CodeEditor() {
 const RESOURCE_CARDS = [
   {
     title: "Documentation",
-    href:  "#",
+    href:  "/docs",
     desc:  "Comprehensive guides for every endpoint and use case.",
     icon: (
       /* File with </> inside */
@@ -191,7 +191,7 @@ const RESOURCE_CARDS = [
   },
   {
     title: "API Refrence",
-    href:  "#",
+    href:  "/docs",
     desc:  "Full endpoint reference with request/response examples.",
     icon: (
       /* Wrench / tool */
@@ -202,7 +202,7 @@ const RESOURCE_CARDS = [
   },
   {
     title: "Changelog",
-    href:  "#",
+    href:  "/docs",
     desc:  "Every API update, new endpoint, and breaking change logged.",
     icon: (
       /* Document with bullet-list rows */
@@ -219,7 +219,7 @@ const RESOURCE_CARDS = [
   },
   {
     title: "SDKs",
-    href:  "#",
+    href:  "/docs",
     desc:  "Official libraries with examples and full TypeScript support.",
     icon: (
       /* Browser window with <> inside */
