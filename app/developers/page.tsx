@@ -178,10 +178,10 @@ const RESOURCE_CARDS = [
     title: "Documentation",
     desc:  "Comprehensive guides for every endpoint and use case.",
     icon: (
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <rect x="4" y="3" width="16" height="20" rx="2" stroke="#6009FF" strokeWidth="1.6"/>
-        <path d="M8 8h8M8 12h8M8 16h5" stroke="#6009FF" strokeWidth="1.5" strokeLinecap="round"/>
-        <path d="M20 8l4 2-4 2" stroke="#F4B249" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#6009FF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M14 2v6h6" stroke="#6009FF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M9 13l1.5 1.5L13 11" stroke="#6009FF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     ),
   },
@@ -189,10 +189,8 @@ const RESOURCE_CARDS = [
     title: "API Refrence",
     desc:  "Full endpoint reference with request/response examples.",
     icon: (
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <path d="M6 10l-3 4 3 4" stroke="#6009FF" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M22 10l3 4-3 4" stroke="#6009FF" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M17 6L11 22" stroke="#F4B249" strokeWidth="1.5" strokeLinecap="round"/>
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" stroke="#6009FF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     ),
   },
@@ -200,11 +198,10 @@ const RESOURCE_CARDS = [
     title: "Changelog",
     desc:  "Every API update, new endpoint, and breaking change logged.",
     icon: (
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <rect x="4" y="4" width="20" height="20" rx="3" stroke="#6009FF" strokeWidth="1.6"/>
-        <path d="M9 10h10M9 14h6" stroke="#6009FF" strokeWidth="1.5" strokeLinecap="round"/>
-        <circle cx="19" cy="17" r="3" fill="#F4B249"/>
-        <path d="M19 15.5v1.5l.8.8" stroke="#fff" strokeWidth="1" strokeLinecap="round"/>
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+        <rect x="3" y="3" width="18" height="18" rx="3" stroke="#6009FF" strokeWidth="1.5"/>
+        <path d="M7 8h6M7 12h4M7 16h3" stroke="#6009FF" strokeWidth="1.5" strokeLinecap="round"/>
+        <path d="M16 11v3l1.5 1.5" stroke="#6009FF" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     ),
   },
@@ -212,10 +209,10 @@ const RESOURCE_CARDS = [
     title: "SDKs",
     desc:  "Official libraries with examples and full TypeScript support.",
     icon: (
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <rect x="3" y="6" width="22" height="16" rx="3" stroke="#6009FF" strokeWidth="1.6"/>
-        <path d="M8 14l3-3-3-3" stroke="#6009FF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M13 17h7" stroke="#F4B249" strokeWidth="1.5" strokeLinecap="round"/>
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+        <rect x="2" y="3" width="20" height="14" rx="2" stroke="#6009FF" strokeWidth="1.5"/>
+        <path d="M8 21h8M12 17v4" stroke="#6009FF" strokeWidth="1.5" strokeLinecap="round"/>
+        <path d="M8 10l-2 2 2 2M16 10l2 2-2 2" stroke="#6009FF" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     ),
   },
@@ -334,28 +331,49 @@ export default function DevelopersPage() {
       {/* ══════════════════════════════
           RESOURCE CARDS
       ══════════════════════════════ */}
-      <section style={{ width:"100%", background:T.bg, padding:`${isMobile ? 56 : 80}px 0` }}>
+      <section style={{ width:"100%", background:T.bg, padding:`${isMobile ? 48 : 72}px 0` }}>
         <div style={{ maxWidth:1440, margin:"0 auto", padding:`0 ${hPad}px` }}>
-          <div style={{
+          <div className="fade-up" style={{
+            border: "1px solid #E7E0EC",
+            borderRadius: 14,
+            overflow: "hidden",
+            background: T.white,
             display: "grid",
-            gridTemplateColumns: isMobile ? "1fr 1fr" : isTablet ? "1fr 1fr" : "1fr 1fr 1fr 1fr",
-            gap: isMobile ? 16 : 20,
+            gridTemplateColumns: isMobile ? "1fr 1fr" : "1fr 1fr 1fr 1fr",
           }}>
             {RESOURCE_CARDS.map((card, i) => (
               <div
                 key={card.title}
-                className={`fade-up dev-card d${i + 1}`}
-                style={{ padding: isMobile ? "24px 18px" : "32px 28px", cursor:"pointer" }}
+                style={{
+                  padding: isMobile ? "28px 20px" : "36px 32px",
+                  borderRight: i < RESOURCE_CARDS.length - 1
+                    ? (isMobile
+                        ? (i % 2 === 0 ? "1px solid #E7E0EC" : "none")
+                        : "1px solid #E7E0EC")
+                    : "none",
+                  borderBottom: isMobile && i < 2 ? "1px solid #E7E0EC" : "none",
+                  cursor: "pointer",
+                }}
               >
-                <div style={{ marginBottom: 20 }}>{card.icon}</div>
+                {/* Icon box */}
+                <div style={{
+                  width: 44, height: 44,
+                  borderRadius: 10,
+                  border: "1px solid #DDD0FF",
+                  background: "#F8F5FF",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  marginBottom: isMobile ? 20 : 24,
+                }}>
+                  {card.icon}
+                </div>
                 <div style={{
                   fontFamily:"DM Sans, sans-serif", fontWeight:700,
                   fontSize: isMobile ? 15 : 17,
-                  color: T.dark, marginBottom:10,
+                  color: T.dark, marginBottom: 10,
                 }}>{card.title}</div>
                 <div style={{
                   fontFamily:"DM Sans, sans-serif", fontWeight:400,
-                  fontSize: isMobile ? 13 : 14, lineHeight:1.55,
+                  fontSize: isMobile ? 13 : 14, lineHeight: 1.6,
                   color: T.muted,
                 }}>{card.desc}</div>
               </div>
