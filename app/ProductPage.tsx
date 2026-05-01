@@ -275,11 +275,11 @@ export default function ProductPage({
         </div>
 
         <div style={{ position:"relative", zIndex:1, maxWidth:1440, margin:"0 auto", padding:isMobile?`80px 20px 60px`:`0 ${hPad}px`, minHeight:isMobile?"auto":"100vh", display:isMobile?"block":"flex", alignItems:"center", justifyContent:"center" }}>
-          <div style={{ maxWidth:isMobile?"100%":isTablet?560:700, display:"flex", flexDirection:"column", gap:isMobile?28:24, alignItems:"flex-start" }}>
+          <div style={{ maxWidth:isMobile?"100%":isTablet?620:860, display:"flex", flexDirection:"column", gap:isMobile?28:24, alignItems:"flex-start" }}>
             <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:isMobile?12:14, letterSpacing:"0.08em", textTransform:"uppercase", color:T.orange }}>
               {label}
             </span>
-            <h1 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?52:isTablet?66:90, lineHeight:1.05, letterSpacing:"-0.02em", color:T.headingBlack }}>
+            <h1 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?44:isTablet?58:72, lineHeight:1.05, letterSpacing:"-0.02em", color:T.headingBlack }}>
               {heading}
             </h1>
             <p style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:16, lineHeight:1.65, color:T.muted, maxWidth:isMobile?320:440 }}>
