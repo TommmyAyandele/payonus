@@ -5,27 +5,6 @@ import { useBreakpoint } from "./use-breakpoint";
 import Navbar, { T } from "./Navbar";
 import Footer from "./Footer";
 
-/* ─── HERO BG ─── */
-function HeroBg() {
-  return (
-    <svg aria-hidden style={{ position:"absolute", top:"-10%", right:"-5%", width:"55%", height:"120%", pointerEvents:"none", zIndex:0 }}
-      viewBox="0 0 500 500" preserveAspectRatio="xMidYMid meet" fill="none">
-      {/* Organic concentric blob shapes matching design reference */}
-      <path d="M420,80 C480,110 510,180 500,260 C490,340 450,410 370,440 C290,470 190,460 120,410 C50,360 20,270 30,190 C40,110 100,50 180,25 C260,0 360,50 420,80 Z"
-        stroke="rgba(200,195,210,0.45)" strokeWidth="1.2" />
-      <path d="M390,105 C445,132 472,196 462,268 C452,340 415,402 342,428 C269,454 176,444 112,397 C48,350 22,266 32,192 C42,118 97,62 170,40 C243,18 335,78 390,105 Z"
-        stroke="rgba(190,182,205,0.40)" strokeWidth="1.1" />
-      <path d="M358,132 C408,156 432,214 422,278 C412,342 378,394 312,416 C246,438 162,428 104,385 C46,342 24,264 34,196 C44,128 94,76 162,56 C230,36 308,108 358,132 Z"
-        stroke="rgba(178,168,200,0.35)" strokeWidth="1" />
-      <path d="M326,160 C370,182 390,232 382,288 C374,344 342,386 284,404 C226,422 150,412 98,374 C46,336 28,264 38,202 C48,140 92,92 154,74 C216,56 282,138 326,160 Z"
-        stroke="rgba(165,152,195,0.30)" strokeWidth="0.9" />
-      <path d="M294,188 C332,208 348,250 342,298 C336,346 308,378 256,392 C204,406 138,396 92,362 C46,328 32,262 42,208 C52,154 90,108 146,92 C202,76 256,168 294,188 Z"
-        stroke="rgba(150,138,188,0.25)" strokeWidth="0.9" />
-      <path d="M264,216 C296,234 308,268 302,308 C296,348 272,372 228,382 C184,392 128,382 88,352 C48,322 36,262 46,214 C56,166 88,124 138,110 C188,96 232,198 264,216 Z"
-        stroke="rgba(135,122,180,0.20)" strokeWidth="0.8" />
-    </svg>
-  );
-}
 
 export interface LegalSection {
   id:       string;
@@ -87,9 +66,8 @@ export default function LegalPage({ title, subtitle, updated, sections }: LegalP
       <Navbar scrolled={scrolled} />
 
       {/* ── HERO ── */}
-      <section style={{ position:"relative", background:T.bg, overflow:"hidden", padding:`${isMobile?56:72}px 0 ${isMobile?40:56}px` }}>
-        <HeroBg />
-        <div style={{ position:"relative", zIndex:1, maxWidth:1440, margin:"0 auto", padding:`0 ${hPad}px` }}>
+      <section style={{ background:T.bg, padding:`${isMobile?56:72}px 0 ${isMobile?40:56}px` }}>
+        <div style={{ maxWidth:1440, margin:"0 auto", padding:`0 ${hPad}px` }}>
           <span style={{ fontFamily:"DM Sans,sans-serif", fontWeight:500, fontSize:13, color:T.accent, display:"block", marginBottom:14 }}>
             • Legal
           </span>
