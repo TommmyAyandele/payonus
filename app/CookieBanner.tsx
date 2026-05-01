@@ -29,109 +29,148 @@ export default function CookieBanner() {
   return (
     <>
       <style>{`
-        @keyframes cookieSlideUp {
-          from { opacity:0; transform:translateY(24px); }
-          to   { opacity:1; transform:translateY(0); }
+        @keyframes cookieFadeIn {
+          from { opacity:0; }
+          to   { opacity:1; }
         }
-        .cookie-banner { animation: cookieSlideUp 0.38s cubic-bezier(0.16,1,0.3,1) forwards; }
+        @keyframes cookieSlideIn {
+          from { opacity:0; transform:translateY(-18px) translateX(-50%); }
+          to   { opacity:1; transform:translateY(0)     translateX(-50%); }
+        }
+        .cookie-overlay { animation: cookieFadeIn 0.28s ease forwards; }
+        .cookie-panel   { animation: cookieSlideIn 0.38s cubic-bezier(0.16,1,0.3,1) forwards; }
       `}</style>
 
+      {/* Backdrop */}
       <div
-        className="cookie-banner"
+        className="cookie-overlay"
+        onClick={decline}
         style={{
-          position:    "fixed",
-          bottom:      24,
-          left:        "50%",
-          transform:   "translateX(-50%)",
-          zIndex:      999,
-          width:       "calc(100% - 40px)",
-          maxWidth:    680,
-          background:  T.white,
-          border:      "1px solid #E7E0EC",
-          borderRadius: 16,
-          boxShadow:   "0 8px 40px rgba(28,27,31,0.12), 0 2px 8px rgba(96,9,255,0.06)",
-          padding:     "20px 24px",
-          display:     "flex",
-          alignItems:  "center",
-          gap:         20,
-          flexWrap:    "wrap",
+          position:   "fixed",
+          inset:      0,
+          background: "rgba(28,27,31,0.38)",
+          zIndex:     998,
+        }}
+      />
+
+      {/* Banner — centered vertically, full viewport width */}
+      <div
+        className="cookie-panel"
+        style={{
+          position:        "fixed",
+          top:             "50%",
+          left:            "50%",
+          zIndex:          999,
+          width:           "100vw",
+          background:      T.white,
+          borderTop:       `3px solid ${T.primary}`,
+          borderBottom:    "1px solid #E7E0EC",
+          boxShadow:       "0 20px 60px rgba(28,27,31,0.22)",
+          padding:         "28px 0",
         }}
       >
-        {/* Cookie icon */}
+        {/* Centered inner content */}
         <div style={{
-          width:           40,
-          height:          40,
-          borderRadius:    10,
-          background:      "#F5EEFF",
-          border:          "1px solid #DDD0FF",
-          display:         "flex",
-          alignItems:      "center",
-          justifyContent:  "center",
-          flexShrink:      0,
+          maxWidth:       1440,
+          margin:         "0 auto",
+          padding:        "0 80px",
+          display:        "flex",
+          alignItems:     "center",
+          gap:            28,
+          flexWrap:       "wrap",
         }}>
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-            <circle cx="12" cy="12" r="10" stroke="#6009FF" strokeWidth="1.5"/>
-            <circle cx="9"  cy="10" r="1.2" fill="#6009FF"/>
-            <circle cx="14" cy="8"  r="0.9" fill="#F4B249"/>
-            <circle cx="15" cy="13" r="1.2" fill="#6009FF"/>
-            <circle cx="10" cy="15" r="0.9" fill="#F4B249"/>
-            <circle cx="12" cy="12" r="0.7" fill="#6009FF"/>
-          </svg>
-        </div>
 
-        {/* Text */}
-        <div style={{ flex:1, minWidth:180 }}>
-          <div style={{ fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:14, color:T.dark, marginBottom:3 }}>
-            We use cookies
+          {/* Cookie SVG icon */}
+          <div style={{ flexShrink: 0 }}>
+            <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+              {/* Cookie base */}
+              <circle cx="26" cy="26" r="22" fill="#F4B249" opacity="0.15"/>
+              <circle cx="26" cy="26" r="22" fill="none" stroke="#F4B249" strokeWidth="2"/>
+              {/* Cookie fill */}
+              <circle cx="26" cy="26" r="18" fill="#FDEABD"/>
+              {/* Bite taken out (top right) */}
+              <path d="M38 14 Q44 20 40 28 Q36 18 30 16 Z" fill={T.white}/>
+              {/* Chocolate chips */}
+              <ellipse cx="20" cy="22" rx="2.5" ry="2" fill="#7C4B1A"/>
+              <ellipse cx="30" cy="20" rx="2"   ry="1.6" fill="#7C4B1A"/>
+              <ellipse cx="22" cy="31" rx="2.5" ry="2" fill="#7C4B1A"/>
+              <ellipse cx="32" cy="30" rx="2"   ry="1.6" fill="#7C4B1A"/>
+              <ellipse cx="26" cy="25" rx="1.8" ry="1.4" fill="#7C4B1A"/>
+              <ellipse cx="17" cy="29" rx="1.6" ry="1.3" fill="#7C4B1A"/>
+            </svg>
           </div>
-          <div style={{ fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:13, color:T.muted, lineHeight:1.55 }}>
-            We use cookies to improve your experience and analyse site traffic. Read our{" "}
-            <a href="#" style={{ color:T.primary, textDecoration:"none", fontWeight:500 }}>Cookie Policy</a>.
-          </div>
-        </div>
 
-        {/* Actions */}
-        <div style={{ display:"flex", gap:10, flexShrink:0 }}>
-          <button
-            onClick={decline}
-            style={{
-              fontFamily:   "DM Sans, sans-serif",
-              fontWeight:   400,
-              fontSize:     13,
-              color:        T.muted,
-              background:   "transparent",
-              border:       `1px solid ${T.borderLight}`,
-              borderRadius: 8,
-              padding:      "8px 16px",
-              cursor:       "pointer",
-              transition:   "background 0.15s",
-              whiteSpace:   "nowrap",
-            }}
-            onMouseEnter={e => (e.currentTarget.style.background = "#F5EFF7")}
-            onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
-          >
-            Decline
-          </button>
-          <button
-            onClick={accept}
-            style={{
-              fontFamily:   "DM Sans, sans-serif",
-              fontWeight:   500,
-              fontSize:     13,
-              color:        T.white,
-              background:   T.primary,
-              border:       "none",
-              borderRadius: 8,
-              padding:      "8px 18px",
-              cursor:       "pointer",
-              transition:   "opacity 0.15s",
-              whiteSpace:   "nowrap",
-            }}
-            onMouseEnter={e => (e.currentTarget.style.opacity = "0.88")}
-            onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
-          >
-            Accept all
-          </button>
+          {/* Text */}
+          <div style={{ flex: 1, minWidth: 220 }}>
+            <div style={{
+              fontFamily: "DM Sans, sans-serif",
+              fontWeight: 700,
+              fontSize:   17,
+              color:      T.dark,
+              marginBottom: 5,
+            }}>
+              We use cookies 🍪
+            </div>
+            <div style={{
+              fontFamily: "DM Sans, sans-serif",
+              fontWeight: 400,
+              fontSize:   14,
+              color:      T.muted,
+              lineHeight: 1.6,
+              maxWidth:   560,
+            }}>
+              We use cookies to improve your experience, personalise content, and analyse site traffic.
+              By clicking <strong style={{ color: T.dark, fontWeight: 600 }}>"Accept all"</strong> you consent to our use of cookies.{" "}
+              <a href="#" style={{ color: T.primary, textDecoration: "none", fontWeight: 500 }}>
+                Read our Cookie Policy →
+              </a>
+            </div>
+          </div>
+
+          {/* Buttons — site style */}
+          <div style={{ display: "flex", alignItems: "center", gap: 12, flexShrink: 0 }}>
+            <button
+              onClick={decline}
+              style={{
+                fontFamily:   "DM Sans, sans-serif",
+                fontWeight:   400,
+                fontSize:     14,
+                color:        T.muted,
+                background:   "transparent",
+                border:       `1px solid ${T.muted}`,
+                borderRadius: 4,
+                padding:      "9px 20px",
+                cursor:       "pointer",
+                transition:   "background 0.15s",
+                whiteSpace:   "nowrap",
+              }}
+              onMouseEnter={e => (e.currentTarget.style.background = "#E9DDFF")}
+              onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
+            >
+              Decline
+            </button>
+            <button
+              onClick={accept}
+              style={{
+                fontFamily:   "DM Sans, sans-serif",
+                fontWeight:   500,
+                fontSize:     14,
+                color:        T.white,
+                background:   T.primary,
+                border:       "none",
+                borderRadius: 4,
+                padding:      "9px 24px",
+                cursor:       "pointer",
+                transition:   "opacity 0.15s",
+                whiteSpace:   "nowrap",
+              }}
+              onMouseEnter={e => (e.currentTarget.style.opacity = "0.88")}
+              onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
+            >
+              Accept all
+            </button>
+          </div>
+
         </div>
       </div>
     </>
