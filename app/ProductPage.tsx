@@ -274,7 +274,7 @@ export default function ProductPage({
           {[0,1].map(n => <img key={n} src="/world-map-dots.png" aria-hidden style={{ display:"block", width:"100%", opacity:isMobile?0.18:0.14, filter:"invert(1)" }} />)}
         </div>
 
-        <div style={{ position:"relative", zIndex:1, maxWidth:1440, margin:"0 auto", padding:isMobile?`80px 20px 60px`:`0 ${hPad}px`, minHeight:isMobile?"auto":"100vh", display:isMobile?"block":"flex", alignItems:"center" }}>
+        <div style={{ position:"relative", zIndex:1, maxWidth:1440, margin:"0 auto", padding:isMobile?`80px 20px 60px`:`0 ${hPad}px`, minHeight:isMobile?"auto":"100vh", display:isMobile?"block":"flex", alignItems:"center", justifyContent:"center" }}>
           <div style={{ maxWidth:isMobile?"100%":isTablet?560:700, display:"flex", flexDirection:"column", gap:isMobile?28:24, alignItems:"flex-start" }}>
             <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:isMobile?12:14, letterSpacing:"0.08em", textTransform:"uppercase", color:T.orange }}>
               {label}
