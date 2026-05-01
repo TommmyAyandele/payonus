@@ -10,17 +10,14 @@ function HeroBg() {
   return (
     <svg aria-hidden style={{ position:"absolute", top:0, left:0, width:"100%", height:"100%", pointerEvents:"none", zIndex:0 }}
       viewBox="0 0 1440 400" preserveAspectRatio="xMidYMid slice" fill="none">
-      <g className="hero-wg1">
-        <path d="M-50 380 C100 360 220 330 380 300 C480 282 560 265 660 240 C780 210 880 170 990 115 C1090 65 1190 0 1320 -65" stroke="rgba(114,82,195,0.22)" strokeWidth="1.3"/>
-        <path d="M-50 400 C80 392 160 375 270 360 C360 347 420 348 480 338 C545 326 585 310 650 296" stroke="rgba(114,82,195,0.16)" strokeWidth="1.1"/>
-      </g>
-      <g className="hero-wg2">
-        <path d="M200 400 C290 394 380 380 480 367 C560 356 615 360 665 351 C715 340 748 323 800 309" stroke="rgba(114,82,195,0.13)" strokeWidth="1"/>
-        <path d="M-100 360 C50 345 160 318 300 298 C400 282 468 269 545 248" stroke="rgba(140,100,210,0.15)" strokeWidth="0.9"/>
-      </g>
-      <g className="hero-wg4">
-        <path d="M-50 395 C100 380 230 353 380 332 C470 318 540 306 620 285 C710 260 800 234 905 200" stroke="rgba(196,148,80,0.13)" strokeWidth="0.9"/>
-      </g>
+      {/* Concentric organic blob shapes */}
+      <ellipse cx="820" cy="210" rx="680" ry="310" stroke="rgba(180,160,220,0.18)" strokeWidth="1.2" />
+      <ellipse cx="830" cy="205" rx="600" ry="268" stroke="rgba(160,130,210,0.16)" strokeWidth="1.1" />
+      <ellipse cx="840" cy="200" rx="520" ry="228" stroke="rgba(140,110,200,0.14)" strokeWidth="1" />
+      <ellipse cx="845" cy="198" rx="440" ry="190" stroke="rgba(120,90,190,0.13)" strokeWidth="0.9" />
+      <ellipse cx="848" cy="196" rx="360" ry="154" stroke="rgba(100,70,180,0.11)" strokeWidth="0.9" />
+      <ellipse cx="850" cy="195" rx="280" ry="120" stroke="rgba(96,9,255,0.09)" strokeWidth="0.8" />
+      <ellipse cx="852" cy="194" rx="200" ry="88" stroke="rgba(96,9,255,0.08)" strokeWidth="0.8" />
     </svg>
   );
 }
