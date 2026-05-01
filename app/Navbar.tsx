@@ -186,7 +186,7 @@ export default function Navbar({ scrolled }: { scrolled: boolean }) {
               {/* Regular nav links */}
               {[
                 { label:"Company",    href:"/company"  },
-                { label:"Developers", href:"#"         },
+                { label:"Developers", href:"/developers"},
                 { label:"Support",    href:"/support"  },
                 { label:"Pricing",    href:"/pricing"  },
               ].map(({ label, href }) => (
@@ -259,7 +259,7 @@ export default function Navbar({ scrolled }: { scrolled: boolean }) {
               </div>
               {[
                 { label:"Company",    href:"/company"    },
-                { label:"Developers", href:"#"           },
+                { label:"Developers", href:"/developers"  },
                 { label:"Support",    href:"/support"    },
                 { label:"Pricing",    href:"/pricing"    },
               ].map(({ label, href }) => (

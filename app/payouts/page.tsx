@@ -397,16 +397,6 @@ export default function PayoutsPage() {
         width: "100%",
         background: T.bg,
         overflow: "hidden",
-        ...(isMobile ? {
-          minHeight: "100vh",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          paddingTop: 80,
-          paddingBottom: 80,
-        } : {
-          height: "calc(100vh + 520px)",
-        }),
       }}>
 
         {/* World map dots */}
@@ -429,137 +419,78 @@ export default function PayoutsPage() {
           ))}
         </div>
 
-        {/* Desktop/tablet: text layer pinned to viewport height, truly centred */}
-        {!isMobile && (
+        {/* Hero content — vertically centered in viewport, left-aligned text */}
+        <div style={{
+          position: "relative", zIndex: 1,
+          maxWidth: 1440, margin: "0 auto",
+          padding: isMobile ? `80px 20px 60px` : `0 ${hPad}px`,
+          minHeight: isMobile ? "auto" : "100vh",
+          display: isMobile ? "block" : "flex",
+          alignItems: "center",
+        }}>
           <div style={{
-            position: "absolute",
-            top: 0, left: 0, right: 0,
-            height: "100vh",
-            display: "flex",
-            alignItems: "center",
-            zIndex: 2,
+            maxWidth: isMobile ? "100%" : isTablet ? 560 : 700,
+            display: "flex", flexDirection: "column",
+            gap: isMobile ? 28 : 24,
+            alignItems: "flex-start",
           }}>
-            <div style={{
-              maxWidth: 1440, margin: "0 auto",
-              padding: `0 ${hPad}px`,
-              width: "100%", boxSizing: "border-box",
+            <span style={{
+              fontFamily: "DM Sans, sans-serif", fontWeight: 500,
+              fontSize: isMobile ? 12 : 14, letterSpacing: "0.08em", textTransform: "uppercase",
+              color: T.orange,
+            }}>• Payouts</span>
+
+            <h1 style={{
+              margin: 0,
+              fontFamily: "Rubik, sans-serif", fontStyle: "italic", fontWeight: 500,
+              fontSize: isMobile ? 52 : isTablet ? 66 : 90,
+              lineHeight: 1.05, letterSpacing: "-0.02em",
+              color: T.headingBlack,
             }}>
-              <div style={{
-                width: isTablet ? "100%" : 700,
-                display: "flex", flexDirection: "column",
-                gap: 24,
-                alignItems: "flex-start",
-                textAlign: "left",
-              }}>
-                <span style={{
-                  fontFamily: "DM Sans, sans-serif", fontWeight: 500,
-                  fontSize: 14, letterSpacing: "0.08em", textTransform: "uppercase",
-                  color: T.orange,
-                }}>Payouts</span>
+              Pay anyone,<br />anywhere<br />
+              across <span style={{ color: T.primary }}>Africa.</span>
+            </h1>
 
-                <h1 style={{
-                  margin: 0,
-                  fontFamily: "Rubik, sans-serif", fontStyle: "italic", fontWeight: 500,
-                  fontSize: isTablet ? 66 : 90,
-                  lineHeight: 1.05, letterSpacing: "-0.02em",
-                  color: T.headingBlack,
-                }}>
-                  Pay anyone,<br />anywhere<br />
-                  across <span style={{ color: T.primary }}>Africa.</span>
-                </h1>
+            <p style={{
+              margin: 0,
+              fontFamily: "Rubik, sans-serif", fontStyle: "italic", fontWeight: 400,
+              fontSize: 16, lineHeight: 1.65, color: T.muted,
+              maxWidth: isMobile ? 320 : 440,
+            }}>
+              Send bulk or single payouts to vendors, contractors, and partners across 14+ African markets — in seconds, not days.
+            </p>
 
-                <p style={{
-                  margin: 0,
-                  fontFamily: "Rubik, sans-serif", fontStyle: "italic", fontWeight: 400,
-                  fontSize: 16, lineHeight: 1.65, color: T.muted, maxWidth: 440,
-                }}>
-                  Send bulk or single payouts to vendors, contractors, and partners across 14+ African markets — in seconds, not days.
-                </p>
-
-                <div style={{ display:"flex", flexWrap:"wrap", gap:12 }}>
-                  <button style={{
-                    fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14,
-                    color:T.white, background:T.primary, border:"none", borderRadius:4,
-                    padding:"13px 28px", cursor:"pointer", transition:"opacity .15s",
-                  }}
-                    onMouseEnter={e => (e.currentTarget.style.opacity = "0.88")}
-                    onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
-                  >Get Started</button>
-                  <button style={{
-                    fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14,
-                    color:T.muted, background:"transparent", border:`1px solid ${T.muted}`,
-                    borderRadius:4, padding:"11px 24px", cursor:"pointer", transition:"background .15s",
-                  }}
-                    onMouseEnter={e => (e.currentTarget.style.background = "#E9DDFF")}
-                    onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
-                  >Contact Sales</button>
-                </div>
-              </div>
+            <div style={{ display:"flex", flexWrap:"wrap", gap:12 }}>
+              <button style={{
+                fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14,
+                color:T.white, background:T.primary, border:"none", borderRadius:4,
+                padding:"13px 28px", cursor:"pointer", transition:"opacity .15s",
+              }}
+                onMouseEnter={e => (e.currentTarget.style.opacity = "0.88")}
+                onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
+              >Get Started</button>
+              <button style={{
+                fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14,
+                color:T.muted, background:"transparent", border:`1px solid ${T.muted}`,
+                borderRadius:4, padding:"11px 24px", cursor:"pointer", transition:"background .15s",
+              }}
+                onMouseEnter={e => (e.currentTarget.style.background = "#E9DDFF")}
+                onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
+              >Contact Sales</button>
             </div>
           </div>
-        )}
+        </div>
 
-        {/* Desktop/tablet: wireframe peeks ~80px above fold, well below text */}
+        {/* Dashboard — normal flow below content, bottom half clipped by next section */}
         {!isMobile && (
           <div style={{
-            position: "absolute",
-            top: "calc(100vh - 80px)", left: 0, right: 0,
-            zIndex: 1,
+            position: "relative", zIndex: 1,
+            maxWidth: 1440, margin: "0 auto",
+            padding: `0 ${hPad}px`,
+            marginBottom: -220,
           }}>
-            <div style={{ maxWidth: 1440, margin: "0 auto", padding: `0 ${hPad}px`, boxSizing: "border-box" }}>
-              <div style={{ maxWidth: 1140 }}>
-                <BrowserWireframeResponsive />
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Mobile: text in normal flex flow */}
-        {isMobile && (
-          <div style={{ position: "relative", zIndex: 1, maxWidth: 1440, margin: "0 auto", padding: `0 ${hPad}px`, width: "100%", boxSizing: "border-box" }}>
-            <div style={{ display: "flex", flexDirection: "column", gap: 28, alignItems: "flex-start", textAlign: "left" }}>
-              <span style={{
-                fontFamily: "DM Sans, sans-serif", fontWeight: 500,
-                fontSize: 12, letterSpacing: "0.08em", textTransform: "uppercase",
-                color: T.orange,
-              }}>Payouts</span>
-
-              <h1 style={{
-                margin: 0,
-                fontFamily: "Rubik, sans-serif", fontStyle: "italic", fontWeight: 500,
-                fontSize: 62, lineHeight: 1.05, letterSpacing: "-0.02em",
-                color: T.headingBlack,
-              }}>
-                Pay anyone,<br />anywhere<br />
-                across <span style={{ color: T.primary }}>Africa.</span>
-              </h1>
-
-              <p style={{
-                margin: 0,
-                fontFamily: "Rubik, sans-serif", fontStyle: "italic", fontWeight: 400,
-                fontSize: 16, lineHeight: 1.65, color: T.muted, maxWidth: 320,
-              }}>
-                Send bulk or single payouts to vendors, contractors, and partners across 14+ African markets — in seconds, not days.
-              </p>
-
-              <div style={{ display:"flex", flexWrap:"wrap", gap:12 }}>
-                <button style={{
-                  fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14,
-                  color:T.white, background:T.primary, border:"none", borderRadius:4,
-                  padding:"13px 28px", cursor:"pointer", transition:"opacity .15s",
-                }}
-                  onMouseEnter={e => (e.currentTarget.style.opacity = "0.88")}
-                  onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
-                >Get Started</button>
-                <button style={{
-                  fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14,
-                  color:T.muted, background:"transparent", border:`1px solid ${T.muted}`,
-                  borderRadius:4, padding:"11px 24px", cursor:"pointer", transition:"background .15s",
-                }}
-                  onMouseEnter={e => (e.currentTarget.style.background = "#E9DDFF")}
-                  onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
-                >Contact Sales</button>
-              </div>
+            <div style={{ maxWidth: 1140 }}>
+              <BrowserWireframeResponsive />
             </div>
           </div>
         )}
@@ -569,7 +500,12 @@ export default function PayoutsPage() {
       {/* ══════════════════════════════
           FEATURES
       ══════════════════════════════ */}
-      <section style={{ width: "100%", background: T.bg, padding: `${isMobile ? 60 : 80}px 0` }}>
+      <section style={{
+        width: "100%", background: T.bg,
+        overflow: "hidden",
+        paddingTop: isMobile ? 60 : 220 + 80,
+        paddingBottom: isMobile ? 60 : 80,
+      }}>
         <div style={{ maxWidth: 1440, margin: "0 auto", padding: `0 ${hPad}px` }}>
 
           <h2 className="fade-up" style={{
