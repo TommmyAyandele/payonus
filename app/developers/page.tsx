@@ -176,43 +176,61 @@ function CodeEditor() {
 const RESOURCE_CARDS = [
   {
     title: "Documentation",
+    href:  "#",
     desc:  "Comprehensive guides for every endpoint and use case.",
     icon: (
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#6009FF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M14 2v6h6" stroke="#6009FF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M9 13l1.5 1.5L13 11" stroke="#6009FF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+      /* File with </> inside */
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" stroke="#6009FF" strokeWidth="1.5" strokeLinejoin="round"/>
+        <path d="M13 2v7h7" stroke="#6009FF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M9 14l-1.5 1.5L9 17" stroke="#6009FF" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M12 13l1.2 5" stroke="#6009FF" strokeWidth="1.3" strokeLinecap="round"/>
+        <path d="M15 14l1.5 1.5L15 17" stroke="#6009FF" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     ),
   },
   {
     title: "API Refrence",
+    href:  "#",
     desc:  "Full endpoint reference with request/response examples.",
     icon: (
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+      /* Wrench / tool */
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
         <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" stroke="#6009FF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     ),
   },
   {
     title: "Changelog",
+    href:  "#",
     desc:  "Every API update, new endpoint, and breaking change logged.",
     icon: (
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-        <rect x="3" y="3" width="18" height="18" rx="3" stroke="#6009FF" strokeWidth="1.5"/>
-        <path d="M7 8h6M7 12h4M7 16h3" stroke="#6009FF" strokeWidth="1.5" strokeLinecap="round"/>
-        <path d="M16 11v3l1.5 1.5" stroke="#6009FF" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+      /* Document with bullet-list rows */
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <rect x="3" y="2" width="18" height="20" rx="2" stroke="#6009FF" strokeWidth="1.5"/>
+        <circle cx="7.5" cy="8" r="1" fill="#6009FF"/>
+        <path d="M10.5 8h6" stroke="#6009FF" strokeWidth="1.3" strokeLinecap="round"/>
+        <circle cx="7.5" cy="12" r="1" fill="#6009FF"/>
+        <path d="M10.5 12h6" stroke="#6009FF" strokeWidth="1.3" strokeLinecap="round"/>
+        <circle cx="7.5" cy="16" r="1" fill="#6009FF"/>
+        <path d="M10.5 16h4" stroke="#6009FF" strokeWidth="1.3" strokeLinecap="round"/>
       </svg>
     ),
   },
   {
     title: "SDKs",
+    href:  "#",
     desc:  "Official libraries with examples and full TypeScript support.",
     icon: (
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-        <rect x="2" y="3" width="20" height="14" rx="2" stroke="#6009FF" strokeWidth="1.5"/>
-        <path d="M8 21h8M12 17v4" stroke="#6009FF" strokeWidth="1.5" strokeLinecap="round"/>
-        <path d="M8 10l-2 2 2 2M16 10l2 2-2 2" stroke="#6009FF" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+      /* Browser window with <> inside */
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <rect x="2" y="4" width="20" height="16" rx="2" stroke="#6009FF" strokeWidth="1.5"/>
+        <path d="M2 9h20" stroke="#6009FF" strokeWidth="1.3"/>
+        <circle cx="5.5" cy="6.5" r="0.8" fill="#6009FF"/>
+        <circle cx="8.5" cy="6.5" r="0.8" fill="#6009FF"/>
+        <circle cx="11.5" cy="6.5" r="0.8" fill="#6009FF"/>
+        <path d="M9 14l-2 2 2 2" stroke="#6009FF" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M15 14l2 2-2 2" stroke="#6009FF" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     ),
   },
@@ -241,8 +259,9 @@ export default function DevelopersPage() {
         .fade-up.d3 { transition-delay:0.24s; }
         .fade-up.d4 { transition-delay:0.32s; }
 
-        .dev-card { border:1px solid #E7E0EC; background:#FFFFFF; border-radius:12px; transition:transform 0.3s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s cubic-bezier(0.16,1,0.3,1), border-color 0.3s; }
-        .dev-card:hover { transform:translateY(-4px); box-shadow:0 16px 40px rgba(96,9,255,0.10); border-color:#C4B5FD; }
+        .res-card { display:block; text-decoration:none; cursor:pointer; background:transparent; transition:background 0.2s cubic-bezier(0.16,1,0.3,1); }
+        .res-card:hover { background:#F5F0FF; }
+        .res-card:hover .res-icon-box { border-color:#C4B5FD; background:#EDE9FF; }
 
         .ripple-effect { position:absolute; border-radius:50%; background:rgba(255,255,255,0.38); animation:rippleOut 0.55s ease-out forwards; pointer-events:none; }
         @keyframes rippleOut { from{transform:scale(0);opacity:0.55;} to{transform:scale(1);opacity:0;} }
@@ -342,8 +361,10 @@ export default function DevelopersPage() {
             gridTemplateColumns: isMobile ? "1fr 1fr" : "1fr 1fr 1fr 1fr",
           }}>
             {RESOURCE_CARDS.map((card, i) => (
-              <div
+              <a
                 key={card.title}
+                href={card.href}
+                className="res-card"
                 style={{
                   padding: isMobile ? "28px 20px" : "36px 32px",
                   borderRight: i < RESOURCE_CARDS.length - 1
@@ -352,17 +373,17 @@ export default function DevelopersPage() {
                         : "1px solid #E7E0EC")
                     : "none",
                   borderBottom: isMobile && i < 2 ? "1px solid #E7E0EC" : "none",
-                  cursor: "pointer",
                 }}
               >
                 {/* Icon box */}
-                <div style={{
+                <div className="res-icon-box" style={{
                   width: 44, height: 44,
                   borderRadius: 10,
                   border: "1px solid #DDD0FF",
                   background: "#F8F5FF",
                   display: "flex", alignItems: "center", justifyContent: "center",
                   marginBottom: isMobile ? 20 : 24,
+                  transition: "border-color 0.2s, background 0.2s",
                 }}>
                   {card.icon}
                 </div>
@@ -376,7 +397,7 @@ export default function DevelopersPage() {
                   fontSize: isMobile ? 13 : 14, lineHeight: 1.6,
                   color: T.muted,
                 }}>{card.desc}</div>
-              </div>
+              </a>
             ))}
           </div>
         </div>
