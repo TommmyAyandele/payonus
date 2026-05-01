@@ -40,7 +40,7 @@ export default function AnalyticsPage() {
   return (
     <ProductPage
       label="• Analytics"
-      heading={<>See everything.<br />Understand<br /><span style={{ color: T.primary }}>every payment.</span></>}
+      heading={<>See everything,<br />understand <span style={{ color: T.primary }}>every payment.</span></>}
       subtext="Real-time dashboards, revenue insights, and fraud signals — all in one place. Know what's working, fix what isn't, and grow with confidence."
       features={FEATURES}
       featuresHeading={<>Data that actually<br />helps you <span style={{ color: T.primary }}>decide.</span></>}

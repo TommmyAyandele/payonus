@@ -40,7 +40,7 @@ export default function SettlementsPage() {
   return (
     <ProductPage
       label="• Settlements"
-      heading={<>Your money,<br />settled fast —<br /><span style={{ color: T.primary }}>every time.</span></>}
+      heading={<>Your money, settled<br />fast — <span style={{ color: T.primary }}>every time.</span></>}
       subtext="Same-day settlements across 14+ African markets. Multi-currency, automated reconciliation, and flexible schedules — so your cash flow never waits."
       features={FEATURES}
       featuresHeading={<>Everything you need to<br />move money <span style={{ color: T.primary }}>efficiently.</span></>}

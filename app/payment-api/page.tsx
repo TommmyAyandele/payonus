@@ -40,7 +40,7 @@ export default function PaymentApiPage() {
   return (
     <ProductPage
       label="• Payment API"
-      heading={<>One API for<br />all African<br /><span style={{ color: T.primary }}>payments.</span></>}
+      heading={<>One API for all<br /><span style={{ color: T.primary }}>African payments.</span></>}
       subtext="A single, well-designed REST API to send and receive money across cards, bank transfers, USSD, and mobile money — in 14+ markets, with one integration."
       features={FEATURES}
       featuresHeading={<>Built for developers<br />who care about <span style={{ color: T.primary }}>quality.</span></>}

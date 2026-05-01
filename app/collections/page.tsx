@@ -40,7 +40,7 @@ export default function CollectionsPage() {
   return (
     <ProductPage
       label="• Collections"
-      heading={<>Accept payments,<br />anywhere in<br /><span style={{ color: T.primary }}>Africa.</span></>}
+      heading={<>Accept payments,<br />anywhere in <span style={{ color: T.primary }}>Africa.</span></>}
       subtext="A unified checkout and collections API for card, bank transfer, USSD, and mobile money across 14+ African markets — in one integration."
       features={FEATURES}
       featuresHeading={<>Everything you need to<br />collect payments <span style={{ color: T.primary }}>reliably.</span></>}
