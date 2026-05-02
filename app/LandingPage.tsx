@@ -140,88 +140,227 @@ function Hero() {
   );
 }
 
-/* ─── CARD WIREFRAME ─── */
-function CardWireframe() {
-  const sk: React.CSSProperties = {
-    background: "linear-gradient(90deg,#E8E8E8 25%,#F2F2F2 50%,#E8E8E8 75%)",
-    backgroundSize: "600px 100%",
-    animation: "skShimmer 1.6s ease-in-out infinite",
-    borderRadius: 3,
-  };
+/* ─── PRODUCT WIREFRAMES ─── */
+const sk: React.CSSProperties = {
+  background: "linear-gradient(90deg,#E8E8E8 25%,#F2F2F2 50%,#E8E8E8 75%)",
+  backgroundSize: "600px 100%",
+  animation: "skShimmer 1.6s ease-in-out infinite",
+  borderRadius: 3,
+};
+
+function Chrome({ children }: { children: React.ReactNode }) {
   return (
     <div style={{ width:"100%", height:"100%", background:"#FFF", display:"flex", flexDirection:"column", userSelect:"none", pointerEvents:"none" }}>
-      {/* Browser chrome */}
-      <div style={{ background:"#EBEBEB", display:"flex", alignItems:"center", padding:"7px 10px", gap:6, borderBottom:"1px solid #DEDEDE", flexShrink:0 }}>
+      <div style={{ background:"#EBEBEB", display:"flex", alignItems:"center", padding:"6px 10px", gap:6, borderBottom:"1px solid #DEDEDE", flexShrink:0 }}>
         <div style={{ display:"flex", gap:4 }}>
-          <div style={{ width:9,height:9,borderRadius:"50%",background:"#FF5F57" }} />
-          <div style={{ width:9,height:9,borderRadius:"50%",background:"#FEBC2E" }} />
-          <div style={{ width:9,height:9,borderRadius:"50%",background:"#28C840" }} />
+          {["#FF5F57","#FEBC2E","#28C840"].map(c => <div key={c} style={{ width:8,height:8,borderRadius:"50%",background:c }} />)}
         </div>
-        <div style={{ flex:1,background:"#DCDCDC",borderRadius:3,height:14,display:"flex",alignItems:"center",padding:"0 7px" }}>
-          <div style={{ width:"38%",height:5,...sk }} />
+        <div style={{ flex:1,background:"#DCDCDC",borderRadius:3,height:13,display:"flex",alignItems:"center",padding:"0 7px" }}>
+          <div style={{ width:"35%",height:5,...sk }} />
         </div>
       </div>
-      {/* Content area */}
+      {children}
+    </div>
+  );
+}
+
+/* Payouts — recipient list + send action */
+function PayoutsWireframe() {
+  const statuses = ["#22C55E","#F4B249","#22C55E","#94A3B8","#22C55E"];
+  return (
+    <Chrome>
       <div style={{ flex:1, display:"flex", minHeight:0 }}>
-        {/* Sidebar */}
-        <div style={{ width:"22%",flexShrink:0,background:"#FAFAFA",borderRight:"1px solid #F0F0F0",padding:"10px 8px",display:"flex",flexDirection:"column",gap:7 }}>
-          <div style={{ background:"#F4B249",borderRadius:4,padding:"5px 7px",display:"flex",alignItems:"center",gap:5,marginBottom:2 }}>
-            <div style={{ width:8,height:8,background:"rgba(255,255,255,0.6)",borderRadius:2,flexShrink:0 }} />
-            <div style={{ flex:1,height:5,background:"rgba(255,255,255,0.38)",borderRadius:2 }} />
+        <div style={{ width:"22%", flexShrink:0, background:"#FAFAFA", borderRight:"1px solid #F0F0F0", padding:"10px 8px", display:"flex", flexDirection:"column", gap:7 }}>
+          <div style={{ background:"#6009FF", borderRadius:4, padding:"5px 7px", display:"flex", alignItems:"center", gap:5, marginBottom:2 }}>
+            <div style={{ width:8,height:8,background:"rgba(255,255,255,0.5)",borderRadius:2,flexShrink:0 }} />
+            <div style={{ flex:1,height:5,background:"rgba(255,255,255,0.3)",borderRadius:2 }} />
           </div>
-          <div style={{ width:"60%",height:5,...sk }} />
           {[0,1,2,3,4].map(i => (
             <div key={i} style={{ display:"flex",alignItems:"center",gap:6 }}>
-              <div style={{ width:10,height:10,borderRadius:2,flexShrink:0,...sk,animationDelay:`${i*0.07}s` }} />
-              <div style={{ flex:1,height:5,...sk,animationDelay:`${i*0.07+0.04}s` }} />
+              <div style={{ width:10,height:10,borderRadius:2,flexShrink:0,...sk }} />
+              <div style={{ flex:1,height:5,...sk,animationDelay:`${i*0.07}s` }} />
             </div>
           ))}
         </div>
-        {/* Main */}
-        <div style={{ flex:1,padding:"10px 12px",display:"flex",flexDirection:"column",gap:10,minWidth:0 }}>
-          {/* Top bar */}
-          <div style={{ display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:2 }}>
-            <div style={{ display:"flex",alignItems:"center",gap:8 }}>
-              <div style={{ width:20,height:20,borderRadius:"50%",...sk }} />
-              <div style={{ display:"flex",flexDirection:"column",gap:4 }}>
-                <div style={{ width:80,height:5,...sk }} />
-                <div style={{ width:55,height:4,...sk,animationDelay:"0.1s" }} />
-              </div>
-            </div>
-            <div style={{ display:"flex",gap:6 }}>
-              <div style={{ width:60,height:18,borderRadius:3,...sk }} />
-              <div style={{ width:74,height:18,borderRadius:3,...sk,animationDelay:"0.1s" }} />
-            </div>
+        <div style={{ flex:1, padding:"12px", display:"flex", flexDirection:"column", gap:9, minWidth:0 }}>
+          <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center" }}>
+            <div style={{ width:90,height:7,borderRadius:3,...sk }} />
+            <div style={{ width:70,height:22,borderRadius:4,background:"#6009FF",opacity:0.15 }} />
           </div>
-          {/* Card grid rows */}
-          {[0,1].map(row => (
-            <div key={row} style={{ display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:8 }}>
-              {[0,1,2].map(col => (
-                <div key={col} style={{ borderRadius:6,overflow:"hidden",background:"#F5F5F5" }}>
-                  <div style={{ height:54,...sk,animationDelay:`${(row*3+col)*0.05}s` }} />
-                  <div style={{ padding:"6px 8px",display:"flex",flexDirection:"column",gap:4,background:"#FFF" }}>
-                    <div style={{ width:"65%",height:5,...sk }} />
-                    <div style={{ width:"44%",height:4,...sk }} />
-                  </div>
-                </div>
-              ))}
+          <div style={{ width:"100%",height:22,borderRadius:4,background:"#F5F5F5",display:"flex",alignItems:"center",padding:"0 8px",gap:6 }}>
+            <div style={{ width:12,height:12,borderRadius:2,...sk }} />
+            <div style={{ width:"50%",height:5,...sk }} />
+          </div>
+          {statuses.map((color, i) => (
+            <div key={i} style={{ display:"flex", alignItems:"center", gap:8, padding:"7px 0", borderBottom:"1px solid #F0F0F0" }}>
+              <div style={{ width:28,height:28,borderRadius:"50%",flexShrink:0,...sk }} />
+              <div style={{ flex:1, display:"flex", flexDirection:"column", gap:4 }}>
+                <div style={{ width:`${55+i*8}%`,height:6,borderRadius:3,...sk }} />
+                <div style={{ width:"40%",height:5,borderRadius:3,...sk,animationDelay:"0.1s" }} />
+              </div>
+              <div style={{ display:"flex",alignItems:"center",gap:6 }}>
+                <div style={{ width:48,height:6,borderRadius:3,...sk }} />
+                <div style={{ width:8,height:8,borderRadius:"50%",background:color,flexShrink:0 }} />
+              </div>
             </div>
           ))}
         </div>
       </div>
-    </div>
+    </Chrome>
+  );
+}
+
+/* Collections — checkout / payment form */
+function CollectionsWireframe() {
+  return (
+    <Chrome>
+      <div style={{ flex:1, display:"flex", alignItems:"center", justifyContent:"center", background:"#F8F7FF", padding:"14px" }}>
+        <div style={{ width:"100%", maxWidth:340, background:"#FFF", borderRadius:10, border:"1px solid #E7E0EC", padding:"16px", display:"flex", flexDirection:"column", gap:12 }}>
+          <div style={{ display:"flex",justifyContent:"space-between",alignItems:"center" }}>
+            <div style={{ display:"flex",alignItems:"center",gap:1 }}>
+              <span style={{ fontFamily:"DM Sans,sans-serif",fontWeight:700,fontSize:10,color:"#6009FF",lineHeight:1 }}>pay</span>
+              <div style={{ width:10,height:10,borderRadius:"50%",background:"#F4B249",display:"flex",alignItems:"center",justifyContent:"center" }}>
+                <span style={{ fontSize:6,fontWeight:700,color:"#fff",lineHeight:1 }}>O</span>
+              </div>
+              <span style={{ fontFamily:"DM Sans,sans-serif",fontWeight:700,fontSize:10,color:"#6009FF",lineHeight:1 }}>.us</span>
+            </div>
+            <div style={{ width:40,height:5,borderRadius:3,...sk }} />
+          </div>
+          <div style={{ textAlign:"center", padding:"6px 0" }}>
+            <div style={{ width:60,height:5,borderRadius:3,...sk,margin:"0 auto 6px" }} />
+            <div style={{ width:90,height:9,borderRadius:3,...sk,margin:"0 auto" }} />
+          </div>
+          <div style={{ display:"flex",gap:6 }}>
+            {["#6009FF","#1A1A2E","#E5E7EB"].map((bg,i) => (
+              <div key={i} style={{ flex:1,height:24,borderRadius:4,background:bg,opacity:i===2?1:0.18 }} />
+            ))}
+          </div>
+          {[1,0.8,0.8].map((w,i) => (
+            <div key={i} style={{ width:`${w*100}%`,height:i===0?32:24,borderRadius:4,background:"#F4F4F5",border:"1px solid #E7E0EC",display:"flex",alignItems:"center",padding:"0 8px" }}>
+              <div style={{ width:`${40+i*10}%`,height:5,borderRadius:3,...sk }} />
+            </div>
+          ))}
+          <div style={{ width:"100%",height:32,borderRadius:4,background:"#6009FF",display:"flex",alignItems:"center",justifyContent:"center",gap:6 }}>
+            <div style={{ width:50,height:6,borderRadius:3,background:"rgba(255,255,255,0.35)" }} />
+          </div>
+        </div>
+      </div>
+    </Chrome>
+  );
+}
+
+/* Settlements — balance card + settlement bars */
+function SettlementsWireframe() {
+  const bars = [65,82,48,90,74,55,88];
+  return (
+    <Chrome>
+      <div style={{ flex:1, padding:"12px", display:"flex", flexDirection:"column", gap:10, minWidth:0 }}>
+        <div style={{ background:"linear-gradient(135deg,#6009FF 0%,#8B3FFF 100%)", borderRadius:10, padding:"14px", display:"flex", flexDirection:"column", gap:8 }}>
+          <div style={{ width:70,height:5,borderRadius:3,background:"rgba(255,255,255,0.4)" }} />
+          <div style={{ width:120,height:11,borderRadius:4,background:"rgba(255,255,255,0.6)" }} />
+          <div style={{ display:"flex",gap:8,marginTop:4 }}>
+            <div style={{ flex:1,background:"rgba(255,255,255,0.15)",borderRadius:6,padding:"7px 8px" }}>
+              <div style={{ width:"60%",height:4,borderRadius:2,background:"rgba(255,255,255,0.35)",marginBottom:5 }} />
+              <div style={{ width:"80%",height:7,borderRadius:3,background:"rgba(255,255,255,0.5)" }} />
+            </div>
+            <div style={{ flex:1,background:"rgba(255,255,255,0.15)",borderRadius:6,padding:"7px 8px" }}>
+              <div style={{ width:"50%",height:4,borderRadius:2,background:"rgba(255,255,255,0.35)",marginBottom:5 }} />
+              <div style={{ width:"70%",height:7,borderRadius:3,background:"rgba(255,255,255,0.5)" }} />
+            </div>
+          </div>
+        </div>
+        <div style={{ display:"flex",justifyContent:"space-between",alignItems:"flex-end",padding:"8px 4px 0",flex:1 }}>
+          {bars.map((h,i) => (
+            <div key={i} style={{ flex:1,marginRight:i<bars.length-1?4:0,display:"flex",flexDirection:"column",justifyContent:"flex-end" }}>
+              <div style={{ height:`${h}%`,minHeight:6,borderRadius:"3px 3px 0 0",background:i===4?"#6009FF":"#E2D9F3",transition:"height 0.3s" }} />
+            </div>
+          ))}
+        </div>
+        <div style={{ display:"flex",justifyContent:"space-between" }}>
+          {bars.map((_,i) => <div key={i} style={{ flex:1,height:4,borderRadius:2,...sk,animationDelay:`${i*0.06}s` }} />)}
+        </div>
+      </div>
+    </Chrome>
+  );
+}
+
+/* Payment API — terminal / code view */
+function PaymentApiWireframe() {
+  const lines = [
+    { w:"55%", c:"#C792EA" }, { w:"80%", c:"#82AAFF" }, { w:"65%", c:"#C3E88D" },
+    { w:"72%", c:"#82AAFF" }, { w:"48%", c:"#F78C6C" }, { w:"70%", c:"#C3E88D" },
+    { w:"60%", c:"#C792EA" }, { w:"44%", c:"#546E7A" }, { w:"77%", c:"#82AAFF" },
+  ];
+  return (
+    <Chrome>
+      <div style={{ flex:1, background:"#1E1E2E", padding:"12px", display:"flex", flexDirection:"column", gap:0, fontFamily:"monospace", minHeight:0, overflow:"hidden" }}>
+        <div style={{ display:"flex",gap:12,marginBottom:10,borderBottom:"1px solid rgba(255,255,255,0.08)",paddingBottom:8 }}>
+          {["index.js","README.md"].map((tab,i) => (
+            <div key={tab} style={{ fontSize:9,color:i===0?"#CDD6F4":"#6C7086",padding:"3px 8px",borderRadius:"4px 4px 0 0",background:i===0?"rgba(255,255,255,0.08)":"transparent" }}>
+              {tab}
+            </div>
+          ))}
+        </div>
+        <div style={{ display:"flex",alignItems:"center",gap:8,marginBottom:10,background:"rgba(255,255,255,0.05)",borderRadius:4,padding:"6px 10px" }}>
+          <div style={{ width:8,height:8,borderRadius:"50%",background:"#22C55E",flexShrink:0 }} />
+          <div style={{ width:"55%",height:5,borderRadius:2,background:"rgba(130,170,255,0.5)" }} />
+        </div>
+        {lines.map((l,i) => (
+          <div key={i} style={{ display:"flex",alignItems:"center",gap:8,marginBottom:6 }}>
+            <div style={{ width:12,height:4,borderRadius:2,background:"rgba(108,112,134,0.4)",flexShrink:0 }} />
+            <div style={{ width:l.w,height:5,borderRadius:2,background:l.c,opacity:0.55 }} />
+          </div>
+        ))}
+      </div>
+    </Chrome>
+  );
+}
+
+/* Analytics — stats + bar chart */
+function AnalyticsWireframe() {
+  const bars = [40,65,52,80,68,90,72,58,84,62,76,88];
+  return (
+    <Chrome>
+      <div style={{ flex:1, padding:"12px", display:"flex", flexDirection:"column", gap:10, minWidth:0 }}>
+        <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:8 }}>
+          {[["#6009FF","rgba(96,9,255,0.12)"],["#22C55E","rgba(34,197,94,0.12)"],["#F4B249","rgba(244,178,73,0.12)"]].map(([accent,bg],i) => (
+            <div key={i} style={{ background:bg,borderRadius:8,padding:"8px" }}>
+              <div style={{ width:"55%",height:4,borderRadius:2,...sk,marginBottom:6 }} />
+              <div style={{ width:"75%",height:9,borderRadius:3,background:accent,opacity:0.4 }} />
+            </div>
+          ))}
+        </div>
+        <div style={{ flex:1,display:"flex",flexDirection:"column",gap:6 }}>
+          <div style={{ display:"flex",justifyContent:"space-between",alignItems:"center" }}>
+            <div style={{ width:70,height:5,borderRadius:3,...sk }} />
+            <div style={{ width:50,height:16,borderRadius:3,...sk }} />
+          </div>
+          <div style={{ flex:1,display:"flex",alignItems:"flex-end",gap:3,padding:"4px 0" }}>
+            {bars.map((h,i) => (
+              <div key={i} style={{ flex:1,display:"flex",flexDirection:"column",justifyContent:"flex-end" }}>
+                <div style={{ height:`${h}%`,minHeight:4,borderRadius:"2px 2px 0 0",background:i===9?"#6009FF":i%3===0?"#DDD6FE":"#EDE9FF" }} />
+              </div>
+            ))}
+          </div>
+          <div style={{ height:1,background:"#F0F0F0" }} />
+          <div style={{ display:"flex",justifyContent:"space-between" }}>
+            {[0,1,2,3].map(i => <div key={i} style={{ width:"20%",height:4,borderRadius:2,...sk,animationDelay:`${i*0.08}s` }} />)}
+          </div>
+        </div>
+      </div>
+    </Chrome>
   );
 }
 
 /* ─── PRODUCT SECTION ─── */
 const PRODUCT_CARDS_TOP = [
-  { title: "Payouts",     image: "/card-payouts.png"     },
-  { title: "Collections", image: "/card-collections.png" },
+  { title: "Payouts",     Wireframe: PayoutsWireframe     },
+  { title: "Collections", Wireframe: CollectionsWireframe },
 ];
 const PRODUCT_CARDS_BOTTOM = [
-  { title: "Instant Settlements",   image: "/card-instant-settlements.png" },
-  { title: "Payment API",           image: "/card-payment-api.png"         },
-  { title: "Analytics & Reporting", image: "/card-analytics.png"           },
+  { title: "Instant Settlements",   Wireframe: SettlementsWireframe },
+  { title: "Payment API",           Wireframe: PaymentApiWireframe  },
+  { title: "Analytics & Reporting", Wireframe: AnalyticsWireframe   },
 ];
 
 function ProductSection() {
@@ -270,11 +409,11 @@ function ProductSection() {
         <div className="fade-up" style={{ display:"grid", gridTemplateColumns:topCols, gap: isMobile ? 12 : 24, marginBottom: isMobile ? 12 : 24 }}>
           {PRODUCT_CARDS_TOP.map(p => (
             <div key={p.title} className="product-card" style={card} onMouseMove={onTilt} onMouseLeave={onTiltLeave}>
-              <div style={{ width:"100%", height: topH, overflow:"hidden" }}>
-                <CardWireframe />
-              </div>
               <div style={{ padding: isMobile ? "10px 14px" : "14px 20px" }}>
                 <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:14, color:T.dark }}>{p.title}</span>
+              </div>
+              <div style={{ width:"100%", height: topH, overflow:"hidden" }}>
+                <p.Wireframe />
               </div>
             </div>
           ))}
@@ -283,11 +422,11 @@ function ProductSection() {
         <div className="fade-up" style={{ display:"grid", gridTemplateColumns:botCols, gap: isMobile ? 12 : 24 }}>
           {PRODUCT_CARDS_BOTTOM.map(p => (
             <div key={p.title} className="product-card" style={card} onMouseMove={onTilt} onMouseLeave={onTiltLeave}>
-              <div style={{ width:"100%", height: isMobile ? 200 : 280, overflow:"hidden" }}>
-                <CardWireframe />
-              </div>
               <div style={{ padding: isMobile ? "10px 14px" : "14px 20px" }}>
                 <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:14, color:T.dark }}>{p.title}</span>
+              </div>
+              <div style={{ width:"100%", height: isMobile ? 200 : 280, overflow:"hidden" }}>
+                <p.Wireframe />
               </div>
             </div>
           ))}
