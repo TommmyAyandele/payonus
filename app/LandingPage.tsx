@@ -141,6 +141,22 @@ function Hero() {
 }
 
 /* ─── PRODUCT WIREFRAMES ─── */
+// Cross-fades a shimmer bar → real content
+function Cell({ loaded, h, w, flex, d = 0, children, style }: {
+  loaded: boolean; h: number; w?: string | number; flex?: number; d?: number;
+  children: React.ReactNode; style?: React.CSSProperties;
+}) {
+  const tr = `opacity 0.55s ease ${d}s`;
+  return (
+    <div style={{ position:"relative", height:h, width:w, flex, flexShrink:flex?undefined:0, borderRadius:3, overflow:"hidden", ...style }}>
+      <div style={{ position:"absolute", inset:0, borderRadius:3, ...sk, opacity:loaded?0:1, transition:tr }} />
+      <div style={{ position:"absolute", inset:0, borderRadius:3, opacity:loaded?1:0, transition:tr, display:"flex", alignItems:"center" }}>
+        {children}
+      </div>
+    </div>
+  );
+}
+
 const sk: React.CSSProperties = {
   background: "linear-gradient(90deg,#E8E8E8 25%,#F2F2F2 50%,#E8E8E8 75%)",
   backgroundSize: "600px 100%",
@@ -164,17 +180,6 @@ function useLoadCycle(initialDelay = 0) {
 }
 
 /* Cross-fades between a shimmer bar and a solid colour */
-function Sk({ loaded, color, w, h = 5, d = 0, flex, style }: {
-  loaded: boolean; color: string; w?: string | number; h?: number; d?: number; flex?: number; style?: React.CSSProperties;
-}) {
-  const tr = `opacity 0.6s ease ${d}s`;
-  return (
-    <div style={{ position:"relative", width:w, height:h, borderRadius:3, flex, flexShrink:flex?undefined:0, ...style }}>
-      <div style={{ position:"absolute", inset:0, borderRadius:3, ...sk, opacity:loaded?0:1, transition:tr }} />
-      <div style={{ position:"absolute", inset:0, borderRadius:3, background:color, opacity:loaded?1:0, transition:tr }} />
-    </div>
-  );
-}
 
 function Chrome({ children }: { children: React.ReactNode }) {
   return (
@@ -192,50 +197,74 @@ function Chrome({ children }: { children: React.ReactNode }) {
   );
 }
 
-/* Payouts — recipient list */
+/* Payouts — recipient list with real names + amounts */
 function PayoutsWireframe() {
   const loaded = useLoadCycle(0);
   const rows = [
-    { sc:"#22C55E", nw:"62%", aw:48, d:0.10 },
-    { sc:"#F4B249", nw:"55%", aw:52, d:0.18 },
-    { sc:"#22C55E", nw:"68%", aw:44, d:0.26 },
-    { sc:"#94A3B8", nw:"48%", aw:56, d:0.34 },
-    { sc:"#22C55E", nw:"63%", aw:48, d:0.42 },
+    { initials:"AO", name:"Amara Osei",       bank:"GTBank · ****4123",  amt:"₦45,000",  sc:"#22C55E" },
+    { initials:"FD", name:"Fatima Diallo",     bank:"UBA · ****8801",     amt:"$1,200",   sc:"#F4B249" },
+    { initials:"KM", name:"Kwame Mensah",      bank:"Zenith · ****3390",  amt:"₦28,500",  sc:"#22C55E" },
+    { initials:"ZA", name:"Zainab Abubakar",   bank:"Access · ****7712",  amt:"₦12,000",  sc:"#94A3B8" },
+    { initials:"EE", name:"Emeka Eze",         bank:"FCMB · ****6647",    amt:"$850",     sc:"#22C55E" },
   ];
+  const nav = ["Dashboard","Payouts","Recipients","History","Settings"];
   return (
     <Chrome>
-      <div style={{ flex:1, display:"flex", minHeight:0 }}>
-        <div style={{ width:"22%",flexShrink:0,background:"#FAFAFA",borderRight:"1px solid #F0F0F0",padding:"10px 8px",display:"flex",flexDirection:"column",gap:7 }}>
-          <div style={{ background:loaded?"#6009FF":"#F4B249",transition:"background 0.6s",borderRadius:4,padding:"5px 7px",display:"flex",alignItems:"center",gap:5,marginBottom:2 }}>
+      <div style={{ flex:1,display:"flex",minHeight:0 }}>
+        <div style={{ width:"23%",flexShrink:0,background:"#FAFAFA",borderRight:"1px solid #F0F0F0",padding:"10px 7px",display:"flex",flexDirection:"column",gap:5 }}>
+          <div style={{ background:loaded?"#6009FF":"#F4B249",transition:"background 0.6s",borderRadius:4,padding:"5px 7px",display:"flex",alignItems:"center",gap:5,marginBottom:3 }}>
             <div style={{ width:8,height:8,background:"rgba(255,255,255,0.5)",borderRadius:2,flexShrink:0 }} />
             <div style={{ flex:1,height:5,background:"rgba(255,255,255,0.3)",borderRadius:2 }} />
           </div>
-          {[0,1,2,3,4].map(i => (
-            <div key={i} style={{ display:"flex",alignItems:"center",gap:6 }}>
-              <Sk loaded={loaded} color="#C4B5FD" w={10} h={10} d={i*0.07} />
-              <Sk loaded={loaded} color="#EDE9FF" flex={1} h={5} d={i*0.07+0.04} />
-            </div>
+          {nav.map((n,i) => (
+            <Cell key={i} loaded={loaded} h={18} w="100%" d={i*0.06} style={{ borderRadius:4 }}>
+              <div style={{ width:"100%",height:"100%",padding:"0 5px",display:"flex",alignItems:"center",
+                background:i===1&&loaded?"rgba(96,9,255,0.08)":"transparent",borderRadius:4 }}>
+                <span style={{ fontFamily:"DM Sans,sans-serif",fontSize:9,fontWeight:i===1?600:400,color:i===1?"#6009FF":"#6B6877" }}>{n}</span>
+              </div>
+            </Cell>
           ))}
         </div>
-        <div style={{ flex:1,padding:"10px 12px",display:"flex",flexDirection:"column",gap:7,minWidth:0 }}>
+        <div style={{ flex:1,padding:"10px 11px",display:"flex",flexDirection:"column",gap:6,minWidth:0 }}>
           <div style={{ display:"flex",justifyContent:"space-between",alignItems:"center" }}>
-            <Sk loaded={loaded} color="#1C1B1F" w="50%" h={7} />
-            <Sk loaded={loaded} color="#6009FF" w={70} h={22} style={{ borderRadius:4 }} />
+            <Cell loaded={loaded} h={14} w="50%" d={0}>
+              <span style={{ fontFamily:"DM Sans,sans-serif",fontSize:11,fontWeight:700,color:"#1C1B1F" }}>Send Payouts</span>
+            </Cell>
+            <Cell loaded={loaded} h={22} w={80} d={0.05} style={{ borderRadius:4 }}>
+              <div style={{ width:"100%",height:"100%",background:"#6009FF",borderRadius:4,display:"flex",alignItems:"center",justifyContent:"center" }}>
+                <span style={{ fontFamily:"DM Sans,sans-serif",fontSize:9,fontWeight:600,color:"#FFF" }}>+ New Payout</span>
+              </div>
+            </Cell>
           </div>
-          <div style={{ height:22,borderRadius:4,background:"#F5F5F5",display:"flex",alignItems:"center",padding:"0 8px",gap:6 }}>
-            <Sk loaded={loaded} color="#94A3B8" w={12} h={12} />
-            <Sk loaded={loaded} color="#CBD5E1" flex={1} h={5} />
+          <div style={{ height:22,borderRadius:4,background:"#F5F5F5",display:"flex",alignItems:"center",padding:"0 8px",gap:5,flexShrink:0 }}>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" style={{ flexShrink:0,opacity:loaded?0.7:0,transition:"opacity 0.5s" }}>
+              <circle cx="11" cy="11" r="7" stroke="#94A3B8" strokeWidth="2.5"/>
+              <path d="M16.5 16.5L21 21" stroke="#94A3B8" strokeWidth="2.5" strokeLinecap="round"/>
+            </svg>
+            <Cell loaded={loaded} h={6} flex={1} d={0.08}>
+              <span style={{ fontFamily:"DM Sans,sans-serif",fontSize:9,color:"#94A3B8" }}>Search recipients…</span>
+            </Cell>
           </div>
           {rows.map((r,i) => (
-            <div key={i} style={{ display:"flex",alignItems:"center",gap:8,padding:"5px 0",borderBottom:"1px solid #F5F5F5" }}>
-              <Sk loaded={loaded} color="#DDD6FE" w={26} h={26} d={r.d} style={{ borderRadius:"50%" }} />
-              <div style={{ flex:1,display:"flex",flexDirection:"column",gap:4,minWidth:0 }}>
-                <Sk loaded={loaded} color="#1C1B1F" w={r.nw} h={6} d={r.d} />
-                <Sk loaded={loaded} color="#94A3B8" w="40%" h={4} d={r.d+0.1} />
+            <div key={i} style={{ display:"flex",alignItems:"center",gap:7,paddingBottom:5,borderBottom:"1px solid #F5F5F5",flexShrink:0 }}>
+              <Cell loaded={loaded} h={26} w={26} d={i*0.07} style={{ borderRadius:"50%",flexShrink:0 }}>
+                <div style={{ width:26,height:26,borderRadius:"50%",background:"#DDD6FE",display:"flex",alignItems:"center",justifyContent:"center" }}>
+                  <span style={{ fontFamily:"DM Sans,sans-serif",fontSize:8,fontWeight:700,color:"#6009FF" }}>{r.initials}</span>
+                </div>
+              </Cell>
+              <div style={{ flex:1,minWidth:0,display:"flex",flexDirection:"column",gap:3 }}>
+                <Cell loaded={loaded} h={10} w="90%" d={i*0.07}>
+                  <span style={{ fontFamily:"DM Sans,sans-serif",fontSize:9,fontWeight:600,color:"#1C1B1F",whiteSpace:"nowrap" }}>{r.name}</span>
+                </Cell>
+                <Cell loaded={loaded} h={9} w="80%" d={i*0.07+0.05}>
+                  <span style={{ fontFamily:"DM Sans,sans-serif",fontSize:8,color:"#94A3B8",whiteSpace:"nowrap" }}>{r.bank}</span>
+                </Cell>
               </div>
               <div style={{ display:"flex",alignItems:"center",gap:5,flexShrink:0 }}>
-                <Sk loaded={loaded} color="#1C1B1F" w={r.aw} h={6} d={r.d} />
-                <div style={{ width:8,height:8,borderRadius:"50%",background:r.sc,flexShrink:0 }} />
+                <Cell loaded={loaded} h={10} w={50} d={i*0.07}>
+                  <span style={{ fontFamily:"DM Sans,sans-serif",fontSize:9,fontWeight:700,color:"#1C1B1F" }}>{r.amt}</span>
+                </Cell>
+                <div style={{ width:7,height:7,borderRadius:"50%",background:r.sc,flexShrink:0 }} />
               </div>
             </div>
           ))}
@@ -245,13 +274,18 @@ function PayoutsWireframe() {
   );
 }
 
-/* Collections — checkout form */
+/* Collections — checkout form with real card data */
 function CollectionsWireframe() {
   const loaded = useLoadCycle(700);
+  const fields = [
+    { label:"Card number", val:"4242  4242  4242  4242" },
+    { label:"Expiry date", val:"12 / 26" },
+    { label:"CVV",         val:"• • •" },
+  ];
   return (
     <Chrome>
       <div style={{ flex:1,display:"flex",alignItems:"center",justifyContent:"center",background:"#F8F7FF",padding:"12px" }}>
-        <div style={{ width:"100%",maxWidth:320,background:"#FFF",borderRadius:10,border:"1px solid #E7E0EC",padding:"14px",display:"flex",flexDirection:"column",gap:10 }}>
+        <div style={{ width:"100%",maxWidth:300,background:"#FFF",borderRadius:10,border:"1px solid #E7E0EC",padding:"14px",display:"flex",flexDirection:"column",gap:9 }}>
           <div style={{ display:"flex",justifyContent:"space-between",alignItems:"center" }}>
             <div style={{ display:"flex",alignItems:"center",gap:1 }}>
               <span style={{ fontFamily:"DM Sans,sans-serif",fontWeight:700,fontSize:10,color:"#6009FF" }}>pay</span>
@@ -260,24 +294,40 @@ function CollectionsWireframe() {
               </div>
               <span style={{ fontFamily:"DM Sans,sans-serif",fontWeight:700,fontSize:10,color:"#6009FF" }}>.us</span>
             </div>
-            <Sk loaded={loaded} color="#94A3B8" w={40} h={5} />
+            <Cell loaded={loaded} h={8} w={65} d={0}>
+              <span style={{ fontFamily:"DM Sans,sans-serif",fontSize:8,color:"#6B6877" }}>Checkout · Secure</span>
+            </Cell>
           </div>
-          <div style={{ textAlign:"center",padding:"4px 0" }}>
-            <Sk loaded={loaded} color="#94A3B8" w={60} h={5} style={{ margin:"0 auto 6px" }} />
-            <Sk loaded={loaded} color="#1C1B1F" w={90} h={9} style={{ margin:"0 auto",borderRadius:4 }} />
+          <div style={{ background:"#F8F7FF",borderRadius:8,padding:"10px",textAlign:"center" }}>
+            <Cell loaded={loaded} h={9} w={70} d={0.05} style={{ margin:"0 auto 5px" }}>
+              <span style={{ fontFamily:"DM Sans,sans-serif",fontSize:9,color:"#6B6877",width:"100%",textAlign:"center" }}>Total amount</span>
+            </Cell>
+            <Cell loaded={loaded} h={20} w={130} d={0.08} style={{ margin:"0 auto",borderRadius:4 }}>
+              <span style={{ fontFamily:"DM Sans,sans-serif",fontSize:18,fontWeight:800,color:"#1C1B1F",width:"100%",textAlign:"center" }}>₦25,000.00</span>
+            </Cell>
           </div>
-          <div style={{ display:"flex",gap:6 }}>
-            {([[loaded?"#6009FF":"#E5E7EB",loaded?1:0.18],["#1A1A2E",0.18],["#E5E7EB",1]] as [string,number][]).map(([bg,op],i) => (
-              <div key={i} style={{ flex:1,height:22,borderRadius:4,background:bg,opacity:op,transition:"background 0.6s, opacity 0.6s" }} />
+          <div style={{ display:"flex",gap:5 }}>
+            {["Card","Transfer","USSD"].map((m,i) => (
+              <div key={m} style={{ flex:1,height:24,borderRadius:4,display:"flex",alignItems:"center",justifyContent:"center",
+                background:i===0?(loaded?"#6009FF":"#E5E7EB"):"#F4F4F5",
+                border:"1px solid",borderColor:i===0?(loaded?"#6009FF":"#E5E7EB"):"#E7E0EC",transition:"all 0.6s" }}>
+                <span style={{ fontFamily:"DM Sans,sans-serif",fontSize:9,fontWeight:i===0?600:400,
+                  color:i===0?(loaded?"#FFF":"#6B6877"):"#6B6877",transition:"color 0.6s" }}>{m}</span>
+              </div>
             ))}
           </div>
-          {[0,1,2].map(i => (
-            <div key={i} style={{ height:i===0?30:22,borderRadius:4,background:"#F4F4F5",border:"1px solid #E7E0EC",display:"flex",alignItems:"center",padding:"0 8px" }}>
-              <Sk loaded={loaded} color={i===0?"#1C1B1F":"#94A3B8"} w={`${40+i*10}%`} h={5} d={i*0.1} />
+          {fields.map((f,i) => (
+            <div key={i} style={{ height:30,borderRadius:4,background:"#F4F4F5",border:"1px solid #E7E0EC",display:"flex",flexDirection:"column",justifyContent:"center",padding:"0 8px" }}>
+              <span style={{ fontFamily:"DM Sans,sans-serif",fontSize:7,color:"#94A3B8",lineHeight:1,marginBottom:3 }}>{f.label}</span>
+              <Cell loaded={loaded} h={10} w="80%" d={0.1+i*0.08}>
+                <span style={{ fontFamily:"DM Sans,sans-serif",fontSize:9,fontWeight:500,color:"#1C1B1F",letterSpacing:i===0?0.5:0 }}>{f.val}</span>
+              </Cell>
             </div>
           ))}
-          <div style={{ height:30,borderRadius:4,background:"#6009FF",display:"flex",alignItems:"center",justifyContent:"center",opacity:loaded?1:0.45,transition:"opacity 0.6s" }}>
-            <div style={{ width:50,height:5,borderRadius:3,background:"rgba(255,255,255,0.6)" }} />
+          <div style={{ height:30,borderRadius:4,background:"#6009FF",display:"flex",alignItems:"center",justifyContent:"center",opacity:loaded?1:0.4,transition:"opacity 0.6s" }}>
+            <span style={{ fontFamily:"DM Sans,sans-serif",fontSize:10,fontWeight:600,color:"#FFF",opacity:loaded?1:0,transition:"opacity 0.4s 0.15s" }}>
+              Pay ₦25,000.00
+            </span>
           </div>
         </div>
       </div>
@@ -285,68 +335,95 @@ function CollectionsWireframe() {
   );
 }
 
-/* Settlements — balance card + bar chart */
+/* Settlements — real balance + labelled bar chart */
 function SettlementsWireframe() {
   const loaded = useLoadCycle(300);
   const bars = [65,82,48,90,74,55,88];
+  const days = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
   return (
     <Chrome>
-      <div style={{ flex:1,padding:"12px",display:"flex",flexDirection:"column",gap:10,minWidth:0 }}>
-        <div style={{ background:"linear-gradient(135deg,#6009FF 0%,#8B3FFF 100%)",borderRadius:10,padding:"12px",display:"flex",flexDirection:"column",gap:8 }}>
-          <Sk loaded={loaded} color="rgba(255,255,255,0.5)" w="45%" h={5} />
-          <Sk loaded={loaded} color="rgba(255,255,255,0.9)" w="68%" h={11} style={{ borderRadius:4 }} />
-          <div style={{ display:"flex",gap:8,marginTop:2 }}>
-            {[0,1].map(j => (
+      <div style={{ flex:1,padding:"11px",display:"flex",flexDirection:"column",gap:9,minWidth:0 }}>
+        <div style={{ background:"linear-gradient(135deg,#6009FF 0%,#8B3FFF 100%)",borderRadius:10,padding:"11px 12px",display:"flex",flexDirection:"column",gap:7 }}>
+          <Cell loaded={loaded} h={9} w="55%" d={0}>
+            <span style={{ fontFamily:"DM Sans,sans-serif",fontSize:9,color:"rgba(255,255,255,0.7)" }}>Available Balance</span>
+          </Cell>
+          <Cell loaded={loaded} h={20} w="78%" d={0.06} style={{ borderRadius:4 }}>
+            <span style={{ fontFamily:"DM Sans,sans-serif",fontSize:18,fontWeight:800,color:"#FFF" }}>₦4,285,000</span>
+          </Cell>
+          <div style={{ display:"flex",gap:8 }}>
+            {[{ label:"Next Settlement", val:"Tomorrow" },{ label:"Pending", val:"₦820,000" }].map((s,j) => (
               <div key={j} style={{ flex:1,background:"rgba(255,255,255,0.15)",borderRadius:6,padding:"6px 8px" }}>
-                <Sk loaded={loaded} color="rgba(255,255,255,0.4)" w="55%" h={4} d={j*0.1} style={{ marginBottom:5 }} />
-                <Sk loaded={loaded} color="rgba(255,255,255,0.75)" w="75%" h={7} d={j*0.1+0.1} style={{ borderRadius:3 }} />
+                <Cell loaded={loaded} h={8} w="90%" d={0.1+j*0.08} style={{ marginBottom:4 }}>
+                  <span style={{ fontFamily:"DM Sans,sans-serif",fontSize:8,color:"rgba(255,255,255,0.65)" }}>{s.label}</span>
+                </Cell>
+                <Cell loaded={loaded} h={11} w="85%" d={0.16+j*0.08}>
+                  <span style={{ fontFamily:"DM Sans,sans-serif",fontSize:10,fontWeight:700,color:"#FFF" }}>{s.val}</span>
+                </Cell>
               </div>
             ))}
           </div>
         </div>
-        <div style={{ display:"flex",justifyContent:"space-between",alignItems:"flex-end",flex:1,paddingTop:4 }}>
-          {bars.map((h,i) => (
-            <div key={i} style={{ flex:1,marginRight:i<bars.length-1?4:0,display:"flex",flexDirection:"column",justifyContent:"flex-end",height:"100%" }}>
-              <div style={{ height:`${h}%`,minHeight:4,borderRadius:"3px 3px 0 0",
-                background: loaded ? (i===4?"#6009FF":i===1||i===3?"#C4B5FD":"#EDE9FF") : "#E8E8E8",
-                transition:"background 0.6s ease" }} />
-            </div>
-          ))}
-        </div>
-        <div style={{ display:"flex",gap:4 }}>
-          {bars.map((_,i) => <Sk key={i} loaded={loaded} color="#94A3B8" flex={1} h={4} d={i*0.05} />)}
+        <div style={{ flex:1,display:"flex",flexDirection:"column",minHeight:0 }}>
+          <div style={{ flex:1,display:"flex",alignItems:"flex-end",gap:4,paddingBottom:4 }}>
+            {bars.map((h,i) => (
+              <div key={i} style={{ flex:1,display:"flex",flexDirection:"column",justifyContent:"flex-end",height:"100%" }}>
+                <div style={{ height:`${h}%`,minHeight:4,borderRadius:"3px 3px 0 0",
+                  background:loaded?(i===3?"#6009FF":i===1?"#C4B5FD":"#EDE9FF"):"#E8E8E8",
+                  transition:"background 0.6s ease" }} />
+              </div>
+            ))}
+          </div>
+          <div style={{ display:"flex",gap:4 }}>
+            {days.map((d,i) => (
+              <Cell key={i} loaded={loaded} h={9} flex={1} d={i*0.04}>
+                <span style={{ fontFamily:"DM Sans,sans-serif",fontSize:7,color:"#94A3B8",width:"100%",textAlign:"center" }}>{d}</span>
+              </Cell>
+            ))}
+          </div>
         </div>
       </div>
     </Chrome>
   );
 }
 
-/* Payment API — terminal / code */
+/* Payment API — actual code syntax */
 function PaymentApiWireframe() {
   const loaded = useLoadCycle(1100);
-  const lines: { c: string; w: string }[] = [
-    { c:"#C792EA", w:"55%" }, { c:"#82AAFF", w:"78%" }, { c:"#C3E88D", w:"64%" },
-    { c:"#82AAFF", w:"71%" }, { c:"#F78C6C", w:"47%" }, { c:"#C3E88D", w:"69%" },
-    { c:"#C792EA", w:"59%" }, { c:"#546E7A", w:"43%" }, { c:"#82AAFF", w:"75%" },
+  const lines: { c: string; text: string }[] = [
+    { c:"#C792EA", text:"const payout = await payonus" },
+    { c:"#82AAFF", text:"  .payouts.create({" },
+    { c:"#F78C6C", text:"    amount: 45000," },
+    { c:"#C3E88D", text:'    currency: "NGN",' },
+    { c:"#82AAFF", text:'    recipient: "rec_0xF4B2",' },
+    { c:"#C3E88D", text:'    reference: "PAY-2026-001"' },
+    { c:"#82AAFF", text:"  });" },
+    { c:"#546E7A", text:"// → 200 OK · id: pay_9xAm" },
   ];
   return (
     <Chrome>
-      <div style={{ flex:1,background:"#1E1E2E",padding:"12px",display:"flex",flexDirection:"column",minHeight:0,overflow:"hidden" }}>
-        <div style={{ display:"flex",gap:12,marginBottom:10,borderBottom:"1px solid rgba(255,255,255,0.08)",paddingBottom:8 }}>
-          {["index.js","README.md"].map((tab,i) => (
-            <div key={tab} style={{ fontSize:9,color:i===0?"#CDD6F4":"#6C7086",padding:"3px 8px",borderRadius:"4px 4px 0 0",background:i===0?"rgba(255,255,255,0.08)":"transparent" }}>
+      <div style={{ flex:1,background:"#1E1E2E",padding:"11px 12px",display:"flex",flexDirection:"column",minHeight:0,overflow:"hidden" }}>
+        <div style={{ display:"flex",gap:10,marginBottom:9,borderBottom:"1px solid rgba(255,255,255,0.08)",paddingBottom:7 }}>
+          {["index.js","config.js"].map((tab,i) => (
+            <span key={tab} style={{ fontFamily:"monospace",fontSize:9,color:i===0?"#CDD6F4":"#6C7086",padding:"3px 8px",borderRadius:"4px 4px 0 0",background:i===0?"rgba(255,255,255,0.08)":"transparent" }}>
               {tab}
-            </div>
+            </span>
           ))}
         </div>
-        <div style={{ display:"flex",alignItems:"center",gap:8,marginBottom:10,background:"rgba(255,255,255,0.05)",borderRadius:4,padding:"6px 10px" }}>
-          <div style={{ width:8,height:8,borderRadius:"50%",background:"#22C55E",flexShrink:0 }} />
-          <Sk loaded={loaded} color="rgba(130,170,255,0.8)" w="55%" h={5} />
+        <div style={{ display:"flex",alignItems:"center",gap:7,marginBottom:9,background:"rgba(255,255,255,0.05)",borderRadius:5,padding:"5px 10px" }}>
+          <div style={{ width:7,height:7,borderRadius:"50%",background:"#22C55E",flexShrink:0 }} />
+          <Cell loaded={loaded} h={9} w="55%" d={0}>
+            <span style={{ fontFamily:"monospace",fontSize:9,color:"rgba(130,170,255,0.9)" }}>POST /v1/payouts</span>
+          </Cell>
+          <Cell loaded={loaded} h={9} w={42} d={0.06} style={{ marginLeft:"auto" }}>
+            <span style={{ fontFamily:"monospace",fontSize:9,color:"#22C55E" }}>200 OK</span>
+          </Cell>
         </div>
         {lines.map((l,i) => (
-          <div key={i} style={{ display:"flex",alignItems:"center",gap:8,marginBottom:6 }}>
-            <div style={{ width:12,height:4,borderRadius:2,background:"rgba(108,112,134,0.4)",flexShrink:0 }} />
-            <Sk loaded={loaded} color={l.c} w={l.w} h={5} d={i*0.06} />
+          <div key={i} style={{ display:"flex",alignItems:"center",gap:7,marginBottom:5 }}>
+            <span style={{ fontFamily:"monospace",fontSize:8,color:"rgba(108,112,134,0.45)",width:12,textAlign:"right",flexShrink:0 }}>{i+1}</span>
+            <Cell loaded={loaded} h={10} w={`${Math.min(92,l.text.length*5.4)}%`} d={i*0.055}>
+              <span style={{ fontFamily:"monospace",fontSize:9,color:l.c,whiteSpace:"nowrap" }}>{l.text}</span>
+            </Cell>
           </div>
         ))}
       </div>
@@ -354,39 +431,56 @@ function PaymentApiWireframe() {
   );
 }
 
-/* Analytics — stats grid + bar chart */
+/* Analytics — real stats + labelled bar chart */
 function AnalyticsWireframe() {
   const loaded = useLoadCycle(500);
   const bars = [40,65,52,80,68,90,72,58,84,62,76,88];
-  const stats: [string,string][] = [["#6009FF","rgba(96,9,255,0.1)"],["#22C55E","rgba(34,197,94,0.1)"],["#F4B249","rgba(244,178,73,0.1)"]];
+  const months = ["J","F","M","A","M","J","J","A","S","O","N","D"];
+  const stats = [
+    { accent:"#6009FF", bg:"rgba(96,9,255,0.1)",   label:"Total Volume", val:"₦1.2M"  },
+    { accent:"#22C55E", bg:"rgba(34,197,94,0.1)",  label:"Growth",       val:"+24.3%" },
+    { accent:"#F4B249", bg:"rgba(244,178,73,0.1)", label:"Success Rate",  val:"98.4%"  },
+  ];
   return (
     <Chrome>
-      <div style={{ flex:1,padding:"12px",display:"flex",flexDirection:"column",gap:10,minWidth:0 }}>
-        <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:8 }}>
-          {stats.map(([accent,bg],i) => (
-            <div key={i} style={{ background:loaded?bg:"#F5F5F5",transition:"background 0.6s",borderRadius:8,padding:"8px" }}>
-              <Sk loaded={loaded} color="#94A3B8" w="55%" h={4} d={i*0.1} style={{ marginBottom:6 }} />
-              <Sk loaded={loaded} color={accent} w="75%" h={9} d={i*0.1+0.1} style={{ borderRadius:3 }} />
+      <div style={{ flex:1,padding:"11px",display:"flex",flexDirection:"column",gap:9,minWidth:0 }}>
+        <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:7 }}>
+          {stats.map((s,i) => (
+            <div key={i} style={{ background:loaded?s.bg:"#F5F5F5",transition:"background 0.6s",borderRadius:8,padding:"8px 7px" }}>
+              <Cell loaded={loaded} h={9} w="95%" d={i*0.08} style={{ marginBottom:5 }}>
+                <span style={{ fontFamily:"DM Sans,sans-serif",fontSize:8,color:"#6B6877",whiteSpace:"nowrap" }}>{s.label}</span>
+              </Cell>
+              <Cell loaded={loaded} h={13} w="90%" d={i*0.08+0.1} style={{ borderRadius:3 }}>
+                <span style={{ fontFamily:"DM Sans,sans-serif",fontSize:11,fontWeight:800,color:s.accent }}>{s.val}</span>
+              </Cell>
             </div>
           ))}
         </div>
-        <div style={{ flex:1,display:"flex",flexDirection:"column",gap:6,minHeight:0 }}>
-          <div style={{ display:"flex",justifyContent:"space-between",alignItems:"center" }}>
-            <Sk loaded={loaded} color="#1C1B1F" w={70} h={5} />
-            <Sk loaded={loaded} color="#94A3B8" w={50} h={16} style={{ borderRadius:3 }} />
+        <div style={{ flex:1,display:"flex",flexDirection:"column",minHeight:0 }}>
+          <div style={{ display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:6 }}>
+            <Cell loaded={loaded} h={10} w={100} d={0}>
+              <span style={{ fontFamily:"DM Sans,sans-serif",fontSize:9,fontWeight:600,color:"#1C1B1F" }}>Monthly Revenue</span>
+            </Cell>
+            <Cell loaded={loaded} h={9} w={60} d={0.05} style={{ borderRadius:3 }}>
+              <span style={{ fontFamily:"DM Sans,sans-serif",fontSize:8,color:"#6B6877" }}>Jan–Dec 2026</span>
+            </Cell>
           </div>
-          <div style={{ flex:1,display:"flex",alignItems:"flex-end",gap:3,minHeight:0 }}>
+          <div style={{ flex:1,display:"flex",alignItems:"flex-end",gap:2,minHeight:0 }}>
             {bars.map((h,i) => (
               <div key={i} style={{ flex:1,display:"flex",flexDirection:"column",justifyContent:"flex-end",height:"100%" }}>
-                <div style={{ height:`${h}%`,minHeight:4,borderRadius:"2px 2px 0 0",
-                  background: loaded ? (i===9?"#6009FF":i%4===0?"#DDD6FE":"#EDE9FF") : "#E8E8E8",
+                <div style={{ height:`${h}%`,minHeight:3,borderRadius:"2px 2px 0 0",
+                  background:loaded?(i===5?"#6009FF":i%3===0?"#DDD6FE":"#EDE9FF"):"#E8E8E8",
                   transition:"background 0.6s ease" }} />
               </div>
             ))}
           </div>
-          <div style={{ height:1,background:"#F0F0F0" }} />
-          <div style={{ display:"flex",gap:4 }}>
-            {[0,1,2,3].map(i => <Sk key={i} loaded={loaded} color="#94A3B8" flex={1} h={4} d={i*0.08} />)}
+          <div style={{ height:1,background:"#F0F0F0",marginTop:3 }} />
+          <div style={{ display:"flex",gap:2,marginTop:3 }}>
+            {months.map((m,i) => (
+              <Cell key={i} loaded={loaded} h={9} flex={1} d={i*0.04}>
+                <span style={{ fontFamily:"DM Sans,sans-serif",fontSize:7,color:"#94A3B8",width:"100%",textAlign:"center" }}>{m}</span>
+              </Cell>
+            ))}
           </div>
         </div>
       </div>
@@ -452,7 +546,7 @@ function ProductSection() {
           {PRODUCT_CARDS_TOP.map(p => (
             <div key={p.title} className="product-card" style={card} onMouseMove={onTilt} onMouseLeave={onTiltLeave}>
               <div style={{ padding: isMobile ? "12px 14px" : "16px 22px" }}>
-                <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?16:20, color:T.dark }}>{p.title}</h3>
+                <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?24:32, color:T.dark }}>{p.title}</h3>
               </div>
               <div style={{ width:"100%", height: topH, overflow:"hidden" }}>
                 <p.Wireframe />
@@ -465,7 +559,7 @@ function ProductSection() {
           {PRODUCT_CARDS_BOTTOM.map(p => (
             <div key={p.title} className="product-card" style={card} onMouseMove={onTilt} onMouseLeave={onTiltLeave}>
               <div style={{ padding: isMobile ? "12px 14px" : "16px 22px" }}>
-                <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?16:20, color:T.dark }}>{p.title}</h3>
+                <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?24:32, color:T.dark }}>{p.title}</h3>
               </div>
               <div style={{ width:"100%", height: isMobile ? 200 : 280, overflow:"hidden" }}>
                 <p.Wireframe />
