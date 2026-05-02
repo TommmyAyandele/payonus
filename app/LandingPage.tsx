@@ -156,10 +156,10 @@ function ProductSection() {
   const hPad    = isMobile ? 20 : isTablet ? 48 : 80;
   const secPad  = isMobile ? "48px 0 32px" : "100px 0 80px";
   const topCols = isMobile ? "1fr" : "1fr 1fr";
-  const botCols = isMobile ? "1fr" : isTablet ? "1fr 1fr" : "1fr 1fr 1fr";
+  const botCols = isMobile ? "1fr" : "1fr 1fr 1fr";
   const cardH   = isMobile ? 260 : undefined;
   const topH    = isMobile ? cardH : 420;
-  const descSz  = isMobile ? 22 : isTablet ? 32 : 42;
+  const descSz  = isMobile ? 22 : 42;
 
   const card: React.CSSProperties = {
     background:   T.bg,
