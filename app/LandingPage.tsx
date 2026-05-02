@@ -140,6 +140,79 @@ function Hero() {
   );
 }
 
+/* ─── CARD WIREFRAME ─── */
+function CardWireframe() {
+  const sk: React.CSSProperties = {
+    background: "linear-gradient(90deg,#E8E8E8 25%,#F2F2F2 50%,#E8E8E8 75%)",
+    backgroundSize: "600px 100%",
+    animation: "skShimmer 1.6s ease-in-out infinite",
+    borderRadius: 3,
+  };
+  return (
+    <div style={{ width:"100%", height:"100%", background:"#FFF", display:"flex", flexDirection:"column", userSelect:"none", pointerEvents:"none" }}>
+      {/* Browser chrome */}
+      <div style={{ background:"#EBEBEB", display:"flex", alignItems:"center", padding:"7px 10px", gap:6, borderBottom:"1px solid #DEDEDE", flexShrink:0 }}>
+        <div style={{ display:"flex", gap:4 }}>
+          <div style={{ width:9,height:9,borderRadius:"50%",background:"#FF5F57" }} />
+          <div style={{ width:9,height:9,borderRadius:"50%",background:"#FEBC2E" }} />
+          <div style={{ width:9,height:9,borderRadius:"50%",background:"#28C840" }} />
+        </div>
+        <div style={{ flex:1,background:"#DCDCDC",borderRadius:3,height:14,display:"flex",alignItems:"center",padding:"0 7px" }}>
+          <div style={{ width:"38%",height:5,...sk }} />
+        </div>
+      </div>
+      {/* Content area */}
+      <div style={{ flex:1, display:"flex", minHeight:0 }}>
+        {/* Sidebar */}
+        <div style={{ width:"22%",flexShrink:0,background:"#FAFAFA",borderRight:"1px solid #F0F0F0",padding:"10px 8px",display:"flex",flexDirection:"column",gap:7 }}>
+          <div style={{ background:"#F4B249",borderRadius:4,padding:"5px 7px",display:"flex",alignItems:"center",gap:5,marginBottom:2 }}>
+            <div style={{ width:8,height:8,background:"rgba(255,255,255,0.6)",borderRadius:2,flexShrink:0 }} />
+            <div style={{ flex:1,height:5,background:"rgba(255,255,255,0.38)",borderRadius:2 }} />
+          </div>
+          <div style={{ width:"60%",height:5,...sk }} />
+          {[0,1,2,3,4].map(i => (
+            <div key={i} style={{ display:"flex",alignItems:"center",gap:6 }}>
+              <div style={{ width:10,height:10,borderRadius:2,flexShrink:0,...sk,animationDelay:`${i*0.07}s` }} />
+              <div style={{ flex:1,height:5,...sk,animationDelay:`${i*0.07+0.04}s` }} />
+            </div>
+          ))}
+        </div>
+        {/* Main */}
+        <div style={{ flex:1,padding:"10px 12px",display:"flex",flexDirection:"column",gap:10,minWidth:0 }}>
+          {/* Top bar */}
+          <div style={{ display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:2 }}>
+            <div style={{ display:"flex",alignItems:"center",gap:8 }}>
+              <div style={{ width:20,height:20,borderRadius:"50%",...sk }} />
+              <div style={{ display:"flex",flexDirection:"column",gap:4 }}>
+                <div style={{ width:80,height:5,...sk }} />
+                <div style={{ width:55,height:4,...sk,animationDelay:"0.1s" }} />
+              </div>
+            </div>
+            <div style={{ display:"flex",gap:6 }}>
+              <div style={{ width:60,height:18,borderRadius:3,...sk }} />
+              <div style={{ width:74,height:18,borderRadius:3,...sk,animationDelay:"0.1s" }} />
+            </div>
+          </div>
+          {/* Card grid rows */}
+          {[0,1].map(row => (
+            <div key={row} style={{ display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:8 }}>
+              {[0,1,2].map(col => (
+                <div key={col} style={{ borderRadius:6,overflow:"hidden",background:"#F5F5F5" }}>
+                  <div style={{ height:54,...sk,animationDelay:`${(row*3+col)*0.05}s` }} />
+                  <div style={{ padding:"6px 8px",display:"flex",flexDirection:"column",gap:4,background:"#FFF" }}>
+                    <div style={{ width:"65%",height:5,...sk }} />
+                    <div style={{ width:"44%",height:4,...sk }} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ─── PRODUCT SECTION ─── */
 const PRODUCT_CARDS_TOP = [
   { title: "Payouts",     image: "/card-payouts.png"     },
@@ -197,8 +270,9 @@ function ProductSection() {
         <div className="fade-up" style={{ display:"grid", gridTemplateColumns:topCols, gap: isMobile ? 12 : 24, marginBottom: isMobile ? 12 : 24 }}>
           {PRODUCT_CARDS_TOP.map(p => (
             <div key={p.title} className="product-card" style={card} onMouseMove={onTilt} onMouseLeave={onTiltLeave}>
-              <img src={p.image} alt={p.title} className="product-card-img"
-                style={{ width:"100%", height: topH, display:"block", objectFit:"cover", objectPosition:"top left" }} />
+              <div style={{ width:"100%", height: topH, overflow:"hidden" }}>
+                <CardWireframe />
+              </div>
               <div style={{ padding: isMobile ? "10px 14px" : "14px 20px" }}>
                 <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:14, color:T.dark }}>{p.title}</span>
               </div>
@@ -209,8 +283,9 @@ function ProductSection() {
         <div className="fade-up" style={{ display:"grid", gridTemplateColumns:botCols, gap: isMobile ? 12 : 24 }}>
           {PRODUCT_CARDS_BOTTOM.map(p => (
             <div key={p.title} className="product-card" style={card} onMouseMove={onTilt} onMouseLeave={onTiltLeave}>
-              <img src={p.image} alt={p.title} className="product-card-img"
-                style={{ width:"100%", height: cardH, display:"block", objectFit:"cover", objectPosition:"top left" }} />
+              <div style={{ width:"100%", height: isMobile ? 200 : 280, overflow:"hidden" }}>
+                <CardWireframe />
+              </div>
               <div style={{ padding: isMobile ? "10px 14px" : "14px 20px" }}>
                 <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:14, color:T.dark }}>{p.title}</span>
               </div>
@@ -275,6 +350,9 @@ export default function PayonUsLandingPage() {
         /* Scroll hint bounce */
         @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0);} 55%{transform:translateX(-50%) translateY(6px);} }
         .scroll-hint { animation: bounce 2s ease-in-out infinite; }
+
+        /* Card shimmer */
+        @keyframes skShimmer { from{background-position:-600px 0;} to{background-position:600px 0;} }
 
         html { scroll-behavior: smooth; }
 

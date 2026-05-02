@@ -69,8 +69,8 @@ function ripple(e: React.MouseEvent<HTMLButtonElement>) {
 export default function CTASection() {
   const { isMobile, isTablet } = useBreakpoint();
   const hPad    = isMobile ? 20 : isTablet ? 48 : 80;
-  const h2Size  = isMobile ? 28 : isTablet ? 36 : 44;
-  const cols    = isMobile || isTablet ? "1fr" : "2fr 1fr 1fr";
+  const h2Size  = isMobile ? 28 : 44;
+  const cols    = isMobile ? "1fr" : "2fr 1fr 1fr";
 
   return (
     <section
