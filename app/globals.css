@@ -6,6 +6,10 @@
   padding: 0;
 }
 
+html {
+  background: #DDD6FE;
+}
+
 body {
   background: #FAFAF8;
   font-family: "DM Sans", Arial, sans-serif;
