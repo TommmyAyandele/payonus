@@ -394,7 +394,7 @@ export default function ProductPage({
       {/* ══ CTA ══ */}
       <section style={{ width:"100%", background:T.bg, padding:`${isMobile?48:80}px 0` }}>
         <div style={{ maxWidth:1440, margin:"0 auto", padding:`0 ${hPad}px` }}>
-          {isMobile || isTablet ? (
+          {isMobile ? (
             <div style={{ maxWidth:560 }}>
               <h2 style={{ margin:"0 0 14px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?28:36, lineHeight:1.1, color:T.headingBlack }}>
                 {ctaHeading}
