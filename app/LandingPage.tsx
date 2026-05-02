@@ -158,9 +158,9 @@ function Cell({ loaded, h, w, flex, d = 0, children, style }: {
 }
 
 const sk: React.CSSProperties = {
-  background: "linear-gradient(90deg,#E8E8E8 25%,#F2F2F2 50%,#E8E8E8 75%)",
+  background: "linear-gradient(90deg,#F0F0F0 25%,#F8F8F8 50%,#F0F0F0 75%)",
   backgroundSize: "600px 100%",
-  animation: "skShimmer 1.6s ease-in-out infinite",
+  animation: "skShimmer 1.8s ease-in-out infinite",
   borderRadius: 3,
 };
 
@@ -499,15 +499,13 @@ const PRODUCT_CARDS_BOTTOM = [
   { title: "Analytics & Reporting", Wireframe: AnalyticsWireframe   },
 ];
 
+const ALL_CARDS = [...PRODUCT_CARDS_TOP, ...PRODUCT_CARDS_BOTTOM];
+
 function ProductSection() {
   const { isMobile, isTablet } = useBreakpoint();
-  const hPad    = isMobile ? 20 : isTablet ? 48 : 80;
-  const secPad  = isMobile ? "48px 0 32px" : "100px 0 80px";
-  const topCols = isMobile ? "1fr" : "1fr 1fr";
-  const botCols = isMobile ? "1fr" : "1fr 1fr 1fr";
-  const cardH   = isMobile ? 260 : undefined;
-  const topH    = isMobile ? cardH : 420;
-  const descSz  = isMobile ? 22 : 42;
+  const hPad   = isMobile ? 20 : isTablet ? 48 : 80;
+  const secPad = isMobile ? "48px 0 40px" : "100px 0 80px";
+  const descSz = isMobile ? 22 : 42;
 
   const card: React.CSSProperties = {
     background:   T.bg,
@@ -538,35 +536,72 @@ function ProductSection() {
           — Products
         </span>
 
-        <p className="fade-up" style={{ margin:`0 0 ${isMobile ? 40 : 64}px`, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:descSz, lineHeight:1.15, color:T.headingBlack }}>
+        <p className="fade-up" style={{ margin:`0 0 ${isMobile ? 32 : 64}px`, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:descSz, lineHeight:1.15, color:T.headingBlack }}>
           Built for operations that can't afford a delay. Every product in the payonus suite is designed to eliminate payment friction at scale.
         </p>
 
-        <div className="fade-up" style={{ display:"grid", gridTemplateColumns:topCols, gap: isMobile ? 12 : 24, marginBottom: isMobile ? 12 : 24 }}>
-          {PRODUCT_CARDS_TOP.map(p => (
-            <div key={p.title} className="product-card" style={card} onMouseMove={onTilt} onMouseLeave={onTiltLeave}>
-              <div style={{ padding: isMobile ? "12px 14px" : "16px 22px" }}>
-                <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?24:32, color:T.dark }}>{p.title}</h3>
+        {isMobile ? (
+          /* ── Mobile: horizontal snap-scroll carousel ── */
+          <div className="product-scroll" style={{
+            display: "flex", gap: 12,
+            overflowX: "auto", overflowY: "visible",
+            scrollSnapType: "x mandatory",
+            WebkitOverflowScrolling: "touch" as React.CSSProperties["WebkitOverflowScrolling"],
+            marginLeft: -20, marginRight: -20,
+            paddingLeft: 20, paddingRight: 20,
+            paddingBottom: 4,
+          }}>
+            {ALL_CARDS.map(p => (
+              <div key={p.title} className="product-card" style={{
+                ...card,
+                flexShrink: 0,
+                width: "78vw",
+                height: 340,
+                display: "flex",
+                flexDirection: "column",
+                scrollSnapAlign: "start",
+              }}>
+                <div style={{ padding:"14px 16px", flexShrink:0 }}>
+                  <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:24, color:T.primary }}>{p.title}</h3>
+                </div>
+                <div style={{ flex:1, overflow:"hidden", minHeight:0 }}>
+                  <p.Wireframe />
+                </div>
               </div>
-              <div style={{ width:"100%", height: topH, overflow:"hidden" }}>
-                <p.Wireframe />
-              </div>
+            ))}
+            {/* trailing spacer so last card snaps flush */}
+            <div style={{ flexShrink:0, width:8 }} />
+          </div>
+        ) : (
+          /* ── Desktop / Tablet: grid layout ── */
+          <>
+            <div className="fade-up" style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:24, marginBottom:24 }}>
+              {PRODUCT_CARDS_TOP.map(p => (
+                <div key={p.title} className="product-card" style={card} onMouseMove={onTilt} onMouseLeave={onTiltLeave}>
+                  <div style={{ padding:"16px 22px" }}>
+                    <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:32, color:T.primary }}>{p.title}</h3>
+                  </div>
+                  <div style={{ width:"100%", height:420, overflow:"hidden" }}>
+                    <p.Wireframe />
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
 
-        <div className="fade-up" style={{ display:"grid", gridTemplateColumns:botCols, gap: isMobile ? 12 : 24 }}>
-          {PRODUCT_CARDS_BOTTOM.map(p => (
-            <div key={p.title} className="product-card" style={card} onMouseMove={onTilt} onMouseLeave={onTiltLeave}>
-              <div style={{ padding: isMobile ? "12px 14px" : "16px 22px" }}>
-                <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?24:32, color:T.dark }}>{p.title}</h3>
-              </div>
-              <div style={{ width:"100%", height: isMobile ? 200 : 280, overflow:"hidden" }}>
-                <p.Wireframe />
-              </div>
+            <div className="fade-up" style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:24 }}>
+              {PRODUCT_CARDS_BOTTOM.map(p => (
+                <div key={p.title} className="product-card" style={card} onMouseMove={onTilt} onMouseLeave={onTiltLeave}>
+                  <div style={{ padding:"16px 22px" }}>
+                    <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:32, color:T.primary }}>{p.title}</h3>
+                  </div>
+                  <div style={{ width:"100%", height:280, overflow:"hidden" }}>
+                    <p.Wireframe />
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </>
+        )}
 
       </div>
     </section>
@@ -628,6 +663,10 @@ export default function PayonUsLandingPage() {
 
         /* Card shimmer */
         @keyframes skShimmer { from{background-position:-600px 0;} to{background-position:600px 0;} }
+
+        /* Mobile product carousel — hide scrollbar */
+        .product-scroll::-webkit-scrollbar { display: none; }
+        .product-scroll { -ms-overflow-style: none; scrollbar-width: none; }
 
         html { scroll-behavior: smooth; }
 
