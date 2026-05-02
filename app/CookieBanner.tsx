@@ -41,8 +41,9 @@ export default function CookieBanner() {
         style={{
           position:     "fixed",
           bottom:       16,
-          left:         "50%",
-          transform:    "translateX(-50%)",
+          left:         0,
+          right:        0,
+          margin:       "0 auto",
           zIndex:       999,
           width:        "calc(100% - 32px)",
           maxWidth:     680,
@@ -54,6 +55,7 @@ export default function CookieBanner() {
           display:      "flex",
           flexDirection: "column",
           gap:          12,
+          boxSizing:    "border-box",
         }}
       >
         {/* Top row: icon + text */}
