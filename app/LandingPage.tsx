@@ -148,6 +148,34 @@ const sk: React.CSSProperties = {
   borderRadius: 3,
 };
 
+/* Cycle: shimmer → loaded (2.5 s) → shimmer (1.2 s) → repeat */
+function useLoadCycle(initialDelay = 0) {
+  const [loaded, setLoaded] = React.useState(false);
+  React.useEffect(() => {
+    let t: ReturnType<typeof setTimeout>;
+    const doLoad = () => {
+      setLoaded(true);
+      t = setTimeout(() => { setLoaded(false); t = setTimeout(doLoad, 1200); }, 2500);
+    };
+    t = setTimeout(doLoad, initialDelay);
+    return () => clearTimeout(t);
+  }, []);
+  return loaded;
+}
+
+/* Cross-fades between a shimmer bar and a solid colour */
+function Sk({ loaded, color, w, h = 5, d = 0, flex, style }: {
+  loaded: boolean; color: string; w?: string | number; h?: number; d?: number; flex?: number; style?: React.CSSProperties;
+}) {
+  const tr = `opacity 0.6s ease ${d}s`;
+  return (
+    <div style={{ position:"relative", width:w, height:h, borderRadius:3, flex, flexShrink:flex?undefined:0, ...style }}>
+      <div style={{ position:"absolute", inset:0, borderRadius:3, ...sk, opacity:loaded?0:1, transition:tr }} />
+      <div style={{ position:"absolute", inset:0, borderRadius:3, background:color, opacity:loaded?1:0, transition:tr }} />
+    </div>
+  );
+}
+
 function Chrome({ children }: { children: React.ReactNode }) {
   return (
     <div style={{ width:"100%", height:"100%", background:"#FFF", display:"flex", flexDirection:"column", userSelect:"none", pointerEvents:"none" }}>
@@ -164,43 +192,50 @@ function Chrome({ children }: { children: React.ReactNode }) {
   );
 }
 
-/* Payouts — recipient list + send action */
+/* Payouts — recipient list */
 function PayoutsWireframe() {
-  const statuses = ["#22C55E","#F4B249","#22C55E","#94A3B8","#22C55E"];
+  const loaded = useLoadCycle(0);
+  const rows = [
+    { sc:"#22C55E", nw:"62%", aw:48, d:0.10 },
+    { sc:"#F4B249", nw:"55%", aw:52, d:0.18 },
+    { sc:"#22C55E", nw:"68%", aw:44, d:0.26 },
+    { sc:"#94A3B8", nw:"48%", aw:56, d:0.34 },
+    { sc:"#22C55E", nw:"63%", aw:48, d:0.42 },
+  ];
   return (
     <Chrome>
       <div style={{ flex:1, display:"flex", minHeight:0 }}>
-        <div style={{ width:"22%", flexShrink:0, background:"#FAFAFA", borderRight:"1px solid #F0F0F0", padding:"10px 8px", display:"flex", flexDirection:"column", gap:7 }}>
-          <div style={{ background:"#6009FF", borderRadius:4, padding:"5px 7px", display:"flex", alignItems:"center", gap:5, marginBottom:2 }}>
+        <div style={{ width:"22%",flexShrink:0,background:"#FAFAFA",borderRight:"1px solid #F0F0F0",padding:"10px 8px",display:"flex",flexDirection:"column",gap:7 }}>
+          <div style={{ background:loaded?"#6009FF":"#F4B249",transition:"background 0.6s",borderRadius:4,padding:"5px 7px",display:"flex",alignItems:"center",gap:5,marginBottom:2 }}>
             <div style={{ width:8,height:8,background:"rgba(255,255,255,0.5)",borderRadius:2,flexShrink:0 }} />
             <div style={{ flex:1,height:5,background:"rgba(255,255,255,0.3)",borderRadius:2 }} />
           </div>
           {[0,1,2,3,4].map(i => (
             <div key={i} style={{ display:"flex",alignItems:"center",gap:6 }}>
-              <div style={{ width:10,height:10,borderRadius:2,flexShrink:0,...sk }} />
-              <div style={{ flex:1,height:5,...sk,animationDelay:`${i*0.07}s` }} />
+              <Sk loaded={loaded} color="#C4B5FD" w={10} h={10} d={i*0.07} />
+              <Sk loaded={loaded} color="#EDE9FF" flex={1} h={5} d={i*0.07+0.04} />
             </div>
           ))}
         </div>
-        <div style={{ flex:1, padding:"12px", display:"flex", flexDirection:"column", gap:9, minWidth:0 }}>
-          <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center" }}>
-            <div style={{ width:90,height:7,borderRadius:3,...sk }} />
-            <div style={{ width:70,height:22,borderRadius:4,background:"#6009FF",opacity:0.15 }} />
+        <div style={{ flex:1,padding:"10px 12px",display:"flex",flexDirection:"column",gap:7,minWidth:0 }}>
+          <div style={{ display:"flex",justifyContent:"space-between",alignItems:"center" }}>
+            <Sk loaded={loaded} color="#1C1B1F" w="50%" h={7} />
+            <Sk loaded={loaded} color="#6009FF" w={70} h={22} style={{ borderRadius:4 }} />
           </div>
-          <div style={{ width:"100%",height:22,borderRadius:4,background:"#F5F5F5",display:"flex",alignItems:"center",padding:"0 8px",gap:6 }}>
-            <div style={{ width:12,height:12,borderRadius:2,...sk }} />
-            <div style={{ width:"50%",height:5,...sk }} />
+          <div style={{ height:22,borderRadius:4,background:"#F5F5F5",display:"flex",alignItems:"center",padding:"0 8px",gap:6 }}>
+            <Sk loaded={loaded} color="#94A3B8" w={12} h={12} />
+            <Sk loaded={loaded} color="#CBD5E1" flex={1} h={5} />
           </div>
-          {statuses.map((color, i) => (
-            <div key={i} style={{ display:"flex", alignItems:"center", gap:8, padding:"7px 0", borderBottom:"1px solid #F0F0F0" }}>
-              <div style={{ width:28,height:28,borderRadius:"50%",flexShrink:0,...sk }} />
-              <div style={{ flex:1, display:"flex", flexDirection:"column", gap:4 }}>
-                <div style={{ width:`${55+i*8}%`,height:6,borderRadius:3,...sk }} />
-                <div style={{ width:"40%",height:5,borderRadius:3,...sk,animationDelay:"0.1s" }} />
+          {rows.map((r,i) => (
+            <div key={i} style={{ display:"flex",alignItems:"center",gap:8,padding:"5px 0",borderBottom:"1px solid #F5F5F5" }}>
+              <Sk loaded={loaded} color="#DDD6FE" w={26} h={26} d={r.d} style={{ borderRadius:"50%" }} />
+              <div style={{ flex:1,display:"flex",flexDirection:"column",gap:4,minWidth:0 }}>
+                <Sk loaded={loaded} color="#1C1B1F" w={r.nw} h={6} d={r.d} />
+                <Sk loaded={loaded} color="#94A3B8" w="40%" h={4} d={r.d+0.1} />
               </div>
-              <div style={{ display:"flex",alignItems:"center",gap:6 }}>
-                <div style={{ width:48,height:6,borderRadius:3,...sk }} />
-                <div style={{ width:8,height:8,borderRadius:"50%",background:color,flexShrink:0 }} />
+              <div style={{ display:"flex",alignItems:"center",gap:5,flexShrink:0 }}>
+                <Sk loaded={loaded} color="#1C1B1F" w={r.aw} h={6} d={r.d} />
+                <div style={{ width:8,height:8,borderRadius:"50%",background:r.sc,flexShrink:0 }} />
               </div>
             </div>
           ))}
@@ -210,38 +245,39 @@ function PayoutsWireframe() {
   );
 }
 
-/* Collections — checkout / payment form */
+/* Collections — checkout form */
 function CollectionsWireframe() {
+  const loaded = useLoadCycle(700);
   return (
     <Chrome>
-      <div style={{ flex:1, display:"flex", alignItems:"center", justifyContent:"center", background:"#F8F7FF", padding:"14px" }}>
-        <div style={{ width:"100%", maxWidth:340, background:"#FFF", borderRadius:10, border:"1px solid #E7E0EC", padding:"16px", display:"flex", flexDirection:"column", gap:12 }}>
+      <div style={{ flex:1,display:"flex",alignItems:"center",justifyContent:"center",background:"#F8F7FF",padding:"12px" }}>
+        <div style={{ width:"100%",maxWidth:320,background:"#FFF",borderRadius:10,border:"1px solid #E7E0EC",padding:"14px",display:"flex",flexDirection:"column",gap:10 }}>
           <div style={{ display:"flex",justifyContent:"space-between",alignItems:"center" }}>
             <div style={{ display:"flex",alignItems:"center",gap:1 }}>
-              <span style={{ fontFamily:"DM Sans,sans-serif",fontWeight:700,fontSize:10,color:"#6009FF",lineHeight:1 }}>pay</span>
+              <span style={{ fontFamily:"DM Sans,sans-serif",fontWeight:700,fontSize:10,color:"#6009FF" }}>pay</span>
               <div style={{ width:10,height:10,borderRadius:"50%",background:"#F4B249",display:"flex",alignItems:"center",justifyContent:"center" }}>
                 <span style={{ fontSize:6,fontWeight:700,color:"#fff",lineHeight:1 }}>O</span>
               </div>
-              <span style={{ fontFamily:"DM Sans,sans-serif",fontWeight:700,fontSize:10,color:"#6009FF",lineHeight:1 }}>.us</span>
+              <span style={{ fontFamily:"DM Sans,sans-serif",fontWeight:700,fontSize:10,color:"#6009FF" }}>.us</span>
             </div>
-            <div style={{ width:40,height:5,borderRadius:3,...sk }} />
+            <Sk loaded={loaded} color="#94A3B8" w={40} h={5} />
           </div>
-          <div style={{ textAlign:"center", padding:"6px 0" }}>
-            <div style={{ width:60,height:5,borderRadius:3,...sk,margin:"0 auto 6px" }} />
-            <div style={{ width:90,height:9,borderRadius:3,...sk,margin:"0 auto" }} />
+          <div style={{ textAlign:"center",padding:"4px 0" }}>
+            <Sk loaded={loaded} color="#94A3B8" w={60} h={5} style={{ margin:"0 auto 6px" }} />
+            <Sk loaded={loaded} color="#1C1B1F" w={90} h={9} style={{ margin:"0 auto",borderRadius:4 }} />
           </div>
           <div style={{ display:"flex",gap:6 }}>
-            {["#6009FF","#1A1A2E","#E5E7EB"].map((bg,i) => (
-              <div key={i} style={{ flex:1,height:24,borderRadius:4,background:bg,opacity:i===2?1:0.18 }} />
+            {([[loaded?"#6009FF":"#E5E7EB",loaded?1:0.18],["#1A1A2E",0.18],["#E5E7EB",1]] as [string,number][]).map(([bg,op],i) => (
+              <div key={i} style={{ flex:1,height:22,borderRadius:4,background:bg,opacity:op,transition:"background 0.6s, opacity 0.6s" }} />
             ))}
           </div>
-          {[1,0.8,0.8].map((w,i) => (
-            <div key={i} style={{ width:`${w*100}%`,height:i===0?32:24,borderRadius:4,background:"#F4F4F5",border:"1px solid #E7E0EC",display:"flex",alignItems:"center",padding:"0 8px" }}>
-              <div style={{ width:`${40+i*10}%`,height:5,borderRadius:3,...sk }} />
+          {[0,1,2].map(i => (
+            <div key={i} style={{ height:i===0?30:22,borderRadius:4,background:"#F4F4F5",border:"1px solid #E7E0EC",display:"flex",alignItems:"center",padding:"0 8px" }}>
+              <Sk loaded={loaded} color={i===0?"#1C1B1F":"#94A3B8"} w={`${40+i*10}%`} h={5} d={i*0.1} />
             </div>
           ))}
-          <div style={{ width:"100%",height:32,borderRadius:4,background:"#6009FF",display:"flex",alignItems:"center",justifyContent:"center",gap:6 }}>
-            <div style={{ width:50,height:6,borderRadius:3,background:"rgba(255,255,255,0.35)" }} />
+          <div style={{ height:30,borderRadius:4,background:"#6009FF",display:"flex",alignItems:"center",justifyContent:"center",opacity:loaded?1:0.45,transition:"opacity 0.6s" }}>
+            <div style={{ width:50,height:5,borderRadius:3,background:"rgba(255,255,255,0.6)" }} />
           </div>
         </div>
       </div>
@@ -249,51 +285,53 @@ function CollectionsWireframe() {
   );
 }
 
-/* Settlements — balance card + settlement bars */
+/* Settlements — balance card + bar chart */
 function SettlementsWireframe() {
+  const loaded = useLoadCycle(300);
   const bars = [65,82,48,90,74,55,88];
   return (
     <Chrome>
-      <div style={{ flex:1, padding:"12px", display:"flex", flexDirection:"column", gap:10, minWidth:0 }}>
-        <div style={{ background:"linear-gradient(135deg,#6009FF 0%,#8B3FFF 100%)", borderRadius:10, padding:"14px", display:"flex", flexDirection:"column", gap:8 }}>
-          <div style={{ width:70,height:5,borderRadius:3,background:"rgba(255,255,255,0.4)" }} />
-          <div style={{ width:120,height:11,borderRadius:4,background:"rgba(255,255,255,0.6)" }} />
-          <div style={{ display:"flex",gap:8,marginTop:4 }}>
-            <div style={{ flex:1,background:"rgba(255,255,255,0.15)",borderRadius:6,padding:"7px 8px" }}>
-              <div style={{ width:"60%",height:4,borderRadius:2,background:"rgba(255,255,255,0.35)",marginBottom:5 }} />
-              <div style={{ width:"80%",height:7,borderRadius:3,background:"rgba(255,255,255,0.5)" }} />
-            </div>
-            <div style={{ flex:1,background:"rgba(255,255,255,0.15)",borderRadius:6,padding:"7px 8px" }}>
-              <div style={{ width:"50%",height:4,borderRadius:2,background:"rgba(255,255,255,0.35)",marginBottom:5 }} />
-              <div style={{ width:"70%",height:7,borderRadius:3,background:"rgba(255,255,255,0.5)" }} />
-            </div>
+      <div style={{ flex:1,padding:"12px",display:"flex",flexDirection:"column",gap:10,minWidth:0 }}>
+        <div style={{ background:"linear-gradient(135deg,#6009FF 0%,#8B3FFF 100%)",borderRadius:10,padding:"12px",display:"flex",flexDirection:"column",gap:8 }}>
+          <Sk loaded={loaded} color="rgba(255,255,255,0.5)" w="45%" h={5} />
+          <Sk loaded={loaded} color="rgba(255,255,255,0.9)" w="68%" h={11} style={{ borderRadius:4 }} />
+          <div style={{ display:"flex",gap:8,marginTop:2 }}>
+            {[0,1].map(j => (
+              <div key={j} style={{ flex:1,background:"rgba(255,255,255,0.15)",borderRadius:6,padding:"6px 8px" }}>
+                <Sk loaded={loaded} color="rgba(255,255,255,0.4)" w="55%" h={4} d={j*0.1} style={{ marginBottom:5 }} />
+                <Sk loaded={loaded} color="rgba(255,255,255,0.75)" w="75%" h={7} d={j*0.1+0.1} style={{ borderRadius:3 }} />
+              </div>
+            ))}
           </div>
         </div>
-        <div style={{ display:"flex",justifyContent:"space-between",alignItems:"flex-end",padding:"8px 4px 0",flex:1 }}>
+        <div style={{ display:"flex",justifyContent:"space-between",alignItems:"flex-end",flex:1,paddingTop:4 }}>
           {bars.map((h,i) => (
-            <div key={i} style={{ flex:1,marginRight:i<bars.length-1?4:0,display:"flex",flexDirection:"column",justifyContent:"flex-end" }}>
-              <div style={{ height:`${h}%`,minHeight:6,borderRadius:"3px 3px 0 0",background:i===4?"#6009FF":"#E2D9F3",transition:"height 0.3s" }} />
+            <div key={i} style={{ flex:1,marginRight:i<bars.length-1?4:0,display:"flex",flexDirection:"column",justifyContent:"flex-end",height:"100%" }}>
+              <div style={{ height:`${h}%`,minHeight:4,borderRadius:"3px 3px 0 0",
+                background: loaded ? (i===4?"#6009FF":i===1||i===3?"#C4B5FD":"#EDE9FF") : "#E8E8E8",
+                transition:"background 0.6s ease" }} />
             </div>
           ))}
         </div>
-        <div style={{ display:"flex",justifyContent:"space-between" }}>
-          {bars.map((_,i) => <div key={i} style={{ flex:1,height:4,borderRadius:2,...sk,animationDelay:`${i*0.06}s` }} />)}
+        <div style={{ display:"flex",gap:4 }}>
+          {bars.map((_,i) => <Sk key={i} loaded={loaded} color="#94A3B8" flex={1} h={4} d={i*0.05} />)}
         </div>
       </div>
     </Chrome>
   );
 }
 
-/* Payment API — terminal / code view */
+/* Payment API — terminal / code */
 function PaymentApiWireframe() {
-  const lines = [
-    { w:"55%", c:"#C792EA" }, { w:"80%", c:"#82AAFF" }, { w:"65%", c:"#C3E88D" },
-    { w:"72%", c:"#82AAFF" }, { w:"48%", c:"#F78C6C" }, { w:"70%", c:"#C3E88D" },
-    { w:"60%", c:"#C792EA" }, { w:"44%", c:"#546E7A" }, { w:"77%", c:"#82AAFF" },
+  const loaded = useLoadCycle(1100);
+  const lines: { c: string; w: string }[] = [
+    { c:"#C792EA", w:"55%" }, { c:"#82AAFF", w:"78%" }, { c:"#C3E88D", w:"64%" },
+    { c:"#82AAFF", w:"71%" }, { c:"#F78C6C", w:"47%" }, { c:"#C3E88D", w:"69%" },
+    { c:"#C792EA", w:"59%" }, { c:"#546E7A", w:"43%" }, { c:"#82AAFF", w:"75%" },
   ];
   return (
     <Chrome>
-      <div style={{ flex:1, background:"#1E1E2E", padding:"12px", display:"flex", flexDirection:"column", gap:0, fontFamily:"monospace", minHeight:0, overflow:"hidden" }}>
+      <div style={{ flex:1,background:"#1E1E2E",padding:"12px",display:"flex",flexDirection:"column",minHeight:0,overflow:"hidden" }}>
         <div style={{ display:"flex",gap:12,marginBottom:10,borderBottom:"1px solid rgba(255,255,255,0.08)",paddingBottom:8 }}>
           {["index.js","README.md"].map((tab,i) => (
             <div key={tab} style={{ fontSize:9,color:i===0?"#CDD6F4":"#6C7086",padding:"3px 8px",borderRadius:"4px 4px 0 0",background:i===0?"rgba(255,255,255,0.08)":"transparent" }}>
@@ -303,12 +341,12 @@ function PaymentApiWireframe() {
         </div>
         <div style={{ display:"flex",alignItems:"center",gap:8,marginBottom:10,background:"rgba(255,255,255,0.05)",borderRadius:4,padding:"6px 10px" }}>
           <div style={{ width:8,height:8,borderRadius:"50%",background:"#22C55E",flexShrink:0 }} />
-          <div style={{ width:"55%",height:5,borderRadius:2,background:"rgba(130,170,255,0.5)" }} />
+          <Sk loaded={loaded} color="rgba(130,170,255,0.8)" w="55%" h={5} />
         </div>
         {lines.map((l,i) => (
           <div key={i} style={{ display:"flex",alignItems:"center",gap:8,marginBottom:6 }}>
             <div style={{ width:12,height:4,borderRadius:2,background:"rgba(108,112,134,0.4)",flexShrink:0 }} />
-            <div style={{ width:l.w,height:5,borderRadius:2,background:l.c,opacity:0.55 }} />
+            <Sk loaded={loaded} color={l.c} w={l.w} h={5} d={i*0.06} />
           </div>
         ))}
       </div>
@@ -316,35 +354,39 @@ function PaymentApiWireframe() {
   );
 }
 
-/* Analytics — stats + bar chart */
+/* Analytics — stats grid + bar chart */
 function AnalyticsWireframe() {
+  const loaded = useLoadCycle(500);
   const bars = [40,65,52,80,68,90,72,58,84,62,76,88];
+  const stats: [string,string][] = [["#6009FF","rgba(96,9,255,0.1)"],["#22C55E","rgba(34,197,94,0.1)"],["#F4B249","rgba(244,178,73,0.1)"]];
   return (
     <Chrome>
-      <div style={{ flex:1, padding:"12px", display:"flex", flexDirection:"column", gap:10, minWidth:0 }}>
+      <div style={{ flex:1,padding:"12px",display:"flex",flexDirection:"column",gap:10,minWidth:0 }}>
         <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:8 }}>
-          {[["#6009FF","rgba(96,9,255,0.12)"],["#22C55E","rgba(34,197,94,0.12)"],["#F4B249","rgba(244,178,73,0.12)"]].map(([accent,bg],i) => (
-            <div key={i} style={{ background:bg,borderRadius:8,padding:"8px" }}>
-              <div style={{ width:"55%",height:4,borderRadius:2,...sk,marginBottom:6 }} />
-              <div style={{ width:"75%",height:9,borderRadius:3,background:accent,opacity:0.4 }} />
+          {stats.map(([accent,bg],i) => (
+            <div key={i} style={{ background:loaded?bg:"#F5F5F5",transition:"background 0.6s",borderRadius:8,padding:"8px" }}>
+              <Sk loaded={loaded} color="#94A3B8" w="55%" h={4} d={i*0.1} style={{ marginBottom:6 }} />
+              <Sk loaded={loaded} color={accent} w="75%" h={9} d={i*0.1+0.1} style={{ borderRadius:3 }} />
             </div>
           ))}
         </div>
-        <div style={{ flex:1,display:"flex",flexDirection:"column",gap:6 }}>
+        <div style={{ flex:1,display:"flex",flexDirection:"column",gap:6,minHeight:0 }}>
           <div style={{ display:"flex",justifyContent:"space-between",alignItems:"center" }}>
-            <div style={{ width:70,height:5,borderRadius:3,...sk }} />
-            <div style={{ width:50,height:16,borderRadius:3,...sk }} />
+            <Sk loaded={loaded} color="#1C1B1F" w={70} h={5} />
+            <Sk loaded={loaded} color="#94A3B8" w={50} h={16} style={{ borderRadius:3 }} />
           </div>
-          <div style={{ flex:1,display:"flex",alignItems:"flex-end",gap:3,padding:"4px 0" }}>
+          <div style={{ flex:1,display:"flex",alignItems:"flex-end",gap:3,minHeight:0 }}>
             {bars.map((h,i) => (
-              <div key={i} style={{ flex:1,display:"flex",flexDirection:"column",justifyContent:"flex-end" }}>
-                <div style={{ height:`${h}%`,minHeight:4,borderRadius:"2px 2px 0 0",background:i===9?"#6009FF":i%3===0?"#DDD6FE":"#EDE9FF" }} />
+              <div key={i} style={{ flex:1,display:"flex",flexDirection:"column",justifyContent:"flex-end",height:"100%" }}>
+                <div style={{ height:`${h}%`,minHeight:4,borderRadius:"2px 2px 0 0",
+                  background: loaded ? (i===9?"#6009FF":i%4===0?"#DDD6FE":"#EDE9FF") : "#E8E8E8",
+                  transition:"background 0.6s ease" }} />
               </div>
             ))}
           </div>
           <div style={{ height:1,background:"#F0F0F0" }} />
-          <div style={{ display:"flex",justifyContent:"space-between" }}>
-            {[0,1,2,3].map(i => <div key={i} style={{ width:"20%",height:4,borderRadius:2,...sk,animationDelay:`${i*0.08}s` }} />)}
+          <div style={{ display:"flex",gap:4 }}>
+            {[0,1,2,3].map(i => <Sk key={i} loaded={loaded} color="#94A3B8" flex={1} h={4} d={i*0.08} />)}
           </div>
         </div>
       </div>
@@ -409,8 +451,8 @@ function ProductSection() {
         <div className="fade-up" style={{ display:"grid", gridTemplateColumns:topCols, gap: isMobile ? 12 : 24, marginBottom: isMobile ? 12 : 24 }}>
           {PRODUCT_CARDS_TOP.map(p => (
             <div key={p.title} className="product-card" style={card} onMouseMove={onTilt} onMouseLeave={onTiltLeave}>
-              <div style={{ padding: isMobile ? "10px 14px" : "14px 20px" }}>
-                <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:14, color:T.dark }}>{p.title}</span>
+              <div style={{ padding: isMobile ? "12px 14px" : "16px 22px" }}>
+                <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?16:20, color:T.dark }}>{p.title}</h3>
               </div>
               <div style={{ width:"100%", height: topH, overflow:"hidden" }}>
                 <p.Wireframe />
@@ -422,8 +464,8 @@ function ProductSection() {
         <div className="fade-up" style={{ display:"grid", gridTemplateColumns:botCols, gap: isMobile ? 12 : 24 }}>
           {PRODUCT_CARDS_BOTTOM.map(p => (
             <div key={p.title} className="product-card" style={card} onMouseMove={onTilt} onMouseLeave={onTiltLeave}>
-              <div style={{ padding: isMobile ? "10px 14px" : "14px 20px" }}>
-                <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:14, color:T.dark }}>{p.title}</span>
+              <div style={{ padding: isMobile ? "12px 14px" : "16px 22px" }}>
+                <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?16:20, color:T.dark }}>{p.title}</h3>
               </div>
               <div style={{ width:"100%", height: isMobile ? 200 : 280, overflow:"hidden" }}>
                 <p.Wireframe />
