@@ -12,7 +12,7 @@ import Footer from "./Footer";
 /* ─── SCROLL REVEAL HOOK ─── */
 function useScrollReveal() {
   React.useEffect(() => {
-    const els = document.querySelectorAll(".fade-up");
+    const els = document.querySelectorAll(".fade-up, .card-in");
     const io = new IntersectionObserver(
       entries => entries.forEach(e => {
         if (e.isIntersecting) {
@@ -20,7 +20,7 @@ function useScrollReveal() {
           io.unobserve(e.target);
         }
       }),
-      { threshold: 0.12 }
+      { threshold: 0.10 }
     );
     els.forEach(el => io.observe(el));
     return () => io.disconnect();
@@ -198,8 +198,7 @@ function Chrome({ children }: { children: React.ReactNode }) {
 }
 
 /* Payouts — recipient list with real names + amounts */
-function PayoutsWireframe() {
-  const loaded = useLoadCycle(0);
+function PayoutsWireframe({ loaded }: { loaded: boolean }) {
   const rows = [
     { initials:"AO", name:"Amara Osei",       bank:"GTBank · ****4123",  amt:"₦45,000",  sc:"#22C55E" },
     { initials:"FD", name:"Fatima Diallo",     bank:"UBA · ****8801",     amt:"$1,200",   sc:"#F4B249" },
@@ -275,8 +274,7 @@ function PayoutsWireframe() {
 }
 
 /* Collections — checkout form with real card data */
-function CollectionsWireframe() {
-  const loaded = useLoadCycle(700);
+function CollectionsWireframe({ loaded }: { loaded: boolean }) {
   const fields = [
     { label:"Card number", val:"4242  4242  4242  4242" },
     { label:"Expiry date", val:"12 / 26" },
@@ -336,8 +334,7 @@ function CollectionsWireframe() {
 }
 
 /* Settlements — real balance + labelled bar chart */
-function SettlementsWireframe() {
-  const loaded = useLoadCycle(300);
+function SettlementsWireframe({ loaded }: { loaded: boolean }) {
   const bars = [65,82,48,90,74,55,88];
   const days = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
   return (
@@ -387,8 +384,7 @@ function SettlementsWireframe() {
 }
 
 /* Payment API — actual code syntax */
-function PaymentApiWireframe() {
-  const loaded = useLoadCycle(1100);
+function PaymentApiWireframe({ loaded }: { loaded: boolean }) {
   const lines: { c: string; text: string }[] = [
     { c:"#C792EA", text:"const payout = await payonus" },
     { c:"#82AAFF", text:"  .payouts.create({" },
@@ -432,8 +428,7 @@ function PaymentApiWireframe() {
 }
 
 /* Analytics — real stats + labelled bar chart */
-function AnalyticsWireframe() {
-  const loaded = useLoadCycle(500);
+function AnalyticsWireframe({ loaded }: { loaded: boolean }) {
   const bars = [40,65,52,80,68,90,72,58,84,62,76,88];
   const months = ["J","F","M","A","M","J","J","A","S","O","N","D"];
   const stats = [
@@ -489,11 +484,13 @@ function AnalyticsWireframe() {
 }
 
 /* ─── PRODUCT SECTION ─── */
-const PRODUCT_CARDS_TOP = [
+type WireframeComp = React.FC<{ loaded: boolean }>;
+
+const PRODUCT_CARDS_TOP: { title: string; Wireframe: WireframeComp }[] = [
   { title: "Payouts",     Wireframe: PayoutsWireframe     },
   { title: "Collections", Wireframe: CollectionsWireframe },
 ];
-const PRODUCT_CARDS_BOTTOM = [
+const PRODUCT_CARDS_BOTTOM: { title: string; Wireframe: WireframeComp }[] = [
   { title: "Instant Settlements",   Wireframe: SettlementsWireframe },
   { title: "Payment API",           Wireframe: PaymentApiWireframe  },
   { title: "Analytics & Reporting", Wireframe: AnalyticsWireframe   },
@@ -506,6 +503,32 @@ function ProductSection() {
   const hPad   = isMobile ? 20 : isTablet ? 48 : 80;
   const secPad = isMobile ? "48px 0 40px" : "100px 0 80px";
   const descSz = isMobile ? 22 : 42;
+
+  /* Single shared load-cycle — all wireframes sync */
+  const loaded = useLoadCycle(0);
+
+  /* Mobile carousel scroll-linked animation */
+  const scrollRef = React.useRef<HTMLDivElement>(null);
+  React.useEffect(() => {
+    if (!isMobile) return;
+    const el = scrollRef.current;
+    if (!el) return;
+    const onScroll = () => {
+      const cw  = el.offsetWidth;
+      const cx  = el.scrollLeft + cw / 2;
+      el.querySelectorAll<HTMLElement>(".product-card").forEach(c => {
+        const cardCx = c.offsetLeft + c.offsetWidth / 2;
+        const dist   = Math.abs(cardCx - cx);
+        const ratio  = Math.min(dist / (cw * 0.55), 1);
+        c.style.transform  = `scale(${1 - ratio * 0.06})`;
+        c.style.opacity    = String(1 - ratio * 0.28);
+        c.style.transition = "transform 0.18s ease, opacity 0.18s ease";
+      });
+    };
+    el.addEventListener("scroll", onScroll, { passive: true });
+    setTimeout(onScroll, 60); // initial run
+    return () => el.removeEventListener("scroll", onScroll);
+  }, [isMobile]);
 
   const card: React.CSSProperties = {
     background:   T.bg,
@@ -528,6 +551,11 @@ function ProductSection() {
     e.currentTarget.style.boxShadow  = "";
   };
 
+  /* Top-row entry directions: left card slides from left, right from right */
+  const topDirs = ["from-left", "from-right"] as const;
+  /* Bottom-row delays */
+  const btmDelays = [0, 0.12, 0.22];
+
   return (
     <section id="products" style={{ width:"100%", background:T.white, padding:secPad }}>
       <div style={{ maxWidth:1440, margin:"0 auto", padding:`0 ${hPad}px` }}>
@@ -541,8 +569,8 @@ function ProductSection() {
         </p>
 
         {isMobile ? (
-          /* ── Mobile: horizontal snap-scroll carousel ── */
-          <div className="product-scroll" style={{
+          /* ── Mobile: horizontal snap-scroll carousel with inline scroll animation ── */
+          <div ref={scrollRef} className="product-scroll" style={{
             display: "flex", gap: 12,
             overflowX: "auto", overflowY: "visible",
             scrollSnapType: "x mandatory",
@@ -565,7 +593,7 @@ function ProductSection() {
                   <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:24, color:T.primary }}>{p.title}</h3>
                 </div>
                 <div style={{ flex:1, overflow:"hidden", minHeight:0 }}>
-                  <p.Wireframe />
+                  <p.Wireframe loaded={loaded} />
                 </div>
               </div>
             ))}
@@ -573,29 +601,41 @@ function ProductSection() {
             <div style={{ flexShrink:0, width:8 }} />
           </div>
         ) : (
-          /* ── Desktop / Tablet: grid layout ── */
+          /* ── Desktop / Tablet: per-card scroll-entry animation ── */
           <>
-            <div className="fade-up" style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:24, marginBottom:24 }}>
-              {PRODUCT_CARDS_TOP.map(p => (
-                <div key={p.title} className="product-card" style={card} onMouseMove={onTilt} onMouseLeave={onTiltLeave}>
+            <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:24, marginBottom:24 }}>
+              {PRODUCT_CARDS_TOP.map((p, i) => (
+                <div
+                  key={p.title}
+                  className={`product-card card-in ${topDirs[i]}`}
+                  style={card}
+                  onMouseMove={onTilt}
+                  onMouseLeave={onTiltLeave}
+                >
                   <div style={{ padding:"16px 22px" }}>
                     <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:32, color:T.primary }}>{p.title}</h3>
                   </div>
                   <div style={{ width:"100%", height:420, overflow:"hidden" }}>
-                    <p.Wireframe />
+                    <p.Wireframe loaded={loaded} />
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="fade-up" style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:24 }}>
-              {PRODUCT_CARDS_BOTTOM.map(p => (
-                <div key={p.title} className="product-card" style={card} onMouseMove={onTilt} onMouseLeave={onTiltLeave}>
+            <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:24 }}>
+              {PRODUCT_CARDS_BOTTOM.map((p, i) => (
+                <div
+                  key={p.title}
+                  className="product-card card-in"
+                  style={{ ...card, transitionDelay:`${btmDelays[i]}s` }}
+                  onMouseMove={onTilt}
+                  onMouseLeave={onTiltLeave}
+                >
                   <div style={{ padding:"16px 22px" }}>
                     <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:32, color:T.primary }}>{p.title}</h3>
                   </div>
                   <div style={{ width:"100%", height:280, overflow:"hidden" }}>
-                    <p.Wireframe />
+                    <p.Wireframe loaded={loaded} />
                   </div>
                 </div>
               ))}
@@ -656,6 +696,12 @@ export default function PayonUsLandingPage() {
         .fade-up.visible { opacity:1; transform:translateY(0); }
         .fade-up:nth-child(2) { transition-delay: 0.12s; }
         .fade-up:nth-child(3) { transition-delay: 0.22s; }
+
+        /* Per-card inline scroll entry */
+        .card-in { opacity:0; transform:translateY(56px); transition: opacity 0.72s cubic-bezier(0.16,1,0.3,1), transform 0.72s cubic-bezier(0.16,1,0.3,1); }
+        .card-in.from-left  { transform:translateX(-56px); }
+        .card-in.from-right { transform:translateX(56px); }
+        .card-in.visible    { opacity:1; transform:none; }
 
         /* Scroll hint bounce */
         @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0);} 55%{transform:translateX(-50%) translateY(6px);} }
