@@ -302,21 +302,47 @@ export default function CompanyPage() {
           QUOTE
       ══════════════════════════════ */}
       <section style={{
-        width:"100%", background:T.bg,
-        padding: isMobile ? "56px 0 52px" : isTablet ? "80px 0 72px" : "96px 0 88px",
+        width:"100%",
+        background: NAVY,
+        padding: isMobile ? "80px 0 72px" : isTablet ? "104px 0 96px" : "128px 0 120px",
       }}>
         <div style={{ maxWidth:1440, margin:"0 auto", padding:`0 ${hPad}px` }}>
-          <div className="fade-up">
+          <div className="fade-up" style={{ maxWidth:880, margin:"0 auto", textAlign:"center" }}>
+
+            {/* Oversized opening quote mark */}
+            <div style={{
+              fontFamily:"Georgia, 'Times New Roman', serif",
+              fontSize: isMobile ? 96 : 140,
+              lineHeight: 0.75,
+              color: T.primary,
+              marginBottom: isMobile ? 28 : 40,
+              userSelect:"none",
+              display:"block",
+            }} aria-hidden>
+              &ldquo;
+            </div>
+
             <p style={{
-              margin:`0 0 ${isMobile ? 28 : 36}px`,
+              margin: `0 0 ${isMobile ? 40 : 56}px`,
               fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500,
-              fontSize: isMobile ? 22 : isTablet ? 34 : 48,
-              lineHeight:1.18, color:NAVY,
+              fontSize: isMobile ? 28 : isTablet ? 40 : 60,
+              lineHeight:1.18,
+              letterSpacing:"-0.01em",
+              color:"#FFFFFF",
             }}>
-              "Africa deserves payment infrastructure that moves at the speed of its ambition."
+              Africa deserves payment infrastructure that moves at the speed of its ambition.
             </p>
-            <p style={{ margin:"0 0 4px", fontFamily:"DM Sans, sans-serif", fontWeight:700, fontSize:16, color:T.dark }}>Onyiye Olisah,</p>
-            <p style={{ margin:0, fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:15, color:T.muted }}>Founder &amp; CEO, PayOnUs</p>
+
+            {/* Divider */}
+            <div style={{ width:52, height:2, background:T.primary, borderRadius:2, margin:"0 auto 28px" }} />
+
+            <p style={{ margin:"0 0 5px", fontFamily:"DM Sans, sans-serif", fontWeight:700, fontSize:17, color:"#FFFFFF" }}>
+              Onyiye Olisah
+            </p>
+            <p style={{ margin:0, fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14, color:"rgba(255,255,255,0.52)" }}>
+              Founder &amp; CEO, PayOnUs
+            </p>
+
           </div>
         </div>
       </section>
