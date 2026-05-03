@@ -303,45 +303,48 @@ export default function CompanyPage() {
       ══════════════════════════════ */}
       <section style={{
         width:"100%",
-        background: NAVY,
-        padding: isMobile ? "80px 0 72px" : isTablet ? "104px 0 96px" : "128px 0 120px",
+        background: T.bg,
+        padding: isMobile ? "72px 0 64px" : isTablet ? "96px 0 88px" : "120px 0 112px",
+        borderTop:    `1px solid ${T.borderLight}`,
+        borderBottom: `1px solid ${T.borderLight}`,
       }}>
         <div style={{ maxWidth:1440, margin:"0 auto", padding:`0 ${hPad}px` }}>
-          <div className="fade-up" style={{ maxWidth:880, margin:"0 auto", textAlign:"center" }}>
+          <div className="fade-up" style={{ maxWidth: isMobile ? "100%" : 860 }}>
 
-            {/* Oversized opening quote mark */}
+            {/* Decorative quote mark */}
             <div style={{
               fontFamily:"Georgia, 'Times New Roman', serif",
-              fontSize: isMobile ? 96 : 140,
-              lineHeight: 0.75,
+              fontSize: isMobile ? 72 : 104,
+              lineHeight: 0.8,
               color: T.primary,
-              marginBottom: isMobile ? 28 : 40,
+              marginBottom: isMobile ? 20 : 28,
               userSelect:"none",
-              display:"block",
             }} aria-hidden>
               &ldquo;
             </div>
 
             <p style={{
-              margin: `0 0 ${isMobile ? 40 : 56}px`,
+              margin: `0 0 ${isMobile ? 36 : 48}px`,
               fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500,
-              fontSize: isMobile ? 28 : isTablet ? 40 : 60,
-              lineHeight:1.18,
-              letterSpacing:"-0.01em",
-              color:"#FFFFFF",
+              fontSize: isMobile ? 30 : isTablet ? 46 : 64,
+              lineHeight: 1.14,
+              letterSpacing:"-0.015em",
+              color: NAVY,
             }}>
               Africa deserves payment infrastructure that moves at the speed of its ambition.
             </p>
 
-            {/* Divider */}
-            <div style={{ width:52, height:2, background:T.primary, borderRadius:2, margin:"0 auto 28px" }} />
-
-            <p style={{ margin:"0 0 5px", fontFamily:"DM Sans, sans-serif", fontWeight:700, fontSize:17, color:"#FFFFFF" }}>
-              Onyiye Olisah
-            </p>
-            <p style={{ margin:0, fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14, color:"rgba(255,255,255,0.52)" }}>
-              Founder &amp; CEO, PayOnUs
-            </p>
+            <div style={{ display:"flex", alignItems:"center", gap:16 }}>
+              <div style={{ width:40, height:2, background:T.primary, borderRadius:2, flexShrink:0 }} />
+              <div>
+                <p style={{ margin:"0 0 3px", fontFamily:"DM Sans, sans-serif", fontWeight:700, fontSize:16, color:T.dark }}>
+                  Onyiye Olisah
+                </p>
+                <p style={{ margin:0, fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14, color:T.muted }}>
+                  Founder &amp; CEO, PayOnUs
+                </p>
+              </div>
+            </div>
 
           </div>
         </div>
