@@ -241,6 +241,9 @@ export default function DevelopersPage() {
   useScrollReveal();
 
   const [scrolled, setScrolled] = React.useState(false);
+
+  React.useEffect(() => { document.title = "Developer Platform | Payonus"; }, []);
+
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener("scroll", onScroll, { passive: true });

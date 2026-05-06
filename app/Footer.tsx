@@ -89,12 +89,16 @@ export default function Footer() {
   const gridGap  = isMobile ? 32 : 48;
   const vPad     = isMobile ? 40 : 56;
 
+  const [email, setEmail] = React.useState("");
+  const [submitted, setSubmitted] = React.useState(false);
+
   return (
     <footer
       style={{
         width:      "100%",
         background: BG,
         boxSizing:  "border-box",
+        borderTop:  `2px solid ${DIVIDER}`,
         flex:       1,
       }}
     >
@@ -104,6 +108,62 @@ export default function Footer() {
         padding:   `${vPad}px ${hPad}px`,
         boxSizing: "border-box",
       }}>
+
+        {/* ── Newsletter signup row ── */}
+        <div style={{
+          display:        "flex",
+          flexDirection:  isMobile ? "column" : "row",
+          alignItems:     isMobile ? "flex-start" : "center",
+          justifyContent: "space-between",
+          gap:            isMobile ? 16 : 24,
+          paddingBottom:  isMobile ? 32 : 40,
+          marginBottom:   isMobile ? 32 : 40,
+          borderBottom:   `1px solid ${DIVIDER}`,
+        }}>
+          <div>
+            <p style={{ margin:0, fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:15, color:HEAD }}>
+              Stay in the loop
+            </p>
+            <p style={{ margin:"4px 0 0", fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:13, color:COPY }}>
+              Product updates, compliance news, and African fintech insights.
+            </p>
+          </div>
+          {submitted ? (
+            <p style={{ fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:13, color:"#22C55E", margin:0 }}>
+              ✓ You're subscribed
+            </p>
+          ) : (
+            <div style={{ display:"flex", gap:8, width: isMobile ? "100%" : "auto" }}>
+              <input
+                type="email"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                placeholder="Enter your email"
+                style={{
+                  flex:1, minWidth: isMobile ? 0 : 220,
+                  fontFamily:"DM Sans, sans-serif", fontSize:13, color:HEAD,
+                  background:"rgba(96,9,255,0.06)", border:`1px solid ${DIVIDER}`,
+                  borderRadius:6, padding:"10px 14px", outline:"none",
+                  transition:"border-color 0.18s",
+                }}
+                onFocus={e  => (e.currentTarget.style.borderColor = "rgba(96,9,255,0.55)")}
+                onBlur={e   => (e.currentTarget.style.borderColor = DIVIDER)}
+              />
+              <button
+                onClick={() => { if (email.includes("@")) setSubmitted(true); }}
+                style={{
+                  fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:13,
+                  color:"#FFFFFF", background:"#6009FF",
+                  border:"none", borderRadius:6, padding:"10px 20px",
+                  cursor:"pointer", whiteSpace:"nowrap",
+                  transition:"opacity 0.15s, transform 0.15s",
+                }}
+                onMouseEnter={e => { e.currentTarget.style.opacity="0.88"; e.currentTarget.style.transform="scale(1.02)"; }}
+                onMouseLeave={e => { e.currentTarget.style.opacity="1";    e.currentTarget.style.transform="scale(1)"; }}
+              >Subscribe</button>
+            </div>
+          )}
+        </div>
 
         {/* ── 4-column link grid ── */}
         <div style={{
@@ -176,7 +236,7 @@ export default function Footer() {
             fontSize:   14,
             color:      COPY,
           }}>
-            © 2026 Payonus All Rights Reserved
+            © {new Date().getFullYear()} Payonus · Made for Africa · All Rights Reserved
           </p>
 
           {/* Social icons */}

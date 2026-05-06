@@ -116,6 +116,8 @@ export default function PricingPage() {
 
   const hPad = isMobile ? 20 : isTablet ? 48 : 80;
 
+  React.useEffect(() => { document.title = "Pricing | Payonus"; }, []);
+
   React.useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 20);

@@ -4,8 +4,8 @@ import React from "react";
 import { useBreakpoint } from "./use-breakpoint";
 
 const STATS = [
-  { value: 10,  suffix: "+",  label: "Currencies",   desc: "Payonus supports transactions in USD, EUR, GBP, KES, NGN, GHS, and many more" },
-  { value: 99,  suffix: "%",  label: "Uptime",        desc: "Service uptime since July 2023 with month on month consistency" },
+  { value: 14,  suffix: "+",  label: "Currencies",   desc: "Payonus supports transactions in USD, EUR, GBP, KES, NGN, GHS, and many more" },
+  { value: 999, suffix: "",   label: "Uptime",        desc: "Service uptime since July 2023 with month on month consistency" },
   { value: 12,  suffix: "M+", label: "Transactions",  desc: "We process 12M+ transactions every month" },
 ];
 
@@ -43,8 +43,8 @@ export default function BackboneSection() {
     return () => io.disconnect();
   }, []);
 
-  const c0 = useCounter(10, on);
-  const c1 = useCounter(99, on);
+  const c0 = useCounter(14, on);
+  const c1 = useCounter(999, on);
   const c2 = useCounter(12, on);
   const counts = [c0, c1, c2];
 
@@ -97,7 +97,7 @@ export default function BackboneSection() {
           {STATS.map((s, i) => (
             <div key={s.label}>
               <p style={{ margin:"0 0 2px", fontFamily:"Rubik, sans-serif", fontWeight:700, fontSize:numSize, lineHeight:1, color:"#1D0057" }}>
-                {counts[i]}{s.suffix}
+                {i === 1 ? (counts[1] / 10).toFixed(1) + "%" : counts[i] + s.suffix}
               </p>
               <p style={{ margin:`0 0 ${isMobile ? 8 : 16}px`, fontFamily:"Rubik, sans-serif", fontWeight:700, fontSize:lblSize, lineHeight:1.15, color:"#1D0057" }}>
                 {s.label}
