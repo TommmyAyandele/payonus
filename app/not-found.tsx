@@ -145,8 +145,8 @@ export default function NotFound() {
             Go home
           </a>
 
-          <a
-            href="/support"
+          <button
+            onClick={e => e.preventDefault()}
             style={{
               display: "inline-flex",
               alignItems: "center",
@@ -159,8 +159,8 @@ export default function NotFound() {
               fontFamily: "DM Sans, sans-serif",
               fontWeight: 600,
               fontSize: 16,
-              textDecoration: "none",
               letterSpacing: 0.2,
+              cursor: "pointer",
               transition: `border-color 0.2s, background 0.2s`,
             }}
             onMouseEnter={e => {
@@ -173,7 +173,7 @@ export default function NotFound() {
             }}
           >
             Contact support
-          </a>
+          </button>
         </div>
 
         {/* Quick links */}
@@ -198,25 +198,28 @@ export default function NotFound() {
           </p>
           <div style={{ display: "flex", gap: 24, flexWrap: "wrap", justifyContent: "center" }}>
             {[
-              { label: "Payouts",     href: "/payouts"     },
-              { label: "Collections", href: "/collections" },
-              { label: "Pricing",     href: "/pricing"     },
-              { label: "Docs",        href: "/docs"        },
+              { label: "Payouts"     },
+              { label: "Collections" },
+              { label: "Pricing"     },
+              { label: "Docs"        },
             ].map(link => (
-              <a
-                key={link.href}
-                href={link.href}
+              <button
+                key={link.label}
+                onClick={e => e.preventDefault()}
                 className="footer-link"
                 style={{
                   fontFamily: "DM Sans, sans-serif",
                   fontSize: 15,
                   fontWeight: 500,
                   color: PRIMARY,
-                  textDecoration: "none",
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  padding: 0,
                 }}
               >
                 {link.label}
-              </a>
+              </button>
             ))}
           </div>
         </div>
