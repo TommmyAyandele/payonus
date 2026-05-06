@@ -27,11 +27,11 @@ const CARDS = [
 ];
 
 const PILLS = [
-  "PCI DSS Level 1",
-  "ISO 27001",
-  "CBN Licensed",
-  "FATF Compliant",
-  "SOC 2 Type II",
+  { label: "PCI DSS Level 1", icon: "pci"  },
+  { label: "ISO 27001",       icon: "iso"  },
+  { label: "CBN Licensed",    icon: "cbn"  },
+  { label: "FATF Compliant",  icon: "fatf" },
+  { label: "SOC 2 Type II",   icon: "soc2" },
 ];
 
 const EASE = "cubic-bezier(0.16,1,0.3,1)";
@@ -71,6 +71,90 @@ function ComplianceIcon({ type }: { type: string }) {
           <path d="M9 12l2 2 4-4" stroke={c} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
       );
+    default:
+      return null;
+  }
+}
+
+function PillIcon({ type, size }: { type: string; size: number }) {
+  const c = "#6009FF";
+  switch (type) {
+
+    /* PCI DSS Level 1 — credit card with chip */
+    case "pci":
+      return (
+        <svg width={size} height={size} viewBox="0 0 16 16" fill="none">
+          <rect x="1.5" y="3.5" width="13" height="9" rx="1.8" stroke={c} strokeWidth="1.4"/>
+          <path d="M1.5 7h13" stroke={c} strokeWidth="1.4"/>
+          {/* chip */}
+          <rect x="4" y="4.8" width="3" height="2.2" rx=".6" stroke={c} strokeWidth="1.2"/>
+          {/* card number dots */}
+          <circle cx="4.5" cy="10" r=".6" fill={c}/>
+          <circle cx="6.5" cy="10" r=".6" fill={c}/>
+          <circle cx="8.5" cy="10" r=".6" fill={c}/>
+          <circle cx="10.5" cy="10" r=".6" fill={c}/>
+        </svg>
+      );
+
+    /* ISO 27001 — certification rosette / badge */
+    case "iso":
+      return (
+        <svg width={size} height={size} viewBox="0 0 16 16" fill="none">
+          {/* 8-point star badge */}
+          <path d="M8 1L9.4 3.2 12 2.8l-.4 2.6L13.8 7l-2.2 1 .4 2.6-2.4-.8L8 12l-1.6-2.2-2.4.8.4-2.6L2.2 7l2.2-1L4 3.4l2.6.4z"
+            stroke={c} strokeWidth="1.3" strokeLinejoin="round"/>
+          {/* tick inside */}
+          <path d="M5.8 8l1.4 1.4 3-3" stroke={c} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      );
+
+    /* CBN Licensed — central bank building */
+    case "cbn":
+      return (
+        <svg width={size} height={size} viewBox="0 0 16 16" fill="none">
+          {/* roof */}
+          <path d="M8 1.5L2 5h12L8 1.5z" stroke={c} strokeWidth="1.4" strokeLinejoin="round"/>
+          {/* top ledge */}
+          <path d="M2 5h12" stroke={c} strokeWidth="1.4" strokeLinecap="round"/>
+          {/* columns */}
+          <path d="M4 6v5.5M7 6v5.5M9 6v5.5M12 6v5.5" stroke={c} strokeWidth="1.4" strokeLinecap="round"/>
+          {/* base */}
+          <path d="M1.5 11.5h13" stroke={c} strokeWidth="1.5" strokeLinecap="round"/>
+          <path d="M1.5 13h13" stroke={c} strokeWidth="1.5" strokeLinecap="round"/>
+        </svg>
+      );
+
+    /* FATF Compliant — balance / scales of justice */
+    case "fatf":
+      return (
+        <svg width={size} height={size} viewBox="0 0 16 16" fill="none">
+          {/* centre post */}
+          <path d="M8 2.5v11" stroke={c} strokeWidth="1.4" strokeLinecap="round"/>
+          {/* base */}
+          <path d="M5.5 13.5h5" stroke={c} strokeWidth="1.4" strokeLinecap="round"/>
+          {/* beam */}
+          <path d="M2.5 5h11" stroke={c} strokeWidth="1.4" strokeLinecap="round"/>
+          {/* left arm + pan */}
+          <path d="M2.5 5 1 8.5" stroke={c} strokeWidth="1.3" strokeLinecap="round"/>
+          <path d="M1 8.5a2 2 0 0 0 3 0" stroke={c} strokeWidth="1.3"/>
+          {/* right arm + pan (lower, tipped) */}
+          <path d="M13.5 5 15 8.5" stroke={c} strokeWidth="1.3" strokeLinecap="round"/>
+          <path d="M15 8.5a2 2 0 0 1-3 0" stroke={c} strokeWidth="1.3"/>
+        </svg>
+      );
+
+    /* SOC 2 Type II — magnifying glass over data (audit) */
+    case "soc2":
+      return (
+        <svg width={size} height={size} viewBox="0 0 16 16" fill="none">
+          <circle cx="6.8" cy="6.8" r="4.3" stroke={c} strokeWidth="1.4"/>
+          <path d="M10 10L14 14" stroke={c} strokeWidth="1.5" strokeLinecap="round"/>
+          {/* data rows inside lens */}
+          <path d="M4.5 6.8h4.5" stroke={c} strokeWidth="1.3" strokeLinecap="round"/>
+          <path d="M4.5 8.3h2.8" stroke={c} strokeWidth="1.3" strokeLinecap="round"/>
+        </svg>
+      );
+
     default:
       return null;
   }
@@ -253,10 +337,7 @@ export default function ComplianceSection() {
                 whiteSpace:   "nowrap",
                 flexShrink:   0,
               }}>
-                <svg width={isMobile ? 13 : 17} height={isMobile ? 13 : 17} viewBox="0 0 16 16" fill="none">
-                  <circle cx="8" cy="8" r="7" stroke="#12B76A" strokeWidth="1.5"/>
-                  <path d="M5 8l2 2 4-4" stroke="#12B76A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
+                <PillIcon type={pill.icon} size={isMobile ? 13 : 17} />
                 <span style={{
                   fontFamily: "DM Sans, sans-serif",
                   fontStyle:  "italic",
@@ -264,7 +345,7 @@ export default function ComplianceSection() {
                   fontSize:   isMobile ? 11 : 14,
                   color:      "#1C1B1F",
                 }}>
-                  {pill}
+                  {pill.label}
                 </span>
               </div>
             ))}
