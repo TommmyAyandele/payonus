@@ -77,7 +77,7 @@ function ComplianceIcon({ type }: { type: string }) {
 }
 
 function PillIcon({ type, size }: { type: string; size: number }) {
-  const c = "#6009FF";
+  const c = "#9CA3AF";
   switch (type) {
 
     /* PCI DSS Level 1 — credit card with chip */
