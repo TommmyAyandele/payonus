@@ -512,13 +512,13 @@ export default function PricingPage() {
               </div>
               <p style={{margin:"0 0 8px",fontFamily:"DM Sans, sans-serif",fontWeight:600,fontSize:16,color:T.dark}}>See what you'll pay</p>
               <p style={{margin:"0 0 14px",fontFamily:"DM Sans, sans-serif",fontWeight:400,fontSize:14,lineHeight:1.65,color:"#6B6877"}}>Integrated per-transaction pricing with no hidden fees.</p>
-              <a href="#" style={{display:"inline-flex",alignItems:"center",gap:4,fontFamily:"DM Sans, sans-serif",fontWeight:600,fontSize:14,color:T.primary,textDecoration:"none"}}
+              <button onClick={e=>e.preventDefault()} style={{display:"inline-flex",alignItems:"center",gap:4,fontFamily:"DM Sans, sans-serif",fontWeight:600,fontSize:14,color:T.primary,background:"none",border:"none",cursor:"pointer",padding:0}}
                 onMouseEnter={e=>(e.currentTarget.style.opacity="0.7")}
                 onMouseLeave={e=>(e.currentTarget.style.opacity="1")}
               >
                 Pricing details
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke={T.primary} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-              </a>
+              </button>
             </div>
 
             {/* Integration options */}
@@ -530,13 +530,13 @@ export default function PricingPage() {
               </div>
               <p style={{margin:"0 0 8px",fontFamily:"DM Sans, sans-serif",fontWeight:600,fontSize:16,color:T.dark}}>Start building</p>
               <p style={{margin:"0 0 14px",fontFamily:"DM Sans, sans-serif",fontWeight:400,fontSize:14,lineHeight:1.65,color:"#6B6877"}}>Get up and running with Payonus in as little as 10 minutes.</p>
-              <a href="#" style={{display:"inline-flex",alignItems:"center",gap:4,fontFamily:"DM Sans, sans-serif",fontWeight:600,fontSize:14,color:T.primary,textDecoration:"none"}}
+              <button onClick={e=>e.preventDefault()} style={{display:"inline-flex",alignItems:"center",gap:4,fontFamily:"DM Sans, sans-serif",fontWeight:600,fontSize:14,color:T.primary,background:"none",border:"none",cursor:"pointer",padding:0}}
                 onMouseEnter={e=>(e.currentTarget.style.opacity="0.7")}
                 onMouseLeave={e=>(e.currentTarget.style.opacity="1")}
               >
                 Integration options
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke={T.primary} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-              </a>
+              </button>
             </div>
 
           </div>

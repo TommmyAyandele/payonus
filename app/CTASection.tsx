@@ -26,27 +26,22 @@ function IconBox({ children }: { children: React.ReactNode }) {
   );
 }
 
-function LinkArrow({ label, href = "#" }: { label: string; href?: string }) {
-  return (
-    <a
-      href={href}
-      style={{
-        display:        "inline-flex",
-        alignItems:     "center",
-        gap:            4,
-        fontFamily:     "DM Sans, sans-serif",
-        fontWeight:     600,
-        fontSize:       14,
-        color:          PRIMARY,
-        textDecoration: "none",
-      }}
-    >
-      {label}
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-        <path d="M9 18l6-6-6-6" stroke={PRIMARY} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    </a>
+function LinkArrow({ label, href }: { label: string; href?: string }) {
+  const style: React.CSSProperties = {
+    display: "inline-flex", alignItems: "center", gap: 4,
+    fontFamily: "DM Sans, sans-serif", fontWeight: 600, fontSize: 14,
+    color: PRIMARY, textDecoration: "none", background: "none",
+    border: "none", cursor: "pointer", padding: 0,
+  };
+  const chevron = (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+      <path d="M9 18l6-6-6-6" stroke={PRIMARY} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
   );
+  if (href && href !== "#") {
+    return <a href={href} style={style}>{label}{chevron}</a>;
+  }
+  return <button onClick={e => e.preventDefault()} style={style}>{label}{chevron}</button>;
 }
 
 function ripple(e: React.MouseEvent<HTMLButtonElement>) {
