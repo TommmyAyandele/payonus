@@ -26,7 +26,7 @@ const CARDS = [
   },
 ];
 
-const PILLS = [
+export const PILLS = [
   { label: "PCI DSS Level 1", icon: "pci"  },
   { label: "ISO 27001",       icon: "iso"  },
   { label: "CBN Licensed",    icon: "cbn"  },
@@ -76,7 +76,7 @@ function ComplianceIcon({ type }: { type: string }) {
   }
 }
 
-function PillIcon({ type, size }: { type: string; size: number }) {
+export function PillIcon({ type, size }: { type: string; size: number }) {
   const c = "#9CA3AF";
   switch (type) {
 

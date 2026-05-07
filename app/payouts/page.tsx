@@ -4,6 +4,7 @@ import React from "react";
 import { useBreakpoint } from "../use-breakpoint";
 import Navbar, { T } from "../Navbar";
 import Footer from "../Footer";
+import { PILLS, PillIcon } from "../ComplianceSection";
 
 /* ─── SCROLL REVEAL ─── */
 function useScrollReveal() {
@@ -174,14 +175,6 @@ function BrowserWireframe() {
   );
 }
 
-/* ─── COMPLIANCE PILLS (same list as ComplianceSection) ─── */
-const PILLS = [
-  "PCI DSS Level 1",
-  "ISO 27001",
-  "CBN Licensed",
-  "FATF Compliant",
-  "SOC 2 Type II",
-];
 
 /* ─── FEATURE CARDS ─── */
 const FEATURES = [
@@ -702,14 +695,11 @@ export default function PayoutsPage() {
                   whiteSpace: "nowrap",
                   flexShrink: 0,
                 }}>
-                  <svg width="17" height="17" viewBox="0 0 16 16" fill="none">
-                    <circle cx="8" cy="8" r="7" stroke="#12B76A" strokeWidth="1.5"/>
-                    <path d="M5 8l2 2 4-4" stroke="#12B76A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
+                  <PillIcon type={pill.icon} size={isMobile ? 13 : 17} />
                   <span style={{
                     fontFamily: "DM Sans, sans-serif", fontStyle: "italic",
-                    fontWeight: 500, fontSize: 14, color: T.dark,
-                  }}>{pill}</span>
+                    fontWeight: 500, fontSize: isMobile ? 11 : 14, color: T.dark,
+                  }}>{pill.label}</span>
                 </div>
               ))}
             </div>

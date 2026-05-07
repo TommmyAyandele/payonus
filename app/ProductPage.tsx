@@ -4,6 +4,7 @@ import React from "react";
 import { useBreakpoint } from "./use-breakpoint";
 import Navbar, { T } from "./Navbar";
 import Footer from "./Footer";
+import { PILLS, PillIcon } from "./ComplianceSection";
 
 /* ─── SCROLL REVEAL ─── */
 export function useScrollReveal() {
@@ -166,7 +167,6 @@ const FLAGS = [
 ];
 const FLAG_ROWS = [FLAGS.slice(0,4), FLAGS.slice(4,8), FLAGS.slice(8,12)];
 
-const PILLS = ["PCI DSS Level 1","ISO 27001","CBN Licensed","FATF Compliant","SOC 2 Type II"];
 
 function IconBox({ children }: { children: React.ReactNode }) {
   return (
@@ -379,11 +379,8 @@ export default function ProductPage({
             <div className="compliance-marquee-track">
               {[...PILLS,...PILLS].map((pill,i) => (
                 <div key={i} style={{ display:"inline-flex",alignItems:"center",gap:8,padding:"9px 22px",border:"1.5px solid #D0D5DD",borderRadius:999,background:"transparent",whiteSpace:"nowrap",flexShrink:0 }}>
-                  <svg width="17" height="17" viewBox="0 0 16 16" fill="none">
-                    <circle cx="8" cy="8" r="7" stroke="#12B76A" strokeWidth="1.5"/>
-                    <path d="M5 8l2 2 4-4" stroke="#12B76A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                  <span style={{ fontFamily:"DM Sans, sans-serif",fontStyle:"italic",fontWeight:500,fontSize:14,color:T.dark }}>{pill}</span>
+                  <PillIcon type={pill.icon} size={isMobile ? 13 : 17} />
+                  <span style={{ fontFamily:"DM Sans, sans-serif",fontStyle:"italic",fontWeight:500,fontSize:isMobile ? 11 : 14,color:T.dark }}>{pill.label}</span>
                 </div>
               ))}
             </div>
