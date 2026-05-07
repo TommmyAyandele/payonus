@@ -412,7 +412,7 @@ export default function PayoutsPage() {
           ))}
         </div>
 
-        {/* Hero content — vertically centered in viewport, left-aligned text */}
+        {/* Hero content — vertically and horizontally centered in viewport */}
         <div style={{
           position: "relative", zIndex: 1,
           maxWidth: 1440, margin: "0 auto",
@@ -420,6 +420,7 @@ export default function PayoutsPage() {
           minHeight: isMobile ? "auto" : "100vh",
           display: isMobile ? "block" : "flex",
           alignItems: "center",
+          justifyContent: "center",
         }}>
           <div style={{
             maxWidth: isMobile ? "100%" : isTablet ? 560 : 700,
