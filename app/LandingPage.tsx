@@ -700,7 +700,7 @@ function ProductSection() {
               onMouseLeave={onTiltLeave}
             >
               <div style={{ padding:"16px 22px" }}>
-                <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:32, color:T.primary }}>{p.title}</h3>
+                <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:32, color:T.dark }}>{p.title}</h3>
               </div>
               <div style={{ width:"100%", height:420, overflow:"hidden" }}>
                 <p.Wireframe loaded={loaded} />
@@ -719,7 +719,7 @@ function ProductSection() {
               onMouseLeave={onTiltLeave}
             >
               <div style={{ padding:"16px 22px" }}>
-                <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:32, color:T.primary }}>{p.title}</h3>
+                <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:32, color:T.dark }}>{p.title}</h3>
               </div>
               <div style={{ width:"100%", height:280, overflow:"hidden" }}>
                 <p.Wireframe loaded={loaded} />
