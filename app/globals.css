@@ -53,8 +53,7 @@ body {
     border-color 0.35s;
 }
 .compliance-card:hover {
-  transform:   translateY(-5px);
-  box-shadow:  0 20px 48px rgba(96,9,255,0.13);
+  transform:    translateY(-5px);
   border-color: #C4B5FD;
 }
 

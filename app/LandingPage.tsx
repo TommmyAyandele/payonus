@@ -566,14 +566,11 @@ function ProductSection() {
     const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
     const x = (e.clientX - left) / width  - 0.5;
     const y = (e.clientY - top)  / height - 0.5;
-    e.currentTarget.style.transition = "box-shadow 0.1s";
-    e.currentTarget.style.transform  = `perspective(900px) rotateX(${-y * 7}deg) rotateY(${x * 7}deg) translateY(-4px)`;
-    e.currentTarget.style.boxShadow  = `${-x * 24}px ${-y * 16}px 60px rgba(96,9,255,0.15), 0 20px 48px rgba(0,0,0,0.07)`;
+    e.currentTarget.style.transform = `perspective(900px) rotateX(${-y * 7}deg) rotateY(${x * 7}deg) translateY(-4px)`;
   };
   const onTiltLeave = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.currentTarget.style.transition = "transform 0.55s cubic-bezier(0.16,1,0.3,1), box-shadow 0.55s cubic-bezier(0.16,1,0.3,1)";
+    e.currentTarget.style.transition = "transform 0.55s cubic-bezier(0.16,1,0.3,1)";
     e.currentTarget.style.transform  = "";
-    e.currentTarget.style.boxShadow  = "";
   };
 
   const topDirs   = ["from-left", "from-right"] as const;
