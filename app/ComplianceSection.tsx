@@ -162,12 +162,13 @@ function PillIcon({ type, size }: { type: string; size: number }) {
 
 export default function ComplianceSection() {
   const { isMobile, isTablet } = useBreakpoint();
-  const hPad   = isMobile ? 20 : isTablet ? 48 : 80;
-  const h2Size = isMobile ? 28 : isTablet ? 38 : 48;
+  const hPad     = isMobile ? 20 : isTablet ? 48 : 80;
+  const h2Size   = isMobile ? 28 : isTablet ? 38 : 48;
+  const cardCols = isMobile ? "1fr" : "1fr 1fr";
+  const gap      = isMobile ? 28 : isTablet ? 40 : 56;
 
   const ref = React.useRef<HTMLElement>(null);
-  const [on, setOn]       = React.useState(false);
-  const [openIdx, setOpenIdx] = React.useState<number | null>(0);
+  const [on, setOn] = React.useState(false);
 
   React.useEffect(() => {
     const el = ref.current;
@@ -186,150 +187,166 @@ export default function ComplianceSection() {
     transform:  on ? "translateY(0)" : "translateY(20px)",
   });
 
-  const certCols = isMobile ? "1fr 1fr" : isTablet ? "1fr 1fr 1fr" : "1fr 1fr 1fr";
-
   return (
     <section
       ref={ref}
       id="compliance"
-      style={{ width:"100%", background:"#FAFAF8", padding: isMobile ? "60px 0" : "94px 0 80px" }}
+      style={{
+        width:      "100%",
+        background: "#FAFAF8",
+        padding:    isMobile ? "60px 0" : "94px 0 80px",
+      }}
     >
-      <div style={{ maxWidth:1440, margin:"0 auto", padding:`0 ${hPad}px` }}>
+      <div style={{
+        maxWidth:      1440,
+        margin:        "0 auto",
+        padding:       `0 ${hPad}px`,
+        display:       "flex",
+        flexDirection: "column",
+      }}>
 
-        {/* Two-column layout on desktop */}
-        <div style={{
-          display:             "grid",
-          gridTemplateColumns: isMobile ? "1fr" : "1fr 1.35fr",
-          gap:                 isMobile ? 48 : isTablet ? 56 : 80,
-          alignItems:          "start",
+        {/* Label */}
+        <span style={{
+          ...fade("0s"),
+          fontFamily:    "DM Sans, sans-serif",
+          fontWeight:    500,
+          fontSize:      16,
+          lineHeight:    "24px",
+          letterSpacing: "0.0094em",
+          color:         "#F4B249",
+          display:       "block",
+          marginBottom:  gap,
         }}>
+          — Compliance
+        </span>
 
-          {/* ── LEFT: sticky header + cert badges ── */}
-          <div style={{ position: isMobile ? "relative" : "sticky", top: isMobile ? 0 : 110 }}>
-            <span style={{
-              ...fade("0s"),
-              fontFamily: "DM Sans, sans-serif", fontWeight:500, fontSize:16,
-              letterSpacing:"0.0094em", color:"#F4B249", display:"block", marginBottom:24,
-            }}>
-              — Compliance
-            </span>
+        {/* Headline */}
+        <h2 style={{
+          ...fade("0.07s"),
+          margin:     "0 0 12px",
+          fontFamily: "Rubik, sans-serif",
+          fontStyle:  "italic",
+          fontWeight: 700,
+          fontSize:   h2Size,
+          lineHeight: 1.12,
+        }}>
+          <span style={{ color: "#6009FF" }}>Enterprise-grade compliance.</span>
+          <br />
+          <span style={{ color: "#0F0C36" }}>Built into the infrastructure.</span>
+        </h2>
 
-            <h2 style={{
-              ...fade("0.07s"),
-              margin:"0 0 16px", fontFamily:"Rubik, sans-serif",
-              fontStyle:"italic", fontWeight:700, fontSize:h2Size, lineHeight:1.12,
-            }}>
-              <span style={{ color:"#6009FF" }}>Enterprise-grade compliance.</span>
-              <br />
-              <span style={{ color:"#0F0C36" }}>Built into the infrastructure.</span>
-            </h2>
+        {/* Subtext */}
+        <p style={{
+          ...fade("0.13s"),
+          margin:     `0 0 ${gap}px`,
+          fontFamily: "Rubik, sans-serif",
+          fontStyle:  "italic",
+          fontWeight: 400,
+          fontSize:   16,
+          lineHeight: 1.6,
+          color:      "#49454F",
+          maxWidth:   680,
+        }}>
+          Regulatory requirements vary by market. payonus handles all of it at the
+          infrastructure layer — so your team doesn't have to build, maintain, or audit it.
+        </p>
 
-            <p style={{
-              ...fade("0.13s"),
-              margin:"0 0 36px", fontFamily:"Rubik, sans-serif",
-              fontStyle:"italic", fontWeight:400, fontSize:16, lineHeight:1.6,
-              color:"#49454F", maxWidth:380,
+        {/* 2×2 card grid */}
+        <div style={{
+          ...fade("0.19s"),
+          display:             "grid",
+          gridTemplateColumns: cardCols,
+          gap:                 20,
+          marginBottom:        gap,
+        }}>
+          {CARDS.map((card) => (
+            <div key={card.title} className="compliance-card" style={{
+              background:    "#FFFFFF",
+              borderRadius:  12,
+              padding:       isMobile ? "20px" : "20px 24px",
+              display:       "flex",
+              flexDirection: "column",
+              gap:           12,
             }}>
-              Regulatory requirements vary by market. Payonus handles all of it at the infrastructure layer.
-            </p>
-
-            {/* Certification badges — 3 across desktop, 2 on mobile */}
-            <div style={{
-              ...fade("0.19s"),
-              display:"grid",
-              gridTemplateColumns: certCols,
-              gap:12,
-            }}>
-              {PILLS.map(pill => (
-                <div key={pill.label} style={{
-                  display:"inline-flex", alignItems:"center", gap:8,
-                  padding:"9px 14px",
-                  border:"1.5px solid #D0D5DD",
-                  borderRadius:10,
-                  background:"#FFFFFF",
+              {/* Icon + Title row */}
+              <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                <div style={{
+                  width:          36,
+                  height:         36,
+                  borderRadius:   8,
+                  background:     "#EDE9FF",
+                  display:        "flex",
+                  alignItems:     "center",
+                  justifyContent: "center",
+                  flexShrink:     0,
                 }}>
-                  <PillIcon type={pill.icon} size={15} />
-                  <span style={{
-                    fontFamily:"DM Sans, sans-serif", fontStyle:"italic",
-                    fontWeight:500, fontSize:12, color:"#1C1B1F", lineHeight:1.3,
-                  }}>{pill.label}</span>
+                  <ComplianceIcon type={card.icon} />
                 </div>
-              ))}
+                <p style={{
+                  margin:     0,
+                  fontFamily: "DM Sans, sans-serif",
+                  fontWeight: 700,
+                  fontSize:   17,
+                  lineHeight: 1.3,
+                  color:      "#0F0C36",
+                }}>
+                  {card.title}
+                </p>
+              </div>
+
+              {/* Description */}
+              <p style={{
+                margin:     0,
+                fontFamily: "DM Sans, sans-serif",
+                fontWeight: 400,
+                fontSize:   13.5,
+                lineHeight: 1.65,
+                color:      "#6B6877",
+              }}>
+                {card.desc}
+              </p>
             </div>
-          </div>
-
-          {/* ── RIGHT: accordion items ── */}
-          <div style={{ ...fade("0.13s"), display:"flex", flexDirection:"column" }}>
-            {CARDS.map((card, i) => {
-              const open = openIdx === i;
-              return (
-                <div key={card.title} style={{
-                  borderTop: i === 0 ? "1px solid #E7E0EC" : "none",
-                  borderBottom: "1px solid #E7E0EC",
-                }}>
-                  <button
-                    onClick={() => setOpenIdx(open ? null : i)}
-                    style={{
-                      width:"100%", background:"none", border:"none", cursor:"pointer",
-                      display:"flex", justifyContent:"space-between", alignItems:"center",
-                      padding: isMobile ? "20px 0" : "24px 0", gap:20, textAlign:"left",
-                    }}
-                  >
-                    <div style={{ display:"flex", alignItems:"center", gap:14 }}>
-                      <div style={{
-                        width:36, height:36, borderRadius:8,
-                        background: open ? "#EDE9FF" : "#F3F4F6",
-                        display:"flex", alignItems:"center", justifyContent:"center",
-                        flexShrink:0, transition:"background 0.2s",
-                      }}>
-                        <ComplianceIcon type={card.icon} />
-                      </div>
-                      <span style={{
-                        fontFamily:"DM Sans, sans-serif", fontWeight:600,
-                        fontSize: isMobile ? 15 : 17, color:"#0F0C36",
-                      }}>{card.title}</span>
-                    </div>
-                    <span style={{
-                      fontSize:24, fontWeight:300, color:"#6009FF", flexShrink:0,
-                      lineHeight:1, display:"block",
-                      transform: open ? "rotate(45deg)" : "rotate(0deg)",
-                      transition: `transform 0.22s ${EASE}`,
-                    }}>+</span>
-                  </button>
-                  <div style={{
-                    maxHeight: open ? 200 : 0,
-                    overflow:"hidden",
-                    transition: `max-height 0.32s ${EASE}`,
-                  }}>
-                    <p style={{
-                      margin:"0 0 24px",
-                      fontFamily:"DM Sans, sans-serif", fontWeight:400,
-                      fontSize: isMobile ? 13.5 : 15, lineHeight:1.65,
-                      color:"#6B6877", paddingRight: isMobile ? 0 : 40,
-                    }}>{card.desc}</p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
+          ))}
         </div>
 
-        {/* Scrolling marquee below — full width */}
-        <div style={{ ...fade("0.3s"), width:"100%", overflow:"hidden", marginTop: isMobile ? 48 : 64 }}>
+        {/* Certifications heading */}
+        <p style={{
+          ...fade("0.25s"),
+          margin:     "0 0 20px",
+          fontFamily: "DM Sans, sans-serif",
+          fontWeight: 700,
+          fontSize:   18,
+          lineHeight: 1.3,
+          color:      "#0F0C36",
+        }}>
+          Certifications and Standards
+        </p>
+
+        {/* Marquee */}
+        <div style={{ ...fade("0.3s"), width: "100%", overflow: "hidden", flexShrink: 0 }}>
           <div className="compliance-marquee-track">
             {[...PILLS, ...PILLS].map((pill, i) => (
               <div key={i} style={{
-                display:"inline-flex", alignItems:"center", gap:6,
-                padding: isMobile ? "6px 14px" : "9px 22px",
-                border:"1.5px solid #D0D5DD", borderRadius:999,
-                background:"transparent", whiteSpace:"nowrap", flexShrink:0,
+                display:      "inline-flex",
+                alignItems:   "center",
+                gap:          6,
+                padding:      isMobile ? "6px 14px" : "9px 22px",
+                border:       "1.5px solid #D0D5DD",
+                borderRadius: 999,
+                background:   "transparent",
+                whiteSpace:   "nowrap",
+                flexShrink:   0,
               }}>
                 <PillIcon type={pill.icon} size={isMobile ? 13 : 17} />
                 <span style={{
-                  fontFamily:"DM Sans, sans-serif", fontStyle:"italic",
-                  fontWeight:500, fontSize: isMobile ? 11 : 14, color:"#1C1B1F",
-                }}>{pill.label}</span>
+                  fontFamily: "DM Sans, sans-serif",
+                  fontStyle:  "italic",
+                  fontWeight: 500,
+                  fontSize:   isMobile ? 11 : 14,
+                  color:      "#1C1B1F",
+                }}>
+                  {pill.label}
+                </span>
               </div>
             ))}
           </div>

@@ -74,32 +74,16 @@ function ripple(e: React.MouseEvent<HTMLButtonElement>) {
 
 
 /* ─── DATA ─── */
-const FAQ_ITEMS: { q: string; a: string }[] = [
-  {
-    q: "How long does a payout take to settle?",
-    a: "Standard payouts settle T+1 for verified merchant accounts. International transfers may take 2–3 business days depending on the destination bank and intermediary routing.",
-  },
-  {
-    q: "Which African markets does Payonus support?",
-    a: "Payonus currently supports Nigeria, Kenya, Ghana, South Africa, Zambia, Ivory Coast, Cameroon, Rwanda, and the DR Congo — with more markets being added each quarter.",
-  },
-  {
-    q: "How do I integrate the Payonus API?",
-    a: "You can get started with our REST API in under 30 minutes. Visit the Developers page for sandbox keys, SDKs in Node, Python, and PHP, plus full endpoint documentation.",
-  },
-  {
-    q: "What currencies are supported for collections?",
-    a: "We support NGN, KES, GHS, ZAR, ZMW, XOF, USD, EUR, and GBP. Local currencies are settled in the transaction currency; cross-border settlements follow our FX policy.",
-  },
-  {
-    q: "How does Payonus handle failed transactions?",
-    a: "Failed transactions are automatically retried up to three times with exponential backoff. After all retries, you receive a webhook notification with a failure reason code for manual review.",
-  },
-  {
-    q: "Is my data secure with Payonus?",
-    a: "Yes. Payonus is PCI DSS Level 1 certified, ISO 27001 compliant, and operates under CBN licensing. All data is encrypted in transit and at rest, with immutable audit logs on every transaction.",
-  },
+const FAQ_ITEMS = [
+  "How long does a payout take to settle?",
+  "How long does a payout take to settle?",
+  "How long does a payout take to settle?",
+  "How long does a payout take to settle?",
+  "How long does a payout take to settle?",
+  "How long does a payout take to settle?",
 ];
+
+const FAQ_ANSWER = "Our standard payout settlement window is T+1 for verified merchant accounts. International payouts may take 2–3 business days depending on the destination bank and intermediary routing.";
 
 /* ═══════════════════════════════════════════════
    PAGE
@@ -112,8 +96,6 @@ export default function SupportPage() {
   const [openFaq,   setOpenFaq]   = React.useState<number | null>(null);
 
   const hPad = isMobile ? 20 : isTablet ? 48 : 80;
-
-  React.useEffect(() => { document.title = "Support | Payonus"; }, []);
 
   React.useEffect(() => {
     const onScroll = () => {
@@ -374,7 +356,7 @@ export default function SupportPage() {
                       <span style={{
                         fontFamily:"DM Sans, sans-serif", fontWeight:500,
                         fontSize: isMobile ? 14 : 15, color:T.dark, textAlign:"left" as "left",
-                      }}>{faq.q}</span>
+                      }}>{faq}</span>
                       <span style={{
                         fontSize:24, fontWeight:300, color:T.primary, flexShrink:0,
                         lineHeight:1, display:"block",
@@ -383,7 +365,7 @@ export default function SupportPage() {
                       }}>+</span>
                     </button>
                     <div style={{
-                      maxHeight: openFaq === i ? 220 : 0,
+                      maxHeight: openFaq === i ? 200 : 0,
                       overflow:"hidden",
                       transition:"max-height .32s cubic-bezier(.16,1,.3,1)",
                     }}>
@@ -392,7 +374,7 @@ export default function SupportPage() {
                         fontFamily:"DM Sans, sans-serif", fontWeight:400,
                         fontSize: isMobile ? 13 : 14, lineHeight:1.75, color:T.muted,
                         paddingRight: isMobile ? 0 : 40,
-                      }}>{faq.a}</p>
+                      }}>{FAQ_ANSWER}</p>
                     </div>
                   </div>
                 ))}

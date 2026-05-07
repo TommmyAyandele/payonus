@@ -95,14 +95,6 @@ function Hero() {
               — PAN-AFRICAN PAYMENT INFRASTRUCTURE
             </span>
 
-            {/* Floating pill badge */}
-            <div style={{ display:"inline-flex", alignItems:"center", gap:8, padding:"6px 14px 6px 10px", background:"rgba(34,197,94,0.08)", border:"1px solid rgba(34,197,94,0.22)", borderRadius:100, width:"fit-content" }}>
-              <div className="pulse-dot" style={{ width:8, height:8, borderRadius:"50%", background:"#22C55E", flexShrink:0 }} />
-              <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:12, color:T.dark }}>
-                Now processing 12M+ transactions monthly
-              </span>
-            </div>
-
             <div style={{ display:"flex", flexDirection:"column", gap: isMobile ? 16 : 24 }}>
               <h1 style={{ maxWidth:"100%", margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:h1Size, lineHeight:1.05, letterSpacing:"-0.02em", color:T.headingBlack }}>
                 Built for<br />
@@ -114,51 +106,15 @@ function Hero() {
                 Settle payments across 14+ African markets in seconds — no delays, no workarounds, no babysitting.
               </p>
 
-              <div style={{ display:"flex", flexDirection:"column", gap:16 }}>
-                <div style={{ display:"flex", flexWrap:"wrap", alignItems:"center", gap:12 }}>
-                  <button style={{ fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14, color:T.white, background:T.primary, border:"none", borderRadius:4, padding:"11px 24px", cursor:"pointer", transition:"opacity .15s, transform .15s" }}
-                    onMouseEnter={e => { e.currentTarget.style.opacity = "0.88"; e.currentTarget.style.transform = "scale(1.02)"; }}
-                    onMouseLeave={e => { e.currentTarget.style.opacity = "1"; e.currentTarget.style.transform = "scale(1)"; }}
-                  >Get Started</button>
-                  <button style={{ fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14, color:T.muted, background:"transparent", border:`1px solid ${T.muted}`, borderRadius:4, padding:"11px 24px", cursor:"pointer", transition:"background .15s, transform .15s" }}
-                    onMouseEnter={e => { e.currentTarget.style.background = "#E9DDFF"; e.currentTarget.style.transform = "scale(1.02)"; }}
-                    onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.transform = "scale(1)"; }}
-                  >Contact Sales</button>
-                </div>
-
-                {/* Trust signal bar */}
-                <div style={{ display:"flex", flexWrap:"wrap", alignItems:"center", gap: isMobile ? 14 : 20 }}>
-                  {[
-                    { label: "PCI DSS Level 1", icon: (
-                      <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
-                        <rect x="1.5" y="4" width="13" height="8.5" rx="1.5" stroke="#9CA3AF" strokeWidth="1.3"/>
-                        <path d="M1.5 7h13" stroke="#9CA3AF" strokeWidth="1.3"/>
-                        <rect x="3.5" y="5" width="3" height="2" rx=".5" stroke="#9CA3AF" strokeWidth="1.1"/>
-                      </svg>
-                    )},
-                    { label: "CBN Licensed", icon: (
-                      <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
-                        <path d="M8 1.5L2 5h12L8 1.5z" stroke="#9CA3AF" strokeWidth="1.3" strokeLinejoin="round"/>
-                        <path d="M3.5 5.5v6M6.5 5.5v6M9.5 5.5v6M12.5 5.5v6" stroke="#9CA3AF" strokeWidth="1.3" strokeLinecap="round"/>
-                        <path d="M2 11.5h12" stroke="#9CA3AF" strokeWidth="1.4" strokeLinecap="round"/>
-                      </svg>
-                    )},
-                    { label: "ISO 27001", icon: (
-                      <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
-                        <path d="M8 1L9.4 3.2 12 2.8l-.4 2.6L13.8 7l-2.2 1 .4 2.6-2.4-.8L8 12l-1.6-2.2-2.4.8.4-2.6L2.2 7l2.2-1L4 3.4l2.6.4z" stroke="#9CA3AF" strokeWidth="1.2" strokeLinejoin="round"/>
-                        <path d="M6 7.8l1.2 1.2 2.8-2.8" stroke="#9CA3AF" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
-                    )},
-                  ].map((t, i) => (
-                    <React.Fragment key={t.label}>
-                      {i > 0 && <span style={{ width:3, height:3, borderRadius:"50%", background:"#D0D5DD", display:"inline-block", flexShrink:0 }} />}
-                      <div style={{ display:"flex", alignItems:"center", gap:5 }}>
-                        {t.icon}
-                        <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:11, color:"#9CA3AF" }}>{t.label}</span>
-                      </div>
-                    </React.Fragment>
-                  ))}
-                </div>
+              <div style={{ display:"flex", flexWrap:"wrap", alignItems:"center", gap:12 }}>
+                <button style={{ fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14, color:T.white, background:T.primary, border:"none", borderRadius:4, padding:"11px 24px", cursor:"pointer", transition:"opacity .15s" }}
+                  onMouseEnter={e => (e.currentTarget.style.opacity = "0.88")}
+                  onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
+                >Get Started</button>
+                <button style={{ fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14, color:T.muted, background:"transparent", border:`1px solid ${T.muted}`, borderRadius:4, padding:"11px 24px", cursor:"pointer", transition:"background .15s" }}
+                  onMouseEnter={e => (e.currentTarget.style.background = "#E9DDFF")}
+                  onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
+                >Contact Sales</button>
               </div>
             </div>
           </div>
