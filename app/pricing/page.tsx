@@ -78,23 +78,23 @@ function HeroBg() {
 
 /* ─── DATA ─── */
 const TABLE_ROWS = [
-  { country:"Nigeria (NGN)",          type:"Payout",      method:"Bank Transfer",   feeType:"% of Volume", fee:"1.5%",  cap:"N/A"       },
-  { country:"Nigeria (NGN)",          type:"Collections", method:"Virtual Account", feeType:"% of Volume", fee:"2.0%",  cap:"N/A"       },
-  { country:"Nigeria (NGN)",          type:"Collections", method:"Opay/PalmPay",    feeType:"% of Volume", fee:"2.5%",  cap:"N/A"       },
-  { country:"Kenya (KES)",            type:"Payout",      method:"Mobile Money",    feeType:"% of Volume", fee:"1.5%",  cap:"MIN 65 KES"},
-  { country:"Kenya (KES)",            type:"Collections", method:"Mobile Money",    feeType:"% of Volume", fee:"2.0%",  cap:"N/A"       },
-  { country:"Ghana (GHS)",            type:"Payout",      method:"Bank Transfer",   feeType:"% of Volume", fee:"2.5%",  cap:"N/A"       },
-  { country:"Ghana (GHS)",            type:"Collections", method:"Bank Transfer",   feeType:"% of Volume", fee:"3.0%",  cap:"N/A"       },
-  { country:"South Africa (ZAR)",     type:"Payout",      method:"Bank Transfer",   feeType:"Fixed",       fee:"150",   cap:"N/A"       },
-  { country:"South Africa (ZAR)",     type:"Collections", method:"EFT",             feeType:"% of Volume", fee:"5.0%",  cap:"N/A"       },
-  { country:"Zambia (ZMW)",           type:"Payout",      method:"Mobile Money",    feeType:"% of Volume", fee:"1.0%",  cap:"N/A"       },
-  { country:"Zambia (ZMW)",           type:"Collections", method:"Mobile Money",    feeType:"% of Volume", fee:"5.5%",  cap:"N/A"       },
-  { country:"Cote d'Ivoire (XOF)",    type:"Payout",      method:"Mobile Money",    feeType:"% of Volume", fee:"2.5%",  cap:"N/A"       },
-  { country:"Cote d'Ivoire (XOF) HR", type:"Payout",      method:"Mobile Money",    feeType:"% of Volume", fee:"4.5%",  cap:"N/A"       },
-  { country:"Cote d'Ivoire (XOF)",    type:"Collections", method:"Mobile Money",    feeType:"% of Volume", fee:"3.0%",  cap:"N/A"       },
-  { country:"Cote d'Ivoire (XOF) HR", type:"Collections", method:"Mobile Money",    feeType:"% of Volume", fee:"4.5%",  cap:"N/A"       },
-  { country:"Cameroon (XOF)",         type:"Payout",      method:"Mobile Money",    feeType:"% of Volume", fee:"3.0%",  cap:"N/A"       },
-  { country:"Cameroon (XOF)",         type:"Collections", method:"Mobile Money",    feeType:"% of Volume", fee:"3.5%",  cap:"N/A"       },
+  { country:"Nigeria (NGN)",          flag:"ng", type:"Payout",      method:"Bank Transfer",   feeType:"% of Volume", fee:"1.5%",  cap:"N/A"       },
+  { country:"Nigeria (NGN)",          flag:"ng", type:"Collections", method:"Virtual Account", feeType:"% of Volume", fee:"2.0%",  cap:"N/A"       },
+  { country:"Nigeria (NGN)",          flag:"ng", type:"Collections", method:"Opay/PalmPay",    feeType:"% of Volume", fee:"2.5%",  cap:"N/A"       },
+  { country:"Kenya (KES)",            flag:"ke", type:"Payout",      method:"Mobile Money",    feeType:"% of Volume", fee:"1.5%",  cap:"MIN 65 KES"},
+  { country:"Kenya (KES)",            flag:"ke", type:"Collections", method:"Mobile Money",    feeType:"% of Volume", fee:"2.0%",  cap:"N/A"       },
+  { country:"Ghana (GHS)",            flag:"gh", type:"Payout",      method:"Bank Transfer",   feeType:"% of Volume", fee:"2.5%",  cap:"N/A"       },
+  { country:"Ghana (GHS)",            flag:"gh", type:"Collections", method:"Bank Transfer",   feeType:"% of Volume", fee:"3.0%",  cap:"N/A"       },
+  { country:"South Africa (ZAR)",     flag:"za", type:"Payout",      method:"Bank Transfer",   feeType:"Fixed",       fee:"150",   cap:"N/A"       },
+  { country:"South Africa (ZAR)",     flag:"za", type:"Collections", method:"EFT",             feeType:"% of Volume", fee:"5.0%",  cap:"N/A"       },
+  { country:"Zambia (ZMW)",           flag:"zm", type:"Payout",      method:"Mobile Money",    feeType:"% of Volume", fee:"1.0%",  cap:"N/A"       },
+  { country:"Zambia (ZMW)",           flag:"zm", type:"Collections", method:"Mobile Money",    feeType:"% of Volume", fee:"5.5%",  cap:"N/A"       },
+  { country:"Cote d'Ivoire (XOF)",    flag:"ci", type:"Payout",      method:"Mobile Money",    feeType:"% of Volume", fee:"2.5%",  cap:"N/A"       },
+  { country:"Cote d'Ivoire (XOF) HR", flag:"ci", type:"Payout",      method:"Mobile Money",    feeType:"% of Volume", fee:"4.5%",  cap:"N/A"       },
+  { country:"Cote d'Ivoire (XOF)",    flag:"ci", type:"Collections", method:"Mobile Money",    feeType:"% of Volume", fee:"3.0%",  cap:"N/A"       },
+  { country:"Cote d'Ivoire (XOF) HR", flag:"ci", type:"Collections", method:"Mobile Money",    feeType:"% of Volume", fee:"4.5%",  cap:"N/A"       },
+  { country:"Cameroon (XOF)",         flag:"cm", type:"Payout",      method:"Mobile Money",    feeType:"% of Volume", fee:"3.0%",  cap:"N/A"       },
+  { country:"Cameroon (XOF)",         flag:"cm", type:"Collections", method:"Mobile Money",    feeType:"% of Volume", fee:"3.5%",  cap:"N/A"       },
 ];
 
 const FAQS = [
@@ -324,7 +324,10 @@ export default function PricingPage() {
                     background:T.white, border:`1px solid ${T.borderLight}`,
                     borderRadius:14, padding:"18px 20px",
                   }}>
-                    <div style={{ fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:14, color:T.dark, marginBottom:14 }}>{row.country}</div>
+                    <div style={{ display:"flex", alignItems:"center", gap:8, fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:14, color:T.dark, marginBottom:14 }}>
+                      <img src={`https://flagcdn.com/w40/${row.flag}.png`} alt={row.country} style={{ width:20, height:14, objectFit:"cover", borderRadius:2, flexShrink:0 }} />
+                      {row.country}
+                    </div>
                     <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"10px 16px" }}>
                       {[
                         { label:"Type",   value:row.type,   bold:false },
@@ -359,7 +362,12 @@ export default function PricingPage() {
                   <tbody>
                     {TABLE_ROWS.map((row,i)=>(
                       <tr key={i}>
-                        <td style={{padding:"14px 20px 14px 0",fontSize:14,fontWeight:500,color:T.dark,whiteSpace:"nowrap" as "nowrap",borderBottom:`1px solid ${T.borderLight}`}}>{row.country}</td>
+                        <td style={{padding:"14px 20px 14px 0",fontSize:14,fontWeight:500,color:T.dark,whiteSpace:"nowrap" as "nowrap",borderBottom:`1px solid ${T.borderLight}`}}>
+                          <span style={{display:"inline-flex",alignItems:"center",gap:8}}>
+                            <img src={`https://flagcdn.com/w40/${row.flag}.png`} alt={row.country} style={{ width:20, height:14, objectFit:"cover", borderRadius:2, flexShrink:0 }} />
+                            {row.country}
+                          </span>
+                        </td>
                         <td style={{padding:"14px 20px 14px 0",fontSize:14,color:T.muted,borderBottom:`1px solid ${T.borderLight}`}}>{row.type}</td>
                         <td style={{padding:"14px 20px 14px 0",fontSize:14,color:T.muted,borderBottom:`1px solid ${T.borderLight}`}}>{row.method}</td>
                         <td style={{padding:"14px 20px 14px 0",fontSize:14,color:T.muted,borderBottom:`1px solid ${T.borderLight}`}}>{row.feeType}</td>
