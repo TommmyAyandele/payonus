@@ -325,7 +325,7 @@ export default function ComplianceSection() {
         {/* Marquee */}
         <div style={{ ...fade("0.3s"), width: "100%", overflow: "hidden", flexShrink: 0 }}>
           <div className="compliance-marquee-track">
-            {[...PILLS, ...PILLS].map((pill, i) => (
+            {[...PILLS, ...PILLS, ...PILLS, ...PILLS].map((pill, i) => (
               <div key={i} style={{
                 display:      "inline-flex",
                 alignItems:   "center",

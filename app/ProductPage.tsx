@@ -240,7 +240,7 @@ export default function ProductPage({
         img{display:block;}
         .fade-up{opacity:0;transform:translateY(40px);transition:opacity 0.75s cubic-bezier(0.16,1,0.3,1),transform 0.75s cubic-bezier(0.16,1,0.3,1);}
         .fade-up.visible{opacity:1;transform:translateY(0);}
-        @keyframes complianceMarquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+        @keyframes complianceMarquee{from{transform:translateX(0);}to{transform:translateX(-25%);}}
         .compliance-marquee-track{display:flex;flex-wrap:nowrap;width:max-content;animation:complianceMarquee 22s linear infinite;}
         .compliance-marquee-track:hover{animation-play-state:paused;}
         @keyframes ctaPulse{0%,100%{box-shadow:0 0 0 0 rgba(96,9,255,0.40);}60%{box-shadow:0 0 0 14px rgba(96,9,255,0);}}
@@ -287,11 +287,13 @@ export default function ProductPage({
             </p>
             <div style={{ display:"flex", flexWrap:"wrap", gap:12 }}>
               <button style={{ fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14, color:T.white, background:T.primary, border:"none", borderRadius:4, padding:"13px 28px", cursor:"pointer", transition:"opacity .15s" }}
-                onMouseEnter={e=>(e.currentTarget.style.opacity="0.88")} onMouseLeave={e=>(e.currentTarget.style.opacity="1")}>
+                onMouseEnter={e=>(e.currentTarget.style.opacity="0.88")} onMouseLeave={e=>(e.currentTarget.style.opacity="1")}
+                onClick={() => { window.location.href="/get-started"; }}>
                 Get Started
               </button>
               <button style={{ fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14, color:T.muted, background:"transparent", border:`1px solid ${T.muted}`, borderRadius:4, padding:"11px 24px", cursor:"pointer", transition:"background .15s" }}
-                onMouseEnter={e=>(e.currentTarget.style.background="#E9DDFF")} onMouseLeave={e=>(e.currentTarget.style.background="transparent")}>
+                onMouseEnter={e=>(e.currentTarget.style.background="#E9DDFF")} onMouseLeave={e=>(e.currentTarget.style.background="transparent")}
+                onClick={() => { window.location.href="/get-started"; }}>
                 Contact Sales
               </button>
             </div>
@@ -377,7 +379,7 @@ export default function ProductPage({
           </p>
           <div style={{ width:"100%", overflow:"hidden" }}>
             <div className="compliance-marquee-track">
-              {[...PILLS,...PILLS].map((pill,i) => (
+              {[...PILLS,...PILLS,...PILLS,...PILLS].map((pill,i) => (
                 <div key={i} style={{ display:"inline-flex",alignItems:"center",gap:8,padding:"9px 22px",border:"1.5px solid #D0D5DD",borderRadius:999,background:"transparent",whiteSpace:"nowrap",flexShrink:0,marginRight:12 }}>
                   <PillIcon type={pill.icon} size={isMobile ? 13 : 17} />
                   <span style={{ fontFamily:"DM Sans, sans-serif",fontStyle:"italic",fontWeight:500,fontSize:isMobile ? 11 : 14,color:T.dark }}>{pill.label}</span>
@@ -400,12 +402,13 @@ export default function ProductPage({
                 {ctaSubtext}
               </p>
               <div style={{ display:"flex", flexWrap:"wrap", gap:12 }}>
-                <button className="cta-pulse" style={{ position:"relative",overflow:"hidden",display:"flex",alignItems:"center",gap:8,fontFamily:"DM Sans, sans-serif",fontWeight:500,fontSize:14,color:T.white,background:T.primary,border:"none",borderRadius:6,padding:"12px 20px",cursor:"pointer" }} onClick={ripple}>
+                <button className="cta-pulse" style={{ position:"relative",overflow:"hidden",display:"flex",alignItems:"center",gap:8,fontFamily:"DM Sans, sans-serif",fontWeight:500,fontSize:14,color:T.white,background:T.primary,border:"none",borderRadius:6,padding:"12px 20px",cursor:"pointer" }} onClick={e => { ripple(e); window.location.href="/get-started"; }}>
                   Get Started
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="#FFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 </button>
                 <button style={{ fontFamily:"DM Sans, sans-serif",fontWeight:400,fontSize:14,color:T.muted,background:"transparent",border:`1px solid ${T.muted}`,borderRadius:6,padding:"12px 20px",cursor:"pointer",transition:"background .15s" }}
-                  onMouseEnter={e=>(e.currentTarget.style.background="#E9DDFF")} onMouseLeave={e=>(e.currentTarget.style.background="transparent")}>
+                  onMouseEnter={e=>(e.currentTarget.style.background="#E9DDFF")} onMouseLeave={e=>(e.currentTarget.style.background="transparent")}
+                  onClick={() => { window.location.href="/get-started"; }}>
                   Contact Sales
                 </button>
               </div>
@@ -421,14 +424,15 @@ export default function ProductPage({
                 </p>
                 <div style={{ display:"flex", alignItems:"center", gap:16 }}>
                   <button className="cta-pulse" style={{ position:"relative",overflow:"hidden",display:"flex",alignItems:"center",gap:8,fontFamily:"DM Sans, sans-serif",fontWeight:500,fontSize:14,color:T.white,background:T.primary,border:"none",borderRadius:6,padding:"12px 20px",cursor:"pointer",transition:"transform 0.4s cubic-bezier(0.16,1,0.3,1)" }}
-                    onClick={ripple}
+                    onClick={e => { ripple(e); window.location.href="/get-started"; }}
                     onMouseMove={e=>{const r=e.currentTarget.getBoundingClientRect();e.currentTarget.style.transform=`translate(${(e.clientX-r.left-r.width/2)*0.25}px,${(e.clientY-r.top-r.height/2)*0.25}px)`;}}
-                    onMouseLeave={e=>{e.currentTarget.style.transform="";ripple;}}>
+                    onMouseLeave={e=>{e.currentTarget.style.transform="";}}>
                     Get Started
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="#FFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
                   </button>
                   <button style={{ fontFamily:"DM Sans, sans-serif",fontWeight:400,fontSize:14,color:T.muted,background:"transparent",border:`1px solid ${T.muted}`,borderRadius:6,padding:"12px 20px",cursor:"pointer",transition:"background .15s" }}
-                    onMouseEnter={e=>(e.currentTarget.style.background="#E9DDFF")} onMouseLeave={e=>(e.currentTarget.style.background="transparent")}>
+                    onMouseEnter={e=>(e.currentTarget.style.background="#E9DDFF")} onMouseLeave={e=>(e.currentTarget.style.background="transparent")}
+                    onClick={() => { window.location.href="/get-started"; }}>
                     Contact Sales
                   </button>
                 </div>

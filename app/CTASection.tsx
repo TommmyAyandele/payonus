@@ -140,7 +140,7 @@ export default function CTASection() {
                   cursor:      "pointer",
                   transition:  "transform 0.4s cubic-bezier(0.16,1,0.3,1)",
                 }}
-                onClick={ripple}
+                onClick={e => { ripple(e); window.location.href="/get-started"; }}
                 onMouseMove={e => {
                   const r = e.currentTarget.getBoundingClientRect();
                   const x = (e.clientX - r.left - r.width  / 2) * 0.25;
@@ -172,6 +172,7 @@ export default function CTASection() {
                 }}
                 onMouseEnter={e => (e.currentTarget.style.background = "#E9DDFF")}
                 onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
+                onClick={() => { window.location.href="/get-started"; }}
               >
                 Contact Sales
               </button>

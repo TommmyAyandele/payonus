@@ -278,7 +278,7 @@ function IconBox({ children }: { children: React.ReactNode }) {
 
 function LinkArrow({ label }: { label: string }) {
   return (
-    <a href="#" style={{
+    <a href="/get-started" style={{
       display: "inline-flex", alignItems: "center", gap: 4,
       fontFamily: "DM Sans, sans-serif", fontWeight: 600, fontSize: 14,
       color: T.primary, textDecoration: "none",
@@ -338,7 +338,7 @@ export default function PayoutsPage() {
         .fade-up { opacity:0; transform:translateY(40px); transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1); }
         .fade-up.visible { opacity:1; transform:translateY(0); }
 
-        @keyframes complianceMarquee { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+        @keyframes complianceMarquee { from { transform:translateX(0); } to { transform:translateX(-25%); } }
         .compliance-marquee-track { display:flex; flex-wrap:nowrap; width:max-content; animation:complianceMarquee 22s linear infinite; }
         .compliance-marquee-track:hover { animation-play-state:paused; }
 
@@ -462,6 +462,7 @@ export default function PayoutsPage() {
               }}
                 onMouseEnter={e => (e.currentTarget.style.opacity = "0.88")}
                 onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
+                onClick={() => { window.location.href="/get-started"; }}
               >Get Started</button>
               <button style={{
                 fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14,
@@ -470,6 +471,7 @@ export default function PayoutsPage() {
               }}
                 onMouseEnter={e => (e.currentTarget.style.background = "#E9DDFF")}
                 onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
+                onClick={() => { window.location.href="/get-started"; }}
               >Contact Sales</button>
             </div>
           </div>
@@ -595,7 +597,7 @@ export default function PayoutsPage() {
               }}>
                 Payonus handles NGN, GHS, KES, XOF, USD, EUR, GBP and more — with live FX rates and local settlement rails built in. Expand to a new market without touching your integration.
               </p>
-              <a href="#" style={{
+              <a href="/get-started" style={{
                 display: "inline-flex", alignItems: "center", gap: 6,
                 fontFamily: "DM Sans, sans-serif", fontWeight: 500, fontSize: 14,
                 color: T.white, background: T.primary,
@@ -686,7 +688,7 @@ export default function PayoutsPage() {
           {/* Marquee */}
           <div style={{ width: "100%", overflow: "hidden" }}>
             <div className="compliance-marquee-track">
-              {[...PILLS, ...PILLS].map((pill, i) => (
+              {[...PILLS, ...PILLS, ...PILLS, ...PILLS].map((pill, i) => (
                 <div key={i} style={{
                   display: "inline-flex", alignItems: "center", gap: 8,
                   padding: "9px 22px",
@@ -747,7 +749,7 @@ export default function PayoutsPage() {
                     color: T.white, background: T.primary,
                     border: "none", borderRadius: 6, padding: "12px 20px", cursor: "pointer",
                   }}
-                  onClick={ripple}
+                  onClick={e => { ripple(e); window.location.href="/get-started"; }}
                 >
                   Get Started
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
@@ -762,6 +764,7 @@ export default function PayoutsPage() {
                 }}
                   onMouseEnter={e => (e.currentTarget.style.background = "#E9DDFF")}
                   onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
+                  onClick={() => { window.location.href="/get-started"; }}
                 >Contact Sales</button>
               </div>
             </div>
@@ -795,7 +798,7 @@ export default function PayoutsPage() {
                       border: "none", borderRadius: 6, padding: "12px 20px", cursor: "pointer",
                       transition: "transform 0.4s cubic-bezier(0.16,1,0.3,1)",
                     }}
-                    onClick={ripple}
+                    onClick={e => { ripple(e); window.location.href="/get-started"; }}
                     onMouseMove={e => {
                       const r = e.currentTarget.getBoundingClientRect();
                       const x = (e.clientX - r.left - r.width  / 2) * 0.25;
@@ -817,6 +820,7 @@ export default function PayoutsPage() {
                   }}
                     onMouseEnter={e => (e.currentTarget.style.background = "#E9DDFF")}
                     onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
+                    onClick={() => { window.location.href="/get-started"; }}
                   >Contact Sales</button>
                 </div>
               </div>
