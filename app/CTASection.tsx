@@ -38,10 +38,7 @@ function LinkArrow({ label, href }: { label: string; href?: string }) {
       <path d="M9 18l6-6-6-6" stroke={PRIMARY} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   );
-  if (href && href !== "#") {
-    return <a href={href} style={style}>{label}{chevron}</a>;
-  }
-  return <button onClick={e => e.preventDefault()} style={style}>{label}{chevron}</button>;
+  return <a href={href ?? "/get-started"} style={style}>{label}{chevron}</a>;
 }
 
 function ripple(e: React.MouseEvent<HTMLButtonElement>) {

@@ -492,10 +492,10 @@ export default function DevelopersPage() {
                 <div style={{ fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:13, color:T.muted, lineHeight:1.55 }}>
                   Get up and running with Payonus in as little as 10 minutes.
                 </div>
-                <button onClick={e => e.preventDefault()} className="dev-cta-link" style={{ background:"none", border:"none", padding:0, cursor:"pointer" }}>
+                <a href="/get-started" className="dev-cta-link">
                   Integration options
                   <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#6009FF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                </button>
+                </a>
               </div>
 
             </div>

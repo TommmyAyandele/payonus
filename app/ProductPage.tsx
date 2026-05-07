@@ -178,12 +178,12 @@ function IconBox({ children }: { children: React.ReactNode }) {
 
 function LinkArrow({ label }: { label: string }) {
   return (
-    <button onClick={e => e.preventDefault()} style={{ display:"inline-flex",alignItems:"center",gap:4,fontFamily:"DM Sans, sans-serif",fontWeight:600,fontSize:14,color:T.primary,background:"none",border:"none",cursor:"pointer",padding:0 }}>
+    <a href="/get-started" style={{ display:"inline-flex",alignItems:"center",gap:4,fontFamily:"DM Sans, sans-serif",fontWeight:600,fontSize:14,color:T.primary,textDecoration:"none" }}>
       {label}
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
         <path d="M9 18l6-6-6-6" stroke={T.primary} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
-    </button>
+    </a>
   );
 }
 
