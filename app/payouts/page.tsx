@@ -339,7 +339,7 @@ export default function PayoutsPage() {
         .fade-up.visible { opacity:1; transform:translateY(0); }
 
         @keyframes complianceMarquee { from { transform:translateX(0); } to { transform:translateX(-50%); } }
-        .compliance-marquee-track { display:flex; flex-wrap:nowrap; gap:12px; width:max-content; animation:complianceMarquee 22s linear infinite; }
+        .compliance-marquee-track { display:flex; flex-wrap:nowrap; width:max-content; animation:complianceMarquee 22s linear infinite; }
         .compliance-marquee-track:hover { animation-play-state:paused; }
 
         @keyframes ctaPulse { 0%,100%{box-shadow:0 0 0 0 rgba(96,9,255,0.40);}60%{box-shadow:0 0 0 14px rgba(96,9,255,0);} }
@@ -695,6 +695,7 @@ export default function PayoutsPage() {
                   background: "transparent",
                   whiteSpace: "nowrap",
                   flexShrink: 0,
+                  marginRight: 12,
                 }}>
                   <PillIcon type={pill.icon} size={isMobile ? 13 : 17} />
                   <span style={{

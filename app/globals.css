@@ -38,7 +38,6 @@ body {
 .compliance-marquee-track {
   display: flex;
   flex-wrap: nowrap;
-  gap: 12px;
   width: max-content;
   animation: complianceMarquee 22s linear infinite;
 }

@@ -336,6 +336,7 @@ export default function ComplianceSection() {
                 background:   "transparent",
                 whiteSpace:   "nowrap",
                 flexShrink:   0,
+                marginRight:  12,
               }}>
                 <PillIcon type={pill.icon} size={isMobile ? 13 : 17} />
                 <span style={{

@@ -241,7 +241,7 @@ export default function ProductPage({
         .fade-up{opacity:0;transform:translateY(40px);transition:opacity 0.75s cubic-bezier(0.16,1,0.3,1),transform 0.75s cubic-bezier(0.16,1,0.3,1);}
         .fade-up.visible{opacity:1;transform:translateY(0);}
         @keyframes complianceMarquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
-        .compliance-marquee-track{display:flex;flex-wrap:nowrap;gap:12px;width:max-content;animation:complianceMarquee 22s linear infinite;}
+        .compliance-marquee-track{display:flex;flex-wrap:nowrap;width:max-content;animation:complianceMarquee 22s linear infinite;}
         .compliance-marquee-track:hover{animation-play-state:paused;}
         @keyframes ctaPulse{0%,100%{box-shadow:0 0 0 0 rgba(96,9,255,0.40);}60%{box-shadow:0 0 0 14px rgba(96,9,255,0);}}
         .cta-pulse{animation:ctaPulse 2.8s ease-in-out infinite;}
@@ -378,7 +378,7 @@ export default function ProductPage({
           <div style={{ width:"100%", overflow:"hidden" }}>
             <div className="compliance-marquee-track">
               {[...PILLS,...PILLS].map((pill,i) => (
-                <div key={i} style={{ display:"inline-flex",alignItems:"center",gap:8,padding:"9px 22px",border:"1.5px solid #D0D5DD",borderRadius:999,background:"transparent",whiteSpace:"nowrap",flexShrink:0 }}>
+                <div key={i} style={{ display:"inline-flex",alignItems:"center",gap:8,padding:"9px 22px",border:"1.5px solid #D0D5DD",borderRadius:999,background:"transparent",whiteSpace:"nowrap",flexShrink:0,marginRight:12 }}>
                   <PillIcon type={pill.icon} size={isMobile ? 13 : 17} />
                   <span style={{ fontFamily:"DM Sans, sans-serif",fontStyle:"italic",fontWeight:500,fontSize:isMobile ? 11 : 14,color:T.dark }}>{pill.label}</span>
                 </div>
