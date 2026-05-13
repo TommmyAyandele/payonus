@@ -485,7 +485,7 @@ export default function PayoutsPage() {
             padding: `0 ${hPad}px`,
             marginBottom: -220,
           }}>
-            <div style={{ maxWidth: 1140 }}>
+            <div style={{ maxWidth: 1140, margin: "0 auto" }}>
               <BrowserWireframeResponsive />
             </div>
           </div>

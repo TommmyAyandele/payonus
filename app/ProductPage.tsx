@@ -302,7 +302,7 @@ export default function ProductPage({
 
         {!isMobile && (
           <div style={{ position:"relative", zIndex:1, maxWidth:1440, margin:"0 auto", padding:`0 ${hPad}px`, marginBottom:-220 }}>
-            <div style={{ maxWidth:1140 }}><BrowserWireframeResponsive /></div>
+            <div style={{ maxWidth:1140, margin:"0 auto" }}><BrowserWireframeResponsive /></div>
           </div>
         )}
       </section>
