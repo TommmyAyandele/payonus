@@ -7,12 +7,16 @@
 }
 
 html {
-  background: #DDD6FE;
+  background: #FAFAF8;
+  overflow-x: hidden;
 }
 
 body {
   background: #FAFAF8;
   font-family: "DM Sans", Arial, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 /* ── Banner float ── */

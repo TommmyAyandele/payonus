@@ -1,13 +1,17 @@
 "use client";
 import React from "react";
 
+// useLayoutEffect on client (fires before paint), useEffect on server (avoids SSR warning)
+const useIsomorphicLayoutEffect =
+  typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
+
 export function useBreakpoint() {
-  const [w, setW] = React.useState(1440);
-  React.useEffect(() => {
-    setW(window.innerWidth);
-    const h = () => setW(window.innerWidth);
-    window.addEventListener("resize", h, { passive: true });
-    return () => window.removeEventListener("resize", h);
+  const [w, setW] = React.useState(390); // mobile-first default
+  useIsomorphicLayoutEffect(() => {
+    const update = () => setW(window.innerWidth);
+    update();
+    window.addEventListener("resize", update, { passive: true });
+    return () => window.removeEventListener("resize", update);
   }, []);
   return {
     isMobile:  w < 768,
