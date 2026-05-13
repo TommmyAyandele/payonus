@@ -358,7 +358,7 @@ export default function DevelopersPage() {
             overflow: "hidden",
             background: T.white,
             display: "grid",
-            gridTemplateColumns: isMobile ? "1fr 1fr" : "1fr 1fr 1fr 1fr",
+            gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr 1fr",
           }}>
             {RESOURCE_CARDS.map((card, i) => (
               <a
