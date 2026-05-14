@@ -500,233 +500,144 @@ const ALL_CARDS = [...PRODUCT_CARDS_TOP, ...PRODUCT_CARDS_BOTTOM];
 
 function ProductSection() {
   const { isMobile, isTablet } = useBreakpoint();
+  const hPad   = isMobile ? 20 : isTablet ? 48 : 80;
+  const secPad = isMobile ? "48px 0 40px" : "100px 0 80px";
+  const descSz = isMobile ? 22 : 42;
+
   const loaded = useLoadCycle(0);
 
-  /* ── Mobile: window-scroll sticky stage ── */
-  const sectionRef = React.useRef<HTMLElement>(null);
-  const [activeIdx, setActiveIdx] = React.useState(0);
-  /* Refs for direct DOM updates — avoids React re-render lag so scroll feels 1:1 */
-  const cardRefs  = React.useRef<(HTMLDivElement | null)[]>([]);
-  const stageRef  = React.useRef<HTMLDivElement>(null);
-  const dotRefs   = React.useRef<(HTMLDivElement | null)[]>([]);
-  const hintRef   = React.useRef<HTMLDivElement>(null);
-
+  /* Mobile carousel scroll-linked animation */
+  const scrollRef = React.useRef<HTMLDivElement>(null);
   React.useEffect(() => {
     if (!isMobile) return;
-    const section = sectionRef.current;
-    const stage   = stageRef.current;
-    if (!section || !stage) return;
-
-    let raf = 0;
-    const update = () => {
-      const rect   = section.getBoundingClientRect();
-      const usable = section.offsetHeight - window.innerHeight;
-      if (usable <= 0) return;
-
-      const pct  = Math.max(0, Math.min(-rect.top / usable, 1));
-      const prog = pct * (ALL_CARDS.length - 1);
-      const stH  = stage.offsetHeight;
-
-      /* Move each card 1:1 with scroll — no easing, no opacity tricks */
-      cardRefs.current.forEach((c, i) => {
-        if (!c) return;
-        const ty = (i - prog) * stH;
-        c.style.transform = `translateY(${ty.toFixed(2)}px)`;
-        /* Fade out only when fully off-stage */
-        const dist = Math.abs(i - prog);
-        c.style.opacity = dist > 0.92 ? "0" : "1";
+    const el = scrollRef.current;
+    if (!el) return;
+    const onScroll = () => {
+      const cw  = el.offsetWidth;
+      const cx  = el.scrollLeft + cw / 2;
+      el.querySelectorAll<HTMLElement>(".product-card").forEach(c => {
+        const cardCx = c.offsetLeft + c.offsetWidth / 2;
+        const dist   = Math.abs(cardCx - cx);
+        const ratio  = Math.min(dist / (cw * 0.55), 1);
+        c.style.transform  = `scale(${1 - ratio * 0.06})`;
+        c.style.opacity    = String(1 - ratio * 0.28);
+        c.style.transition = "transform 0.18s ease, opacity 0.18s ease";
       });
-
-      /* Dot indicators */
-      const idx = Math.round(prog);
-      if (idx !== activeIdx) setActiveIdx(idx);
-      dotRefs.current.forEach((d, i) => {
-        if (!d) return;
-        const active = i === idx;
-        d.style.width      = active ? "22px" : "7px";
-        d.style.background = active ? "#6009FF" : "#D0D0D0";
-      });
-
-      /* Scroll hint — hide on last card */
-      if (hintRef.current) {
-        hintRef.current.style.opacity = idx >= ALL_CARDS.length - 1 ? "0" : "0.4";
-      }
     };
-
-    const onScroll = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(update); };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    update();
-    return () => { window.removeEventListener("scroll", onScroll); cancelAnimationFrame(raf); };
+    el.addEventListener("scroll", onScroll, { passive: true });
+    setTimeout(onScroll, 60);
+    return () => el.removeEventListener("scroll", onScroll);
   }, [isMobile]);
 
-  const card: React.CSSProperties = { background: T.bg, borderRadius: 16, overflow: "hidden" };
+  const card: React.CSSProperties = {
+    background:   T.bg,
+    borderRadius: 16,
+    overflow:     "hidden",
+  };
 
-  /* ── Desktop hover tilt ── */
   const onTilt = (e: React.MouseEvent<HTMLDivElement>) => {
     const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
     const x = (e.clientX - left) / width  - 0.5;
     const y = (e.clientY - top)  / height - 0.5;
-    e.currentTarget.style.transform = `perspective(900px) rotateX(${-y * 7}deg) rotateY(${x * 7}deg) translateY(-4px)`;
+    e.currentTarget.style.transition = "box-shadow 0.1s";
+    e.currentTarget.style.transform  = `perspective(900px) rotateX(${-y * 7}deg) rotateY(${x * 7}deg) translateY(-4px)`;
+    e.currentTarget.style.boxShadow  = `${-x * 24}px ${-y * 16}px 60px rgba(96,9,255,0.15), 0 20px 48px rgba(0,0,0,0.07)`;
   };
+
   const onTiltLeave = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.currentTarget.style.transition = "transform 0.55s cubic-bezier(0.16,1,0.3,1)";
+    e.currentTarget.style.transition = "transform 0.55s cubic-bezier(0.16,1,0.3,1), box-shadow 0.55s cubic-bezier(0.16,1,0.3,1)";
     e.currentTarget.style.transform  = "";
+    e.currentTarget.style.boxShadow  = "";
   };
 
   const topDirs   = ["from-left", "from-right"] as const;
   const btmDelays = [0, 0.12, 0.22];
 
-  /* ══════════════════════════════════════════════
-     MOBILE — sticky scrolljack card reveal
-  ══════════════════════════════════════════════ */
-  if (isMobile) {
-    return (
-      <div id="products" style={{ background: T.white }}>
-        {/* Tall section drives the sticky stage through its scroll range */}
-        {/*
-          Section height = (N-1) steps × 100vh + 100vh for the sticky frame itself.
-          One full viewport of scroll per card = feels exactly like native scrolling.
-        */}
-        <section
-          ref={sectionRef as React.RefObject<HTMLElement>}
-          style={{ height: `${ALL_CARDS.length * 100}vh`, position: "relative" }}
-        >
-          <div style={{
-            position:      "sticky",
-            top:           0,
-            height:        "100vh",
-            display:       "flex",
-            flexDirection: "column",
-            background:    T.white,
-            overflow:      "hidden",
+  return (
+    <section id="products" style={{ width:"100%", background:T.white, padding:secPad }}>
+      <div style={{ maxWidth:1440, margin:"0 auto", padding:`0 ${hPad}px` }}>
+
+        <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14, letterSpacing:"0.0094em", color:T.orange, display:"block", marginBottom:20 }}>
+          — Products
+        </span>
+
+        <p className="fade-up" style={{ margin:`0 0 ${isMobile ? 32 : 64}px`, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:descSz, lineHeight:1.15, color:T.headingBlack }}>
+          Built for operations that can't afford a delay. Every product in the payonus suite is designed to eliminate payment friction at scale.
+        </p>
+
+        {isMobile ? (
+          /* ── Mobile: horizontal snap-scroll carousel ── */
+          <div ref={scrollRef} className="product-scroll" style={{
+            display: "flex", gap: 12,
+            overflowX: "auto", overflowY: "visible",
+            scrollSnapType: "x mandatory",
+            WebkitOverflowScrolling: "touch" as React.CSSProperties["WebkitOverflowScrolling"],
+            marginLeft: -20, marginRight: -20,
+            paddingLeft: 20, paddingRight: 20,
+            paddingBottom: 4,
           }}>
-
-            {/* Header */}
-            <div style={{ padding: "72px 20px 16px", flexShrink: 0 }}>
-              <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:700, fontSize:14, letterSpacing:"0.08em", textTransform:"uppercase", color:T.primary, display:"block", marginBottom:14 }}>
-                Products
-              </span>
-              <p style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:24, lineHeight:1.22, color:T.headingBlack }}>
-                Built for operations that<br />can't afford a delay.
-              </p>
-            </div>
-
-            {/* Card stage — cards translated directly via DOM refs, 1:1 with scroll */}
-            <div ref={stageRef} style={{ flex:1, position:"relative", margin:"12px 20px 0", overflow:"hidden", borderRadius:16 }}>
-              {ALL_CARDS.map((p, i) => (
+            {ALL_CARDS.map(p => (
+              <div key={p.title} className="product-card" style={{
+                ...card,
+                flexShrink: 0,
+                width: "78vw",
+                height: 340,
+                display: "flex",
+                flexDirection: "column",
+                scrollSnapAlign: "start",
+              }}>
+                <div style={{ padding:"14px 16px", flexShrink:0 }}>
+                  <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:24, color:T.primary }}>{p.title}</h3>
+                </div>
+                <div style={{ flex:1, overflow:"hidden", minHeight:0 }}>
+                  <p.Wireframe loaded={loaded} />
+                </div>
+              </div>
+            ))}
+            <div style={{ flexShrink:0, width:8 }} />
+          </div>
+        ) : (
+          /* ── Desktop / Tablet: per-card scroll-entry animation ── */
+          <>
+            <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:24, marginBottom:24 }}>
+              {PRODUCT_CARDS_TOP.map((p, i) => (
                 <div
                   key={p.title}
-                  ref={el => { cardRefs.current[i] = el; }}
-                  className="product-card"
-                  style={{
-                    ...card,
-                    position:      "absolute",
-                    inset:         0,
-                    display:       "flex",
-                    flexDirection: "column",
-                    willChange:    "transform",
-                    /* initial position: first card visible, rest below */
-                    transform:     `translateY(${i === 0 ? 0 : 9999}px)`,
-                  }}
+                  className={`product-card card-in ${topDirs[i]}`}
+                  style={card}
+                  onMouseMove={onTilt}
+                  onMouseLeave={onTiltLeave}
                 >
-                  <div style={{ padding:"14px 16px", flexShrink:0 }}>
-                    <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:24, color:T.primary }}>
-                      {p.title}
-                    </h3>
+                  <div style={{ padding:"16px 22px" }}>
+                    <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:32, color:T.primary }}>{p.title}</h3>
                   </div>
-                  <div style={{ flex:1, overflow:"hidden", minHeight:0 }}>
+                  <div style={{ width:"100%", height:420, overflow:"hidden" }}>
                     <p.Wireframe loaded={loaded} />
                   </div>
                 </div>
               ))}
             </div>
 
-            {/* Progress dots + scroll hint — also direct DOM via refs */}
-            <div style={{ padding:"14px 20px 28px", display:"flex", justifyContent:"space-between", alignItems:"center", flexShrink:0 }}>
-              <div style={{ display:"flex", gap:8, alignItems:"center" }}>
-                {ALL_CARDS.map((_, i) => (
-                  <div
-                    key={i}
-                    ref={el => { dotRefs.current[i] = el; }}
-                    style={{
-                      width:        i === 0 ? 22 : 7,
-                      height:       7,
-                      borderRadius: 4,
-                      background:   i === 0 ? T.primary : "#D0D0D0",
-                      transition:   "width 0.3s cubic-bezier(0.16,1,0.3,1), background 0.3s",
-                    }}
-                  />
-                ))}
-              </div>
-              <div ref={hintRef} style={{ display:"flex", alignItems:"center", gap:5, opacity:0.4, transition:"opacity 0.25s" }}>
-                  <span style={{ fontFamily:"DM Sans, sans-serif", fontSize:12, color:T.muted }}>scroll</span>
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
-                    <path d="M12 5v14M5 12l7 7 7-7" stroke={T.muted} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
+            <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:24 }}>
+              {PRODUCT_CARDS_BOTTOM.map((p, i) => (
+                <div
+                  key={p.title}
+                  className="product-card card-in"
+                  style={{ ...card, transitionDelay:`${btmDelays[i]}s` }}
+                  onMouseMove={onTilt}
+                  onMouseLeave={onTiltLeave}
+                >
+                  <div style={{ padding:"16px 22px" }}>
+                    <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:32, color:T.primary }}>{p.title}</h3>
+                  </div>
+                  <div style={{ width:"100%", height:280, overflow:"hidden" }}>
+                    <p.Wireframe loaded={loaded} />
+                  </div>
                 </div>
+              ))}
             </div>
-
-          </div>
-        </section>
-      </div>
-    );
-  }
-
-  /* ══════════════════════════════════════════════
-     DESKTOP / TABLET — per-card scroll-entry grid
-  ══════════════════════════════════════════════ */
-  const hPad   = isTablet ? 48 : 80;
-  const descSz = 42;
-
-  return (
-    <section id="products" style={{ width:"100%", background:T.white, padding:"100px 0 80px" }}>
-      <div style={{ maxWidth:1440, margin:"0 auto", padding:`0 ${hPad}px` }}>
-
-        <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:700, fontSize:16, letterSpacing:"0.08em", textTransform:"uppercase", color:T.primary, display:"block", marginBottom:24 }}>
-          Products
-        </span>
-
-        <p className="fade-up" style={{ margin:`0 0 64px`, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:descSz, lineHeight:1.15, color:T.headingBlack }}>
-          Built for operations that can't afford a delay. Every product in the payonus suite is designed to eliminate payment friction at scale.
-        </p>
-
-        <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:24, marginBottom:24 }}>
-          {PRODUCT_CARDS_TOP.map((p, i) => (
-            <div
-              key={p.title}
-              className={`product-card card-in ${topDirs[i]}`}
-              style={card}
-              onMouseMove={onTilt}
-              onMouseLeave={onTiltLeave}
-            >
-              <div style={{ padding:"16px 22px" }}>
-                <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:32, color:T.dark }}>{p.title}</h3>
-              </div>
-              <div style={{ width:"100%", height:420, overflow:"hidden" }}>
-                <p.Wireframe loaded={loaded} />
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:24 }}>
-          {PRODUCT_CARDS_BOTTOM.map((p, i) => (
-            <div
-              key={p.title}
-              className="product-card card-in"
-              style={{ ...card, transitionDelay:`${btmDelays[i]}s` }}
-              onMouseMove={onTilt}
-              onMouseLeave={onTiltLeave}
-            >
-              <div style={{ padding:"16px 22px" }}>
-                <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:32, color:T.dark }}>{p.title}</h3>
-              </div>
-              <div style={{ width:"100%", height:280, overflow:"hidden" }}>
-                <p.Wireframe loaded={loaded} />
-              </div>
-            </div>
-          ))}
-        </div>
+          </>
+        )}
 
       </div>
     </section>
