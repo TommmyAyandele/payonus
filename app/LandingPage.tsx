@@ -502,6 +502,15 @@ function ProductSection() {
   const { isMobile, isTablet } = useBreakpoint();
   const loaded = useLoadCycle(0);
 
+  /* Measure real viewport height via JS so the sticky section is pixel-accurate */
+  const [frameH, setFrameH] = React.useState(0);
+  React.useEffect(() => {
+    const upd = () => setFrameH(window.innerHeight);
+    upd();
+    window.addEventListener("resize", upd, { passive: true });
+    return () => window.removeEventListener("resize", upd);
+  }, []);
+
   /* ── Mobile: window-scroll sticky stage ── */
   const sectionRef = React.useRef<HTMLElement>(null);
   const cardRefs   = React.useRef<(HTMLDivElement | null)[]>([]);
@@ -581,10 +590,10 @@ function ProductSection() {
       <div id="products" style={{ background: T.white }}>
         <section
           ref={sectionRef as React.RefObject<HTMLElement>}
-          style={{ height: `${ALL_CARDS.length * 100}dvh`, position: "relative" }}
+          style={{ height: frameH ? `${ALL_CARDS.length * frameH}px` : `${ALL_CARDS.length * 100}svh`, position: "relative" }}
         >
           <div style={{
-            position: "sticky", top: 0, height: "100dvh",
+            position: "sticky", top: 0, height: frameH ? `${frameH}px` : "100svh",
             display: "flex", flexDirection: "column",
             background: T.white, overflow: "hidden",
           }}>
@@ -665,50 +674,46 @@ function ProductSection() {
           — Products
         </span>
 
-        <p className="fade-up" style={{ margin:`0 0 64px`, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:descSz, lineHeight:1.15, color:T.headingBlack }}>
+        <p style={{ margin:`0 0 64px`, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:descSz, lineHeight:1.15, color:T.headingBlack }}>
           Built for operations that can't afford a delay. Every product in the payonus suite is designed to eliminate payment friction at scale.
         </p>
 
-        {(() => (
-          <>
-            <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:24, marginBottom:24 }}>
-              {PRODUCT_CARDS_TOP.map((p, i) => (
-                <div
-                  key={p.title}
-                  className={`product-card card-in ${topDirs[i]}`}
-                  style={card}
-                  onMouseMove={onTilt}
-                  onMouseLeave={onTiltLeave}
-                >
-                  <div style={{ padding:"16px 22px" }}>
-                    <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:32, color:T.dark }}>{p.title}</h3>
-                  </div>
-                  <div style={{ width:"100%", height:420, overflow:"hidden" }}>
-                    <p.Wireframe loaded={loaded} />
-                  </div>
-                </div>
-              ))}
+        <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:24, marginBottom:24 }}>
+          {PRODUCT_CARDS_TOP.map((p, i) => (
+            <div
+              key={p.title}
+              className="product-card"
+              style={card}
+              onMouseMove={onTilt}
+              onMouseLeave={onTiltLeave}
+            >
+              <div style={{ padding:"16px 22px" }}>
+                <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:32, color:T.dark }}>{p.title}</h3>
+              </div>
+              <div style={{ width:"100%", height:420, overflow:"hidden" }}>
+                <p.Wireframe loaded={loaded} />
+              </div>
             </div>
-            <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:24 }}>
-              {PRODUCT_CARDS_BOTTOM.map((p, i) => (
-                <div
-                  key={p.title}
-                  className="product-card card-in"
-                  style={{ ...card, transitionDelay:`${btmDelays[i]}s` }}
-                  onMouseMove={onTilt}
-                  onMouseLeave={onTiltLeave}
-                >
-                  <div style={{ padding:"16px 22px" }}>
-                    <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:32, color:T.dark }}>{p.title}</h3>
-                  </div>
-                  <div style={{ width:"100%", height:280, overflow:"hidden" }}>
-                    <p.Wireframe loaded={loaded} />
-                  </div>
-                </div>
-              ))}
+          ))}
+        </div>
+        <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:24 }}>
+          {PRODUCT_CARDS_BOTTOM.map((p, i) => (
+            <div
+              key={p.title}
+              className="product-card"
+              style={card}
+              onMouseMove={onTilt}
+              onMouseLeave={onTiltLeave}
+            >
+              <div style={{ padding:"16px 22px" }}>
+                <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:32, color:T.dark }}>{p.title}</h3>
+              </div>
+              <div style={{ width:"100%", height:280, overflow:"hidden" }}>
+                <p.Wireframe loaded={loaded} />
+              </div>
             </div>
-          </>
-        ))()}
+          ))}
+        </div>
 
       </div>
     </section>
