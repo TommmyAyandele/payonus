@@ -506,28 +506,6 @@ function ProductSection() {
 
   const loaded = useLoadCycle(0);
 
-  /* Mobile carousel scroll-linked animation */
-  const scrollRef = React.useRef<HTMLDivElement>(null);
-  React.useEffect(() => {
-    if (!isMobile) return;
-    const el = scrollRef.current;
-    if (!el) return;
-    const onScroll = () => {
-      const cw  = el.offsetWidth;
-      const cx  = el.scrollLeft + cw / 2;
-      el.querySelectorAll<HTMLElement>(".product-card").forEach(c => {
-        const cardCx = c.offsetLeft + c.offsetWidth / 2;
-        const dist   = Math.abs(cardCx - cx);
-        const ratio  = Math.min(dist / (cw * 0.55), 1);
-        c.style.transform  = `scale(${1 - ratio * 0.06})`;
-        c.style.opacity    = String(1 - ratio * 0.28);
-        c.style.transition = "transform 0.18s ease, opacity 0.18s ease";
-      });
-    };
-    el.addEventListener("scroll", onScroll, { passive: true });
-    setTimeout(onScroll, 60);
-    return () => el.removeEventListener("scroll", onScroll);
-  }, [isMobile]);
 
   const card: React.CSSProperties = {
     background:   T.bg,
@@ -566,35 +544,23 @@ function ProductSection() {
         </p>
 
         {isMobile ? (
-          /* ── Mobile: horizontal snap-scroll carousel ── */
-          <div ref={scrollRef} className="product-scroll" style={{
-            display: "flex", gap: 12,
-            overflowX: "auto", overflowY: "visible",
-            scrollSnapType: "x mandatory",
-            WebkitOverflowScrolling: "touch" as React.CSSProperties["WebkitOverflowScrolling"],
-            marginLeft: -20, marginRight: -20,
-            paddingLeft: 20, paddingRight: 20,
-            paddingBottom: 4,
-          }}>
+          /* ── Mobile: vertical stack ── */
+          <div style={{ display:"flex", flexDirection:"column", gap:16 }}>
             {ALL_CARDS.map(p => (
               <div key={p.title} className="product-card" style={{
                 ...card,
-                flexShrink: 0,
-                width: "78vw",
-                height: 340,
+                height: 320,
                 display: "flex",
                 flexDirection: "column",
-                scrollSnapAlign: "start",
               }}>
                 <div style={{ padding:"14px 16px", flexShrink:0 }}>
-                  <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:24, color:T.primary }}>{p.title}</h3>
+                  <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:24, color:T.dark }}>{p.title}</h3>
                 </div>
                 <div style={{ flex:1, overflow:"hidden", minHeight:0 }}>
                   <p.Wireframe loaded={loaded} />
                 </div>
               </div>
             ))}
-            <div style={{ flexShrink:0, width:8 }} />
           </div>
         ) : (
           /* ── Desktop / Tablet: per-card scroll-entry animation ── */
@@ -609,7 +575,7 @@ function ProductSection() {
                   onMouseLeave={onTiltLeave}
                 >
                   <div style={{ padding:"16px 22px" }}>
-                    <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:32, color:T.primary }}>{p.title}</h3>
+                    <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:32, color:T.dark }}>{p.title}</h3>
                   </div>
                   <div style={{ width:"100%", height:420, overflow:"hidden" }}>
                     <p.Wireframe loaded={loaded} />
@@ -628,7 +594,7 @@ function ProductSection() {
                   onMouseLeave={onTiltLeave}
                 >
                   <div style={{ padding:"16px 22px" }}>
-                    <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:32, color:T.primary }}>{p.title}</h3>
+                    <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:32, color:T.dark }}>{p.title}</h3>
                   </div>
                   <div style={{ width:"100%", height:280, overflow:"hidden" }}>
                     <p.Wireframe loaded={loaded} />
