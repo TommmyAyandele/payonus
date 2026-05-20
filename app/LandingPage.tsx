@@ -656,11 +656,11 @@ function ProductSection() {
     <section id="products" style={{ width:"100%", background:T.white, padding:"100px 0 80px" }}>
       <div style={{ maxWidth:1440, margin:"0 auto", padding:`0 ${hPad}px` }}>
 
-        <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14, letterSpacing:"0.0094em", color:T.orange, display:"block", marginBottom:20 }}>
-          — Products
+        <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:700, fontSize:16, letterSpacing:"0.08em", textTransform:"uppercase", color:T.primary, display:"block", marginBottom:24 }}>
+          Products
         </span>
 
-        <p style={{ margin:`0 0 64px`, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:descSz, lineHeight:1.15, color:T.headingBlack }}>
+        <p className="fade-up" style={{ margin:`0 0 64px`, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:descSz, lineHeight:1.15, color:T.headingBlack }}>
           Built for operations that can't afford a delay. Every product in the payonus suite is designed to eliminate payment friction at scale.
         </p>
 
@@ -668,7 +668,7 @@ function ProductSection() {
           {PRODUCT_CARDS_TOP.map((p, i) => (
             <div
               key={p.title}
-              className="product-card"
+              className={`product-card card-in ${topDirs[i]}`}
               style={card}
               onMouseMove={onTilt}
               onMouseLeave={onTiltLeave}
@@ -682,12 +682,13 @@ function ProductSection() {
             </div>
           ))}
         </div>
+
         <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:24 }}>
           {PRODUCT_CARDS_BOTTOM.map((p, i) => (
             <div
               key={p.title}
-              className="product-card"
-              style={card}
+              className="product-card card-in"
+              style={{ ...card, transitionDelay:`${btmDelays[i]}s` }}
               onMouseMove={onTilt}
               onMouseLeave={onTiltLeave}
             >
