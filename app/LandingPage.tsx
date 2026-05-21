@@ -513,12 +513,12 @@ function ProductSection() {
     const el = scrollRef.current;
     if (!el) return;
     const onScroll = () => {
-      const cw  = el.offsetWidth;
-      const cx  = el.scrollLeft + cw / 2;
+      const ch  = el.offsetHeight;
+      const cy  = el.scrollTop + ch / 2;
       el.querySelectorAll<HTMLElement>(".product-card").forEach(c => {
-        const cardCx = c.offsetLeft + c.offsetWidth / 2;
-        const dist   = Math.abs(cardCx - cx);
-        const ratio  = Math.min(dist / (cw * 0.55), 1);
+        const cardCy = c.offsetTop + c.offsetHeight / 2;
+        const dist   = Math.abs(cardCy - cy);
+        const ratio  = Math.min(dist / (ch * 0.55), 1);
         c.style.transform  = `scale(${1 - ratio * 0.06})`;
         c.style.opacity    = String(1 - ratio * 0.28);
         c.style.transition = "transform 0.18s ease, opacity 0.18s ease";
@@ -561,21 +561,19 @@ function ProductSection() {
         </p>
 
         {isMobile ? (
-          /* ── Mobile: horizontal snap-scroll carousel ── */
+          /* ── Mobile: vertical snap-scroll carousel ── */
           <div ref={scrollRef} className="product-scroll" style={{
-            display: "flex", gap: 12,
-            overflowX: "auto", overflowY: "visible",
-            scrollSnapType: "x mandatory",
+            display: "flex", flexDirection: "column", gap: 12,
+            overflowY: "auto", overflowX: "hidden",
+            scrollSnapType: "y mandatory",
             WebkitOverflowScrolling: "touch" as React.CSSProperties["WebkitOverflowScrolling"],
-            marginLeft: -20, marginRight: -20,
-            paddingLeft: 20, paddingRight: 20,
-            paddingBottom: 4,
+            height: 360,
           }}>
             {ALL_CARDS.map(p => (
               <div key={p.title} className="product-card" style={{
                 ...card,
                 flexShrink: 0,
-                width: "78vw",
+                width: "100%",
                 height: 340,
                 display: "flex",
                 flexDirection: "column",
@@ -589,7 +587,6 @@ function ProductSection() {
                 </div>
               </div>
             ))}
-            <div style={{ flexShrink:0, width:8 }} />
           </div>
         ) : (
           /* ── Desktop / Tablet: per-card scroll-entry animation ── */
