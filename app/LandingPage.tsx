@@ -576,10 +576,10 @@ function ProductSection() {
       <div id="products" style={{ background: T.white }}>
         <section
           ref={sectionRef as React.RefObject<HTMLElement>}
-          style={{ height: `${ALL_CARDS.length * 100}vh`, position: "relative" }}
+          style={{ height: `${ALL_CARDS.length * 100}dvh`, position: "relative" }}
         >
           <div style={{
-            position: "sticky", top: 0, height: "100vh",
+            position: "sticky", top: 0, height: "100dvh",
             display: "flex", flexDirection: "column",
             background: T.white, overflow: "hidden",
           }}>
