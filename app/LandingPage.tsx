@@ -10,7 +10,7 @@ import CTASection from "./CTASection";
 import Footer from "./Footer";
 
 /* ─── SCROLL REVEAL HOOK ─── */
-function useScrollReveal(isMobile: boolean) {
+function useScrollReveal() {
   React.useEffect(() => {
     const els = document.querySelectorAll(".fade-up, .card-in");
     const io = new IntersectionObserver(
@@ -24,7 +24,7 @@ function useScrollReveal(isMobile: boolean) {
     );
     els.forEach(el => io.observe(el));
     return () => io.disconnect();
-  }, [isMobile]);
+  }, []);
 }
 
 /* ─── HERO ─── */
@@ -68,6 +68,8 @@ function Hero() {
   return (
     <section
       style={{ position:"relative", width:"100%", height:"100vh", background:T.bg, overflow:"hidden" }}
+      onMouseMove={onParallax}
+      onMouseLeave={onParallaxLeave}
     >
       {/* World map */}
       <div className="map-rotate" style={{ position:"absolute", left:"50%", top:"50%", pointerEvents:"none", width: isMobile ? 900 : 1600, zIndex:0 }}>
@@ -87,7 +89,7 @@ function Hero() {
         justifyContent: "center",    /* vertical centre in that usable band */
       }}>
         <div style={{ maxWidth:1440, margin:"0 auto", padding:`0 ${hPad}px`, width:"100%", boxSizing:"border-box", display:"flex", justifyContent:"center" }}>
-          <div ref={textRef} style={{ width: isMobile ? "100%" : 700, display:"flex", flexDirection:"column", gap: isMobile ? 20 : 40 }}>
+          <div ref={textRef} style={{ width: isMobile ? "100%" : 700, display:"flex", flexDirection:"column", gap: isMobile ? 20 : 40, transition:"transform 0.15s linear", willChange:"transform" }}>
 
             <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize: isMobile ? 13 : 16, letterSpacing:"0.0094em", color:T.orange }}>
               — PAN-AFRICAN PAYMENT INFRASTRUCTURE
@@ -108,12 +110,10 @@ function Hero() {
                 <button style={{ fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14, color:T.white, background:T.primary, border:"none", borderRadius:4, padding:"11px 24px", cursor:"pointer", transition:"opacity .15s" }}
                   onMouseEnter={e => (e.currentTarget.style.opacity = "0.88")}
                   onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
-                  onClick={() => { window.location.href="/get-started"; }}
                 >Get Started</button>
                 <button style={{ fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14, color:T.muted, background:"transparent", border:`1px solid ${T.muted}`, borderRadius:4, padding:"11px 24px", cursor:"pointer", transition:"background .15s" }}
                   onMouseEnter={e => (e.currentTarget.style.background = "#E9DDFF")}
                   onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
-                  onClick={() => { window.location.href="/get-started"; }}
                 >Contact Sales</button>
               </div>
             </div>
@@ -500,131 +500,190 @@ const ALL_CARDS = [...PRODUCT_CARDS_TOP, ...PRODUCT_CARDS_BOTTOM];
 
 function ProductSection() {
   const { isMobile, isTablet } = useBreakpoint();
-  const hPad   = isMobile ? 20 : isTablet ? 48 : 80;
-  const secPad = isMobile ? "48px 0 40px" : "100px 0 80px";
-  const descSz = isMobile ? 22 : 42;
-
   const loaded = useLoadCycle(0);
 
+  /* ── Mobile: window-scroll sticky stage ── */
   const sectionRef = React.useRef<HTMLElement>(null);
-  const carouselRef = React.useRef<HTMLDivElement>(null);
+  const [activeIdx, setActiveIdx] = React.useState(0);
+  /* Refs for direct DOM updates — avoids React re-render lag so scroll feels 1:1 */
+  const cardRefs  = React.useRef<(HTMLDivElement | null)[]>([]);
+  const stageRef  = React.useRef<HTMLDivElement>(null);
+  const dotRefs   = React.useRef<(HTMLDivElement | null)[]>([]);
+  const hintRef   = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
     if (!isMobile) return;
-    const section  = sectionRef.current;
-    const carousel = carouselRef.current;
-    if (!section || !carousel) return;
+    const section = sectionRef.current;
+    const stage   = stageRef.current;
+    if (!section || !stage) return;
 
-    const N     = ALL_CARDS.length;
-    const STEP  = 380;                  // px of page scroll per card
-    const maxPx = (N - 1) * STEP;      // matches CSS calc below
+    let raf = 0;
+    const update = () => {
+      const rect   = section.getBoundingClientRect();
+      const usable = section.offsetHeight - window.innerHeight;
+      if (usable <= 0) return;
 
-    const onScroll = () => {
-      const top      = section.getBoundingClientRect().top;
-      const scrolled = Math.max(0, Math.min(-top, maxPx));
-      const maxC     = carousel.scrollHeight - carousel.offsetHeight;
-      if (maxC <= 0) return;
+      const pct  = Math.max(0, Math.min(-rect.top / usable, 1));
+      const prog = pct * (ALL_CARDS.length - 1);
+      const stH  = stage.offsetHeight;
 
-      carousel.scrollTop = (scrolled / maxPx) * maxC;
-
-      const ch = carousel.offsetHeight;
-      const cy = carousel.scrollTop + ch / 2;
-      carousel.querySelectorAll<HTMLElement>(".product-card").forEach(c => {
-        const cardCy = c.offsetTop + c.offsetHeight / 2;
-        const dist   = Math.abs(cardCy - cy);
-        const ratio  = Math.min(dist / (ch * 0.55), 1);
-        c.style.transform = `scale(${1 - ratio * 0.06})`;
-        c.style.opacity   = String(1 - ratio * 0.28);
+      /* Move each card 1:1 with scroll — no easing, no opacity tricks */
+      cardRefs.current.forEach((c, i) => {
+        if (!c) return;
+        const ty = (i - prog) * stH;
+        c.style.transform = `translateY(${ty.toFixed(2)}px)`;
+        /* Fade out only when fully off-stage */
+        const dist = Math.abs(i - prog);
+        c.style.opacity = dist > 0.92 ? "0" : "1";
       });
+
+      /* Dot indicators */
+      const idx = Math.round(prog);
+      if (idx !== activeIdx) setActiveIdx(idx);
+      dotRefs.current.forEach((d, i) => {
+        if (!d) return;
+        const active = i === idx;
+        d.style.width      = active ? "22px" : "7px";
+        d.style.background = active ? "#6009FF" : "#D0D0D0";
+      });
+
+      /* Scroll hint — hide on last card */
+      if (hintRef.current) {
+        hintRef.current.style.opacity = idx >= ALL_CARDS.length - 1 ? "0" : "0.4";
+      }
     };
 
+    const onScroll = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(update); };
     window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
+    update();
+    return () => { window.removeEventListener("scroll", onScroll); cancelAnimationFrame(raf); };
   }, [isMobile]);
 
   const card: React.CSSProperties = { background: T.bg, borderRadius: 16, overflow: "hidden" };
 
+  /* ── Desktop hover tilt ── */
   const onTilt = (e: React.MouseEvent<HTMLDivElement>) => {
     const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
     const x = (e.clientX - left) / width  - 0.5;
     const y = (e.clientY - top)  / height - 0.5;
-    e.currentTarget.style.transition = "box-shadow 0.1s";
-    e.currentTarget.style.transform  = `perspective(900px) rotateX(${-y * 7}deg) rotateY(${x * 7}deg) translateY(-4px)`;
-    e.currentTarget.style.boxShadow  = `${-x * 24}px ${-y * 16}px 60px rgba(96,9,255,0.15), 0 20px 48px rgba(0,0,0,0.07)`;
+    e.currentTarget.style.transform = `perspective(900px) rotateX(${-y * 7}deg) rotateY(${x * 7}deg) translateY(-4px)`;
   };
   const onTiltLeave = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.currentTarget.style.transition = "transform 0.55s cubic-bezier(0.16,1,0.3,1), box-shadow 0.55s cubic-bezier(0.16,1,0.3,1)";
+    e.currentTarget.style.transition = "transform 0.55s cubic-bezier(0.16,1,0.3,1)";
     e.currentTarget.style.transform  = "";
-    e.currentTarget.style.boxShadow  = "";
   };
 
   const topDirs   = ["from-left", "from-right"] as const;
   const btmDelays = [0, 0.12, 0.22];
 
-  /* ── Mobile: sticky scroll-tunnel ── */
+  /* ══════════════════════════════════════════════
+     MOBILE — sticky scrolljack card reveal
+  ══════════════════════════════════════════════ */
   if (isMobile) {
     return (
-      <section
-        id="products"
-        ref={sectionRef}
-        style={{
-          width: "100%", background: T.white, position: "relative",
-          /* (N-1) × 380px scroll total = ~1 swipe per card, no dead space */
-          height: `calc(100dvh + ${(ALL_CARDS.length - 1) * 380}px)`,
-        }}
-      >
-        <div style={{
-          position: "sticky", top: 0,
-          height: "100dvh",
-          background: T.white,
-          overflow: "hidden",
-          display: "flex", flexDirection: "column",
-          padding: "24px 20px 16px",
-          boxSizing: "border-box",
-        }}>
-          <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:13, letterSpacing:"0.0094em", color:T.orange, display:"block", marginBottom:8, flexShrink:0 }}>
-            — Products
-          </span>
-          <p style={{ margin:"0 0 12px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:18, lineHeight:1.2, color:T.headingBlack, flexShrink:0 }}>
-            Built for operations that can't afford a delay.
-          </p>
-          {/* cards fill remaining height; scrollTop driven 1-to-1 by page scroll */}
-          <div ref={carouselRef} style={{
-            flex: 1, minHeight: 0,
-            overflowY: "hidden",
-            display: "flex", flexDirection: "column",
-            gap: 12,
+      <div id="products" style={{ background: T.white }}>
+        {/* Tall section drives the sticky stage through its scroll range */}
+        {/*
+          Section height = (N-1) steps × 100vh + 100vh for the sticky frame itself.
+          One full viewport of scroll per card = feels exactly like native scrolling.
+        */}
+        <section
+          ref={sectionRef as React.RefObject<HTMLElement>}
+          style={{ height: `${ALL_CARDS.length * 100}vh`, position: "relative" }}
+        >
+          <div style={{
+            position:      "sticky",
+            top:           0,
+            height:        "100vh",
+            display:       "flex",
+            flexDirection: "column",
+            background:    T.white,
+            overflow:      "hidden",
           }}>
-            {ALL_CARDS.map(p => (
-              <div key={p.title} className="product-card" style={{
-                ...card,
-                flexShrink: 0,
-                width: "100%",
-                height: "100%",
-                display: "flex", flexDirection: "column",
-              }}>
-                <div style={{ padding:"14px 16px", flexShrink:0 }}>
-                  <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:24, color:T.primary }}>{p.title}</h3>
+
+            {/* Header */}
+            <div style={{ padding: "72px 20px 16px", flexShrink: 0 }}>
+              <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:700, fontSize:14, letterSpacing:"0.08em", textTransform:"uppercase", color:T.primary, display:"block", marginBottom:14 }}>
+                Products
+              </span>
+              <p style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:24, lineHeight:1.22, color:T.headingBlack }}>
+                Built for operations that<br />can't afford a delay.
+              </p>
+            </div>
+
+            {/* Card stage — cards translated directly via DOM refs, 1:1 with scroll */}
+            <div ref={stageRef} style={{ flex:1, position:"relative", margin:"12px 20px 0", overflow:"hidden", borderRadius:16 }}>
+              {ALL_CARDS.map((p, i) => (
+                <div
+                  key={p.title}
+                  ref={el => { cardRefs.current[i] = el; }}
+                  className="product-card"
+                  style={{
+                    ...card,
+                    position:      "absolute",
+                    inset:         0,
+                    display:       "flex",
+                    flexDirection: "column",
+                    willChange:    "transform",
+                    /* initial position: first card visible, rest below */
+                    transform:     `translateY(${i === 0 ? 0 : 9999}px)`,
+                  }}
+                >
+                  <div style={{ padding:"14px 16px", flexShrink:0 }}>
+                    <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:24, color:T.primary }}>
+                      {p.title}
+                    </h3>
+                  </div>
+                  <div style={{ flex:1, overflow:"hidden", minHeight:0 }}>
+                    <p.Wireframe loaded={loaded} />
+                  </div>
                 </div>
-                <div style={{ flex:1, overflow:"hidden", minHeight:0 }}>
-                  <p.Wireframe loaded={loaded} />
-                </div>
+              ))}
+            </div>
+
+            {/* Progress dots + scroll hint — also direct DOM via refs */}
+            <div style={{ padding:"14px 20px 28px", display:"flex", justifyContent:"space-between", alignItems:"center", flexShrink:0 }}>
+              <div style={{ display:"flex", gap:8, alignItems:"center" }}>
+                {ALL_CARDS.map((_, i) => (
+                  <div
+                    key={i}
+                    ref={el => { dotRefs.current[i] = el; }}
+                    style={{
+                      width:        i === 0 ? 22 : 7,
+                      height:       7,
+                      borderRadius: 4,
+                      background:   i === 0 ? T.primary : "#D0D0D0",
+                      transition:   "width 0.3s cubic-bezier(0.16,1,0.3,1), background 0.3s",
+                    }}
+                  />
+                ))}
               </div>
-            ))}
+              <div ref={hintRef} style={{ display:"flex", alignItems:"center", gap:5, opacity:0.4, transition:"opacity 0.25s" }}>
+                  <span style={{ fontFamily:"DM Sans, sans-serif", fontSize:12, color:T.muted }}>scroll</span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 5v14M5 12l7 7 7-7" stroke={T.muted} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+            </div>
+
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     );
   }
 
-  /* ── Desktop / Tablet ── */
+  /* ══════════════════════════════════════════════
+     DESKTOP / TABLET — per-card scroll-entry grid
+  ══════════════════════════════════════════════ */
+  const hPad   = isTablet ? 48 : 80;
+  const descSz = 42;
+
   return (
-    <section id="products" style={{ width:"100%", background:T.white, padding:secPad }}>
+    <section id="products" style={{ width:"100%", background:T.white, padding:"100px 0 80px" }}>
       <div style={{ maxWidth:1440, margin:"0 auto", padding:`0 ${hPad}px` }}>
 
-        <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14, letterSpacing:"0.0094em", color:T.orange, display:"block", marginBottom:20 }}>
-          — Products
+        <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:700, fontSize:16, letterSpacing:"0.08em", textTransform:"uppercase", color:T.primary, display:"block", marginBottom:24 }}>
+          Products
         </span>
 
         <p className="fade-up" style={{ margin:`0 0 64px`, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:descSz, lineHeight:1.15, color:T.headingBlack }}>
@@ -641,7 +700,7 @@ function ProductSection() {
               onMouseLeave={onTiltLeave}
             >
               <div style={{ padding:"16px 22px" }}>
-                <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:32, color:T.primary }}>{p.title}</h3>
+                <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:32, color:T.dark }}>{p.title}</h3>
               </div>
               <div style={{ width:"100%", height:420, overflow:"hidden" }}>
                 <p.Wireframe loaded={loaded} />
@@ -660,7 +719,7 @@ function ProductSection() {
               onMouseLeave={onTiltLeave}
             >
               <div style={{ padding:"16px 22px" }}>
-                <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:32, color:T.primary }}>{p.title}</h3>
+                <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:32, color:T.dark }}>{p.title}</h3>
               </div>
               <div style={{ width:"100%", height:280, overflow:"hidden" }}>
                 <p.Wireframe loaded={loaded} />
@@ -676,8 +735,7 @@ function ProductSection() {
 
 /* ─── ROOT ─── */
 export default function PayonUsLandingPage() {
-  const { isMobile } = useBreakpoint();
-  useScrollReveal(isMobile);
+  useScrollReveal();
   const [scrolled, setScrolled]   = React.useState(false);
   const [scrollPct, setScrollPct] = React.useState(0);
 
