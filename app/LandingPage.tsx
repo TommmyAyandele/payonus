@@ -506,27 +506,42 @@ function ProductSection() {
 
   const loaded = useLoadCycle(0);
 
-  /* Mobile carousel scroll-linked scale/fade */
-  const scrollRef = React.useRef<HTMLDivElement>(null);
+  const sectionRef = React.useRef<HTMLElement>(null);
+  const carouselRef = React.useRef<HTMLDivElement>(null);
+
   React.useEffect(() => {
     if (!isMobile) return;
-    const el = scrollRef.current;
-    if (!el) return;
+    const section  = sectionRef.current;
+    const carousel = carouselRef.current;
+    if (!section || !carousel) return;
+
+    const N = ALL_CARDS.length;
+
     const onScroll = () => {
-      const ch  = el.offsetHeight;
-      const cy  = el.scrollTop + ch / 2;
-      el.querySelectorAll<HTMLElement>(".product-card").forEach(c => {
+      const top = section.getBoundingClientRect().top;
+      // dvhPx = section.offsetHeight / N (= current 1dvh in pixels, self-consistent)
+      const dvhPx      = section.offsetHeight / N;
+      const scrollRange = (N - 1) * dvhPx;
+      const scrolled   = Math.max(0, Math.min(-top, scrollRange));
+      const progress   = scrollRange > 0 ? scrolled / scrollRange : 0;
+      const maxScroll  = carousel.scrollHeight - carousel.offsetHeight;
+
+      carousel.scrollTop = progress * maxScroll;
+
+      const ch = carousel.offsetHeight;
+      const cy = carousel.scrollTop + ch / 2;
+      carousel.querySelectorAll<HTMLElement>(".product-card").forEach(c => {
         const cardCy = c.offsetTop + c.offsetHeight / 2;
         const dist   = Math.abs(cardCy - cy);
         const ratio  = Math.min(dist / (ch * 0.55), 1);
-        c.style.transform  = `scale(${1 - ratio * 0.06})`;
-        c.style.opacity    = String(1 - ratio * 0.28);
-        c.style.transition = "transform 0.18s ease, opacity 0.18s ease";
+        c.style.transform = `scale(${1 - ratio * 0.06})`;
+        c.style.opacity   = String(1 - ratio * 0.28);
       });
     };
-    el.addEventListener("scroll", onScroll, { passive: true });
-    setTimeout(onScroll, 60);
-    return () => el.removeEventListener("scroll", onScroll);
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
   }, [isMobile]);
 
   const card: React.CSSProperties = { background: T.bg, borderRadius: 16, overflow: "hidden" };
@@ -548,36 +563,50 @@ function ProductSection() {
   const topDirs   = ["from-left", "from-right"] as const;
   const btmDelays = [0, 0.12, 0.22];
 
-  return (
-    <section id="products" style={{ width:"100%", background:T.white, padding:secPad }}>
-      <div style={{ maxWidth:1440, margin:"0 auto", padding:`0 ${hPad}px` }}>
-
-        <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14, letterSpacing:"0.0094em", color:T.orange, display:"block", marginBottom:20 }}>
-          — Products
-        </span>
-
-        <p className="fade-up" style={{ margin:`0 0 ${isMobile ? 32 : 64}px`, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:descSz, lineHeight:1.15, color:T.headingBlack }}>
-          Built for operations that can't afford a delay. Every product in the payonus suite is designed to eliminate payment friction at scale.
-        </p>
-
-        {isMobile ? (
-          /* ── Mobile: vertical snap-scroll carousel ── */
-          <div ref={scrollRef} className="product-scroll" style={{
-            display: "flex", flexDirection: "column", gap: 12,
-            overflowY: "auto", overflowX: "hidden",
-            scrollSnapType: "y mandatory",
-            WebkitOverflowScrolling: "touch" as React.CSSProperties["WebkitOverflowScrolling"],
-            height: 360,
+  /* ── Mobile: sticky scroll-tunnel, N cards × 100dvh tall ── */
+  if (isMobile) {
+    return (
+      <section
+        id="products"
+        ref={sectionRef}
+        style={{
+          width: "100%",
+          background: T.white,
+          position: "relative",
+          /* Each card gets exactly 1dvh of page scroll.
+             dvhPx = offsetHeight/N stays self-consistent so section always
+             exits at progress=1 — no dead space regardless of iOS chrome state. */
+          height: `${ALL_CARDS.length * 100}dvh`,
+        }}
+      >
+        <div style={{
+          position: "sticky", top: 0,
+          height: "100dvh",
+          background: T.white,
+          overflow: "hidden",
+          display: "flex", flexDirection: "column",
+          padding: "48px 20px 24px",
+          boxSizing: "border-box",
+        }}>
+          <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14, letterSpacing:"0.0094em", color:T.orange, display:"block", marginBottom:20, flexShrink:0 }}>
+            — Products
+          </span>
+          <p className="fade-up" style={{ margin:"0 0 24px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:22, lineHeight:1.15, color:T.headingBlack, flexShrink:0 }}>
+            Built for operations that can't afford a delay. Every product in the payonus suite is designed to eliminate payment friction at scale.
+          </p>
+          {/* overflow hidden — scrollTop driven by page scroll, not touch */}
+          <div ref={carouselRef} style={{
+            flex: 1, minHeight: 0,
+            overflowY: "hidden",
+            display: "flex", flexDirection: "column",
+            gap: 12,
           }}>
             {ALL_CARDS.map(p => (
               <div key={p.title} className="product-card" style={{
                 ...card,
                 flexShrink: 0,
-                width: "100%",
-                height: 340,
-                display: "flex",
-                flexDirection: "column",
-                scrollSnapAlign: "start",
+                width: "100%", height: 340,
+                display: "flex", flexDirection: "column",
               }}>
                 <div style={{ padding:"14px 16px", flexShrink:0 }}>
                   <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:24, color:T.primary }}>{p.title}</h3>
@@ -588,48 +617,61 @@ function ProductSection() {
               </div>
             ))}
           </div>
-        ) : (
-          /* ── Desktop / Tablet: per-card scroll-entry animation ── */
-          <>
-            <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:24, marginBottom:24 }}>
-              {PRODUCT_CARDS_TOP.map((p, i) => (
-                <div
-                  key={p.title}
-                  className={`product-card card-in ${topDirs[i]}`}
-                  style={card}
-                  onMouseMove={onTilt}
-                  onMouseLeave={onTiltLeave}
-                >
-                  <div style={{ padding:"16px 22px" }}>
-                    <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:32, color:T.primary }}>{p.title}</h3>
-                  </div>
-                  <div style={{ width:"100%", height:420, overflow:"hidden" }}>
-                    <p.Wireframe loaded={loaded} />
-                  </div>
-                </div>
-              ))}
-            </div>
+        </div>
+      </section>
+    );
+  }
 
-            <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:24 }}>
-              {PRODUCT_CARDS_BOTTOM.map((p, i) => (
-                <div
-                  key={p.title}
-                  className="product-card card-in"
-                  style={{ ...card, transitionDelay:`${btmDelays[i]}s` }}
-                  onMouseMove={onTilt}
-                  onMouseLeave={onTiltLeave}
-                >
-                  <div style={{ padding:"16px 22px" }}>
-                    <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:32, color:T.primary }}>{p.title}</h3>
-                  </div>
-                  <div style={{ width:"100%", height:280, overflow:"hidden" }}>
-                    <p.Wireframe loaded={loaded} />
-                  </div>
-                </div>
-              ))}
+  /* ── Desktop / Tablet ── */
+  return (
+    <section id="products" style={{ width:"100%", background:T.white, padding:secPad }}>
+      <div style={{ maxWidth:1440, margin:"0 auto", padding:`0 ${hPad}px` }}>
+
+        <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14, letterSpacing:"0.0094em", color:T.orange, display:"block", marginBottom:20 }}>
+          — Products
+        </span>
+
+        <p className="fade-up" style={{ margin:`0 0 64px`, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:descSz, lineHeight:1.15, color:T.headingBlack }}>
+          Built for operations that can't afford a delay. Every product in the payonus suite is designed to eliminate payment friction at scale.
+        </p>
+
+        <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:24, marginBottom:24 }}>
+          {PRODUCT_CARDS_TOP.map((p, i) => (
+            <div
+              key={p.title}
+              className={`product-card card-in ${topDirs[i]}`}
+              style={card}
+              onMouseMove={onTilt}
+              onMouseLeave={onTiltLeave}
+            >
+              <div style={{ padding:"16px 22px" }}>
+                <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:32, color:T.primary }}>{p.title}</h3>
+              </div>
+              <div style={{ width:"100%", height:420, overflow:"hidden" }}>
+                <p.Wireframe loaded={loaded} />
+              </div>
             </div>
-          </>
-        )}
+          ))}
+        </div>
+
+        <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:24 }}>
+          {PRODUCT_CARDS_BOTTOM.map((p, i) => (
+            <div
+              key={p.title}
+              className="product-card card-in"
+              style={{ ...card, transitionDelay:`${btmDelays[i]}s` }}
+              onMouseMove={onTilt}
+              onMouseLeave={onTiltLeave}
+            >
+              <div style={{ padding:"16px 22px" }}>
+                <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:32, color:T.primary }}>{p.title}</h3>
+              </div>
+              <div style={{ width:"100%", height:280, overflow:"hidden" }}>
+                <p.Wireframe loaded={loaded} />
+              </div>
+            </div>
+          ))}
+        </div>
 
       </div>
     </section>
