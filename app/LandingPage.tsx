@@ -515,26 +515,20 @@ function ProductSection() {
     const carousel = carouselRef.current;
     if (!section || !carousel) return;
 
-    const N = ALL_CARDS.length;
-    const GAP = 12;
-    let maxPx = 0;
-
-    /* Measure after render: card fills carousel, so step = carousel height + gap */
-    const measure = () => {
-      const cardH = carousel.offsetHeight; // cards are height:100% of carousel
-      maxPx = (N - 1) * (cardH + GAP);
-      section.style.height = `calc(100dvh + ${maxPx}px)`;
-    };
+    const N     = ALL_CARDS.length;
+    const STEP  = 380;                  // px of page scroll per card
+    const maxPx = (N - 1) * STEP;      // matches CSS calc below
 
     const onScroll = () => {
-      if (!maxPx) return;
-      const top     = section.getBoundingClientRect().top;
+      const top      = section.getBoundingClientRect().top;
       const scrolled = Math.max(0, Math.min(-top, maxPx));
-      /* direct 1-to-1 mapping — no dead space */
-      carousel.scrollTop = scrolled;
+      const maxC     = carousel.scrollHeight - carousel.offsetHeight;
+      if (maxC <= 0) return;
+
+      carousel.scrollTop = (scrolled / maxPx) * maxC;
 
       const ch = carousel.offsetHeight;
-      const cy = scrolled + ch / 2;
+      const cy = carousel.scrollTop + ch / 2;
       carousel.querySelectorAll<HTMLElement>(".product-card").forEach(c => {
         const cardCy = c.offsetTop + c.offsetHeight / 2;
         const dist   = Math.abs(cardCy - cy);
@@ -544,17 +538,9 @@ function ProductSection() {
       });
     };
 
-    const onResize = () => { measure(); onScroll(); };
-
-    measure();
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onResize);
     onScroll();
-
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onResize);
-    };
+    return () => window.removeEventListener("scroll", onScroll);
   }, [isMobile]);
 
   const card: React.CSSProperties = { background: T.bg, borderRadius: 16, overflow: "hidden" };
@@ -582,7 +568,11 @@ function ProductSection() {
       <section
         id="products"
         ref={sectionRef}
-        style={{ width: "100%", background: T.white, position: "relative" }}
+        style={{
+          width: "100%", background: T.white, position: "relative",
+          /* (N-1) × 380px scroll total = ~1 swipe per card, no dead space */
+          height: `calc(100dvh + ${(ALL_CARDS.length - 1) * 380}px)`,
+        }}
       >
         <div style={{
           position: "sticky", top: 0,
