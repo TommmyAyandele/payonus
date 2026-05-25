@@ -516,20 +516,25 @@ function ProductSection() {
     if (!section || !carousel) return;
 
     const N = ALL_CARDS.length;
+    const GAP = 12;
+    let maxPx = 0;
+
+    /* Measure after render: card fills carousel, so step = carousel height + gap */
+    const measure = () => {
+      const cardH = carousel.offsetHeight; // cards are height:100% of carousel
+      maxPx = (N - 1) * (cardH + GAP);
+      section.style.height = `calc(100dvh + ${maxPx}px)`;
+    };
 
     const onScroll = () => {
-      const top = section.getBoundingClientRect().top;
-      // dvhPx = section.offsetHeight / N (= current 1dvh in pixels, self-consistent)
-      const dvhPx      = section.offsetHeight / N;
-      const scrollRange = (N - 1) * dvhPx;
-      const scrolled   = Math.max(0, Math.min(-top, scrollRange));
-      const progress   = scrollRange > 0 ? scrolled / scrollRange : 0;
-      const maxScroll  = carousel.scrollHeight - carousel.offsetHeight;
-
-      carousel.scrollTop = progress * maxScroll;
+      if (!maxPx) return;
+      const top     = section.getBoundingClientRect().top;
+      const scrolled = Math.max(0, Math.min(-top, maxPx));
+      /* direct 1-to-1 mapping — no dead space */
+      carousel.scrollTop = scrolled;
 
       const ch = carousel.offsetHeight;
-      const cy = carousel.scrollTop + ch / 2;
+      const cy = scrolled + ch / 2;
       carousel.querySelectorAll<HTMLElement>(".product-card").forEach(c => {
         const cardCy = c.offsetTop + c.offsetHeight / 2;
         const dist   = Math.abs(cardCy - cy);
@@ -539,9 +544,17 @@ function ProductSection() {
       });
     };
 
+    const onResize = () => { measure(); onScroll(); };
+
+    measure();
     window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onResize);
     onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
+    };
   }, [isMobile]);
 
   const card: React.CSSProperties = { background: T.bg, borderRadius: 16, overflow: "hidden" };
@@ -563,21 +576,13 @@ function ProductSection() {
   const topDirs   = ["from-left", "from-right"] as const;
   const btmDelays = [0, 0.12, 0.22];
 
-  /* ── Mobile: sticky scroll-tunnel, N cards × 100dvh tall ── */
+  /* ── Mobile: sticky scroll-tunnel ── */
   if (isMobile) {
     return (
       <section
         id="products"
         ref={sectionRef}
-        style={{
-          width: "100%",
-          background: T.white,
-          position: "relative",
-          /* Each card gets exactly 1dvh of page scroll.
-             dvhPx = offsetHeight/N stays self-consistent so section always
-             exits at progress=1 — no dead space regardless of iOS chrome state. */
-          height: `${ALL_CARDS.length * 100}dvh`,
-        }}
+        style={{ width: "100%", background: T.white, position: "relative" }}
       >
         <div style={{
           position: "sticky", top: 0,
@@ -585,16 +590,16 @@ function ProductSection() {
           background: T.white,
           overflow: "hidden",
           display: "flex", flexDirection: "column",
-          padding: "48px 20px 24px",
+          padding: "24px 20px 16px",
           boxSizing: "border-box",
         }}>
-          <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14, letterSpacing:"0.0094em", color:T.orange, display:"block", marginBottom:20, flexShrink:0 }}>
+          <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:13, letterSpacing:"0.0094em", color:T.orange, display:"block", marginBottom:8, flexShrink:0 }}>
             — Products
           </span>
-          <p className="fade-up" style={{ margin:"0 0 24px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:22, lineHeight:1.15, color:T.headingBlack, flexShrink:0 }}>
-            Built for operations that can't afford a delay. Every product in the payonus suite is designed to eliminate payment friction at scale.
+          <p style={{ margin:"0 0 12px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:18, lineHeight:1.2, color:T.headingBlack, flexShrink:0 }}>
+            Built for operations that can't afford a delay.
           </p>
-          {/* overflow hidden — scrollTop driven by page scroll, not touch */}
+          {/* cards fill remaining height; scrollTop driven 1-to-1 by page scroll */}
           <div ref={carouselRef} style={{
             flex: 1, minHeight: 0,
             overflowY: "hidden",
@@ -605,7 +610,8 @@ function ProductSection() {
               <div key={p.title} className="product-card" style={{
                 ...card,
                 flexShrink: 0,
-                width: "100%", height: 340,
+                width: "100%",
+                height: "100%",
                 display: "flex", flexDirection: "column",
               }}>
                 <div style={{ padding:"14px 16px", flexShrink:0 }}>
