@@ -529,9 +529,8 @@ function ProductSection() {
 
     let raf = 0;
     const update = () => {
-      const h      = window.innerHeight;
       const rect   = section.getBoundingClientRect();
-      const usable = ALL_CARDS.length * h - h; // always (N-1)*innerHeight
+      const usable = section.offsetHeight - sticky.offsetHeight; // matches actual sticky exit point
       if (usable <= 0) return;
 
       const pct  = Math.max(0, Math.min(-rect.top / usable, 1));
@@ -607,6 +606,7 @@ function ProductSection() {
           <div ref={stickyRef} style={{
             position:      "sticky",
             top:           0,
+            height:        "100dvh",
             display:       "flex",
             flexDirection: "column",
             background:    T.white,
