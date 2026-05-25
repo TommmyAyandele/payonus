@@ -504,6 +504,7 @@ function ProductSection() {
 
   /* ── Mobile: window-scroll sticky stage ── */
   const sectionRef = React.useRef<HTMLElement>(null);
+  const stickyRef  = React.useRef<HTMLDivElement>(null);
   const [activeIdx, setActiveIdx] = React.useState(0);
   /* Refs for direct DOM updates — avoids React re-render lag so scroll feels 1:1 */
   const cardRefs  = React.useRef<(HTMLDivElement | null)[]>([]);
@@ -514,30 +515,37 @@ function ProductSection() {
   React.useEffect(() => {
     if (!isMobile) return;
     const section = sectionRef.current;
+    const sticky  = stickyRef.current;
     const stage   = stageRef.current;
-    if (!section || !stage) return;
+    if (!section || !sticky || !stage) return;
+
+    /* Set heights in px from window.innerHeight so CSS units never misalign */
+    const setHeights = () => {
+      const h = window.innerHeight;
+      section.style.height = `${ALL_CARDS.length * h}px`;
+      sticky.style.height  = `${h}px`;
+    };
+    setHeights();
 
     let raf = 0;
     const update = () => {
+      const h      = window.innerHeight;
       const rect   = section.getBoundingClientRect();
-      const usable = section.offsetHeight - window.innerHeight;
+      const usable = ALL_CARDS.length * h - h; // always (N-1)*innerHeight
       if (usable <= 0) return;
 
       const pct  = Math.max(0, Math.min(-rect.top / usable, 1));
       const prog = pct * (ALL_CARDS.length - 1);
       const stH  = stage.offsetHeight;
 
-      /* Move each card 1:1 with scroll — no easing, no opacity tricks */
       cardRefs.current.forEach((c, i) => {
         if (!c) return;
         const ty = (i - prog) * stH;
         c.style.transform = `translateY(${ty.toFixed(2)}px)`;
-        /* Fade out only when fully off-stage */
         const dist = Math.abs(i - prog);
         c.style.opacity = dist > 0.92 ? "0" : "1";
       });
 
-      /* Dot indicators */
       const idx = Math.round(prog);
       if (idx !== activeIdx) setActiveIdx(idx);
       dotRefs.current.forEach((d, i) => {
@@ -547,16 +555,21 @@ function ProductSection() {
         d.style.background = active ? "#6009FF" : "#D0D0D0";
       });
 
-      /* Scroll hint — hide on last card */
       if (hintRef.current) {
         hintRef.current.style.opacity = idx >= ALL_CARDS.length - 1 ? "0" : "0.4";
       }
     };
 
     const onScroll = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(update); };
+    const onResize = () => { setHeights(); update(); };
     window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onResize);
     update();
-    return () => { window.removeEventListener("scroll", onScroll); cancelAnimationFrame(raf); };
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
+      cancelAnimationFrame(raf);
+    };
   }, [isMobile]);
 
   const card: React.CSSProperties = { background: T.bg, borderRadius: 16, overflow: "hidden" };
@@ -589,12 +602,11 @@ function ProductSection() {
         */}
         <section
           ref={sectionRef as React.RefObject<HTMLElement>}
-          style={{ height: `${ALL_CARDS.length * 100}dvh`, position: "relative" }}
+          style={{ position: "relative" }}
         >
-          <div style={{
+          <div ref={stickyRef} style={{
             position:      "sticky",
             top:           0,
-            height:        "100dvh",
             display:       "flex",
             flexDirection: "column",
             background:    T.white,
