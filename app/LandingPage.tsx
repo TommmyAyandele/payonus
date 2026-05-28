@@ -10,7 +10,7 @@ import CTASection from "./CTASection";
 import Footer from "./Footer";
 
 /* ─── SCROLL REVEAL HOOK ─── */
-function useScrollReveal() {
+function useScrollReveal(isMobile: boolean) {
   React.useEffect(() => {
     const els = document.querySelectorAll(".fade-up, .card-in");
     const io = new IntersectionObserver(
@@ -24,7 +24,7 @@ function useScrollReveal() {
     );
     els.forEach(el => io.observe(el));
     return () => io.disconnect();
-  }, []);
+  }, [isMobile]);
 }
 
 /* ─── HERO ─── */
@@ -735,7 +735,8 @@ function ProductSection() {
 
 /* ─── ROOT ─── */
 export default function PayonUsLandingPage() {
-  useScrollReveal();
+  const { isMobile } = useBreakpoint();
+  useScrollReveal(isMobile);
   const [scrolled, setScrolled]   = React.useState(false);
   const [scrollPct, setScrollPct] = React.useState(0);
 
