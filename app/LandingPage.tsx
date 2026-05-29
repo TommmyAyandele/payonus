@@ -502,62 +502,69 @@ function ProductSection() {
   const { isMobile, isTablet } = useBreakpoint();
   const loaded = useLoadCycle(0);
 
-  /* ── Mobile: window-scroll sticky stage ── */
-  const sectionRef = React.useRef<HTMLElement>(null);
+  /* ── Mobile: touch-swipe carousel ── */
   const [activeIdx, setActiveIdx] = React.useState(0);
-  /* Refs for direct DOM updates — avoids React re-render lag so scroll feels 1:1 */
-  const cardRefs  = React.useRef<(HTMLDivElement | null)[]>([]);
-  const stageRef  = React.useRef<HTMLDivElement>(null);
-  const dotRefs   = React.useRef<(HTMLDivElement | null)[]>([]);
-  const hintRef   = React.useRef<HTMLDivElement>(null);
+  const cardRefs     = React.useRef<(HTMLDivElement | null)[]>([]);
+  const stageRef     = React.useRef<HTMLDivElement>(null);
+  const dotRefs      = React.useRef<(HTMLDivElement | null)[]>([]);
+  const hintRef      = React.useRef<HTMLDivElement>(null);
+  const activeIdxRef = React.useRef(0);
+
+  const goTo = React.useCallback((idx: number) => {
+    const next = Math.max(0, Math.min(idx, ALL_CARDS.length - 1));
+    activeIdxRef.current = next;
+    cardRefs.current.forEach((c, i) => {
+      if (!c) return;
+      c.style.transition = "transform 0.38s cubic-bezier(0.16,1,0.3,1)";
+      c.style.transform  = `translateY(${(i - next) * 100}%)`;
+    });
+    dotRefs.current.forEach((d, i) => {
+      if (!d) return;
+      const active = i === next;
+      d.style.width      = active ? "22px" : "7px";
+      d.style.background = active ? "#6009FF" : "#D0D0D0";
+    });
+    if (hintRef.current) {
+      hintRef.current.style.opacity = next >= ALL_CARDS.length - 1 ? "0" : "0.4";
+    }
+    setActiveIdx(next);
+  }, []);
 
   React.useEffect(() => {
     if (!isMobile) return;
-    const section = sectionRef.current;
-    const stage   = stageRef.current;
-    if (!section || !stage) return;
+    const stage = stageRef.current;
+    if (!stage) return;
 
-    let raf = 0;
-    const update = () => {
-      const rect   = section.getBoundingClientRect();
-      const usable = section.offsetHeight * (ALL_CARDS.length - 1) / ALL_CARDS.length;
-      if (usable <= 0) return;
+    let startY = 0;
+    let startX = 0;
+    let locked = false;
 
-      const pct  = Math.max(0, Math.min(-rect.top / usable, 1));
-      const prog = pct * (ALL_CARDS.length - 1);
-      const stH  = stage.offsetHeight;
-
-      /* Move each card 1:1 with scroll — no easing, no opacity tricks */
-      cardRefs.current.forEach((c, i) => {
-        if (!c) return;
-        const ty = (i - prog) * stH;
-        c.style.transform = `translateY(${ty.toFixed(2)}px)`;
-        /* Fade out only when fully off-stage */
-        const dist = Math.abs(i - prog);
-        c.style.opacity = dist > 0.92 ? "0" : "1";
-      });
-
-      /* Dot indicators */
-      const idx = Math.round(prog);
-      if (idx !== activeIdx) setActiveIdx(idx);
-      dotRefs.current.forEach((d, i) => {
-        if (!d) return;
-        const active = i === idx;
-        d.style.width      = active ? "22px" : "7px";
-        d.style.background = active ? "#6009FF" : "#D0D0D0";
-      });
-
-      /* Scroll hint — hide on last card */
-      if (hintRef.current) {
-        hintRef.current.style.opacity = idx >= ALL_CARDS.length - 1 ? "0" : "0.4";
-      }
+    const onTouchStart = (e: TouchEvent) => {
+      startY = e.touches[0].clientY;
+      startX = e.touches[0].clientX;
+      locked = false;
+    };
+    const onTouchMove = (e: TouchEvent) => {
+      if (locked) { e.preventDefault(); return; }
+      const dy = Math.abs(e.touches[0].clientY - startY);
+      const dx = Math.abs(e.touches[0].clientX - startX);
+      if (dy > dx && dy > 5) { locked = true; e.preventDefault(); }
+    };
+    const onTouchEnd = (e: TouchEvent) => {
+      const dy = e.changedTouches[0].clientY - startY;
+      if (Math.abs(dy) > 40) goTo(activeIdxRef.current + (dy < 0 ? 1 : -1));
+      locked = false;
     };
 
-    const onScroll = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(update); };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    update();
-    return () => { window.removeEventListener("scroll", onScroll); cancelAnimationFrame(raf); };
-  }, [isMobile]);
+    stage.addEventListener("touchstart", onTouchStart, { passive: true });
+    stage.addEventListener("touchmove",  onTouchMove,  { passive: false });
+    stage.addEventListener("touchend",   onTouchEnd,   { passive: true });
+    return () => {
+      stage.removeEventListener("touchstart", onTouchStart);
+      stage.removeEventListener("touchmove",  onTouchMove);
+      stage.removeEventListener("touchend",   onTouchEnd);
+    };
+  }, [isMobile, goTo]);
 
   const card: React.CSSProperties = { background: T.bg, borderRadius: 16, overflow: "hidden" };
 
@@ -581,93 +588,74 @@ function ProductSection() {
   ══════════════════════════════════════════════ */
   if (isMobile) {
     return (
-      <div id="products" style={{ background: T.white }}>
-        {/* Tall section drives the sticky stage through its scroll range */}
-        {/*
-          Section height = (N-1) steps × 100vh + 100vh for the sticky frame itself.
-          One full viewport of scroll per card = feels exactly like native scrolling.
-        */}
-        <section
-          ref={sectionRef as React.RefObject<HTMLElement>}
-          style={{ height: `${ALL_CARDS.length * 100}dvh`, position: "relative" }}
-        >
-          <div style={{
-            position:      "sticky",
-            top:           0,
-            height:        "100dvh",
-            display:       "flex",
-            flexDirection: "column",
-            background:    T.white,
-            overflow:      "hidden",
-          }}>
+      <div id="products" style={{ height:"100dvh", display:"flex", flexDirection:"column", background:T.white, overflow:"hidden" }}>
 
-            {/* Header */}
-            <div style={{ padding: "72px 20px 16px", flexShrink: 0 }}>
-              <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:700, fontSize:14, letterSpacing:"0.08em", textTransform:"uppercase", color:T.primary, display:"block", marginBottom:14 }}>
-                Products
-              </span>
-              <p style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:24, lineHeight:1.22, color:T.headingBlack }}>
-                Built for operations that<br />can't afford a delay.
-              </p>
-            </div>
+        {/* Header */}
+        <div style={{ padding:"72px 20px 16px", flexShrink:0 }}>
+          <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:700, fontSize:14, letterSpacing:"0.08em", textTransform:"uppercase", color:T.primary, display:"block", marginBottom:14 }}>
+            Products
+          </span>
+          <p style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:24, lineHeight:1.22, color:T.headingBlack }}>
+            Built for operations that<br />can't afford a delay.
+          </p>
+        </div>
 
-            {/* Card stage — cards translated directly via DOM refs, 1:1 with scroll */}
-            <div ref={stageRef} style={{ flex:1, position:"relative", margin:"12px 20px 0", overflow:"hidden", borderRadius:16 }}>
-              {ALL_CARDS.map((p, i) => (
-                <div
-                  key={p.title}
-                  ref={el => { cardRefs.current[i] = el; }}
-                  className="product-card"
-                  style={{
-                    ...card,
-                    position:      "absolute",
-                    inset:         0,
-                    display:       "flex",
-                    flexDirection: "column",
-                    willChange:    "transform",
-                    /* initial position: first card visible, rest below */
-                    transform:     `translateY(${i === 0 ? 0 : 9999}px)`,
-                  }}
-                >
-                  <div style={{ padding:"14px 16px", flexShrink:0 }}>
-                    <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:24, color:T.primary }}>
-                      {p.title}
-                    </h3>
-                  </div>
-                  <div style={{ flex:1, overflow:"hidden", minHeight:0 }}>
-                    <p.Wireframe loaded={loaded} />
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Progress dots + scroll hint — also direct DOM via refs */}
-            <div style={{ padding:"14px 20px 28px", display:"flex", justifyContent:"space-between", alignItems:"center", flexShrink:0 }}>
-              <div style={{ display:"flex", gap:8, alignItems:"center" }}>
-                {ALL_CARDS.map((_, i) => (
-                  <div
-                    key={i}
-                    ref={el => { dotRefs.current[i] = el; }}
-                    style={{
-                      width:        i === 0 ? 22 : 7,
-                      height:       7,
-                      borderRadius: 4,
-                      background:   i === 0 ? T.primary : "#D0D0D0",
-                      transition:   "width 0.3s cubic-bezier(0.16,1,0.3,1), background 0.3s",
-                    }}
-                  />
-                ))}
+        {/* Card stage — cards stacked below, swipe navigates */}
+        <div ref={stageRef} style={{ flex:1, position:"relative", margin:"12px 20px 0", overflow:"hidden", borderRadius:16 }}>
+          {ALL_CARDS.map((p, i) => (
+            <div
+              key={p.title}
+              ref={el => { cardRefs.current[i] = el; }}
+              className="product-card"
+              style={{
+                ...card,
+                position:      "absolute",
+                inset:         0,
+                display:       "flex",
+                flexDirection: "column",
+                willChange:    "transform",
+                transform:     `translateY(${i * 100}%)`,
+              }}
+            >
+              <div style={{ padding:"14px 16px", flexShrink:0 }}>
+                <h3 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:24, color:T.primary }}>
+                  {p.title}
+                </h3>
               </div>
-              <div ref={hintRef} style={{ display:"flex", alignItems:"center", gap:5, opacity:0.4, transition:"opacity 0.25s" }}>
-                  <span style={{ fontFamily:"DM Sans, sans-serif", fontSize:12, color:T.muted }}>scroll</span>
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
-                    <path d="M12 5v14M5 12l7 7 7-7" stroke={T.muted} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </div>
+              <div style={{ flex:1, overflow:"hidden", minHeight:0 }}>
+                <p.Wireframe loaded={loaded} />
+              </div>
             </div>
+          ))}
+        </div>
 
+        {/* Progress dots + swipe hint */}
+        <div style={{ padding:"14px 20px 28px", display:"flex", justifyContent:"space-between", alignItems:"center", flexShrink:0 }}>
+          <div style={{ display:"flex", gap:8, alignItems:"center" }}>
+            {ALL_CARDS.map((_, i) => (
+              <div
+                key={i}
+                ref={el => { dotRefs.current[i] = el; }}
+                onClick={() => goTo(i)}
+                style={{
+                  width:        i === 0 ? 22 : 7,
+                  height:       7,
+                  borderRadius: 4,
+                  background:   i === 0 ? T.primary : "#D0D0D0",
+                  transition:   "width 0.3s cubic-bezier(0.16,1,0.3,1), background 0.3s",
+                  cursor:       "pointer",
+                }}
+              />
+            ))}
           </div>
-        </section>
+          <div ref={hintRef} style={{ display:"flex", alignItems:"center", gap:5, opacity:0.4, transition:"opacity 0.25s" }}>
+            <span style={{ fontFamily:"DM Sans, sans-serif", fontSize:12, color:T.muted }}>swipe</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+              <path d="M12 5v14M5 12l7 7 7-7" stroke={T.muted} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
+        </div>
+
       </div>
     );
   }
