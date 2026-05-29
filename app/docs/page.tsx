@@ -165,21 +165,6 @@ export default function DocsPage() {
 
   return (
     <div style={{ display:"flex", flexDirection:"column", minHeight:"100vh", background:T.bg }}>
-      <style>{`
-        .doc-sidebar-link { display:flex; align-items:center; gap:7px; font-family:"DM Sans",sans-serif; font-size:13px; font-weight:400; color:#49454F; text-decoration:none; padding:5px 0 5px 4px; border-radius:5px; cursor:pointer; transition:color 0.15s; border:none; background:none; text-align:left; width:100%; }
-        .doc-sidebar-link:hover { color:#6009FF; }
-        .doc-sidebar-link.active { color:#6009FF; font-weight:500; }
-        .doc-sidebar-link.active::before { background:#6009FF !important; }
-        .doc-sdk-tab { font-family:"DM Sans",sans-serif; font-size:14px; font-weight:500; color:#49454F; padding:10px 16px; cursor:pointer; border:none; background:transparent; border-bottom:2px solid transparent; transition:color 0.15s,border-color 0.15s; }
-        .doc-sdk-tab.active { color:#6009FF; border-bottom-color:#6009FF; }
-        .doc-sdk-tab:hover:not(.active) { color:#1C1B1F; }
-        .doc-intro-card { border:1px solid #E7E0EC; border-radius:10px; padding:20px 22px; background:#FFFFFF; transition:border-color 0.2s,box-shadow 0.2s; cursor:pointer; text-decoration:none; display:block; }
-        .doc-intro-card:hover { border-color:#C4B5FD; box-shadow:0 8px 24px rgba(96,9,255,0.09); }
-        .doc-divider { border:none; border-top:1px solid #E7E0EC; margin:40px 0; }
-        .doc-sidebar { position:-webkit-sticky; position:sticky; top:60px; align-self:flex-start; }
-        .doc-mob-nav { position:-webkit-sticky; position:sticky; top:59px; z-index:90; }
-      `}</style>
-
       <Navbar scrolled={scrolled} />
 
       {isMobile && (
@@ -211,7 +196,7 @@ export default function DocsPage() {
       <div style={{ flex:1, maxWidth:1440, margin:"0 auto", padding:`0 ${hPad}px`, width:"100%", boxSizing:"border-box", display:"flex", gap:isMobile?0:48, alignItems:"flex-start" }}>
 
         {!isMobile && (
-          <aside className="doc-sidebar" style={{ width:SIDEBAR_W, flexShrink:0, height:"calc(100vh - 60px)", overflowY:"auto", paddingTop:40, paddingBottom:40, background:T.bg }}>
+          <aside className="doc-sidebar" style={{ width:SIDEBAR_W, flexShrink:0, paddingTop:40, paddingBottom:40, background:T.bg }}>
             {SIDEBAR.map(group => (
               <div key={group.label} style={{ marginBottom:8 }}>
                 <div style={{ fontFamily:"DM Sans,sans-serif", fontWeight:600, fontSize:10, color:T.muted, textTransform:"uppercase", letterSpacing:"0.09em", padding:"14px 0 6px 4px" }}>
