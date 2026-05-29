@@ -95,8 +95,8 @@ function Field({
         background:   T.bg,
         display:      "flex",
         alignItems:   multiline ? "stretch" : "center",
-        minHeight:    multiline ? 160 : 56,
-        height:       multiline ? "auto" : 56,
+        minHeight:    multiline ? 120 : 48,
+        height:       multiline ? "auto" : 48,
         transition:   "border-color 0.15s, border-width 0.1s",
       }}>
         <label
@@ -127,18 +127,18 @@ function Field({
         {multiline ? (
           <textarea
             {...sharedAttrs}
-            style={{ ...sharedInputStyle, padding: "28px 16px 12px", minHeight: 160 }}
+            style={{ ...sharedInputStyle, padding: "22px 14px 10px", minHeight: 120 }}
           />
         ) : (
           <input
             type={type}
             {...sharedAttrs}
-            style={{ ...sharedInputStyle, height: "100%", padding: lifted ? "20px 16px 8px" : "0 16px" }}
+            style={{ ...sharedInputStyle, height: "100%", padding: lifted ? "16px 14px 4px" : "0 14px" }}
           />
         )}
       </div>
 
-      <div style={{ display: "flex", justifyContent: "space-between", padding: "4px 16px 0", minHeight: 20 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", padding: "3px 14px 0", minHeight: 16 }}>
         <span
           id={`${id}-err`}
           style={{
@@ -195,7 +195,7 @@ function UploadZone({
         style={{
           border:       `${dragging ? 2 : 1}px dashed ${borderColor}`,
           borderRadius: 8,
-          padding:      "28px 20px 24px",
+          padding:      "16px 20px",
           cursor:       "pointer",
           background:   dragging ? "#EDE9FF" : T.bg,
           transition:   "all 0.15s",
@@ -212,7 +212,7 @@ function UploadZone({
           style={{ display: "none" }}
           onChange={e => { onAdd(Array.from(e.target.files ?? [])); e.target.value = ""; }}
         />
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" style={{ display: "block", margin: "0 auto 10px" }}>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" style={{ display: "block", margin: "0 auto 6px" }}>
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke={dragging ? T.primary : "#7A757F"} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
           <polyline points="17 8 12 3 7 8" stroke={dragging ? T.primary : "#7A757F"} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
           <line x1="12" y1="3" x2="12" y2="15" stroke={dragging ? T.primary : "#7A757F"} strokeWidth="1.8" strokeLinecap="round"/>
@@ -383,7 +383,7 @@ export default function WhistleblowerPage() {
       )}
 
       {/* Hero */}
-      <section style={{ padding: `${isMobile ? 56 : 72}px 0 ${isMobile ? 32 : 48}px` }}>
+      <section style={{ padding: `${isMobile ? 40 : 56}px 0 ${isMobile ? 24 : 32}px` }}>
         <div style={{ maxWidth: 1440, margin: "0 auto", padding: `0 ${hPad}px`, display: "flex", justifyContent: "center" }}>
           <div style={{ width: "100%", maxWidth: 610, display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
             <h1 style={{
@@ -420,7 +420,7 @@ export default function WhistleblowerPage() {
         flex:           1,
         maxWidth:       1440,
         margin:         "0 auto",
-        padding:        `0 ${hPad}px 96px`,
+        padding:        `0 ${hPad}px 64px`,
         width:          "100%",
         boxSizing:      "border-box",
         display:        "flex",
@@ -437,7 +437,7 @@ export default function WhistleblowerPage() {
             border:       "1px solid #DDD0FF",
             borderRadius: 8,
             padding:      "16px 20px",
-            marginBottom: 40,
+            marginBottom: 24,
           }}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0, marginTop: 1 }}>
               <circle cx="12" cy="12" r="10" stroke={T.primary} strokeWidth="1.8"/>
@@ -451,7 +451,7 @@ export default function WhistleblowerPage() {
           </div>
 
           {/* Form */}
-          <form onSubmit={handleSubmit} noValidate style={{ display: "flex", flexDirection: "column", gap: 32 }}>
+          <form onSubmit={handleSubmit} noValidate style={{ display: "flex", flexDirection: "column", gap: 20 }}>
 
             <Field
               id="name" label="Name" optional
