@@ -177,12 +177,10 @@ export default function DocsPage() {
         .doc-intro-card:hover { border-color:#C4B5FD; box-shadow:0 8px 24px rgba(96,9,255,0.09); }
         .doc-divider { border:none; border-top:1px solid #E7E0EC; margin:40px 0; }
         .doc-sidebar { position:-webkit-sticky; position:sticky; top:60px; align-self:flex-start; }
-        .doc-mob-nav { position:fixed; top:60px; left:0; right:0; z-index:90; }
+        .doc-mob-nav { position:-webkit-sticky; position:sticky; top:59px; z-index:90; }
       `}</style>
 
       <Navbar scrolled={scrolled} />
-
-      {isMobile && <div style={{ height:54, flexShrink:0 }} />}
 
       {isMobile && (
         <div className="doc-mob-nav" style={{ background:T.bg, borderBottom:"1px solid #E7E0EC", padding:"12px 20px" }}>
@@ -233,7 +231,7 @@ export default function DocsPage() {
         <main style={{ flex:1, minWidth:0, paddingTop:40, paddingBottom:80 }}>
 
           {/* ══ Introduction ══ */}
-          <div id="introduction" style={{ scrollMarginTop:100, marginBottom:32 }}>
+          <div id="introduction" style={{ scrollMarginTop:120, marginBottom:32 }}>
             <h1 style={{ margin:"0 0 12px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?34:46, color:T.dark, lineHeight:1.1, letterSpacing:"-0.01em" }}>
               PayOnUs{" "}<span style={{ color:T.primary }}>API</span>{" "}Documentation
             </h1>
@@ -265,7 +263,7 @@ export default function DocsPage() {
           </div>
 
           {/* ══ API Integration ══ */}
-          <div id="api-integration" style={{ scrollMarginTop:100 }}>
+          <div id="api-integration" style={{ scrollMarginTop:120 }}>
             <h2 style={{ margin:"0 0 10px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?22:28, color:T.dark }}>API Integration</h2>
             <p style={{ margin:"0 0 24px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:14, lineHeight:1.7, color:T.muted, maxWidth:580 }}>
               To set up your integration, follow these steps to get your credentials and connect to the PayOnUs API. All requests must be made over HTTPS; responses are in JSON format.
@@ -304,7 +302,7 @@ export default function DocsPage() {
           <hr className="doc-divider" />
 
           {/* ══ Authentication ══ */}
-          <div id="authentication" style={{ scrollMarginTop:100 }}>
+          <div id="authentication" style={{ scrollMarginTop:120 }}>
             <h2 style={{ margin:"0 0 10px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?22:28, color:T.dark }}>Authentication</h2>
             <p style={{ margin:"0 0 16px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:14, lineHeight:1.7, color:T.muted, maxWidth:560 }}>
               PayOnUs uses OAuth 2.0. Exchange your Client ID and Client Secret for an access token, then pass it in the <code style={inline}>Authorization</code> header of every request.
@@ -352,7 +350,7 @@ export default function DocsPage() {
           <hr className="doc-divider" />
 
           {/* ══ Error Handling ══ */}
-          <div id="error-handling" style={{ scrollMarginTop:100 }}>
+          <div id="error-handling" style={{ scrollMarginTop:120 }}>
             <h2 style={{ margin:"0 0 10px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?22:28, color:T.dark }}>Error Handling</h2>
             <p style={{ margin:"0 0 16px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:14, lineHeight:1.7, color:T.muted, maxWidth:560 }}>
               PayOnUs uses conventional HTTP status codes. <code style={inline}>2xx</code> indicates success; <code style={inline}>4xx</code> a client error; <code style={inline}>5xx</code> a server error.
@@ -391,7 +389,7 @@ export default function DocsPage() {
           <hr className="doc-divider" />
 
           {/* ══ Payins Overview ══ */}
-          <div id="payins-overview" style={{ scrollMarginTop:100 }}>
+          <div id="payins-overview" style={{ scrollMarginTop:120 }}>
             <h2 style={{ margin:"0 0 10px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?22:28, color:T.dark }}>Payins</h2>
             <p style={{ margin:"0 0 16px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:14, lineHeight:1.7, color:T.muted, maxWidth:580 }}>
               PayOnUs provides multiple methods to receive payments: Virtual Accounts (Fixed or Dynamic) and Mobile Money. Virtual Accounts accept bank transfers; Mobile Money supports MTN, M-Pesa, and other networks across Africa.
@@ -415,7 +413,7 @@ export default function DocsPage() {
           <hr className="doc-divider" />
 
           {/* ══ Fixed Accounts ══ */}
-          <div id="fixed-accounts" style={{ scrollMarginTop:100 }}>
+          <div id="fixed-accounts" style={{ scrollMarginTop:120 }}>
             <h2 style={{ margin:"0 0 10px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?22:28, color:T.dark }}>Fixed Accounts</h2>
             <p style={{ margin:"0 0 4px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:14, lineHeight:1.7, color:T.muted, maxWidth:560 }}>
               Fixed virtual accounts are permanent accounts assigned to your business that can receive payments from customers at any time.
@@ -442,7 +440,7 @@ export default function DocsPage() {
           <hr className="doc-divider" />
 
           {/* ══ Dynamic Accounts ══ */}
-          <div id="dynamic-accounts" style={{ scrollMarginTop:100 }}>
+          <div id="dynamic-accounts" style={{ scrollMarginTop:120 }}>
             <h2 style={{ margin:"0 0 10px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?22:28, color:T.dark }}>Dynamic Accounts</h2>
             <p style={{ margin:"0 0 4px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:14, lineHeight:1.7, color:T.muted, maxWidth:560 }}>
               Dynamic virtual accounts are temporary accounts created for a specific transaction. Ideal for one-time payments and precise transaction tracking.
@@ -481,7 +479,7 @@ export default function DocsPage() {
           <hr className="doc-divider" />
 
           {/* ══ Payouts Overview ══ */}
-          <div id="payouts-overview" style={{ scrollMarginTop:100 }}>
+          <div id="payouts-overview" style={{ scrollMarginTop:120 }}>
             <h2 style={{ margin:"0 0 10px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?22:28, color:T.dark }}>Payouts</h2>
             <p style={{ margin:"0 0 16px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:14, lineHeight:1.7, color:T.muted, maxWidth:580 }}>
               Transfer funds from your PayOnUs wallet to bank accounts, mobile money wallets, or other PayOnUs businesses. Always perform a Name Enquiry before initiating a bank transfer.
@@ -506,7 +504,7 @@ export default function DocsPage() {
           <hr className="doc-divider" />
 
           {/* ══ Bank Transfers ══ */}
-          <div id="bank-transfers" style={{ scrollMarginTop:100 }}>
+          <div id="bank-transfers" style={{ scrollMarginTop:120 }}>
             <h2 style={{ margin:"0 0 16px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?22:28, color:T.dark }}>Bank Transfers</h2>
 
             <h3 style={{ margin:"0 0 4px", fontFamily:"DM Sans,sans-serif", fontWeight:700, fontSize:15, color:T.dark }}>1. Name Enquiry</h3>
@@ -548,7 +546,7 @@ export default function DocsPage() {
           <hr className="doc-divider" />
 
           {/* ══ Wallets ══ */}
-          <div id="wallets" style={{ scrollMarginTop:100 }}>
+          <div id="wallets" style={{ scrollMarginTop:120 }}>
             <h2 style={{ margin:"0 0 10px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?22:28, color:T.dark }}>Wallets</h2>
             <p style={{ margin:"0 0 4px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:14, lineHeight:1.7, color:T.muted, maxWidth:560 }}>
               Retrieve all wallets for a merchant and their current balances.
@@ -580,7 +578,7 @@ export default function DocsPage() {
           <hr className="doc-divider" />
 
           {/* ══ Webhooks Overview ══ */}
-          <div id="webhooks-overview" style={{ scrollMarginTop:100 }}>
+          <div id="webhooks-overview" style={{ scrollMarginTop:120 }}>
             <h2 style={{ margin:"0 0 10px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?22:28, color:T.dark }}>Webhooks</h2>
             <p style={{ margin:"0 0 24px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:14, lineHeight:1.7, color:T.muted, maxWidth:580 }}>
               PayOnUs sends real-time webhook events when a payment is received or a payout completes. Configure a publicly accessible HTTPS endpoint under Merchant Dashboard → Settings → Webhooks. Respond with HTTP 200 within 5 seconds; defer heavy work to background jobs.
@@ -627,7 +625,7 @@ export default function DocsPage() {
           <hr className="doc-divider" />
 
           {/* ══ Verify Signatures ══ */}
-          <div id="verify-signatures" style={{ scrollMarginTop:100 }}>
+          <div id="verify-signatures" style={{ scrollMarginTop:120 }}>
             <h2 style={{ margin:"0 0 10px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?22:28, color:T.dark }}>Verify Signatures</h2>
             <p style={{ margin:"0 0 12px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:14, lineHeight:1.7, color:T.muted, maxWidth:560 }}>
               Always verify incoming webhooks to confirm they originate from PayOnUs and were not tampered with.
@@ -658,7 +656,7 @@ export default function DocsPage() {
           <hr className="doc-divider" />
 
           {/* ══ Testing ══ */}
-          <div id="testing" style={{ scrollMarginTop:100 }}>
+          <div id="testing" style={{ scrollMarginTop:120 }}>
             <h2 style={{ margin:"0 0 10px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?22:28, color:T.dark }}>Testing Integration</h2>
             <p style={{ margin:"0 0 16px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:14, lineHeight:1.7, color:T.muted, maxWidth:580 }}>
               Use the sandbox environment to simulate transactions before going live. Ensure your Webhook URL and Verification Key are configured in the sandbox dashboard, and that your IP is whitelisted.
