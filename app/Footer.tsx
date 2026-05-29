@@ -138,6 +138,7 @@ export default function Footer() {
                       color:          LINK,
                       textDecoration: "none",
                       transition:     "color 0.2s",
+                      alignSelf:      "flex-start",
                     }}
                     onMouseEnter={e => (e.currentTarget.style.color = "#6009FF")}
                     onMouseLeave={e => (e.currentTarget.style.color = LINK)}
