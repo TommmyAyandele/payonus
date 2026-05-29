@@ -384,44 +384,37 @@ export default function WhistleblowerPage() {
 
       {/* Hero */}
       <section style={{ padding: `${isMobile ? 56 : 72}px 0 ${isMobile ? 32 : 48}px` }}>
-        <div style={{
-          maxWidth:      1440,
-          margin:        "0 auto",
-          padding:       `0 ${hPad}px`,
-          display:       "flex",
-          flexDirection: "column",
-          alignItems:    "flex-start",
-        }}>
-          <span style={{ fontFamily: "DM Sans,sans-serif", fontWeight: 500, fontSize: 13, color: T.accent, display: "block", marginBottom: 14 }}>
-            • Legal
-          </span>
-          <h1 style={{
-            margin:        "0 0 16px",
-            fontFamily:    "Rubik,sans-serif",
-            fontStyle:     "italic",
-            fontWeight:    500,
-            fontSize:      isMobile ? 44 : isTablet ? 52 : 68,
-            lineHeight:    1.08,
-            letterSpacing: "-0.02em",
-            color:         T.headingBlack,
-            maxWidth:      700,
-          }}>
-            Whistleblower Reporting
-          </h1>
-          <p style={{
-            margin:     0,
-            fontFamily: "Rubik,sans-serif",
-            fontStyle:  "italic",
-            fontWeight: 400,
-            fontSize:   isMobile ? 15 : 17,
-            lineHeight: 1.6,
-            color:      T.muted,
-            maxWidth:   560,
-          }}>
-            This confidential reporting system allows you to report concerns regarding policy violations,
-            unethical behavior, or other issues. Your report will be handled with the utmost
-            confidentiality and forwarded to the appropriate authorities.
-          </p>
+        <div style={{ maxWidth: 1440, margin: "0 auto", padding: `0 ${hPad}px`, display: "flex", justifyContent: "center" }}>
+          <div style={{ width: "100%", maxWidth: 610, display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
+            <span style={{ fontFamily: "DM Sans,sans-serif", fontWeight: 500, fontSize: 13, color: T.accent, display: "block", marginBottom: 14 }}>
+              • Legal
+            </span>
+            <h1 style={{
+              margin:        "0 0 16px",
+              fontFamily:    "Rubik,sans-serif",
+              fontStyle:     "italic",
+              fontWeight:    500,
+              fontSize:      isMobile ? 44 : isTablet ? 52 : 68,
+              lineHeight:    1.08,
+              letterSpacing: "-0.02em",
+              color:         T.headingBlack,
+            }}>
+              Whistleblower Reporting
+            </h1>
+            <p style={{
+              margin:     0,
+              fontFamily: "Rubik,sans-serif",
+              fontStyle:  "italic",
+              fontWeight: 400,
+              fontSize:   isMobile ? 15 : 17,
+              lineHeight: 1.6,
+              color:      T.muted,
+            }}>
+              This confidential reporting system allows you to report concerns regarding policy violations,
+              unethical behavior, or other issues. Your report will be handled with the utmost
+              confidentiality and forwarded to the appropriate authorities.
+            </p>
+          </div>
         </div>
       </section>
 
