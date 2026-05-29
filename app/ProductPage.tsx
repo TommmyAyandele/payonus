@@ -279,7 +279,7 @@ export default function ProductPage({
             <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:isMobile?12:14, letterSpacing:"0.08em", textTransform:"uppercase", color:T.orange }}>
               {label}
             </span>
-            <h1 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?62:isTablet?64:90, lineHeight:1.05, letterSpacing:"-0.02em", color:T.headingBlack }}>
+            <h1 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?58:isTablet?60:86, lineHeight:1.05, letterSpacing:"-0.02em", color:T.headingBlack }}>
               {heading}
             </h1>
             <p style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:isMobile?15:17, lineHeight:1.65, color:T.muted, maxWidth:480 }}>

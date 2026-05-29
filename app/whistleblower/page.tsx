@@ -11,6 +11,8 @@ type Alert     = { type: "success" | "error"; message: string } | null;
 
 const API      = "https://dev-cicd-payonus-notification-service.dev-payonus.com/api/v1/report";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const ACCEPT   = ".pdf,.doc,.docx,.jpg,.jpeg,.png";
+const MAX_MB   = 10;
 
 function validate(f: FormState): Errors {
   const e: Errors = {};
@@ -27,10 +29,14 @@ function validate(f: FormState): Errors {
   return e;
 }
 
+function fmtSize(bytes: number) {
+  return bytes < 1024 * 1024
+    ? `${(bytes / 1024).toFixed(0)} KB`
+    : `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+}
+
 /**
  * MD3 outlined text field — matches Figma node 60844-711.
- * Outline: 1px #7A757F → 3px #6009FF focused.
- * Floating label: 14px resting, 12px lifted, background clips the border.
  */
 function Field({
   id, label, optional, type = "text", multiline,
@@ -82,7 +88,6 @@ function Field({
 
   return (
     <div>
-      {/* Field border container */}
       <div style={{
         position:     "relative",
         border:       `${outlinePx}px solid ${outline}`,
@@ -94,16 +99,12 @@ function Field({
         height:       multiline ? "auto" : 56,
         transition:   "border-color 0.15s, border-width 0.1s",
       }}>
-
-        {/* Floating label */}
         <label
           htmlFor={id}
           style={{
             position:      "absolute",
             left:          lifted ? 12 : 16,
-            top:           multiline
-                             ? (lifted ? -10 : 18)
-                             : (lifted ? -10 : "50%"),
+            top:           multiline ? (lifted ? -10 : 18) : (lifted ? -10 : "50%"),
             transform:     (!multiline && !lifted) ? "translateY(-50%)" : "none",
             fontSize:      lifted ? 12 : 14,
             fontWeight:    lifted ? 500 : 400,
@@ -119,12 +120,8 @@ function Field({
           }}
         >
           {label}
-          {optional && (
-            <span style={{ fontWeight: 400, color: "#79747E" }}> (optional)</span>
-          )}
-          {!optional && id === "message" && (
-            <span style={{ color: "#B3261E" }}> *</span>
-          )}
+          {optional && <span style={{ fontWeight: 400, color: "#79747E" }}> (optional)</span>}
+          {!optional && id === "message" && <span style={{ color: "#B3261E" }}> *</span>}
         </label>
 
         {multiline ? (
@@ -136,39 +133,23 @@ function Field({
           <input
             type={type}
             {...sharedAttrs}
-            style={{
-              ...sharedInputStyle,
-              height:  "100%",
-              padding: lifted ? "20px 16px 8px" : "0 16px",
-            }}
+            style={{ ...sharedInputStyle, height: "100%", padding: lifted ? "20px 16px 8px" : "0 16px" }}
           />
         )}
       </div>
 
-      {/* Supporting text row */}
       <div style={{ display: "flex", justifyContent: "space-between", padding: "4px 16px 0", minHeight: 20 }}>
         <span
           id={`${id}-err`}
           style={{
-            fontFamily: "DM Sans, sans-serif",
-            fontSize:   11,
-            fontWeight: 500,
-            lineHeight: "16px",
-            color:      error ? "#B3261E" : "transparent",
-            letterSpacing: "0.04em",
+            fontFamily: "DM Sans, sans-serif", fontSize: 11, fontWeight: 500,
+            lineHeight: "16px", color: error ? "#B3261E" : "transparent", letterSpacing: "0.04em",
           }}
         >
           {error ?? " "}
         </span>
         {multiline && (
-          <span style={{
-            fontFamily: "DM Sans, sans-serif",
-            fontSize:   11,
-            fontWeight: 500,
-            color:      "#7A757F",
-            lineHeight: "16px",
-            letterSpacing: "0.04em",
-          }}>
+          <span style={{ fontFamily: "DM Sans, sans-serif", fontSize: 11, fontWeight: 500, color: "#7A757F", lineHeight: "16px", letterSpacing: "0.04em" }}>
             {value.length} / 2000
           </span>
         )}
@@ -177,15 +158,122 @@ function Field({
   );
 }
 
+/* ─── Upload Zone ─── */
+function UploadZone({
+  files, onAdd, onRemove, error,
+}: {
+  files:    File[];
+  onAdd:    (f: File[]) => void;
+  onRemove: (i: number) => void;
+  error?:   string;
+}) {
+  const [dragging, setDragging] = React.useState(false);
+  const inputRef = React.useRef<HTMLInputElement>(null);
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    setDragging(false);
+    onAdd(Array.from(e.dataTransfer.files));
+  };
+
+  const borderColor = error ? "#B3261E" : dragging ? T.primary : "#7A757F";
+
+  return (
+    <div>
+      <p style={{ margin: "0 0 8px", fontFamily: "DM Sans, sans-serif", fontSize: 13, fontWeight: 500, color: "#49454F" }}>
+        Attachments <span style={{ fontWeight: 400, color: "#79747E" }}>(optional)</span>
+      </p>
+
+      <div
+        role="button"
+        tabIndex={0}
+        onClick={() => inputRef.current?.click()}
+        onKeyDown={e => (e.key === "Enter" || e.key === " ") && inputRef.current?.click()}
+        onDragOver={e => { e.preventDefault(); setDragging(true); }}
+        onDragLeave={() => setDragging(false)}
+        onDrop={handleDrop}
+        style={{
+          border:       `${dragging ? 2 : 1}px dashed ${borderColor}`,
+          borderRadius: 8,
+          padding:      "28px 20px 24px",
+          cursor:       "pointer",
+          background:   dragging ? "#EDE9FF" : T.bg,
+          transition:   "all 0.15s",
+          textAlign:    "center",
+          userSelect:   "none",
+          outline:      "none",
+        }}
+      >
+        <input
+          ref={inputRef}
+          type="file"
+          multiple
+          accept={ACCEPT}
+          style={{ display: "none" }}
+          onChange={e => { onAdd(Array.from(e.target.files ?? [])); e.target.value = ""; }}
+        />
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" style={{ display: "block", margin: "0 auto 10px" }}>
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke={dragging ? T.primary : "#7A757F"} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+          <polyline points="17 8 12 3 7 8" stroke={dragging ? T.primary : "#7A757F"} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+          <line x1="12" y1="3" x2="12" y2="15" stroke={dragging ? T.primary : "#7A757F"} strokeWidth="1.8" strokeLinecap="round"/>
+        </svg>
+        <p style={{ margin: 0, fontFamily: "DM Sans, sans-serif", fontSize: 14, color: dragging ? T.primary : "#49454F" }}>
+          <span style={{ fontWeight: 600, color: T.primary }}>Click to upload</span> or drag and drop
+        </p>
+        <p style={{ margin: "4px 0 0", fontFamily: "DM Sans, sans-serif", fontSize: 11, color: "#7A757F" }}>
+          PDF, DOC, DOCX, JPG, PNG — max {MAX_MB} MB each
+        </p>
+      </div>
+
+      {error && (
+        <p style={{ margin: "4px 0 0 16px", fontFamily: "DM Sans, sans-serif", fontSize: 11, fontWeight: 500, color: "#B3261E", letterSpacing: "0.04em" }}>
+          {error}
+        </p>
+      )}
+
+      {files.length > 0 && (
+        <ul style={{ margin: "12px 0 0", padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 8 }}>
+          {files.map((f, i) => (
+            <li key={i} style={{ display: "flex", alignItems: "center", gap: 10, background: "#F4F0FF", borderRadius: 6, padding: "8px 12px" }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0 }}>
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke={T.primary} strokeWidth="1.8" strokeLinejoin="round"/>
+                <polyline points="14 2 14 8 20 8" stroke={T.primary} strokeWidth="1.8" strokeLinejoin="round"/>
+              </svg>
+              <span style={{ flex: 1, fontFamily: "DM Sans, sans-serif", fontSize: 13, color: T.dark, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                {f.name}
+              </span>
+              <span style={{ fontFamily: "DM Sans, sans-serif", fontSize: 11, color: "#79747E", flexShrink: 0 }}>
+                {fmtSize(f.size)}
+              </span>
+              <button
+                type="button"
+                onClick={() => onRemove(i)}
+                aria-label={`Remove ${f.name}`}
+                style={{ border: "none", background: "none", cursor: "pointer", padding: 2, display: "flex", color: "#79747E", flexShrink: 0 }}
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                  <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                </svg>
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
 /* ─── Page ─── */
 export default function WhistleblowerPage() {
   const { isMobile, isTablet } = useBreakpoint();
 
-  const [scrolled, setScrolled] = React.useState(false);
-  const [form,     setForm]     = React.useState<FormState>({ name: "", email: "", message: "" });
-  const [errors,   setErrors]   = React.useState<Errors>({});
-  const [loading,  setLoading]  = React.useState(false);
-  const [alert,    setAlert]    = React.useState<Alert>(null);
+  const [scrolled,   setScrolled]   = React.useState(false);
+  const [form,       setForm]       = React.useState<FormState>({ name: "", email: "", message: "" });
+  const [errors,     setErrors]     = React.useState<Errors>({});
+  const [files,      setFiles]      = React.useState<File[]>([]);
+  const [fileError,  setFileError]  = React.useState<string | undefined>();
+  const [loading,    setLoading]    = React.useState(false);
+  const [alert,      setAlert]      = React.useState<Alert>(null);
 
   React.useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 10);
@@ -206,6 +294,24 @@ export default function WhistleblowerPage() {
     setErrors(p => ({ ...p, [name]: partial[name as keyof FormState] }));
   };
 
+  const handleAddFiles = (incoming: File[]) => {
+    const oversize = incoming.filter(f => f.size > MAX_MB * 1024 * 1024);
+    if (oversize.length > 0) {
+      setFileError(`${oversize.map(f => f.name).join(", ")} exceed${oversize.length === 1 ? "s" : ""} ${MAX_MB} MB.`);
+      return;
+    }
+    setFileError(undefined);
+    setFiles(prev => {
+      const names = new Set(prev.map(f => f.name));
+      return [...prev, ...incoming.filter(f => !names.has(f.name))];
+    });
+  };
+
+  const handleRemoveFile = (i: number) => {
+    setFiles(prev => prev.filter((_, idx) => idx !== i));
+    setFileError(undefined);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const errs = validate(form);
@@ -214,14 +320,25 @@ export default function WhistleblowerPage() {
 
     setLoading(true);
     try {
-      const res = await fetch(API, {
-        method:  "POST",
-        headers: { "Content-Type": "application/json" },
-        body:    JSON.stringify(form),
-      });
+      let body: BodyInit;
+      let headers: Record<string, string> = {};
+
+      if (files.length > 0) {
+        const fd = new FormData();
+        fd.append("name",    form.name);
+        fd.append("email",   form.email);
+        fd.append("message", form.message);
+        files.forEach(f => fd.append("attachments", f));
+        body = fd;
+      } else {
+        headers["Content-Type"] = "application/json";
+        body = JSON.stringify(form);
+      }
+
+      const res = await fetch(API, { method: "POST", headers, body });
       if (res.ok) {
         setAlert({ type: "success", message: "Your report has been submitted successfully. Thank you for your submission." });
-        setTimeout(() => setForm({ name: "", email: "", message: "" }), 2000);
+        setTimeout(() => { setForm({ name: "", email: "", message: "" }); setFiles([]); }, 2000);
       } else {
         setAlert({ type: "error", message: "Failed to submit your report. Please try again later." });
       }
@@ -245,20 +362,20 @@ export default function WhistleblowerPage() {
           role="alert"
           aria-live="polite"
           style={{
-            position:   "fixed",
-            top:        80,
-            left:       "50%",
-            transform:  "translateX(-50%)",
-            zIndex:     200,
-            padding:    "14px 24px",
+            position:     "fixed",
+            top:          80,
+            left:         "50%",
+            transform:    "translateX(-50%)",
+            zIndex:       200,
+            padding:      "14px 24px",
             borderRadius: 8,
-            background: alert.type === "success" ? "#1A7F5A" : "#B3261E",
-            color:      "#fff",
-            fontFamily: "DM Sans, sans-serif",
-            fontSize:   15,
-            boxShadow:  "0 4px 20px rgba(0,0,0,0.18)",
-            maxWidth:   "90vw",
-            textAlign:  "center",
+            background:   alert.type === "success" ? "#1A7F5A" : "#B3261E",
+            color:        "#fff",
+            fontFamily:   "DM Sans, sans-serif",
+            fontSize:     15,
+            boxShadow:    "0 4px 20px rgba(0,0,0,0.18)",
+            maxWidth:     "90vw",
+            textAlign:    "center",
           }}
         >
           {alert.message}
@@ -268,14 +385,14 @@ export default function WhistleblowerPage() {
       {/* Hero */}
       <section style={{ padding: `${isMobile ? 56 : 72}px 0 ${isMobile ? 32 : 48}px` }}>
         <div style={{
-          maxWidth:       1440,
-          margin:         "0 auto",
-          padding:        `0 ${hPad}px`,
-          display:        "flex",
-          flexDirection:  "column",
-          alignItems:     "flex-start",
+          maxWidth:      1440,
+          margin:        "0 auto",
+          padding:       `0 ${hPad}px`,
+          display:       "flex",
+          flexDirection: "column",
+          alignItems:    "flex-start",
         }}>
-          <span style={{ fontFamily:"DM Sans,sans-serif", fontWeight:500, fontSize:13, color:T.accent, display:"block", marginBottom:14 }}>
+          <span style={{ fontFamily: "DM Sans,sans-serif", fontWeight: 500, fontSize: 13, color: T.accent, display: "block", marginBottom: 14 }}>
             • Legal
           </span>
           <h1 style={{
@@ -283,10 +400,11 @@ export default function WhistleblowerPage() {
             fontFamily:    "Rubik,sans-serif",
             fontStyle:     "italic",
             fontWeight:    500,
-            fontSize:      isMobile ? 62 : isTablet ? 64 : 90,
-            lineHeight:    1.05,
+            fontSize:      isMobile ? 44 : isTablet ? 52 : 68,
+            lineHeight:    1.08,
             letterSpacing: "-0.02em",
             color:         T.headingBlack,
+            maxWidth:      700,
           }}>
             Whistleblower Reporting
           </h1>
@@ -309,13 +427,13 @@ export default function WhistleblowerPage() {
 
       {/* Form area */}
       <div style={{
-        flex:      1,
-        maxWidth:  1440,
-        margin:    "0 auto",
-        padding:   `0 ${hPad}px 96px`,
-        width:     "100%",
-        boxSizing: "border-box",
-        display:   "flex",
+        flex:           1,
+        maxWidth:       1440,
+        margin:         "0 auto",
+        padding:        `0 ${hPad}px 96px`,
+        width:          "100%",
+        boxSizing:      "border-box",
+        display:        "flex",
         justifyContent: "center",
       }}>
         <div style={{ width: "100%", maxWidth: 610 }}>
@@ -331,19 +449,19 @@ export default function WhistleblowerPage() {
             padding:      "16px 20px",
             marginBottom: 40,
           }}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style={{ flexShrink:0, marginTop:1 }}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0, marginTop: 1 }}>
               <circle cx="12" cy="12" r="10" stroke={T.primary} strokeWidth="1.8"/>
               <path d="M12 8v4M12 16h.01" stroke={T.primary} strokeWidth="2" strokeLinecap="round"/>
             </svg>
-            <p style={{ margin:0, fontFamily:"DM Sans,sans-serif", fontSize:14, color:T.muted, lineHeight:1.6 }}>
-              <strong style={{ color:T.dark }}>Your identity is protected.</strong>{" "}
+            <p style={{ margin: 0, fontFamily: "DM Sans,sans-serif", fontSize: 14, color: T.muted, lineHeight: 1.6 }}>
+              <strong style={{ color: T.dark }}>Your identity is protected.</strong>{" "}
               Name and email are optional — you may submit this report completely anonymously.
               All submissions are reviewed only by authorised personnel.
             </p>
           </div>
 
           {/* Form */}
-          <form onSubmit={handleSubmit} noValidate style={{ display:"flex", flexDirection:"column", gap:32 }}>
+          <form onSubmit={handleSubmit} noValidate style={{ display: "flex", flexDirection: "column", gap: 32 }}>
 
             <Field
               id="name" label="Name" optional
@@ -365,24 +483,31 @@ export default function WhistleblowerPage() {
               maxLength={2000}
             />
 
+            <UploadZone
+              files={files}
+              onAdd={handleAddFiles}
+              onRemove={handleRemoveFile}
+              error={fileError}
+            />
+
             {/* Submit button */}
             <button
               type="submit"
               disabled={loading}
               style={{
-                width:          "100%",
-                padding:        "16px 24px",
-                background:     loading ? "#C4B5FD" : T.primary,
-                color:          "#fff",
-                border:         "none",
-                borderRadius:   4,
-                fontFamily:     "DM Sans, sans-serif",
-                fontWeight:     500,
-                fontSize:       16,
-                lineHeight:     "24px",
-                letterSpacing:  "0.0094em",
-                cursor:         loading ? "not-allowed" : "pointer",
-                transition:     "opacity 0.15s",
+                width:         "100%",
+                padding:       "16px 24px",
+                background:    loading ? "#C4B5FD" : T.primary,
+                color:         "#fff",
+                border:        "none",
+                borderRadius:  4,
+                fontFamily:    "DM Sans, sans-serif",
+                fontWeight:    500,
+                fontSize:      16,
+                lineHeight:    "24px",
+                letterSpacing: "0.0094em",
+                cursor:        loading ? "not-allowed" : "pointer",
+                transition:    "opacity 0.15s",
               }}
               onMouseEnter={e => { if (!loading) e.currentTarget.style.opacity = "0.88"; }}
               onMouseLeave={e => { e.currentTarget.style.opacity = "1"; }}
