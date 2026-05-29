@@ -176,12 +176,16 @@ export default function DocsPage() {
         .doc-intro-card { border:1px solid #E7E0EC; border-radius:10px; padding:20px 22px; background:#FFFFFF; transition:border-color 0.2s,box-shadow 0.2s; cursor:pointer; text-decoration:none; display:block; }
         .doc-intro-card:hover { border-color:#C4B5FD; box-shadow:0 8px 24px rgba(96,9,255,0.09); }
         .doc-divider { border:none; border-top:1px solid #E7E0EC; margin:40px 0; }
+        .doc-sidebar { position:-webkit-sticky; position:sticky; top:60px; align-self:flex-start; }
+        .doc-mob-nav { position:fixed; top:60px; left:0; right:0; z-index:90; }
       `}</style>
 
       <Navbar scrolled={scrolled} />
 
+      {isMobile && <div style={{ height:54, flexShrink:0 }} />}
+
       {isMobile && (
-        <div style={{ position:"sticky", top:60, zIndex:90, background:T.bg, borderBottom:"1px solid #E7E0EC", padding:"12px 20px" }}>
+        <div className="doc-mob-nav" style={{ background:T.bg, borderBottom:"1px solid #E7E0EC", padding:"12px 20px" }}>
           <button
             onClick={() => setSidebarOpen(o => !o)}
             style={{ fontFamily:"DM Sans,sans-serif", fontWeight:500, fontSize:13, color:T.primary, background:"#EDE9FF", border:"1px solid #DDD0FF", borderRadius:6, padding:"6px 14px", cursor:"pointer" }}
@@ -209,7 +213,7 @@ export default function DocsPage() {
       <div style={{ flex:1, maxWidth:1440, margin:"0 auto", padding:`0 ${hPad}px`, width:"100%", boxSizing:"border-box", display:"flex", gap:isMobile?0:48, alignItems:"flex-start" }}>
 
         {!isMobile && (
-          <aside style={{ width:SIDEBAR_W, flexShrink:0, position:"sticky", top:60, alignSelf:"flex-start", height:"calc(100vh - 60px)", overflowY:"auto", paddingTop:40, paddingBottom:40, background:T.bg }}>
+          <aside className="doc-sidebar" style={{ width:SIDEBAR_W, flexShrink:0, height:"calc(100vh - 60px)", overflowY:"auto", paddingTop:40, paddingBottom:40, background:T.bg }}>
             {SIDEBAR.map(group => (
               <div key={group.label} style={{ marginBottom:8 }}>
                 <div style={{ fontFamily:"DM Sans,sans-serif", fontWeight:600, fontSize:10, color:T.muted, textTransform:"uppercase", letterSpacing:"0.09em", padding:"14px 0 6px 4px" }}>
