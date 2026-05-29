@@ -67,7 +67,7 @@ export default function LegalPage({ title, subtitle, updated, sections }: LegalP
 
       {/* ── HERO ── */}
       <section style={{ background:T.bg, padding:`${isMobile?56:72}px 0 ${isMobile?40:56}px` }}>
-        <div style={{ maxWidth:1440, margin:"0 auto", padding:`0 ${hPad}px`, display:"flex", flexDirection:"column", alignItems:"center", textAlign:"center" }}>
+        <div style={{ maxWidth:1440, margin:"0 auto", padding:`0 ${hPad}px`, display:"flex", flexDirection:"column", alignItems:"flex-start" }}>
           <span style={{ fontFamily:"DM Sans,sans-serif", fontWeight:500, fontSize:13, color:T.accent, display:"block", marginBottom:14 }}>
             • Legal
           </span>

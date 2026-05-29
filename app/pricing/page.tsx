@@ -177,7 +177,7 @@ export default function PricingPage() {
       }}>
         <HeroBg />
 
-        <div style={{position:"relative",zIndex:1,maxWidth:1440,margin:"0 auto",padding:`0 ${hPad}px`,display:"flex",flexDirection:"column",alignItems:"center",textAlign:"center"}}>
+        <div style={{position:"relative",zIndex:1,maxWidth:1440,margin:"0 auto",padding:`0 ${hPad}px`,display:"flex",flexDirection:"column",alignItems:"flex-start"}}>
 
           {/* Label */}
           <span className="fade-up" style={{

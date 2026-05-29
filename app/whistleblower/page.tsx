@@ -273,8 +273,7 @@ export default function WhistleblowerPage() {
           padding:        `0 ${hPad}px`,
           display:        "flex",
           flexDirection:  "column",
-          alignItems:     "center",
-          textAlign:      "center",
+          alignItems:     "flex-start",
         }}>
           <span style={{ fontFamily:"DM Sans,sans-serif", fontWeight:500, fontSize:13, color:T.accent, display:"block", marginBottom:14 }}>
             • Legal

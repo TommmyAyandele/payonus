@@ -154,7 +154,7 @@ export default function SupportPage() {
         padding: isMobile ? "64px 0 80px" : "88px 0 120px",
       }}>
         <HeroBg />
-        <div style={{position:"relative",zIndex:1,maxWidth:1440,margin:"0 auto",padding:`0 ${hPad}px`,display:"flex",flexDirection:"column",alignItems:"center",textAlign:"center"}}>
+        <div style={{position:"relative",zIndex:1,maxWidth:1440,margin:"0 auto",padding:`0 ${hPad}px`,display:"flex",flexDirection:"column",alignItems:"flex-start"}}>
 
           <span className="fade-up" style={{
             display:"block", marginBottom: isMobile ? 20 : 28,
