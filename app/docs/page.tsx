@@ -99,6 +99,8 @@ export default function DocsPage() {
   const [activeId,     setActiveId]     = React.useState("introduction");
   const [activeTab,    setActiveTab]    = React.useState<"curl"|"node"|"python"|"php">("curl");
   const [sidebarOpen,  setSidebarOpen]  = React.useState(false);
+  const [sidebarLeft,  setSidebarLeft]  = React.useState(80);
+  const spacerRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -114,6 +116,15 @@ export default function DocsPage() {
     SECTION_IDS.forEach(id => { const el = document.getElementById(id); if (el) obs.observe(el); });
     return () => obs.disconnect();
   }, []);
+
+  React.useEffect(() => {
+    const measure = () => {
+      if (spacerRef.current) setSidebarLeft(spacerRef.current.getBoundingClientRect().left);
+    };
+    measure();
+    window.addEventListener("resize", measure, { passive: true });
+    return () => window.removeEventListener("resize", measure);
+  }, [isMobile]);
 
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
@@ -181,7 +192,7 @@ export default function DocsPage() {
       <Navbar scrolled={scrolled} />
 
       {isMobile && (
-        <div style={{ background:T.bg, borderBottom:"1px solid #E7E0EC", padding:"12px 20px" }}>
+        <div style={{ position:"sticky", top:60, zIndex:90, background:T.bg, borderBottom:"1px solid #E7E0EC", padding:"12px 20px" }}>
           <button
             onClick={() => setSidebarOpen(o => !o)}
             style={{ fontFamily:"DM Sans,sans-serif", fontWeight:500, fontSize:13, color:T.primary, background:"#EDE9FF", border:"1px solid #DDD0FF", borderRadius:6, padding:"6px 14px", cursor:"pointer" }}
@@ -209,21 +220,26 @@ export default function DocsPage() {
       <div style={{ flex:1, maxWidth:1440, margin:"0 auto", padding:`0 ${hPad}px`, width:"100%", boxSizing:"border-box", display:"flex", gap:isMobile?0:48, alignItems:"flex-start" }}>
 
         {!isMobile && (
-          <aside style={{ width:SIDEBAR_W, flexShrink:0, position:"sticky", top:90, alignSelf:"flex-start", height:"calc(100vh - 90px)", overflowY:"auto", paddingTop:40, paddingBottom:40 }}>
-            {SIDEBAR.map(group => (
-              <div key={group.label} style={{ marginBottom:8 }}>
-                <div style={{ fontFamily:"DM Sans,sans-serif", fontWeight:600, fontSize:10, color:T.muted, textTransform:"uppercase", letterSpacing:"0.09em", padding:"14px 0 6px 4px" }}>
-                  {group.label}
+          <>
+            {/* Spacer — holds the sidebar's place in the flex flow */}
+            <div ref={spacerRef} style={{ width:SIDEBAR_W, flexShrink:0 }} />
+            {/* Fixed sidebar — always on screen */}
+            <aside style={{ position:"fixed", left:sidebarLeft, top:60, width:SIDEBAR_W, height:"calc(100vh - 60px)", overflowY:"auto", paddingTop:40, paddingBottom:40, background:T.bg, zIndex:50 }}>
+              {SIDEBAR.map(group => (
+                <div key={group.label} style={{ marginBottom:8 }}>
+                  <div style={{ fontFamily:"DM Sans,sans-serif", fontWeight:600, fontSize:10, color:T.muted, textTransform:"uppercase", letterSpacing:"0.09em", padding:"14px 0 6px 4px" }}>
+                    {group.label}
+                  </div>
+                  {group.links.map(link => (
+                    <button key={link.id} className={`doc-sidebar-link${activeId===link.id?" active":""}`} onClick={() => scrollTo(link.id)}>
+                      <span style={{ width:5,height:5,borderRadius:"50%",flexShrink:0,background:activeId===link.id?"#6009FF":"#C4B5FD",display:"inline-block" }}/>
+                      {link.label}
+                    </button>
+                  ))}
                 </div>
-                {group.links.map(link => (
-                  <button key={link.id} className={`doc-sidebar-link${activeId===link.id?" active":""}`} onClick={() => scrollTo(link.id)}>
-                    <span style={{ width:5,height:5,borderRadius:"50%",flexShrink:0,background:activeId===link.id?"#6009FF":"#C4B5FD",display:"inline-block" }}/>
-                    {link.label}
-                  </button>
-                ))}
-              </div>
-            ))}
-          </aside>
+              ))}
+            </aside>
+          </>
         )}
 
         <main style={{ flex:1, minWidth:0, paddingTop:40, paddingBottom:80 }}>
