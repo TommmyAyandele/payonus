@@ -177,7 +177,7 @@ export default function PricingPage() {
       }}>
         <HeroBg />
 
-        <div style={{position:"relative",zIndex:1,maxWidth:1440,margin:"0 auto",padding:`0 ${hPad}px`}}>
+        <div style={{position:"relative",zIndex:1,maxWidth:1440,margin:"0 auto",padding:`0 ${hPad}px`,display:"flex",flexDirection:"column",alignItems:"center",textAlign:"center"}}>
 
           {/* Label */}
           <span className="fade-up" style={{
@@ -189,7 +189,7 @@ export default function PricingPage() {
           <h1 className="fade-up d1" style={{
             margin:`0 0 ${isMobile ? 16 : 20}px`,
             fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500,
-            fontSize: isMobile ? 52 : isTablet ? 68 : 84,
+            fontSize: isMobile ? 62 : isTablet ? 64 : 90,
             lineHeight:1.04, letterSpacing:"-0.02em", color:T.headingBlack,
           }}>
             Simple pricing.<br />No surprises.
@@ -199,7 +199,7 @@ export default function PricingPage() {
           <p className="fade-up d2" style={{
             margin:`0 0 ${isMobile ? 44 : 60}px`,
             fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400,
-            fontSize: isMobile ? 15 : 16, lineHeight:1.7, color:T.muted, maxWidth:480,
+            fontSize: isMobile ? 15 : 17, lineHeight:1.7, color:T.muted, maxWidth:520,
           }}>
             Pay only for what you use. No setup fees, no monthly minimums on Starter. Upgrade when you need more
           </p>

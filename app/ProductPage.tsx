@@ -275,17 +275,17 @@ export default function ProductPage({
         </div>
 
         <div style={{ position:"relative", zIndex:1, maxWidth:1440, margin:"0 auto", padding:isMobile?`80px 20px 60px`:`0 ${hPad}px`, minHeight:isMobile?"auto":"100vh", display:isMobile?"block":"flex", alignItems:"center", justifyContent:"center" }}>
-          <div style={{ maxWidth:isMobile?"100%":isTablet?620:860, display:"flex", flexDirection:"column", gap:isMobile?28:24, alignItems:"flex-start" }}>
+          <div style={{ maxWidth:isMobile?"100%":760, display:"flex", flexDirection:"column", gap:isMobile?28:24, alignItems:"center", textAlign:"center", margin:"0 auto" }}>
             <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:isMobile?12:14, letterSpacing:"0.08em", textTransform:"uppercase", color:T.orange }}>
               {label}
             </span>
-            <h1 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?44:isTablet?58:72, lineHeight:1.05, letterSpacing:"-0.02em", color:T.headingBlack }}>
+            <h1 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?62:isTablet?64:90, lineHeight:1.05, letterSpacing:"-0.02em", color:T.headingBlack }}>
               {heading}
             </h1>
-            <p style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:16, lineHeight:1.65, color:T.muted, maxWidth:isMobile?320:440 }}>
+            <p style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:isMobile?15:17, lineHeight:1.65, color:T.muted, maxWidth:480 }}>
               {subtext}
             </p>
-            <div style={{ display:"flex", flexWrap:"wrap", gap:12 }}>
+            <div style={{ display:"flex", flexWrap:"wrap", gap:12, justifyContent:"center" }}>
               <button style={{ fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14, color:T.white, background:T.primary, border:"none", borderRadius:4, padding:"13px 28px", cursor:"pointer", transition:"opacity .15s" }}
                 onMouseEnter={e=>(e.currentTarget.style.opacity="0.88")} onMouseLeave={e=>(e.currentTarget.style.opacity="1")}
                 onClick={() => { window.location.href="/get-started"; }}>

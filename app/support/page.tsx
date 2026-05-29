@@ -154,7 +154,7 @@ export default function SupportPage() {
         padding: isMobile ? "64px 0 80px" : "88px 0 120px",
       }}>
         <HeroBg />
-        <div style={{position:"relative",zIndex:1,maxWidth:1440,margin:"0 auto",padding:`0 ${hPad}px`}}>
+        <div style={{position:"relative",zIndex:1,maxWidth:1440,margin:"0 auto",padding:`0 ${hPad}px`,display:"flex",flexDirection:"column",alignItems:"center",textAlign:"center"}}>
 
           <span className="fade-up" style={{
             display:"block", marginBottom: isMobile ? 20 : 28,
@@ -165,9 +165,8 @@ export default function SupportPage() {
           <h1 className="fade-up d1" style={{
             margin:`0 0 ${isMobile ? 20 : 28}px`,
             fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500,
-            fontSize: isMobile ? 52 : isTablet ? 72 : 90,
+            fontSize: isMobile ? 62 : isTablet ? 64 : 90,
             lineHeight:1.04, letterSpacing:"-0.02em", color:T.headingBlack,
-            maxWidth: 760,
           }}>
             We're here when it matters.
           </h1>
