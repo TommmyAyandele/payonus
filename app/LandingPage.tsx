@@ -35,7 +35,6 @@ function Hero() {
   const { isMobile, isTablet } = useBreakpoint();
   const [wordIdx, setWordIdx] = React.useState(0);
   const [animKey, setAnimKey] = React.useState(0);
-  const textRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
     const id = setInterval(() => {
@@ -45,20 +44,6 @@ function Hero() {
     return () => clearInterval(id);
   }, []);
 
-  const onParallax = (e: React.MouseEvent<HTMLElement>) => {
-    if (isMobile || !textRef.current) return;
-    const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
-    const x = (e.clientX - left - width  / 2) / width;
-    const y = (e.clientY - top  - height / 2) / height;
-    textRef.current.style.transform = `translate(${x * 14}px,${y * 8}px)`;
-  };
-
-  const onParallaxLeave = () => {
-    if (!textRef.current) return;
-    textRef.current.style.transition = "transform 0.7s cubic-bezier(0.16,1,0.3,1)";
-    textRef.current.style.transform  = "";
-    setTimeout(() => { if (textRef.current) textRef.current.style.transition = ""; }, 700);
-  };
 
   const hPad    = isMobile ? 20 : isTablet ? 48 : 80;
   const h1Size  = isMobile ? 62 : isTablet ? 64 : 90;
@@ -68,8 +53,6 @@ function Hero() {
   return (
     <section
       style={{ position:"relative", width:"100%", height:"100vh", background:T.bg, overflow:"hidden" }}
-      onMouseMove={onParallax}
-      onMouseLeave={onParallaxLeave}
     >
       {/* World map */}
       <div className="map-rotate" style={{ position:"absolute", left:"50%", top:"50%", pointerEvents:"none", width: isMobile ? 900 : 1600, zIndex:0 }}>
@@ -89,7 +72,7 @@ function Hero() {
         justifyContent: "center",    /* vertical centre in that usable band */
       }}>
         <div style={{ maxWidth:1440, margin:"0 auto", padding:`0 ${hPad}px`, width:"100%", boxSizing:"border-box", display:"flex", justifyContent:"center" }}>
-          <div ref={textRef} style={{ width: isMobile ? "100%" : 700, display:"flex", flexDirection:"column", gap: isMobile ? 20 : 40, transition:"transform 0.15s linear", willChange:"transform" }}>
+          <div style={{ width: isMobile ? "100%" : 700, display:"flex", flexDirection:"column", gap: isMobile ? 20 : 40 }}>
 
             <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize: isMobile ? 13 : 16, letterSpacing:"0.0094em", color:T.orange }}>
               — PAN-AFRICAN PAYMENT INFRASTRUCTURE
