@@ -42,9 +42,11 @@ const COLS: { heading: string; links: { label: string; href: string }[] }[] = [
   {
     heading: "Legal",
     links: [
-      { label: "Terms of Service", href: "/terms"   },
-      { label: "Privacy Policy",   href: "/privacy" },
-      { label: "Cookies Policy",   href: "/cookies" },
+      { label: "Terms of Service", href: "/terms"          },
+      { label: "Privacy Policy",   href: "/privacy"        },
+      { label: "Cookies Policy",   href: "/cookies"        },
+      { label: "ISMS Policy",      href: "/isms-policy"    },
+      { label: "Whistleblower",    href: "/whistleblower"  },
     ],
   },
 ];
