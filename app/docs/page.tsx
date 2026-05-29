@@ -209,7 +209,7 @@ export default function DocsPage() {
       <div style={{ flex:1, maxWidth:1440, margin:"0 auto", padding:`0 ${hPad}px`, width:"100%", boxSizing:"border-box", display:"flex", gap:isMobile?0:48, alignItems:"flex-start" }}>
 
         {!isMobile && (
-          <aside style={{ width:SIDEBAR_W, flexShrink:0, position:"sticky", top:90, alignSelf:"flex-start", paddingTop:40, paddingBottom:40, overflowY:"auto", maxHeight:"calc(100vh - 90px)" }}>
+          <aside style={{ width:SIDEBAR_W, flexShrink:0, position:"sticky", top:90, alignSelf:"flex-start", height:"calc(100vh - 90px)", overflowY:"auto", paddingTop:40, paddingBottom:40 }}>
             {SIDEBAR.map(group => (
               <div key={group.label} style={{ marginBottom:8 }}>
                 <div style={{ fontFamily:"DM Sans,sans-serif", fontWeight:600, fontSize:10, color:T.muted, textTransform:"uppercase", letterSpacing:"0.09em", padding:"14px 0 6px 4px" }}>
