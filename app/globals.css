@@ -8,14 +8,14 @@
 
 html {
   background: #FAFAF8;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {
   background: #FAFAF8;
   font-family: "DM Sans", Arial, sans-serif;
   min-height: 100vh;
-  overflow-x: hidden;
+  overflow-x: clip;
   width: 100%;
 }
 
