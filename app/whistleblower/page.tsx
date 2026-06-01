@@ -60,7 +60,7 @@ function UploadZone({ files, onAdd, onRemove, error }: {
           borderRadius: 8,
           padding:      "20px 16px",
           cursor:       "pointer",
-          background:   dragging ? "#EDE9FF" : "#FFFFFF",
+          background:   dragging ? "#EDE9FF" : T.white,
           transition:   "all 0.15s",
           textAlign:    "center",
           userSelect:   "none",
@@ -193,11 +193,11 @@ export default function WhistleblowerPage() {
   return (
     <div style={{ display:"flex", flexDirection:"column", minHeight:"100vh", background:T.bg }}>
       <style>{`
-        fieldset.wb-field{border:1px solid ${T.borderLight};border-radius:8px;padding:2px 14px 14px;background:#FFFFFF;margin:0;transition:border-color .18s;}
+        fieldset.wb-field{border:1px solid ${T.borderLight};border-radius:8px;padding:2px 14px 14px;background:${T.white};margin:0;transition:border-color .18s;}
         fieldset.wb-field:focus-within{border-color:${T.primary};}
         fieldset.wb-field.has-error{border-color:#B3261E;}
         fieldset.wb-field.has-error legend{color:#B3261E;}
-        fieldset.wb-field legend{font-family:"DM Sans",sans-serif;font-weight:400;font-size:12px;color:${T.muted};padding:0 4px;margin-left:-4px;line-height:1;background:#FFFFFF;}
+        fieldset.wb-field legend{font-family:"DM Sans",sans-serif;font-weight:400;font-size:12px;color:${T.muted};padding:0 4px;margin-left:-4px;line-height:1;background:${T.white};}
         fieldset.wb-field input,fieldset.wb-field textarea{width:100%;border:none;outline:none;font-family:"DM Sans",sans-serif;font-size:14px;color:${T.dark};background:transparent;padding:0;resize:none;}
         fieldset.wb-field textarea{min-height:90px;padding-top:4px;}
         .wb-field-error{margin:4px 0 0;font-family:"DM Sans",sans-serif;font-size:12px;color:#B3261E;}
@@ -239,7 +239,7 @@ export default function WhistleblowerPage() {
       </section>
 
       {/* Form section */}
-      <section style={{ flex:1, background:"#F0EFEB" }}>
+      <section style={{ flex:1, background:T.bg }}>
         <div style={{
           maxWidth:1440, margin:"0 auto",
           padding:`${isMobile ? 56 : 80}px ${hPad}px ${isMobile ? 64 : 96}px`,
