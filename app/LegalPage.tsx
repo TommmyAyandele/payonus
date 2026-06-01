@@ -4,6 +4,7 @@ import React from "react";
 import { useBreakpoint } from "./use-breakpoint";
 import Navbar, { T } from "./Navbar";
 import Footer from "./Footer";
+import HeroBg from "./HeroBg";
 
 
 export interface LegalSection {
@@ -66,18 +67,19 @@ export default function LegalPage({ title, subtitle, updated, sections }: LegalP
       <Navbar scrolled={scrolled} />
 
       {/* ── HERO ── */}
-      <section style={{ background:T.bg, padding:`${isMobile?56:72}px 0 ${isMobile?40:56}px` }}>
-        <div style={{ maxWidth:1440, margin:"0 auto", padding:`0 ${hPad}px`, display:"flex", flexDirection:"column", alignItems:"flex-start" }}>
-          <span style={{ fontFamily:"DM Sans,sans-serif", fontWeight:500, fontSize:13, color:T.accent, display:"block", marginBottom:14 }}>
+      <section style={{ position:"relative", width:"100%", background:T.bg, overflow:"hidden", padding: isMobile ? "64px 0 80px" : "88px 0 120px" }}>
+        <HeroBg />
+        <div style={{ position:"relative", zIndex:1, maxWidth:1440, margin:"0 auto", padding:`0 ${hPad}px`, display:"flex", flexDirection:"column", alignItems:"flex-start" }}>
+          <span className="fade-up" style={{ display:"block", marginBottom: isMobile ? 20 : 28, fontFamily:"DM Sans,sans-serif", fontWeight:500, fontSize:14, color:T.orange }}>
             • Legal
           </span>
-          <h1 style={{ margin:"0 0 16px", fontFamily:"Rubik,sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?62:isTablet?64:90, lineHeight:1.05, letterSpacing:"-0.02em", color:T.headingBlack }}>
+          <h1 className="fade-up d1" style={{ margin:`0 0 ${isMobile ? 20 : 28}px`, fontFamily:"Rubik,sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?62:isTablet?64:90, lineHeight:1.04, letterSpacing:"-0.02em", color:T.headingBlack }}>
             {title}
           </h1>
-          <p style={{ margin:"0 0 12px", fontFamily:"Rubik,sans-serif", fontStyle:"italic", fontWeight:400, fontSize:isMobile?15:17, lineHeight:1.6, color:T.muted, maxWidth:520 }}>
+          <p className="fade-up d2" style={{ margin:"0 0 12px", fontFamily:"Rubik,sans-serif", fontStyle:"italic", fontWeight:400, fontSize:isMobile?15:17, lineHeight:1.7, color:T.muted, maxWidth:520 }}>
             {subtitle}
           </p>
-          <span style={{ fontFamily:"DM Sans,sans-serif", fontWeight:400, fontSize:13, color:"#9CA3AF" }}>
+          <span className="fade-up d2" style={{ fontFamily:"DM Sans,sans-serif", fontWeight:400, fontSize:13, color:"#9CA3AF" }}>
             Last updated: {updated}
           </span>
         </div>
