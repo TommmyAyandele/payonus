@@ -393,7 +393,7 @@ export default function WhistleblowerPage() {
           <h1 className="fade-up d1" style={{ margin:`0 0 ${isMobile ? 20 : 28}px`, fontFamily:"Rubik,sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?62:isTablet?64:90, lineHeight:1.04, letterSpacing:"-0.02em", color:T.headingBlack }}>
             Whistleblower Reporting
           </h1>
-          <p className="fade-up d2" style={{ margin:0, fontFamily:"Rubik,sans-serif", fontStyle:"italic", fontWeight:400, fontSize:isMobile?15:17, lineHeight:1.7, color:T.muted, maxWidth:520 }}>
+          <p className="fade-up d2" style={{ margin:0, fontFamily:"Rubik,sans-serif", fontStyle:"italic", fontWeight:400, fontSize:isMobile?15:17, lineHeight:1.7, color:T.muted }}>
             This confidential reporting system allows you to report concerns regarding policy violations,
             unethical behavior, or other issues. Your report will be handled with the utmost
             confidentiality and forwarded to the appropriate authorities.
@@ -401,17 +401,17 @@ export default function WhistleblowerPage() {
         </div>
       </section>
 
-      {/* Form area */}
-      <div style={{
-        flex:           1,
-        maxWidth:       1440,
-        margin:         "0 auto",
-        padding:        `0 ${hPad}px 64px`,
-        width:          "100%",
-        boxSizing:      "border-box",
-        display:        "flex",
-        justifyContent: "center",
-      }}>
+      {/* Form section */}
+      <section style={{ flex: 1, background: "#fff" }}>
+        <div style={{
+          maxWidth:       1440,
+          margin:         "0 auto",
+          padding:        `${isMobile ? 48 : 72}px ${hPad}px ${isMobile ? 64 : 96}px`,
+          width:          "100%",
+          boxSizing:      "border-box",
+          display:        "flex",
+          justifyContent: "center",
+        }}>
         <div style={{ width: "100%", maxWidth: 610 }}>
 
           {/* Anonymity notice */}
@@ -493,7 +493,8 @@ export default function WhistleblowerPage() {
 
           </form>
         </div>
-      </div>
+        </div>
+      </section>
 
       <Footer />
     </div>
