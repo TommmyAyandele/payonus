@@ -240,9 +240,14 @@ export default function DevelopersPage() {
   const { isMobile, isTablet } = useBreakpoint();
   useScrollReveal();
 
-  const [scrolled, setScrolled] = React.useState(false);
+  const [scrolled,  setScrolled]  = React.useState(false);
+  const [scrollPct, setScrollPct] = React.useState(0);
   React.useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 10);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 10);
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollPct(max > 0 ? window.scrollY / max : 0);
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -251,6 +256,9 @@ export default function DevelopersPage() {
 
   return (
     <div style={{ display:"flex", flexDirection:"column", minHeight:"100vh", background:T.bg }}>
+      <div style={{position:"fixed",top:0,left:0,right:0,height:3,zIndex:200,pointerEvents:"none"}}>
+        <div style={{height:"100%",width:`${scrollPct*100}%`,background:"linear-gradient(90deg,#6009FF 0%,#F4B249 100%)",transition:"width .1s linear",borderRadius:"0 2px 2px 0",boxShadow:"0 0 8px rgba(96,9,255,.4)"}}/>
+      </div>
       <style>{`
         .fade-up { opacity:0; transform:translateY(28px); transition:opacity 0.55s cubic-bezier(0.16,1,0.3,1), transform 0.55s cubic-bezier(0.16,1,0.3,1); }
         .fade-up.visible { opacity:1; transform:translateY(0); }

@@ -23,11 +23,16 @@ interface LegalPageProps {
 export default function LegalPage({ title, subtitle, updated, sections }: LegalPageProps) {
   const { isMobile, isTablet } = useBreakpoint();
   const [scrolled,    setScrolled]    = React.useState(false);
+  const [scrollPct,   setScrollPct]   = React.useState(0);
   const [activeId,    setActiveId]    = React.useState(sections[0]?.id ?? "");
   const [tocOpen,     setTocOpen]     = React.useState(false);
 
   React.useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 10);
+    const fn = () => {
+      setScrolled(window.scrollY > 10);
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollPct(max > 0 ? window.scrollY / max : 0);
+    };
     window.addEventListener("scroll", fn, { passive: true });
     return () => window.removeEventListener("scroll", fn);
   }, []);
@@ -51,6 +56,9 @@ export default function LegalPage({ title, subtitle, updated, sections }: LegalP
 
   return (
     <div style={{ display:"flex", flexDirection:"column", minHeight:"100vh", background:T.bg }}>
+      <div style={{position:"fixed",top:0,left:0,right:0,height:3,zIndex:200,pointerEvents:"none"}}>
+        <div style={{height:"100%",width:`${scrollPct*100}%`,background:"linear-gradient(90deg,#6009FF 0%,#F4B249 100%)",transition:"width .1s linear",borderRadius:"0 2px 2px 0",boxShadow:"0 0 8px rgba(96,9,255,.4)"}}/>
+      </div>
       <style>{`
         .legal-toc-btn { display:flex; align-items:center; gap:7px; font-family:"DM Sans",sans-serif; font-size:13px; font-weight:400; color:#49454F; text-decoration:none; padding:5px 4px; border-radius:5px; cursor:pointer; border:none; background:none; text-align:left; width:100%; transition:color 0.15s; }
         .legal-toc-btn:hover { color:#6009FF; }

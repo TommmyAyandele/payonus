@@ -96,12 +96,17 @@ export default function DocsPage() {
   const { isMobile, isTablet } = useBreakpoint();
 
   const [scrolled,     setScrolled]     = React.useState(false);
+  const [scrollPct,    setScrollPct]    = React.useState(0);
   const [activeId,     setActiveId]     = React.useState("introduction");
   const [activeTab,    setActiveTab]    = React.useState<"curl"|"node"|"python"|"php">("curl");
   const [sidebarOpen,  setSidebarOpen]  = React.useState(false);
 
   React.useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 10);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 10);
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollPct(max > 0 ? window.scrollY / max : 0);
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -165,6 +170,9 @@ export default function DocsPage() {
 
   return (
     <div style={{ display:"flex", flexDirection:"column", minHeight:"100vh", background:T.bg }}>
+      <div style={{position:"fixed",top:0,left:0,right:0,height:3,zIndex:200,pointerEvents:"none"}}>
+        <div style={{height:"100%",width:`${scrollPct*100}%`,background:"linear-gradient(90deg,#6009FF 0%,#F4B249 100%)",transition:"width .1s linear",borderRadius:"0 2px 2px 0",boxShadow:"0 0 8px rgba(96,9,255,.4)"}}/>
+      </div>
       <Navbar scrolled={scrolled} />
 
       {isMobile && (

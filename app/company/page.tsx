@@ -353,7 +353,7 @@ export default function CompanyPage() {
       {/* ══════════════════════════════
           MISSION / VISION
       ══════════════════════════════ */}
-      <section style={{ width:"100%", background:"#F8F7F9" }}>
+      <section style={{ width:"100%", background:T.white }}>
         <div style={{ maxWidth:1440, margin:"0 auto", padding:`${isMobile ? 56 : 80}px ${hPad}px ${isMobile ? 56 : 80}px` }}>
 
           {isMobile ? (

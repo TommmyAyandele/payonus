@@ -5,6 +5,7 @@ import { useBreakpoint } from "../use-breakpoint";
 import Navbar, { T } from "../Navbar";
 import Footer from "../Footer";
 import TestimonialsSection from "../TestimonialsSection";
+import HeroBg from "../HeroBg";
 
 /* ─── SCROLL REVEAL ─── */
 function useScrollReveal() {
@@ -35,45 +36,6 @@ function ripple(e: React.MouseEvent<HTMLButtonElement>) {
   span.className = "ripple-effect";
   btn.appendChild(span);
   setTimeout(() => span.remove(), 600);
-}
-
-/* ─── HERO BACKGROUND SVG ─── */
-function HeroBg() {
-  return (
-    <svg
-      aria-hidden
-      style={{ position:"absolute", top:0, left:0, width:"100%", height:"100%", pointerEvents:"none", zIndex:0 }}
-      viewBox="0 0 1440 700"
-      preserveAspectRatio="xMidYMid slice"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <g className="hero-wg1">
-        <path d="M-50 680 C100 660 220 630 380 600 C480 582 560 565 660 540 C780 510 880 470 990 415 C1090 365 1190 300 1320 235 C1380 205 1420 182 1460 162" stroke="rgba(114,82,195,0.30)" strokeWidth="1.4"/>
-        <path d="M-50 700 C80 692 160 675 270 660 C360 647 420 648 480 638 C545 626 585 610 650 596 C730 578 810 555 900 526 C1000 493 1100 447 1200 385 C1290 330 1370 270 1440 220" stroke="rgba(114,82,195,0.24)" strokeWidth="1.3"/>
-        <path d="M100 700 C180 693 260 678 370 665 C450 654 510 657 565 647 C620 635 655 618 710 604 C785 584 860 562 945 533 C1045 499 1140 451 1240 387 C1325 332 1390 272 1440 236" stroke="rgba(114,82,195,0.20)" strokeWidth="1.1"/>
-        <path d="M-100 700 C20 698 80 686 160 678 C205 673 235 678 265 671 C305 662 330 646 375 635 C435 619 490 607 555 591 C635 570 720 547 815 517 C920 483 1020 436 1125 372 C1215 316 1315 250 1440 194" stroke="rgba(90,60,180,0.26)" strokeWidth="1.1"/>
-      </g>
-      <g className="hero-wg2">
-        <path d="M200 700 C290 694 380 680 480 667 C560 656 615 660 665 651 C715 640 748 623 800 609 C870 589 945 567 1030 537 C1125 503 1215 454 1308 390 C1376 341 1415 302 1440 278" stroke="rgba(114,82,195,0.18)" strokeWidth="1.1"/>
-        <path d="M-100 660 C50 645 160 618 300 598 C400 582 468 569 545 548 C630 524 710 503 800 476 C905 444 1015 396 1115 332 C1205 276 1310 209 1440 158" stroke="rgba(140,100,210,0.24)" strokeWidth="1"/>
-        <path d="M-50 640 C100 625 200 600 330 582 C420 567 490 555 568 534 C650 510 730 490 825 462 C925 430 1030 382 1135 316 C1224 260 1325 193 1440 145" stroke="rgba(140,100,210,0.20)" strokeWidth="1"/>
-      </g>
-      <g className="hero-wg3">
-        <line x1="1060" y1="700" x2="1180" y2="320" stroke="rgba(114,82,195,0.18)" strokeWidth="1"/>
-        <line x1="1120" y1="700" x2="1220" y2="280" stroke="rgba(114,82,195,0.16)" strokeWidth="1"/>
-        <line x1="1180" y1="700" x2="1265" y2="240" stroke="rgba(114,82,195,0.14)" strokeWidth="1"/>
-        <line x1="1240" y1="700" x2="1310" y2="200" stroke="rgba(114,82,195,0.12)" strokeWidth="1"/>
-        <line x1="1300" y1="700" x2="1360" y2="160" stroke="rgba(114,82,195,0.10)" strokeWidth="0.9"/>
-        <line x1="1360" y1="700" x2="1410" y2="120" stroke="rgba(114,82,195,0.08)" strokeWidth="0.9"/>
-        <line x1="1410" y1="700" x2="1445" y2="90"  stroke="rgba(114,82,195,0.06)" strokeWidth="0.9"/>
-      </g>
-      <g className="hero-wg4">
-        <path d="M-50 695 C100 680 230 653 380 632 C470 618 540 606 620 585 C710 560 800 534 905 500 C1010 463 1110 416 1210 351 C1295 296 1375 240 1440 198" stroke="rgba(196,148,80,0.18)" strokeWidth="0.9"/>
-        <path d="M-50 700 C80 692 190 670 320 653 C410 640 480 630 555 613 C640 592 725 570 820 542 C920 510 1020 463 1125 398 C1212 343 1308 278 1440 220" stroke="rgba(196,148,80,0.14)" strokeWidth="0.9"/>
-      </g>
-    </svg>
-  );
 }
 
 /* ─── DATA ─── */

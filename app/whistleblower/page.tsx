@@ -114,6 +114,7 @@ export default function WhistleblowerPage() {
   const { isMobile, isTablet } = useBreakpoint();
 
   const [scrolled,  setScrolled]  = React.useState(false);
+  const [scrollPct, setScrollPct] = React.useState(0);
   const [form,      setForm]      = React.useState<FormState>({ name:"", email:"", message:"" });
   const [errors,    setErrors]    = React.useState<Errors>({});
   const [files,     setFiles]     = React.useState<File[]>([]);
@@ -122,7 +123,11 @@ export default function WhistleblowerPage() {
   const [alert,     setAlert]     = React.useState<Alert>(null);
 
   React.useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 10);
+    const fn = () => {
+      setScrolled(window.scrollY > 10);
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollPct(max > 0 ? window.scrollY / max : 0);
+    };
     window.addEventListener("scroll", fn, { passive:true });
     return () => window.removeEventListener("scroll", fn);
   }, []);
@@ -192,6 +197,9 @@ export default function WhistleblowerPage() {
 
   return (
     <div style={{ display:"flex", flexDirection:"column", minHeight:"100vh", background:T.bg }}>
+      <div style={{position:"fixed",top:0,left:0,right:0,height:3,zIndex:200,pointerEvents:"none"}}>
+        <div style={{height:"100%",width:`${scrollPct*100}%`,background:"linear-gradient(90deg,#6009FF 0%,#F4B249 100%)",transition:"width .1s linear",borderRadius:"0 2px 2px 0",boxShadow:"0 0 8px rgba(96,9,255,.4)"}}/>
+      </div>
       <style>{`
         fieldset.wb-field{border:1px solid ${T.borderLight};border-radius:8px;padding:2px 14px 14px;background:${T.white};margin:0;transition:border-color .18s;}
         fieldset.wb-field:focus-within{border-color:${T.primary};}
