@@ -211,14 +211,7 @@ export default function Footer() {
               </svg>
             </SocialBtn>
 
-            {/* Facebook */}
-            <SocialBtn label="Facebook">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none">
-                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" stroke={HEAD} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </SocialBtn>
-
-            {/* X / Twitter */}
+{/* X / Twitter */}
             <SocialBtn label="X" href="https://x.com/trypayonus">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
                 <path d="M18 6L6 18M6 6l12 12" stroke={HEAD} strokeWidth="2" strokeLinecap="round"/>
