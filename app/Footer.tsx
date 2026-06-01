@@ -203,7 +203,7 @@ export default function Footer() {
             </SocialBtn>
 
             {/* Instagram */}
-            <SocialBtn label="Instagram">
+            <SocialBtn label="Instagram" href="https://www.instagram.com/trypayonus/">
               <svg width="17" height="17" viewBox="0 0 24 24" fill="none">
                 <rect x="2" y="2" width="20" height="20" rx="5" stroke={HEAD} strokeWidth="1.8"/>
                 <circle cx="12" cy="12" r="4" stroke={HEAD} strokeWidth="1.8"/>
