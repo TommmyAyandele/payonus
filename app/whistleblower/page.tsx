@@ -390,14 +390,16 @@ export default function WhistleblowerPage() {
           <span className="fade-up" style={{ display:"block", marginBottom: isMobile ? 20 : 28, fontFamily:"DM Sans,sans-serif", fontWeight:500, fontSize:14, color:T.orange }}>
             • Legal
           </span>
-          <h1 className="fade-up d1" style={{ margin:`0 0 ${isMobile ? 20 : 28}px`, fontFamily:"Rubik,sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?62:isTablet?64:90, lineHeight:1.04, letterSpacing:"-0.02em", color:T.headingBlack }}>
-            Whistleblower Reporting
-          </h1>
-          <p className="fade-up d2" style={{ margin:0, fontFamily:"Rubik,sans-serif", fontStyle:"italic", fontWeight:400, fontSize:isMobile?15:17, lineHeight:1.7, color:T.muted }}>
-            This confidential reporting system allows you to report concerns regarding policy violations,
-            unethical behavior, or other issues. Your report will be handled with the utmost
-            confidentiality and forwarded to the appropriate authorities.
-          </p>
+          <div style={{ width: "fit-content" }}>
+            <h1 className="fade-up d1" style={{ margin:`0 0 ${isMobile ? 20 : 28}px`, fontFamily:"Rubik,sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?62:isTablet?64:90, lineHeight:1.04, letterSpacing:"-0.02em", color:T.headingBlack }}>
+              Whistleblower Reporting
+            </h1>
+            <p className="fade-up d2" style={{ margin:0, fontFamily:"Rubik,sans-serif", fontStyle:"italic", fontWeight:400, fontSize:isMobile?15:17, lineHeight:1.7, color:T.muted }}>
+              This confidential reporting system allows you to report concerns regarding policy violations,
+              unethical behavior, or other issues. Your report will be handled with the utmost
+              confidentiality and forwarded to the appropriate authorities.
+            </p>
+          </div>
         </div>
       </section>
 
