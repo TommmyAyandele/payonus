@@ -51,34 +51,42 @@ const COLS: { heading: string; links: { label: string; href: string }[] }[] = [
   },
 ];
 
-function SocialBtn({ label, children }: { label: string; children: React.ReactNode }) {
+function SocialBtn({ label, href, children }: { label: string; href?: string; children: React.ReactNode }) {
+  const style: React.CSSProperties = {
+    width:          40,
+    height:         40,
+    borderRadius:   "50%",
+    border:         `1.5px solid ${ICON_RING}`,
+    background:     "transparent",
+    display:        "flex",
+    alignItems:     "center",
+    justifyContent: "center",
+    cursor:         "pointer",
+    flexShrink:     0,
+    textDecoration: "none",
+    transition:     "background 0.2s, transform 0.25s cubic-bezier(0.16,1,0.3,1), border-color 0.2s",
+  };
+  const handlers = {
+    onMouseEnter: (e: React.MouseEvent<HTMLElement>) => {
+      (e.currentTarget as HTMLElement).style.background  = "rgba(96,9,255,0.1)";
+      (e.currentTarget as HTMLElement).style.transform   = "scale(1.15)";
+      (e.currentTarget as HTMLElement).style.borderColor = "rgba(96,9,255,0.55)";
+    },
+    onMouseLeave: (e: React.MouseEvent<HTMLElement>) => {
+      (e.currentTarget as HTMLElement).style.background  = "transparent";
+      (e.currentTarget as HTMLElement).style.transform   = "scale(1)";
+      (e.currentTarget as HTMLElement).style.borderColor = ICON_RING;
+    },
+  };
+  if (href) {
+    return (
+      <a href={href} aria-label={label} target="_blank" rel="noopener noreferrer" style={style} {...handlers}>
+        {children}
+      </a>
+    );
+  }
   return (
-    <button
-      aria-label={label}
-      style={{
-        width:          40,
-        height:         40,
-        borderRadius:   "50%",
-        border:         `1.5px solid ${ICON_RING}`,
-        background:     "transparent",
-        display:        "flex",
-        alignItems:     "center",
-        justifyContent: "center",
-        cursor:         "pointer",
-        flexShrink:     0,
-        transition:     "background 0.2s, transform 0.25s cubic-bezier(0.16,1,0.3,1), border-color 0.2s",
-      }}
-      onMouseEnter={e => {
-        e.currentTarget.style.background   = "rgba(96,9,255,0.1)";
-        e.currentTarget.style.transform    = "scale(1.15)";
-        e.currentTarget.style.borderColor  = "rgba(96,9,255,0.55)";
-      }}
-      onMouseLeave={e => {
-        e.currentTarget.style.background   = "transparent";
-        e.currentTarget.style.transform    = "scale(1)";
-        e.currentTarget.style.borderColor  = ICON_RING;
-      }}
-    >
+    <button aria-label={label} style={style} {...handlers}>
       {children}
     </button>
   );
@@ -186,7 +194,7 @@ export default function Footer() {
           <div style={{ display: "flex", gap: 10 }}>
 
             {/* LinkedIn */}
-            <SocialBtn label="LinkedIn">
+            <SocialBtn label="LinkedIn" href="https://www.linkedin.com/company/payonus/posts/?feedView=all">
               <svg width="17" height="17" viewBox="0 0 24 24" fill="none">
                 <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" stroke={HEAD} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
                 <rect x="2" y="9" width="4" height="12" stroke={HEAD} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
