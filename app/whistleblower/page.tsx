@@ -231,8 +231,8 @@ export default function WhistleblowerPage() {
             </h1>
             <p className="fade-up d2" style={{ margin:0, fontFamily:"Rubik,sans-serif", fontStyle:"italic", fontWeight:400, fontSize:isMobile?15:17, lineHeight:1.7, color:T.muted }}>
               This confidential reporting system allows you to report concerns regarding policy violations,
-              unethical behavior, or other issues. Your report will be handled with the utmost
-              confidentiality and forwarded to the appropriate authorities.
+              unethical behavior, or other issues.<br />
+              Your report will be handled with the utmost confidentiality and forwarded to the appropriate authorities.
             </p>
           </div>
         </div>
