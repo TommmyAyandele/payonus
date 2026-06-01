@@ -201,49 +201,17 @@ export default function SupportPage() {
             fontSize: isMobile ? 32 : isTablet ? 44 : 56,
             lineHeight:1.1, color:T.headingBlack,
           }}>
-            Choose how you want{isMobile ? " " : <br />}to reach us.
+            We'd love to{isMobile ? " " : <br />}hear from you.
           </h2>
 
-          {/* Three cards */}
+          {/* Two cards */}
           <div className="fade-up d2" style={{
             display:"grid",
-            gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr",
+            gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
             gap: isMobile ? 20 : 24,
           }}>
 
             {/* Email Support */}
-            <div className="support-card" style={{
-              background:T.white, border:`1px solid ${T.borderLight}`,
-              borderRadius:16, padding: isMobile ? "28px 24px" : "36px 32px",
-              display:"flex", flexDirection:"column",
-            }}>
-              <div style={{marginBottom:24}}>
-                <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
-                  <rect width="44" height="44" rx="10" fill="#F5EFF7"/>
-                  <rect x="11" y="14" width="22" height="16" rx="2" stroke={T.primary} strokeWidth="1.6" strokeLinejoin="round"/>
-                  <path d="M11 17l11 8 11-8" stroke={T.primary} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
-              <h3 style={{margin:"0 0 12px",fontFamily:"DM Sans, sans-serif",fontWeight:500,fontSize:20,color:T.dark}}>Email Support</h3>
-              <p style={{margin:"0 0 28px",fontFamily:"DM Sans, sans-serif",fontWeight:400,fontSize:14,lineHeight:1.65,color:T.muted,flex:1}}>
-                Send us a detailed message and our team will respond within 4 business hours. Best for complex integration questions.
-              </p>
-              <button onClick={ripple} style={{
-                position:"relative",overflow:"hidden",
-                fontFamily:"DM Sans, sans-serif",fontWeight:600,fontSize:14,
-                color:T.white,background:T.primary,
-                border:"none",borderRadius:8,padding:"13px 0",cursor:"pointer",
-                width:"100%",marginBottom:16,transition:"opacity .15s",
-              }}
-                onMouseEnter={e=>(e.currentTarget.style.opacity="0.88")}
-                onMouseLeave={e=>(e.currentTarget.style.opacity="1")}
-              >Send and email</button>
-              <p style={{margin:0,fontFamily:"DM Sans, sans-serif",fontWeight:400,fontSize:12,color:T.orange,textAlign:"center" as "center"}}>
-                support@payonus.com · Avg. response: 2h
-              </p>
-            </div>
-
-            {/* Live Chat — highlighted */}
             <div className="support-card" style={{
               background:"#EDE9FF", border:`2px solid ${T.primary}`,
               borderRadius:16, padding: isMobile ? "28px 24px" : "36px 32px",
@@ -252,29 +220,31 @@ export default function SupportPage() {
               <div style={{marginBottom:24}}>
                 <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
                   <rect width="44" height="44" rx="10" fill="rgba(96,9,255,0.12)"/>
-                  <path d="M12 15a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-7l-5 4v-4h-4a2 2 0 0 1-2-2V15z" stroke={T.primary} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                  <rect x="11" y="14" width="22" height="16" rx="2" stroke={T.primary} strokeWidth="1.6" strokeLinejoin="round"/>
+                  <path d="M11 17l11 8 11-8" stroke={T.primary} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-              <h3 style={{margin:"0 0 12px",fontFamily:"DM Sans, sans-serif",fontWeight:500,fontSize:20,color:T.dark}}>Live Chat</h3>
+              <h3 style={{margin:"0 0 12px",fontFamily:"DM Sans, sans-serif",fontWeight:500,fontSize:20,color:T.dark}}>Email Support</h3>
               <p style={{margin:"0 0 28px",fontFamily:"DM Sans, sans-serif",fontWeight:400,fontSize:14,lineHeight:1.65,color:T.muted,flex:1}}>
-                Chat with a real person — no bots, no scripts. Available for Growth and Enterprise accounts during business hours.
+                Send us a message and our team will get back to you as soon as possible. Best for billing, integration, and account questions.
               </p>
-              <button onClick={ripple} style={{
-                position:"relative",overflow:"hidden",
+              <a href="mailto:support@payonus.com" style={{
+                display:"block", textAlign:"center",
                 fontFamily:"DM Sans, sans-serif",fontWeight:600,fontSize:14,
                 color:T.white,background:T.primary,
-                border:"none",borderRadius:8,padding:"13px 0",cursor:"pointer",
-                width:"100%",marginBottom:16,transition:"opacity .15s",
+                borderRadius:8,padding:"13px 0",
+                textDecoration:"none", marginBottom:16,
+                transition:"opacity .15s",
               }}
                 onMouseEnter={e=>(e.currentTarget.style.opacity="0.88")}
                 onMouseLeave={e=>(e.currentTarget.style.opacity="1")}
-              >Start a chat</button>
+              >Send an Email</a>
               <p style={{margin:0,fontFamily:"DM Sans, sans-serif",fontWeight:400,fontSize:12,color:T.orange,textAlign:"center" as "center"}}>
-                Mon-Fri, 8am-10pm WAT · Usually instant
+                support@payonus.com
               </p>
             </div>
 
-            {/* Phone Support */}
+            {/* Office Address */}
             <div className="support-card" style={{
               background:T.white, border:`1px solid ${T.borderLight}`,
               borderRadius:16, padding: isMobile ? "28px 24px" : "36px 32px",
@@ -283,25 +253,34 @@ export default function SupportPage() {
               <div style={{marginBottom:24}}>
                 <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
                   <rect width="44" height="44" rx="10" fill="#F5EFF7"/>
-                  <path d="M16.4 13.5h-2.9a1.5 1.5 0 0 0-1.5 1.5c0 10.49 8.51 19 19 19a1.5 1.5 0 0 0 1.5-1.5v-2.9a1.5 1.5 0 0 0-1.5-1.5l-3.97-.99a1.5 1.5 0 0 0-1.45.38l-1.75 1.75a15.07 15.07 0 0 1-6.52-6.52l1.76-1.76a1.5 1.5 0 0 0 .37-1.45L17.9 15a1.5 1.5 0 0 0-1.5-1.5z" stroke={T.primary} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M22 11c-4.42 0-8 3.58-8 8 0 5.25 8 14 8 14s8-8.75 8-14c0-4.42-3.58-8-8-8z" stroke={T.primary} strokeWidth="1.6" strokeLinejoin="round"/>
+                  <circle cx="22" cy="19" r="2.5" stroke={T.primary} strokeWidth="1.6"/>
                 </svg>
               </div>
-              <h3 style={{margin:"0 0 12px",fontFamily:"DM Sans, sans-serif",fontWeight:500,fontSize:20,color:T.dark}}>Phone Support</h3>
+              <h3 style={{margin:"0 0 12px",fontFamily:"DM Sans, sans-serif",fontWeight:500,fontSize:20,color:T.dark}}>Our Office</h3>
               <p style={{margin:"0 0 28px",fontFamily:"DM Sans, sans-serif",fontWeight:400,fontSize:14,lineHeight:1.65,color:T.muted,flex:1}}>
-                Speak directly with our technical team. Reserved for Enterprise accounts with dedicated support packages.
+                Plot 1a Kunle Ogunba Street<br />
+                Formerly (Otunba Adesina Str),<br />
+                Lekki Phase 1,<br />
+                Lagos, Nigeria.
               </p>
-              <button style={{
-                fontFamily:"DM Sans, sans-serif",fontWeight:600,fontSize:14,
-                color:T.primary,background:"transparent",
-                border:`1.5px solid ${T.primary}`,borderRadius:8,
-                padding:"12px 0",cursor:"pointer",
-                width:"100%",marginBottom:16,transition:"background .15s",
-              }}
+              <a
+                href="https://maps.google.com/?q=Plot+1a+Kunle+Ogunba+Street+Lekki+Phase+1+Lagos+Nigeria"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display:"block", textAlign:"center",
+                  fontFamily:"DM Sans, sans-serif",fontWeight:600,fontSize:14,
+                  color:T.primary, background:"transparent",
+                  border:`1.5px solid ${T.primary}`,borderRadius:8,
+                  padding:"12px 0", textDecoration:"none",
+                  marginBottom:16, transition:"background .15s",
+                }}
                 onMouseEnter={e=>(e.currentTarget.style.background="#E9DDFF")}
                 onMouseLeave={e=>(e.currentTarget.style.background="transparent")}
-              >Reach out</button>
+              >Get Directions</a>
               <p style={{margin:0,fontFamily:"DM Sans, sans-serif",fontWeight:400,fontSize:12,color:T.orange,textAlign:"center" as "center"}}>
-                +234 700 PAYONUS · 24/7 for Enterprise
+                Lekki Phase 1, Lagos
               </p>
             </div>
 
