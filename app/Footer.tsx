@@ -219,7 +219,7 @@ export default function Footer() {
             </SocialBtn>
 
             {/* X / Twitter */}
-            <SocialBtn label="X">
+            <SocialBtn label="X" href="https://x.com/trypayonus">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
                 <path d="M18 6L6 18M6 6l12 12" stroke={HEAD} strokeWidth="2" strokeLinecap="round"/>
               </svg>
