@@ -236,7 +236,7 @@ export default function CompanyPage() {
               <h1 className="fade-up d1" style={{
                 margin:`0 0 ${isMobile ? 16 : 22}px`,
                 fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500,
-                fontSize: isMobile ? 44 : isTablet ? 62 : 90,
+                fontSize: isMobile ? 62 : isTablet ? 64 : 90,
                 lineHeight:1.05, letterSpacing:"-0.02em", color:T.headingBlack,
               }}>
                 Building the rails<br />for a borderless<br />
