@@ -96,8 +96,8 @@ function Field({
         background:   T.bg,
         display:      "flex",
         alignItems:   multiline ? "stretch" : "center",
-        minHeight:    multiline ? 120 : 48,
-        height:       multiline ? "auto" : 48,
+        minHeight:    multiline ? 90 : 44,
+        height:       multiline ? "auto" : 44,
         transition:   "border-color 0.15s, border-width 0.1s",
       }}>
         <label
@@ -128,18 +128,18 @@ function Field({
         {multiline ? (
           <textarea
             {...sharedAttrs}
-            style={{ ...sharedInputStyle, padding: "22px 14px 10px", minHeight: 120 }}
+            style={{ ...sharedInputStyle, padding: "18px 14px 8px", minHeight: 90 }}
           />
         ) : (
           <input
             type={type}
             {...sharedAttrs}
-            style={{ ...sharedInputStyle, height: "100%", padding: lifted ? "16px 14px 4px" : "0 14px" }}
+            style={{ ...sharedInputStyle, height: "100%", padding: lifted ? "13px 14px 3px" : "0 14px" }}
           />
         )}
       </div>
 
-      <div style={{ display: "flex", justifyContent: "space-between", padding: "3px 14px 0", minHeight: 16 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", padding: "2px 14px 0", minHeight: 14 }}>
         <span
           id={`${id}-err`}
           style={{
@@ -406,7 +406,7 @@ export default function WhistleblowerPage() {
         <div style={{
           maxWidth:       1440,
           margin:         "0 auto",
-          padding:        `${isMobile ? 48 : 72}px ${hPad}px ${isMobile ? 64 : 96}px`,
+          padding:        `${isMobile ? 36 : 56}px ${hPad}px ${isMobile ? 48 : 72}px`,
           width:          "100%",
           boxSizing:      "border-box",
           display:        "flex",
@@ -422,14 +422,14 @@ export default function WhistleblowerPage() {
             background:   "#EDE9FF",
             border:       "1px solid #DDD0FF",
             borderRadius: 8,
-            padding:      "16px 20px",
-            marginBottom: 24,
+            padding:      "10px 14px",
+            marginBottom: 16,
           }}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0, marginTop: 1 }}>
               <circle cx="12" cy="12" r="10" stroke={T.primary} strokeWidth="1.8"/>
               <path d="M12 8v4M12 16h.01" stroke={T.primary} strokeWidth="2" strokeLinecap="round"/>
             </svg>
-            <p style={{ margin: 0, fontFamily: "DM Sans,sans-serif", fontSize: 14, color: T.muted, lineHeight: 1.6 }}>
+            <p style={{ margin: 0, fontFamily: "DM Sans,sans-serif", fontSize: 13, color: T.muted, lineHeight: 1.5 }}>
               <strong style={{ color: T.dark }}>Your identity is protected.</strong>{" "}
               Name and email are optional — you may submit this report completely anonymously.
               All submissions are reviewed only by authorised personnel.
@@ -437,20 +437,21 @@ export default function WhistleblowerPage() {
           </div>
 
           {/* Form */}
-          <form onSubmit={handleSubmit} noValidate style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+          <form onSubmit={handleSubmit} noValidate style={{ display: "flex", flexDirection: "column", gap: 14 }}>
 
-            <Field
-              id="name" label="Name" optional
-              value={form.name} error={errors.name}
-              onChange={handleChange} onBlur={handleBlur}
-              maxLength={100}
-            />
-
-            <Field
-              id="email" label="Email Address" optional type="email"
-              value={form.email} error={errors.email}
-              onChange={handleChange} onBlur={handleBlur}
-            />
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 14 }}>
+              <Field
+                id="name" label="Name" optional
+                value={form.name} error={errors.name}
+                onChange={handleChange} onBlur={handleBlur}
+                maxLength={100}
+              />
+              <Field
+                id="email" label="Email Address" optional type="email"
+                value={form.email} error={errors.email}
+                onChange={handleChange} onBlur={handleBlur}
+              />
+            </div>
 
             <Field
               id="message" label="Message" multiline
@@ -472,15 +473,15 @@ export default function WhistleblowerPage() {
               disabled={loading}
               style={{
                 width:         "100%",
-                padding:       "16px 24px",
+                padding:       "12px 24px",
                 background:    loading ? "#C4B5FD" : T.primary,
                 color:         "#fff",
                 border:        "none",
                 borderRadius:  4,
                 fontFamily:    "DM Sans, sans-serif",
                 fontWeight:    500,
-                fontSize:      16,
-                lineHeight:    "24px",
+                fontSize:      15,
+                lineHeight:    "22px",
                 letterSpacing: "0.0094em",
                 cursor:        loading ? "not-allowed" : "pointer",
                 transition:    "opacity 0.15s",
