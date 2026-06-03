@@ -46,7 +46,7 @@ function Hero() {
 
 
   const hPad    = isMobile ? 20 : isTablet ? 48 : 80;
-  const h1Size  = isMobile ? 62 : isTablet ? 64 : 90;
+  const h1Size  = isMobile ? 48 : isTablet ? 60 : 72;
   const subSize = isMobile ? 16 : isTablet ? 18 : 20;
   const logoH   = isMobile ? 96 : 126;
 

@@ -437,7 +437,7 @@ export default function PayoutsPage() {
             <h1 style={{
               margin: 0,
               fontFamily: "Rubik, sans-serif", fontStyle: "italic", fontWeight: 500,
-              fontSize: isMobile ? 62 : isTablet ? 64 : 90,
+              fontSize: isMobile ? 48 : isTablet ? 60 : 72,
               lineHeight: 1.05, letterSpacing: "-0.02em",
               color: T.headingBlack,
             }}>

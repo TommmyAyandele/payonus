@@ -240,7 +240,7 @@ export default function CareersPage() {
           <h1 className="fade-up d1" style={{
             margin:`0 0 ${isMobile ? 20 : 28}px`,
             fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500,
-            fontSize: isMobile ? 62 : isTablet ? 64 : 90,
+            fontSize: isMobile ? 48 : isTablet ? 60 : 72,
             lineHeight:1.04, letterSpacing:"-0.02em", color:T.headingBlack,
           }}>
             Work that matters,<br />at the speed of <span style={{color:T.primary}}>Africa.</span>

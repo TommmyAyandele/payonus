@@ -81,7 +81,7 @@ export default function LegalPage({ title, subtitle, updated, sections }: LegalP
           <span className="fade-up" style={{ display:"block", marginBottom: isMobile ? 20 : 28, fontFamily:"DM Sans,sans-serif", fontWeight:500, fontSize:14, color:T.orange }}>
             • Legal
           </span>
-          <h1 className="fade-up d1" style={{ margin:`0 0 ${isMobile ? 20 : 28}px`, fontFamily:"Rubik,sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?62:isTablet?64:90, lineHeight:1.04, letterSpacing:"-0.02em", color:T.headingBlack }}>
+          <h1 className="fade-up d1" style={{ margin:`0 0 ${isMobile ? 20 : 28}px`, fontFamily:"Rubik,sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?48:isTablet?60:72, lineHeight:1.04, letterSpacing:"-0.02em", color:T.headingBlack }}>
             {title}
           </h1>
           <p className="fade-up d2" style={{ margin:"0 0 12px", fontFamily:"Rubik,sans-serif", fontStyle:"italic", fontWeight:400, fontSize:isMobile?15:17, lineHeight:1.7, color:T.muted, maxWidth:520 }}>
