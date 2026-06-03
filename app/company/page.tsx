@@ -254,7 +254,7 @@ export default function CompanyPage() {
               <div className="fade-up d3" style={{ display:"flex", flexWrap:"wrap", gap:12 }}>
                 <button
                   className="cta-pulse"
-                  onClick={ripple}
+                  onClick={e => { ripple(e); window.location.href = "/careers"; }}
                   style={{ position:"relative", overflow:"hidden", fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14, color:T.white, background:T.primary, border:"none", borderRadius:6, padding:"12px 24px", cursor:"pointer" }}
                   onMouseEnter={e => (e.currentTarget.style.opacity = "0.88")}
                   onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
@@ -534,12 +534,35 @@ export default function CompanyPage() {
                 </p>
                 <p style={{ margin:0, fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14, lineHeight:1.68, color:T.muted }}>{job.desc}</p>
                 <button
+                  onClick={() => { window.location.href = "/careers"; }}
                   style={{ alignSelf:"flex-start", fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:13, color:T.white, background:T.primary, border:"none", borderRadius:6, padding:"10px 22px", cursor:"pointer", transition:"opacity .15s", marginTop:6 }}
                   onMouseEnter={e => (e.currentTarget.style.opacity = "0.88")}
                   onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
                 >Apply Now</button>
               </div>
             ))}
+          </div>
+
+          {/* See all roles CTA */}
+          <div className="fade-up" style={{marginTop: isMobile ? 32 : 40, display:"flex", justifyContent:"center"}}>
+            <a
+              href="/careers"
+              style={{
+                display:"inline-flex", alignItems:"center", gap:6,
+                fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:14,
+                color:T.primary, background:"transparent",
+                border:`1.5px solid ${T.primary}`, borderRadius:6,
+                padding:"12px 28px", textDecoration:"none",
+                transition:"background .15s",
+              }}
+              onMouseEnter={e => (e.currentTarget.style.background = "#EDE9FF")}
+              onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
+            >
+              See all open roles
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                <path d="M9 18l6-6-6-6" stroke={T.primary} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </a>
           </div>
 
         </div>
@@ -576,7 +599,7 @@ export default function CompanyPage() {
               <div style={{ display:"flex", flexWrap:"wrap", gap:12 }}>
                 <button
                   className="cta-pulse"
-                  onClick={ripple}
+                  onClick={e => { ripple(e); window.location.href = "/careers"; }}
                   style={{ position:"relative", overflow:"hidden", fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14, color:T.white, background:T.primary, border:"none", borderRadius:6, padding:"12px 24px", cursor:"pointer" }}
                   onMouseEnter={e => (e.currentTarget.style.opacity = "0.88")}
                   onMouseLeave={e => (e.currentTarget.style.opacity = "1")}

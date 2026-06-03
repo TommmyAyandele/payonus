@@ -15,7 +15,7 @@ const COLS: { heading: string; links: { label: string; href: string }[] }[] = [
     heading: "Payonus",
     links: [
       { label: "About",   href: "/company" },
-      { label: "Careers", href: "/company" },
+      { label: "Careers", href: "/careers" },
       { label: "Contact", href: "/support" },
     ],
   },
