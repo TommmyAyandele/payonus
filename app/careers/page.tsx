@@ -384,21 +384,28 @@ export default function CareersPage() {
       ══════════════════════════════ */}
       <section style={{width:"100%",background:T.bg,padding: isMobile ? "64px 0" : "88px 0 108px",borderTop:`1px solid ${T.borderLight}`}}>
         <div style={{maxWidth:1440,margin:"0 auto",padding:`0 ${hPad}px`}}>
-          {isMobile || isTablet ? (
-            <div style={{maxWidth:560}}>
-              <h2 className="fade-up" style={{
+          <div style={{
+            display:"grid",
+            gridTemplateColumns: isMobile ? "1fr" : isTablet ? "1fr" : "2fr 1fr 1fr",
+            gap: isMobile ? 40 : isTablet ? 40 : 56,
+            alignItems:"start",
+          }}>
+            {/* Left — always visible */}
+            <div>
+              <h2 style={{
                 margin:"0 0 16px",
                 fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500,
-                fontSize: isMobile ? 28 : 36, lineHeight:1.1, color:T.headingBlack,
+                fontSize: isMobile ? 28 : isTablet ? 36 : 44,
+                lineHeight:1.1, color:T.headingBlack,
               }}>
                 Don't see a role<br />that <span style={{color:T.primary}}>fits?</span>
               </h2>
-              <p className="fade-up d1" style={{
+              <p style={{
                 margin:"0 0 28px",
                 fontFamily:"DM Sans, sans-serif", fontWeight:400,
-                fontSize:15, lineHeight:1.65, color:T.muted,
+                fontSize:15, lineHeight:1.65, color:T.muted, maxWidth:440,
               }}>
-                We're always looking for exceptional people. Send us your CV and tell us how you'd contribute.
+                We're always looking for exceptional people. Send us your CV and tell us how you'd contribute — we'll reach out when the right opportunity comes up.
               </p>
               <div style={{display:"flex",flexWrap:"wrap",gap:12}}>
                 <a
@@ -409,11 +416,17 @@ export default function CareersPage() {
                     fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14,
                     color:T.white, background:T.primary,
                     borderRadius:6, padding:"12px 20px",
-                    textDecoration:"none", transition:"opacity .15s",
+                    textDecoration:"none",
+                    transition:"transform 0.4s cubic-bezier(0.16,1,0.3,1)",
                   }}
-                  onMouseEnter={e=>(e.currentTarget.style.opacity="0.88")}
-                  onMouseLeave={e=>(e.currentTarget.style.opacity="1")}
-                >Send Open Application</a>
+                  onMouseMove={e=>{ const r=e.currentTarget.getBoundingClientRect(); const x=(e.clientX-r.left-r.width/2)*0.25; const y=(e.clientY-r.top-r.height/2)*0.25; e.currentTarget.style.transform=`translate(${x}px,${y}px)`; }}
+                  onMouseLeave={e=>{ e.currentTarget.style.transform=""; }}
+                >
+                  Send Open Application
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                    <path d="M9 18l6-6-6-6" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </a>
                 <button
                   onClick={() => document.getElementById("open-roles")?.scrollIntoView({ behavior:"smooth" })}
                   style={{
@@ -427,58 +440,10 @@ export default function CareersPage() {
                 >Browse Open Roles</button>
               </div>
             </div>
-          ) : (
-            <div style={{display:"grid",gridTemplateColumns:"2fr 1fr 1fr",gap:56,alignItems:"start"}}>
-              <div className="fade-up">
-                <h2 style={{
-                  margin:"0 0 16px",
-                  fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500,
-                  fontSize:44, lineHeight:1.1, color:T.headingBlack,
-                }}>
-                  Don't see a role<br />that <span style={{color:T.primary}}>fits?</span>
-                </h2>
-                <p style={{
-                  margin:"0 0 32px",
-                  fontFamily:"DM Sans, sans-serif", fontWeight:400,
-                  fontSize:15, lineHeight:1.65, color:T.muted, maxWidth:440,
-                }}>
-                  We're always looking for exceptional people. Send us your CV and tell us how you'd contribute — we'll reach out when the right opportunity comes up.
-                </p>
-                <div style={{display:"flex",alignItems:"center",gap:16}}>
-                  <a
-                    href="mailto:careers@payonus.com"
-                    className="cta-pulse"
-                    style={{
-                      display:"inline-flex", alignItems:"center", gap:8,
-                      fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14,
-                      color:T.white, background:T.primary,
-                      borderRadius:6, padding:"12px 20px",
-                      textDecoration:"none",
-                      transition:"transform 0.4s cubic-bezier(0.16,1,0.3,1)",
-                    }}
-                    onMouseMove={e=>{ const r=e.currentTarget.getBoundingClientRect(); const x=(e.clientX-r.left-r.width/2)*0.25; const y=(e.clientY-r.top-r.height/2)*0.25; e.currentTarget.style.transform=`translate(${x}px,${y}px)`; }}
-                    onMouseLeave={e=>{ e.currentTarget.style.transform=""; }}
-                  >
-                    Send Open Application
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                      <path d="M9 18l6-6-6-6" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </a>
-                  <button
-                    onClick={() => document.getElementById("open-roles")?.scrollIntoView({ behavior:"smooth" })}
-                    style={{
-                      fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14,
-                      color:T.muted, background:"transparent",
-                      border:`1px solid ${T.muted}`, borderRadius:6,
-                      padding:"12px 20px", cursor:"pointer", transition:"background .15s",
-                    }}
-                    onMouseEnter={e=>(e.currentTarget.style.background="#E9DDFF")}
-                    onMouseLeave={e=>(e.currentTarget.style.background="transparent")}
-                  >Browse Open Roles</button>
-                </div>
-              </div>
 
-              <div className="fade-up d1">
+            {/* Right columns — desktop only */}
+            {!isMobile && !isTablet && (<>
+              <div>
                 <div style={{width:44,height:44,borderRadius:10,background:"#EDE9FF",border:`1px solid ${T.borderLight}`,display:"flex",alignItems:"center",justifyContent:"center",marginBottom:16}}>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                     <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke={T.primary} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
@@ -488,12 +453,11 @@ export default function CareersPage() {
                 </div>
                 <p style={{margin:"0 0 8px",fontFamily:"DM Sans, sans-serif",fontWeight:700,fontSize:16,lineHeight:1.3,color:T.dark}}>Remote-first culture</p>
                 <p style={{margin:"0 0 14px",fontFamily:"DM Sans, sans-serif",fontWeight:400,fontSize:13.5,lineHeight:1.65,color:T.muted}}>We hire the best people across Africa, regardless of where they're based.</p>
-                <a href="#why-payonus" className="arrow-link" style={{display:"inline-flex",alignItems:"center",gap:4,fontFamily:"DM Sans, sans-serif",fontWeight:500,fontSize:13,color:T.primary,textDecoration:"none"}}
-                  onClick={e=>{ e.preventDefault(); document.querySelector("section:nth-of-type(3)")?.scrollIntoView({behavior:"smooth"}); }}
+                <a href="/careers#perks" className="arrow-link" style={{display:"inline-flex",alignItems:"center",gap:4,fontFamily:"DM Sans, sans-serif",fontWeight:500,fontSize:13,color:T.primary,textDecoration:"none"}}
                 >Why Payonus <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke={T.primary} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg></a>
               </div>
 
-              <div className="fade-up d2">
+              <div>
                 <div style={{width:44,height:44,borderRadius:10,background:"#EDE9FF",border:`1px solid ${T.borderLight}`,display:"flex",alignItems:"center",justifyContent:"center",marginBottom:16}}>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.07 11.9 19.79 19.79 0 0 1 1 3.27 2 2 0 0 1 2.96 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21 16z" stroke={T.primary} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
@@ -504,8 +468,8 @@ export default function CareersPage() {
                 <a href="mailto:careers@payonus.com" className="arrow-link" style={{display:"inline-flex",alignItems:"center",gap:4,fontFamily:"DM Sans, sans-serif",fontWeight:500,fontSize:13,color:T.primary,textDecoration:"none"}}
                 >careers@payonus.com <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke={T.primary} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg></a>
               </div>
-            </div>
-          )}
+            </>)}
+          </div>
         </div>
       </section>
 

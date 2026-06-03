@@ -360,18 +360,25 @@ export default function JobDetailPage() {
       ══════════════════════════════ */}
       <section style={{width:"100%",background:T.bg,padding: isMobile ? "56px 0" : "80px 0 108px",borderTop:`1px solid ${T.borderLight}`}}>
         <div style={{maxWidth:1440,margin:"0 auto",padding:`0 ${hPad}px`}}>
-          {isMobile || isTablet ? (
-            <div style={{maxWidth:560}}>
-              <h2 className="fade-up" style={{
+          <div style={{
+            display:"grid",
+            gridTemplateColumns: isMobile ? "1fr" : isTablet ? "1fr" : "2fr 1fr 1fr",
+            gap: isMobile ? 40 : isTablet ? 40 : 56,
+            alignItems:"start",
+          }}>
+            {/* Left — always visible */}
+            <div>
+              <h2 style={{
                 margin:"0 0 16px",
                 fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500,
-                fontSize: isMobile ? 28 : 36, lineHeight:1.1, color:T.headingBlack,
+                fontSize: isMobile ? 28 : isTablet ? 36 : 44,
+                lineHeight:1.1, color:T.headingBlack,
               }}>
                 Ready to <span style={{color:T.primary}}>join the team?</span>
               </h2>
-              <p className="fade-up d1" style={{
+              <p style={{
                 margin:"0 0 28px", fontFamily:"DM Sans, sans-serif", fontWeight:400,
-                fontSize:15, lineHeight:1.65, color:T.muted,
+                fontSize:15, lineHeight:1.65, color:T.muted, maxWidth:440,
               }}>
                 Email your CV and a brief introduction. We review every application personally and get back within 5 business days.
               </p>
@@ -384,11 +391,17 @@ export default function JobDetailPage() {
                     fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14,
                     color:T.white, background:T.primary,
                     borderRadius:6, padding:"12px 20px",
-                    textDecoration:"none", transition:"opacity .15s",
+                    textDecoration:"none",
+                    transition:"transform 0.4s cubic-bezier(0.16,1,0.3,1)",
                   }}
-                  onMouseEnter={e=>(e.currentTarget.style.opacity="0.88")}
-                  onMouseLeave={e=>(e.currentTarget.style.opacity="1")}
-                >Apply for This Role</a>
+                  onMouseMove={e=>{ const r=e.currentTarget.getBoundingClientRect(); const x=(e.clientX-r.left-r.width/2)*0.25; const y=(e.clientY-r.top-r.height/2)*0.25; e.currentTarget.style.transform=`translate(${x}px,${y}px)`; }}
+                  onMouseLeave={e=>{ e.currentTarget.style.transform=""; }}
+                >
+                  Apply for This Role
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                    <path d="M9 18l6-6-6-6" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </a>
                 <button
                   onClick={() => router.push("/careers")}
                   style={{
@@ -402,57 +415,10 @@ export default function JobDetailPage() {
                 >View Other Roles</button>
               </div>
             </div>
-          ) : (
-            <div style={{display:"grid",gridTemplateColumns:"2fr 1fr 1fr",gap:56,alignItems:"start"}}>
-              <div className="fade-up">
-                <h2 style={{
-                  margin:"0 0 16px",
-                  fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500,
-                  fontSize:44, lineHeight:1.1, color:T.headingBlack,
-                }}>
-                  Ready to <span style={{color:T.primary}}>join the team?</span>
-                </h2>
-                <p style={{
-                  margin:"0 0 32px", fontFamily:"DM Sans, sans-serif", fontWeight:400,
-                  fontSize:15, lineHeight:1.65, color:T.muted, maxWidth:440,
-                }}>
-                  Email your CV and a brief introduction. We review every application personally and get back within 5 business days.
-                </p>
-                <div style={{display:"flex",alignItems:"center",gap:16}}>
-                  <a
-                    href={`mailto:careers@payonus.com?subject=Application: ${encodeURIComponent(job.title)}`}
-                    className="cta-pulse"
-                    style={{
-                      display:"inline-flex", alignItems:"center", gap:8,
-                      fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14,
-                      color:T.white, background:T.primary,
-                      borderRadius:6, padding:"12px 20px",
-                      textDecoration:"none",
-                      transition:"transform 0.4s cubic-bezier(0.16,1,0.3,1)",
-                    }}
-                    onMouseMove={e=>{ const r=e.currentTarget.getBoundingClientRect(); const x=(e.clientX-r.left-r.width/2)*0.25; const y=(e.clientY-r.top-r.height/2)*0.25; e.currentTarget.style.transform=`translate(${x}px,${y}px)`; }}
-                    onMouseLeave={e=>{ e.currentTarget.style.transform=""; }}
-                  >
-                    Apply for This Role
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                      <path d="M9 18l6-6-6-6" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </a>
-                  <button
-                    onClick={() => router.push("/careers")}
-                    style={{
-                      fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14,
-                      color:T.muted, background:"transparent",
-                      border:`1px solid ${T.muted}`, borderRadius:6,
-                      padding:"12px 20px", cursor:"pointer", transition:"background .15s",
-                    }}
-                    onMouseEnter={e=>(e.currentTarget.style.background="#E9DDFF")}
-                    onMouseLeave={e=>(e.currentTarget.style.background="transparent")}
-                  >View Other Roles</button>
-                </div>
-              </div>
 
-              <div className="fade-up d1">
+            {/* Right columns — desktop only */}
+            {!isMobile && !isTablet && (<>
+              <div>
                 <div style={{width:44,height:44,borderRadius:10,background:"#EDE9FF",border:`1px solid ${T.borderLight}`,display:"flex",alignItems:"center",justifyContent:"center",marginBottom:16}}>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                     <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke={T.primary} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
@@ -464,7 +430,7 @@ export default function JobDetailPage() {
                 >See all perks <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke={T.primary} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg></a>
               </div>
 
-              <div className="fade-up d2">
+              <div>
                 <div style={{width:44,height:44,borderRadius:10,background:"#EDE9FF",border:`1px solid ${T.borderLight}`,display:"flex",alignItems:"center",justifyContent:"center",marginBottom:16}}>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                     <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke={T.primary} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
@@ -477,8 +443,8 @@ export default function JobDetailPage() {
                 <a href="/careers" className="arrow-link" style={{display:"inline-flex",alignItems:"center",gap:4,fontFamily:"DM Sans, sans-serif",fontWeight:500,fontSize:13,color:T.primary,textDecoration:"none"}}
                 >View all roles <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke={T.primary} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg></a>
               </div>
-            </div>
-          )}
+            </>)}
+          </div>
         </div>
       </section>
 
