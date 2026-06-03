@@ -358,7 +358,7 @@ export default function JobDetailPage() {
       {/* ══════════════════════════════
           BOTTOM CTA
       ══════════════════════════════ */}
-      <section style={{width:"100%",background:T.bg,padding: isMobile ? "56px 0" : "80px 0 108px",borderTop:`1px solid ${T.borderLight}`}}>
+      <section style={{width:"100%",background:T.bg,padding: isMobile ? "56px 0" : "80px 0 108px"}}>
         <div style={{maxWidth:1440,margin:"0 auto",padding:`0 ${hPad}px`}}>
           <div style={{
             display:"grid",

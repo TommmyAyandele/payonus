@@ -282,7 +282,7 @@ export default function SecurityPage() {
       {/* ══════════════════════════════
           TRUST BAR — key numbers
       ══════════════════════════════ */}
-      <section style={{width:"100%",background:"#EDE9FF",borderTop:`1px solid ${T.borderLight}`,padding: isMobile ? "40px 0" : "52px 0"}}>
+      <section style={{width:"100%",background:"#EDE9FF",padding: isMobile ? "40px 0" : "52px 0"}}>
         <div style={{
           maxWidth:1440, margin:"0 auto", padding:`0 ${hPad}px`,
           display:"grid",
@@ -381,7 +381,6 @@ export default function SecurityPage() {
             width:"100%",
             background: pi % 2 === 0 ? T.bg : T.white,
             padding: isMobile ? "64px 0" : "88px 0",
-            borderTop:`1px solid ${T.borderLight}`,
           }}
         >
           <div style={{maxWidth:1440,margin:"0 auto",padding:`0 ${hPad}px`}}>
@@ -444,7 +443,7 @@ export default function SecurityPage() {
       {/* ══════════════════════════════
           RESPONSIBLE DISCLOSURE
       ══════════════════════════════ */}
-      <section id="disclosure" style={{width:"100%",background:T.bg,padding: isMobile ? "64px 0" : "88px 0",borderTop:`1px solid ${T.borderLight}`,scrollMarginTop:80}}>
+      <section id="disclosure" style={{width:"100%",background:T.bg,padding: isMobile ? "64px 0" : "88px 0",scrollMarginTop:80}}>
         <div style={{maxWidth:1440,margin:"0 auto",padding:`0 ${hPad}px`}}>
 
           <div style={{
@@ -554,7 +553,7 @@ export default function SecurityPage() {
       {/* ══════════════════════════════
           FAQs
       ══════════════════════════════ */}
-      <section style={{width:"100%",background:T.white,padding: isMobile ? "64px 0" : "88px 0",borderTop:`1px solid ${T.borderLight}`}}>
+      <section style={{width:"100%",background:T.white,padding: isMobile ? "64px 0" : "88px 0"}}>
         <div style={{maxWidth:1440,margin:"0 auto",padding:`0 ${hPad}px`}}>
 
           <span className="fade-up" style={{
@@ -625,7 +624,7 @@ export default function SecurityPage() {
       {/* ══════════════════════════════
           BOTTOM CTA
       ══════════════════════════════ */}
-      <section style={{width:"100%",background:T.bg,padding: isMobile ? "64px 0" : "88px 0 108px",borderTop:`1px solid ${T.borderLight}`}}>
+      <section style={{width:"100%",background:T.bg,padding: isMobile ? "64px 0" : "88px 0 108px"}}>
         <div style={{maxWidth:1440,margin:"0 auto",padding:`0 ${hPad}px`}}>
           <div style={{
             display:"grid",

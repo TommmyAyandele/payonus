@@ -382,7 +382,7 @@ export default function CareersPage() {
       {/* ══════════════════════════════
           BOTTOM CTA — open application
       ══════════════════════════════ */}
-      <section style={{width:"100%",background:T.bg,padding: isMobile ? "64px 0" : "88px 0 108px",borderTop:`1px solid ${T.borderLight}`}}>
+      <section style={{width:"100%",background:T.bg,padding: isMobile ? "64px 0" : "88px 0 108px"}}>
         <div style={{maxWidth:1440,margin:"0 auto",padding:`0 ${hPad}px`}}>
           <div style={{
             display:"grid",
