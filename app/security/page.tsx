@@ -575,7 +575,6 @@ export default function SecurityPage() {
             border:`1px solid ${T.borderLight}`,
             borderRadius:14,
             overflow:"hidden",
-            maxWidth: isMobile ? "100%" : 860,
           }}>
             {FAQS.map((faq, i) => {
               const isOpen = openFaq === i;
@@ -626,66 +625,133 @@ export default function SecurityPage() {
       {/* ══════════════════════════════
           BOTTOM CTA
       ══════════════════════════════ */}
-      <section style={{width:"100%",background:T.bg,padding: isMobile ? "64px 0" : "88px 0",borderTop:`1px solid ${T.borderLight}`}}>
+      <section style={{width:"100%",background:T.bg,padding: isMobile ? "64px 0" : "88px 0 108px",borderTop:`1px solid ${T.borderLight}`}}>
         <div style={{maxWidth:1440,margin:"0 auto",padding:`0 ${hPad}px`}}>
-          <div style={{
-            background:"#EDE9FF",
-            border:`1.5px solid ${T.primary}`,
-            borderRadius:20,
-            padding: isMobile ? "40px 28px" : isTablet ? "56px 52px" : "64px 72px",
-            display:"flex",
-            flexDirection: isMobile ? "column" : "row",
-            alignItems: isMobile ? "flex-start" : "center",
-            justifyContent:"space-between",
-            gap: isMobile ? 32 : 40,
-          }}>
+          {isMobile || isTablet ? (
             <div style={{maxWidth:560}}>
               <h2 className="fade-up" style={{
-                margin:"0 0 14px",
+                margin:"0 0 16px",
                 fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500,
-                fontSize: isMobile ? 26 : isTablet ? 34 : 42,
-                lineHeight:1.1, color:T.headingBlack,
+                fontSize: isMobile ? 28 : 36, lineHeight:1.1, color:T.headingBlack,
               }}>
-                Security questions<br />for your team?
+                Security questions<br />for your <span style={{color:T.primary}}>team?</span>
               </h2>
               <p className="fade-up d1" style={{
-                margin:0,
-                fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize: isMobile ? 14 : 15,
-                lineHeight:1.7, color:T.muted,
+                margin:"0 0 28px",
+                fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:15,
+                lineHeight:1.65, color:T.muted,
               }}>
-                Our security team reviews every enterprise onboarding. Send your questionnaire, request our latest pen-test report, or ask about our data processing addendum — we respond within one business day.
+                Our security team reviews every enterprise onboarding and responds within one business day.
               </p>
+              <div style={{display:"flex",flexWrap:"wrap",gap:12}}>
+                <a
+                  href="mailto:security@payonus.com"
+                  className="cta-pulse"
+                  style={{
+                    position:"relative", overflow:"hidden", display:"inline-flex", alignItems:"center", gap:8,
+                    fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14,
+                    color:T.white, background:T.primary,
+                    border:"none", borderRadius:6, padding:"12px 20px",
+                    textDecoration:"none", transition:"opacity .15s",
+                  }}
+                  onMouseEnter={e=>(e.currentTarget.style.opacity="0.88")}
+                  onMouseLeave={e=>(e.currentTarget.style.opacity="1")}
+                >Contact Security Team</a>
+                <a
+                  href="#disclosure"
+                  style={{
+                    fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14,
+                    color:T.muted, background:"transparent",
+                    border:`1px solid ${T.muted}`, borderRadius:6,
+                    padding:"12px 20px", textDecoration:"none",
+                    transition:"background .15s", display:"inline-block",
+                  }}
+                  onMouseEnter={e=>(e.currentTarget.style.background="#E9DDFF")}
+                  onMouseLeave={e=>(e.currentTarget.style.background="transparent")}
+                >Report a Vulnerability</a>
+              </div>
             </div>
-            <div className="fade-up d2" style={{flexShrink:0,display:"flex",flexWrap:"wrap",gap:12}}>
-              <a
-                href="mailto:security@payonus.com"
-                style={{
-                  display:"inline-block",
-                  fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:14,
-                  color:T.white, background:T.primary,
-                  borderRadius:6, padding:"14px 28px",
-                  textDecoration:"none", transition:"opacity .15s",
-                  whiteSpace:"nowrap",
-                }}
-                onMouseEnter={e=>(e.currentTarget.style.opacity="0.88")}
-                onMouseLeave={e=>(e.currentTarget.style.opacity="1")}
-              >Email Security Team</a>
-              <a
-                href="/support"
-                style={{
-                  display:"inline-block",
-                  fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14,
-                  color:T.dark, background:"transparent",
-                  border:`1px solid ${T.dark}`, borderRadius:6,
-                  padding:"13px 24px",
-                  textDecoration:"none", transition:"background .15s",
-                  whiteSpace:"nowrap",
-                }}
-                onMouseEnter={e=>(e.currentTarget.style.background="#fff")}
-                onMouseLeave={e=>(e.currentTarget.style.background="transparent")}
-              >General Support</a>
+          ) : (
+            <div style={{display:"grid",gridTemplateColumns:"2fr 1fr 1fr",gap:56,alignItems:"start"}}>
+              <div className="fade-up">
+                <h2 style={{
+                  margin:"0 0 16px",
+                  fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500,
+                  fontSize:44, lineHeight:1.1, color:T.headingBlack,
+                }}>
+                  Security questions<br />for your <span style={{color:T.primary}}>team?</span>
+                </h2>
+                <p style={{
+                  margin:"0 0 32px",
+                  fontFamily:"DM Sans, sans-serif", fontWeight:400,
+                  fontSize:15, lineHeight:1.65, color:T.muted, maxWidth:440,
+                }}>
+                  Our security team reviews every enterprise onboarding. Send your questionnaire, request our latest pen-test report, or ask about our data processing addendum — we respond within one business day.
+                </p>
+                <div style={{display:"flex",alignItems:"center",gap:16}}>
+                  <a
+                    href="mailto:security@payonus.com"
+                    className="cta-pulse"
+                    style={{
+                      position:"relative", overflow:"hidden", display:"inline-flex", alignItems:"center", gap:8,
+                      fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14,
+                      color:T.white, background:T.primary,
+                      borderRadius:6, padding:"12px 20px",
+                      textDecoration:"none",
+                      transition:"transform 0.4s cubic-bezier(0.16,1,0.3,1)",
+                    }}
+                    onMouseMove={e=>{ const r=e.currentTarget.getBoundingClientRect(); const x=(e.clientX-r.left-r.width/2)*0.25; const y=(e.clientY-r.top-r.height/2)*0.25; e.currentTarget.style.transform=`translate(${x}px,${y}px)`; }}
+                    onMouseLeave={e=>{ e.currentTarget.style.transform=""; }}
+                  >
+                    Contact Security Team
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                      <path d="M9 18l6-6-6-6" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </a>
+                  <a
+                    href="/support"
+                    style={{
+                      fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14,
+                      color:T.muted, background:"transparent",
+                      border:`1px solid ${T.muted}`, borderRadius:6,
+                      padding:"12px 20px", textDecoration:"none",
+                      transition:"background .15s", display:"inline-block",
+                    }}
+                    onMouseEnter={e=>(e.currentTarget.style.background="#E9DDFF")}
+                    onMouseLeave={e=>(e.currentTarget.style.background="transparent")}
+                  >General Support</a>
+                </div>
+              </div>
+
+              <div className="fade-up d1">
+                <div style={{width:44,height:44,borderRadius:10,background:"#EDE9FF",border:`1px solid ${T.borderLight}`,display:"flex",alignItems:"center",justifyContent:"center",marginBottom:16}}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 2L4 6v6c0 5.25 3.5 10.15 8 11.5C16.5 22.15 20 17.25 20 12V6l-8-4z" stroke={T.primary} strokeWidth="1.6" strokeLinejoin="round"/>
+                    <path d="M9 12l2 2 4-4" stroke={T.primary} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+                <p style={{margin:"0 0 8px",fontFamily:"DM Sans, sans-serif",fontWeight:700,fontSize:16,lineHeight:1.3,color:T.dark}}>Request a questionnaire</p>
+                <p style={{margin:"0 0 14px",fontFamily:"DM Sans, sans-serif",fontWeight:400,fontSize:13.5,lineHeight:1.65,color:T.muted}}>Send your vendor security assessment and we'll complete it within 3 business days.</p>
+                <a href="mailto:security@payonus.com?subject=Security Questionnaire Request" style={{display:"inline-flex",alignItems:"center",gap:4,fontFamily:"DM Sans, sans-serif",fontWeight:500,fontSize:13,color:T.primary,textDecoration:"none"}}
+                  className="arrow-link"
+                >Email us <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke={T.primary} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg></a>
+              </div>
+
+              <div className="fade-up d2">
+                <div style={{width:44,height:44,borderRadius:10,background:"#EDE9FF",border:`1px solid ${T.borderLight}`,display:"flex",alignItems:"center",justifyContent:"center",marginBottom:16}}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <circle cx="11" cy="11" r="8" stroke={T.primary} strokeWidth="1.6"/>
+                    <path d="M21 21l-4.35-4.35" stroke={T.primary} strokeWidth="1.6" strokeLinecap="round"/>
+                  </svg>
+                </div>
+                <p style={{margin:"0 0 8px",fontFamily:"DM Sans, sans-serif",fontWeight:700,fontSize:16,lineHeight:1.3,color:T.dark}}>Report a vulnerability</p>
+                <p style={{margin:"0 0 14px",fontFamily:"DM Sans, sans-serif",fontWeight:400,fontSize:13.5,lineHeight:1.65,color:T.muted}}>Found a security issue? We welcome responsible disclosure and acknowledge every report.</p>
+                <a href="#disclosure" style={{display:"inline-flex",alignItems:"center",gap:4,fontFamily:"DM Sans, sans-serif",fontWeight:500,fontSize:13,color:T.primary,textDecoration:"none"}}
+                  className="arrow-link"
+                >View disclosure policy <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke={T.primary} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg></a>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </section>
 
