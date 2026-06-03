@@ -1,10 +1,12 @@
 "use client";
 
 import React from "react";
+import { useRouter } from "next/navigation";
 import { useBreakpoint } from "../use-breakpoint";
 import Navbar, { T } from "../Navbar";
 import Footer from "../Footer";
 import HeroBg from "../HeroBg";
+import { JOBS } from "./jobs-data";
 
 /* ─── SCROLL REVEAL ─── */
 function useScrollReveal() {
@@ -101,57 +103,6 @@ const PERKS = [
   },
 ];
 
-const JOBS: {
-  dept:     string;
-  title:    string;
-  location: string;
-  type:     string;
-  desc:     string;
-}[] = [
-  {
-    dept:     "Engineering",
-    title:    "Senior Backend Engineer (Payments)",
-    location: "Lagos · Remote",
-    type:     "Full-time",
-    desc:     "Design and scale high-throughput payment systems handling thousands of transactions per second across multiple African markets.",
-  },
-  {
-    dept:     "Engineering",
-    title:    "Frontend Engineer (React / Next.js)",
-    location: "Lagos · Remote",
-    type:     "Full-time",
-    desc:     "Build the merchant dashboard and developer tooling that makes Payonus delightful to use — fast, accessible, and beautifully designed.",
-  },
-  {
-    dept:     "Engineering",
-    title:    "DevOps / Platform Engineer",
-    location: "Lagos · Remote",
-    type:     "Full-time",
-    desc:     "Own our cloud infrastructure, CI/CD pipelines, and observability stack to keep the platform reliable for every transaction.",
-  },
-  {
-    dept:     "Growth",
-    title:    "Growth Marketing Lead",
-    location: "Lagos",
-    type:     "Full-time",
-    desc:     "Drive customer acquisition and expansion across key African markets through creative, data-driven campaigns and partnerships.",
-  },
-  {
-    dept:     "Growth",
-    title:    "Partnership Manager",
-    location: "Lagos · Remote",
-    type:     "Full-time",
-    desc:     "Build and grow strategic relationships with fintechs, banks, and enterprise clients across West and East Africa.",
-  },
-  {
-    dept:     "Product",
-    title:    "Product Manager",
-    location: "Lagos",
-    type:     "Full-time",
-    desc:     "Own product discovery and delivery for our core payments primitives, working closely with engineering, design, and customers.",
-  },
-];
-
 const DEPTS = ["All", ...Array.from(new Set(JOBS.map(j => j.dept)))];
 
 /* ═══════════════════════════════════════════════
@@ -159,6 +110,7 @@ const DEPTS = ["All", ...Array.from(new Set(JOBS.map(j => j.dept)))];
 ═══════════════════════════════════════════════ */
 export default function CareersPage() {
   useScrollReveal();
+  const router = useRouter();
   const { isMobile, isTablet } = useBreakpoint();
   const [scrolled,  setScrolled]  = React.useState(false);
   const [scrollPct, setScrollPct] = React.useState(0);
@@ -199,8 +151,8 @@ export default function CareersPage() {
         @keyframes ctaPulse{0%,100%{box-shadow:0 0 0 0 rgba(96,9,255,.40);}60%{box-shadow:0 0 0 14px rgba(96,9,255,0);}}
         .cta-pulse{animation:ctaPulse 2.8s ease-in-out infinite;}
 
-        .perk-card{transition:transform .28s cubic-bezier(.16,1,.3,1),box-shadow .28s;}
-        .perk-card:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(96,9,255,.08);}
+        .perk-card{transition:background .22s;}
+        .perk-card:hover{background:#F5EFFE !important;}
 
         .job-card{transition:transform .28s cubic-bezier(.16,1,.3,1),box-shadow .28s;}
         .job-card:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(96,9,255,.09);}
@@ -304,33 +256,46 @@ export default function CareersPage() {
             A team worth<br /><span style={{color:T.primary}}>joining.</span>
           </h2>
 
-          <div style={{
-            display:"grid",
-            gridTemplateColumns: isMobile ? "1fr" : isTablet ? "1fr 1fr" : "1fr 1fr 1fr",
-            gap: isMobile ? 16 : 20,
-          }}>
-            {PERKS.map((perk, i) => (
-              <div
-                key={perk.title}
-                className={`fade-up perk-card d${(i % 4) + 1}`}
-                style={{
-                  background:T.bg, border:`1px solid ${T.borderLight}`,
-                  borderRadius:14, padding: isMobile ? "28px 24px" : "32px 28px",
-                }}
-              >
-                <div style={{
-                  width:48, height:48, borderRadius:10,
-                  background:"#EDE9FF", border:`1px solid ${T.borderLight}`,
-                  display:"flex", alignItems:"center", justifyContent:"center",
-                  marginBottom:20,
-                }}>
-                  {perk.icon}
-                </div>
-                <p style={{margin:"0 0 10px",fontFamily:"DM Sans, sans-serif",fontWeight:600,fontSize: isMobile ? 16 : 17,color:T.dark}}>{perk.title}</p>
-                <p style={{margin:0,fontFamily:"DM Sans, sans-serif",fontWeight:400,fontSize:14,lineHeight:1.72,color:T.muted}}>{perk.desc}</p>
+          {(() => {
+            const cols = isMobile ? 1 : isTablet ? 2 : 3;
+            return (
+              <div style={{
+                display:"grid",
+                gridTemplateColumns: `repeat(${cols}, 1fr)`,
+                border:`1px solid ${T.borderLight}`,
+                borderRadius:16,
+                overflow:"hidden",
+              }}>
+                {PERKS.map((perk, i) => {
+                  const isLastInRow = (i + 1) % cols === 0;
+                  const isLastRow   = i >= PERKS.length - cols;
+                  return (
+                    <div
+                      key={perk.title}
+                      className={`fade-up perk-card d${(i % 4) + 1}`}
+                      style={{
+                        background:T.bg,
+                        padding: isMobile ? "28px 24px" : "36px 32px",
+                        borderRight:  !isLastInRow ? `1px solid ${T.borderLight}` : "none",
+                        borderBottom: !isLastRow   ? `1px solid ${T.borderLight}` : "none",
+                      }}
+                    >
+                      <div style={{
+                        width:48, height:48, borderRadius:10,
+                        background:"#EDE9FF", border:`1px solid ${T.borderLight}`,
+                        display:"flex", alignItems:"center", justifyContent:"center",
+                        marginBottom:20,
+                      }}>
+                        {perk.icon}
+                      </div>
+                      <p style={{margin:"0 0 10px",fontFamily:"DM Sans, sans-serif",fontWeight:600,fontSize: isMobile ? 16 : 17,color:T.dark}}>{perk.title}</p>
+                      <p style={{margin:0,fontFamily:"DM Sans, sans-serif",fontWeight:400,fontSize:14,lineHeight:1.72,color:T.muted}}>{perk.desc}</p>
+                    </div>
+                  );
+                })}
               </div>
-            ))}
-          </div>
+            );
+          })()}
         </div>
       </section>
 
@@ -395,7 +360,7 @@ export default function CareersPage() {
                 </p>
                 <p style={{margin:0,fontFamily:"DM Sans, sans-serif",fontWeight:400,fontSize:14,lineHeight:1.68,color:T.muted}}>{job.desc}</p>
                 <button
-                  onClick={ripple}
+                  onClick={e => { ripple(e); router.push(`/careers/${job.slug}`); }}
                   style={{
                     position:"relative", overflow:"hidden",
                     alignSelf:"flex-start",
