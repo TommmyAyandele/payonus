@@ -282,7 +282,7 @@ export default function SecurityPage() {
       {/* ══════════════════════════════
           TRUST BAR — key numbers
       ══════════════════════════════ */}
-      <section style={{width:"100%",background:T.dark,padding: isMobile ? "40px 0" : "52px 0"}}>
+      <section style={{width:"100%",background:"#EDE9FF",borderTop:`1px solid ${T.borderLight}`,padding: isMobile ? "40px 0" : "52px 0"}}>
         <div style={{
           maxWidth:1440, margin:"0 auto", padding:`0 ${hPad}px`,
           display:"grid",
@@ -298,10 +298,10 @@ export default function SecurityPage() {
             <div key={i} style={{
               textAlign:"center",
               padding: isMobile ? "0" : "0 24px",
-              borderRight: (!isMobile && i < 3) ? "1px solid rgba(255,255,255,0.1)" : "none",
+              borderRight: (!isMobile && i < 3) ? `1px solid rgba(96,9,255,0.15)` : "none",
             }}>
-              <p style={{margin:"0 0 6px",fontFamily:"Rubik, sans-serif",fontStyle:"italic",fontWeight:700,fontSize: isMobile ? 26 : 32,color:T.white}}>{item.stat}</p>
-              <p style={{margin:0,fontFamily:"DM Sans, sans-serif",fontWeight:400,fontSize:13,color:"rgba(255,255,255,0.55)"}}>{item.label}</p>
+              <p style={{margin:"0 0 6px",fontFamily:"Rubik, sans-serif",fontStyle:"italic",fontWeight:700,fontSize: isMobile ? 26 : 32,color:T.primary}}>{item.stat}</p>
+              <p style={{margin:0,fontFamily:"DM Sans, sans-serif",fontWeight:400,fontSize:13,color:T.muted}}>{item.label}</p>
             </div>
           ))}
         </div>
