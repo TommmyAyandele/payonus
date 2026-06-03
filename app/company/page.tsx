@@ -547,8 +547,8 @@ export default function CompanyPage() {
           <div className="fade-up" style={{marginTop: isMobile ? 32 : 40, display:"flex", justifyContent:"center"}}>
             <a
               href="/careers"
+              className="arrow-link"
               style={{
-                display:"inline-flex", alignItems:"center", gap:6,
                 fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:14,
                 color:T.primary, background:"transparent",
                 border:`1.5px solid ${T.primary}`, borderRadius:6,
@@ -622,7 +622,7 @@ export default function CompanyPage() {
               </div>
               <p style={{ margin:"0 0 8px", fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:16, color:T.dark, lineHeight:1.3 }}>See what you'll pay</p>
               <p style={{ margin:"0 0 14px", fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14, lineHeight:1.65, color:"#6B6877" }}>Integrated per-transaction pricing with no hidden fees.</p>
-              <a href="/get-started" style={{ display:"inline-flex", alignItems:"center", gap:4, fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:14, color:T.primary, textDecoration:"none" }}
+              <a href="/get-started" className="arrow-link" style={{ fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:14, color:T.primary, textDecoration:"none" }}
                 onMouseEnter={e => (e.currentTarget.style.opacity = "0.7")}
                 onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
               >
@@ -640,7 +640,7 @@ export default function CompanyPage() {
               </div>
               <p style={{ margin:"0 0 8px", fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:16, color:T.dark, lineHeight:1.3 }}>Start building</p>
               <p style={{ margin:"0 0 14px", fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14, lineHeight:1.65, color:"#6B6877" }}>Get up and running with Payonus in as little as 10 minutes.</p>
-              <a href="/get-started" style={{ display:"inline-flex", alignItems:"center", gap:4, fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:14, color:T.primary, textDecoration:"none" }}
+              <a href="/get-started" className="arrow-link" style={{ fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:14, color:T.primary, textDecoration:"none" }}
                 onMouseEnter={e => (e.currentTarget.style.opacity = "0.7")}
                 onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
               >

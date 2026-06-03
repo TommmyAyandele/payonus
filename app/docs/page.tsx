@@ -70,19 +70,53 @@ const WEBHOOK_EVENTS = [
 
 /* ─── CODE BLOCK ─── */
 function CodeBlock({ children }: { children: React.ReactNode }) {
+  const ref = React.useRef<HTMLDivElement>(null);
+  const [copied, setCopied] = React.useState(false);
+
+  const copy = () => {
+    const text = ref.current?.innerText ?? "";
+    navigator.clipboard.writeText(text).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    });
+  };
+
   return (
-    <div style={{
-      background: "#1E1E2E",
-      borderRadius: 8,
-      padding: "18px 22px",
-      overflowX: "auto",
-      fontFamily: "'Fira Code','Cascadia Code','Courier New',monospace",
-      fontSize: 13,
-      lineHeight: 1.7,
-      color: "#D4D4D4",
-      margin: "16px 0",
-    }}>
-      {children}
+    <div style={{ position:"relative", margin:"16px 0" }}>
+      <div ref={ref} style={{
+        background: "#1E1E2E",
+        borderRadius: 8,
+        padding: "18px 52px 18px 22px",
+        overflowX: "auto",
+        fontFamily: "'Fira Code','Cascadia Code','Courier New',monospace",
+        fontSize: 13,
+        lineHeight: 1.7,
+        color: "#D4D4D4",
+      }}>
+        {children}
+      </div>
+      <button
+        onClick={copy}
+        title={copied ? "Copied!" : "Copy"}
+        style={{
+          position:"absolute", top:10, right:10,
+          background: copied ? "rgba(34,197,94,0.18)" : "rgba(255,255,255,0.08)",
+          border: `1px solid ${copied ? "rgba(34,197,94,0.35)" : "rgba(255,255,255,0.12)"}`,
+          borderRadius:5, padding:"4px 10px",
+          fontFamily:"DM Sans,sans-serif", fontSize:11, fontWeight:500,
+          color: copied ? "#86EFAC" : "#9CA3AF",
+          cursor:"pointer",
+          transition:"all 0.18s",
+          display:"flex", alignItems:"center", gap:5,
+        }}
+        onMouseEnter={e => { if (!copied) { e.currentTarget.style.background="rgba(255,255,255,0.14)"; e.currentTarget.style.color="#D4D4D4"; } }}
+        onMouseLeave={e => { if (!copied) { e.currentTarget.style.background="rgba(255,255,255,0.08)"; e.currentTarget.style.color="#9CA3AF"; } }}
+      >
+        {copied
+          ? <><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#86EFAC" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>Copied</>
+          : <><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><rect x="9" y="9" width="13" height="13" rx="2" stroke="currentColor" strokeWidth="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" stroke="currentColor" strokeWidth="2"/></svg>Copy</>
+        }
+      </button>
     </div>
   );
 }

@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useBreakpoint } from "./use-breakpoint";
+import { usePathname } from "next/navigation";
 
 export const T = {
   bg:          "#FAFAF8",
@@ -33,10 +34,13 @@ export function Logo({ height = 30 }: { height?: number }) {
 
 export default function Navbar({ scrolled }: { scrolled: boolean }) {
   const { isMobile, isTablet } = useBreakpoint();
+  const pathname = usePathname();
   const [productsOpen,    setProductsOpen]    = React.useState(false);
   const [mobileOpen,      setMobileOpen]      = React.useState(false);
   const [productsExpanded,setProductsExpanded] = React.useState(false);
   const timer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const isProductActive = PRODUCTS.some(p => pathname === p.href || pathname.startsWith(p.href + "/"));
 
   const open  = () => { if (timer.current) clearTimeout(timer.current); setProductsOpen(true);  };
   const close = () => { timer.current = setTimeout(() => setProductsOpen(false), 130); };
@@ -253,7 +257,7 @@ export default function Navbar({ scrolled }: { scrolled: boolean }) {
           <div style={{ display:"flex", alignItems:"center", gap: isTablet ? 24 : 40 }}>
             <div style={{ display:"flex", alignItems:"center", gap: isTablet ? 4 : 16 }}>
               <div onMouseEnter={open} onMouseLeave={close} style={{ position:"relative" }}>
-                <a href="#" style={{ ...nl, gap:6, color:productsOpen?T.primary:T.dark, background:productsOpen?"#F5EFF7":"transparent" }}>
+                <a href="#" style={{ ...nl, gap:6, color:(productsOpen||isProductActive)?T.primary:T.dark, background:(productsOpen||isProductActive)?"#F5EFF7":"transparent" }}>
                   Products
                   <img src="/icons/icon-chevron.svg" alt="" width={14} height={14} style={{ transform: productsOpen ? "rotate(0deg)" : "rotate(180deg)", transition:"transform .2s" }} />
                 </a>
@@ -263,12 +267,16 @@ export default function Navbar({ scrolled }: { scrolled: boolean }) {
                 { label:"Developers", href:"/developers"  },
                 { label:"Support",    href:"/support"    },
                 { label:"Pricing",    href:"/pricing"    },
-              ].map(({ label, href }) => (
-                <a key={label} href={href} style={nl}
-                  onMouseEnter={e => (e.currentTarget.style.background = "#F5EFF7")}
-                  onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
-                >{label}</a>
-              ))}
+              ].map(({ label, href }) => {
+                const active = pathname === href || pathname.startsWith(href + "/");
+                return (
+                  <a key={label} href={href}
+                    style={{ ...nl, color: active ? T.primary : T.dark, background: active ? "#F5EFF7" : "transparent" }}
+                    onMouseEnter={e => (e.currentTarget.style.background = "#F5EFF7")}
+                    onMouseLeave={e => (e.currentTarget.style.background = active ? "#F5EFF7" : "transparent")}
+                  >{label}</a>
+                );
+              })}
             </div>
             <div style={{ display:"flex", alignItems:"center", gap:12 }}>
               {!isTablet && (
@@ -287,7 +295,7 @@ export default function Navbar({ scrolled }: { scrolled: boolean }) {
         </div>
 
         {productsOpen && (
-          <div onMouseEnter={open} onMouseLeave={close} style={{ position:"absolute", top:"100%", left:0, width:"100%", background:"#F8F5FF", boxShadow:"0 12px 40px rgba(96,9,255,0.08)", borderTop:`1px solid #E9DDFF`, zIndex:10 }}>
+          <div onMouseEnter={open} onMouseLeave={close} className="nav-dropdown" style={{ position:"absolute", top:"100%", left:0, width:"100%", background:"#F8F5FF", boxShadow:"0 12px 40px rgba(96,9,255,0.08)", borderTop:`1px solid #E9DDFF`, zIndex:10 }}>
             <div style={{ maxWidth:1440, margin:"0 auto", padding:`24px ${hPad}px 32px`, display:"grid", gridTemplateColumns: isTablet ? "1fr 1fr" : "1fr 1fr 1fr", gap:4 }}>
               {PRODUCTS.map(p => (
                 <a key={p.title} href={p.href} style={{ display:"flex", alignItems:"center", gap:14, padding:"14px 16px", textDecoration:"none", borderRadius:10, transition:"background .15s" }}

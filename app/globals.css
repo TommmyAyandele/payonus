@@ -137,3 +137,68 @@ body {
   animation: rippleOut 0.55s ease-out forwards;
   pointer-events: none;
 }
+
+/* ── Button press (active) ── */
+button:active:not(:disabled),
+a[role="button"]:active {
+  transform: scale(0.97);
+  transition: transform 0.08s ease !important;
+}
+
+/* ── Focus ring (keyboard nav) ── */
+:focus-visible {
+  outline: 2px solid #6009FF;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── Text selection ── */
+::selection {
+  background: rgba(96,9,255,0.15);
+  color: #1C1B1F;
+}
+
+/* ── Form field focus glow ── */
+fieldset.form-field:focus-within,
+fieldset.wb-field:focus-within {
+  box-shadow: 0 0 0 3px rgba(96,9,255,0.10);
+}
+
+/* ── Error shake ── */
+@keyframes shake {
+  0%, 100% { transform: translateX(0);    }
+  20%      { transform: translateX(-6px); }
+  40%      { transform: translateX( 6px); }
+  60%      { transform: translateX(-4px); }
+  80%      { transform: translateX( 4px); }
+}
+.shake { animation: shake 0.4s cubic-bezier(0.36,0.07,0.19,0.97) both; }
+
+/* ── Spinner ── */
+@keyframes spin { to { transform: rotate(360deg); } }
+.spinner { animation: spin 0.7s linear infinite; transform-origin: center; }
+
+/* ── Alert slide-down ── */
+@keyframes alertSlide {
+  from { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0);     }
+}
+.alert-slide { animation: alertSlide 0.25s cubic-bezier(0.16,1,0.3,1); }
+
+/* ── Nav dropdown fade-in ── */
+@keyframes dropdownIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+.nav-dropdown { animation: dropdownIn 0.18s cubic-bezier(0.16,1,0.3,1); }
+
+/* ── Doc intro card — add lift to existing hover ── */
+.doc-intro-card:hover { transform: translateY(-2px); }
+
+/* ── Arrow-link nudge ── */
+.arrow-link { display: inline-flex; align-items: center; gap: 4px; }
+.arrow-link svg { transition: transform 0.2s cubic-bezier(0.16,1,0.3,1); }
+.arrow-link:hover svg { transform: translateX(3px); }
+
+/* ── Smooth cursor on all interactive elements ── */
+button, a, [role="button"], label[for] { cursor: pointer; }

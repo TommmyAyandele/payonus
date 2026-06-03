@@ -159,11 +159,19 @@ export default function WhistleblowerPage() {
 
   const handleRemoveFile = (i: number) => { setFiles(p => p.filter((_, idx) => idx !== i)); setFileError(undefined); };
 
+  const shakeErrors = () => {
+    document.querySelectorAll(".wb-field.has-error").forEach(el => {
+      el.classList.remove("shake");
+      void (el as HTMLElement).offsetWidth;
+      el.classList.add("shake");
+    });
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const errs = validate(form);
     setErrors(errs);
-    if (Object.keys(errs).length > 0) return;
+    if (Object.keys(errs).length > 0) { shakeErrors(); return; }
 
     setLoading(true);
     try {
@@ -215,13 +223,18 @@ export default function WhistleblowerPage() {
 
       {/* Toast */}
       {alert && (
-        <div role="alert" aria-live="polite" style={{
+        <div role="alert" aria-live="polite" className="alert-slide" style={{
           position:"fixed", top:80, left:"50%", transform:"translateX(-50%)", zIndex:200,
           padding:"14px 24px", borderRadius:8,
           background: alert.type === "success" ? "#1A7F5A" : "#B3261E",
           color:"#fff", fontFamily:"DM Sans, sans-serif", fontSize:15,
           boxShadow:"0 4px 20px rgba(0,0,0,0.18)", maxWidth:"90vw", textAlign:"center",
+          display:"flex", alignItems:"center", gap:10,
         }}>
+          {alert.type === "success"
+            ? <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style={{flexShrink:0}}><path d="M20 6L9 17l-5-5" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            : <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style={{flexShrink:0}}><circle cx="12" cy="12" r="10" stroke="#fff" strokeWidth="2"/><path d="M12 8v4M12 16h.01" stroke="#fff" strokeWidth="2" strokeLinecap="round"/></svg>
+          }
           {alert.message}
         </div>
       )}
@@ -294,7 +307,7 @@ export default function WhistleblowerPage() {
                   {errors.message
                     ? <p className="wb-field-error" style={{ margin:0 }}>{errors.message}</p>
                     : <span />}
-                  <span style={{ fontFamily:"DM Sans, sans-serif", fontSize:11, color:T.muted }}>{form.message.length} / 2000</span>
+                  <span style={{ fontFamily:"DM Sans, sans-serif", fontSize:11, color: form.message.length >= 1800 ? "#B3261E" : form.message.length >= 1500 ? "#F4B249" : T.muted, transition:"color .2s" }}>{form.message.length} / 2000</span>
                 </div>
               </div>
 
@@ -313,14 +326,21 @@ export default function WhistleblowerPage() {
                 style={{
                   position:"relative", overflow:"hidden",
                   fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:15,
-                  color:"#fff", background: loading ? "#C4B5FD" : T.primary,
+                  color:"#fff", background: loading ? "#8B5CF6" : T.primary,
                   border:"none", borderRadius:8,
                   padding:"17px 0", cursor: loading ? "not-allowed" : "pointer",
-                  width:"100%", transition:"opacity .15s", marginTop:4,
+                  width:"100%", transition:"background .2s, opacity .15s", marginTop:4,
+                  display:"flex", alignItems:"center", justifyContent:"center", gap:8,
                 }}
                 onMouseEnter={e => { if (!loading) e.currentTarget.style.opacity = "0.88"; }}
                 onMouseLeave={e => { e.currentTarget.style.opacity = "1"; }}
               >
+                {loading && (
+                  <svg className="spinner" width="16" height="16" viewBox="0 0 24 24" fill="none" style={{flexShrink:0}}>
+                    <circle cx="12" cy="12" r="9" stroke="rgba(255,255,255,0.3)" strokeWidth="2.5"/>
+                    <path d="M12 3a9 9 0 0 1 9 9" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
+                  </svg>
+                )}
                 {loading ? "Submitting…" : "Submit Report"}
               </button>
 
