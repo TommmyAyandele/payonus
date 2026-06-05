@@ -97,7 +97,9 @@ export default function SalesPage() {
         fieldset.form-field{border:1px solid ${T.borderLight};border-radius:8px;padding:2px 14px 14px;background:#FFFFFF;margin:0;transition:border-color .18s;}
         fieldset.form-field:focus-within{border-color:${T.primary};}
         fieldset.form-field legend{font-family:"DM Sans",sans-serif;font-weight:400;font-size:12px;color:${T.muted};padding:0 4px;margin-left:-4px;line-height:1;background:#FFFFFF;}
-        fieldset.form-field input,fieldset.form-field textarea,fieldset.form-field select{width:100%;border:none;outline:none;font-family:"DM Sans",sans-serif;font-size:14px;color:${T.dark};background:transparent;padding:0;resize:none;appearance:none;}
+        fieldset.form-field input,fieldset.form-field textarea,fieldset.form-field select{width:100%;border:none;outline:none;font-family:"DM Sans",sans-serif;font-size:14px;color:${T.dark};background:transparent;padding:0;resize:none;}
+        fieldset.form-field input,fieldset.form-field textarea{appearance:none;}
+        fieldset.form-field select{cursor:pointer;}
         fieldset.form-field select option{background:#fff;color:${T.dark};}
 
         .benefit-card{transition:background .22s;}
