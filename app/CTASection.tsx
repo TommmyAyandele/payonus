@@ -172,7 +172,7 @@ export default function CTASection() {
                 }}
                 onMouseEnter={e => (e.currentTarget.style.background = "#E9DDFF")}
                 onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
-                onClick={() => { window.location.href="/get-started"; }}
+                onClick={() => { window.location.href="/sales"; }}
               >
                 Contact Sales
               </button>

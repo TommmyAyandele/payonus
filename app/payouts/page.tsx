@@ -462,7 +462,7 @@ export default function PayoutsPage() {
               }}
                 onMouseEnter={e => (e.currentTarget.style.opacity = "0.88")}
                 onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
-                onClick={() => { window.location.href="/get-started"; }}
+                onClick={() => { window.location.href="/sales"; }}
               >Get Started</button>
               <button style={{
                 fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14,
@@ -471,7 +471,7 @@ export default function PayoutsPage() {
               }}
                 onMouseEnter={e => (e.currentTarget.style.background = "#E9DDFF")}
                 onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
-                onClick={() => { window.location.href="/get-started"; }}
+                onClick={() => { window.location.href="/sales"; }}
               >Contact Sales</button>
             </div>
           </div>
@@ -749,7 +749,7 @@ export default function PayoutsPage() {
                     color: T.white, background: T.primary,
                     border: "none", borderRadius: 6, padding: "12px 20px", cursor: "pointer",
                   }}
-                  onClick={e => { ripple(e); window.location.href="/get-started"; }}
+                  onClick={e => { ripple(e); window.location.href="/sales"; }}
                 >
                   Get Started
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
@@ -764,7 +764,7 @@ export default function PayoutsPage() {
                 }}
                   onMouseEnter={e => (e.currentTarget.style.background = "#E9DDFF")}
                   onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
-                  onClick={() => { window.location.href="/get-started"; }}
+                  onClick={() => { window.location.href="/sales"; }}
                 >Contact Sales</button>
               </div>
             </div>
@@ -798,7 +798,7 @@ export default function PayoutsPage() {
                       border: "none", borderRadius: 6, padding: "12px 20px", cursor: "pointer",
                       transition: "transform 0.4s cubic-bezier(0.16,1,0.3,1)",
                     }}
-                    onClick={e => { ripple(e); window.location.href="/get-started"; }}
+                    onClick={e => { ripple(e); window.location.href="/sales"; }}
                     onMouseMove={e => {
                       const r = e.currentTarget.getBoundingClientRect();
                       const x = (e.clientX - r.left - r.width  / 2) * 0.25;
@@ -820,7 +820,7 @@ export default function PayoutsPage() {
                   }}
                     onMouseEnter={e => (e.currentTarget.style.background = "#E9DDFF")}
                     onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
-                    onClick={() => { window.location.href="/get-started"; }}
+                    onClick={() => { window.location.href="/sales"; }}
                   >Contact Sales</button>
                 </div>
               </div>

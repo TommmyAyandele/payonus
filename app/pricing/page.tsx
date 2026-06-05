@@ -199,7 +199,7 @@ export default function PricingPage() {
               }}>Capped at 2000</p>
 
               <button
-                onClick={e => { ripple(e); window.location.href="/get-started"; }}
+                onClick={e => { ripple(e); window.location.href="/sales"; }}
                 style={{
                   position:"relative", overflow:"hidden",
                   fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:15,
@@ -239,7 +239,7 @@ export default function PricingPage() {
               }}>Subject to Negotiation</p>
 
               <button
-                onClick={e => { ripple(e); window.location.href="/get-started"; }}
+                onClick={e => { ripple(e); window.location.href="/sales"; }}
                 style={{
                   position:"relative", overflow:"hidden",
                   fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:15,
@@ -449,7 +449,7 @@ export default function PricingPage() {
               <div style={{display:"flex",flexWrap:"wrap",gap:12}}>
                 <button
                   className="cta-pulse"
-                  onClick={e => { ripple(e); window.location.href="/get-started"; }}
+                  onClick={e => { ripple(e); window.location.href="/sales"; }}
                   style={{
                     position:"relative", overflow:"hidden",
                     fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:14,
@@ -468,7 +468,7 @@ export default function PricingPage() {
                   }}
                   onMouseEnter={e=>(e.currentTarget.style.background="#E9DDFF")}
                   onMouseLeave={e=>(e.currentTarget.style.background="transparent")}
-                  onClick={() => { window.location.href="/get-started"; }}
+                  onClick={() => { window.location.href="/sales"; }}
                 >Contact Sales</button>
               </div>
             </div>
