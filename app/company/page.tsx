@@ -259,11 +259,6 @@ export default function CompanyPage() {
                   onMouseEnter={e => (e.currentTarget.style.opacity = "0.88")}
                   onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
                 >Join the Team</button>
-                <button
-                  style={{ fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14, color:T.dark, background:"transparent", border:`1px solid ${T.dark}`, borderRadius:6, padding:"12px 24px", cursor:"pointer", transition:"background .15s" }}
-                  onMouseEnter={e => (e.currentTarget.style.background = "#E9DDFF")}
-                  onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
-                >Our Story</button>
               </div>
             </div>
 
