@@ -364,7 +364,7 @@ export default function CompanyPage() {
                   We eliminate the friction, delays, and complexity that have held back African commerce for decades. Whether it's paying vendors, receiving customer payments, or moving funds across borders — Payonus makes it seamless.
                 </p>
                 <div style={{ height:240, borderRadius:16, overflow:"hidden" }}>
-                  <img src="/company-mission.png" alt="Our Mission" style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center", display:"block" }} />
+                  <img src="/company-mission.jpg" alt="Our Mission" style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center", display:"block" }} />
                 </div>
               </div>
 
@@ -378,7 +378,7 @@ export default function CompanyPage() {
                   We envision a continent where any business — from a Lagos startup to a Nairobi merchant — can send and receive money instantly across 50+ African markets, just like sending a WhatsApp message.
                 </p>
                 <div style={{ height:240, borderRadius:16, overflow:"hidden" }}>
-                  <img src="/company-vision.png" alt="Our Vision" style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center", display:"block" }} />
+                  <img src="/company-vision.jpg" alt="Our Vision" style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center", display:"block" }} />
                 </div>
               </div>
             </div>
@@ -408,10 +408,10 @@ export default function CompanyPage() {
 
               <div className="fade-up" style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:24 }}>
                 <div style={{ height: isTablet ? 320 : 400, borderRadius:16, overflow:"hidden" }}>
-                  <img src="/company-mission.png" alt="Our Mission" style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center", display:"block" }} />
+                  <img src="/company-mission.jpg" alt="Our Mission" style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center", display:"block" }} />
                 </div>
                 <div style={{ height: isTablet ? 320 : 400, borderRadius:16, overflow:"hidden" }}>
-                  <img src="/company-vision.png" alt="Our Vision" style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center", display:"block" }} />
+                  <img src="/company-vision.jpg" alt="Our Vision" style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center", display:"block" }} />
                 </div>
               </div>
             </>
