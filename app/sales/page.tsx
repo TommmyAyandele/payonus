@@ -94,14 +94,11 @@ export default function SalesPage() {
         @keyframes ctaPulse{0%,100%{box-shadow:0 0 0 0 rgba(96,9,255,.40);}60%{box-shadow:0 0 0 14px rgba(96,9,255,0);}}
         .cta-pulse{animation:ctaPulse 2.8s ease-in-out infinite;}
 
-        .sales-input{
-          width:100%; font-family:"DM Sans",sans-serif; font-size:14px; color:${T.dark};
-          background:#fff; border:1px solid ${T.borderLight}; border-radius:8px;
-          padding:12px 14px; outline:none; transition:border-color .18s;
-          appearance:none;
-        }
-        .sales-input:focus{border-color:${T.primary};}
-        .sales-input::placeholder{color:${T.muted};}
+        fieldset.form-field{border:1px solid ${T.borderLight};border-radius:8px;padding:2px 14px 14px;background:#FFFFFF;margin:0;transition:border-color .18s;}
+        fieldset.form-field:focus-within{border-color:${T.primary};}
+        fieldset.form-field legend{font-family:"DM Sans",sans-serif;font-weight:400;font-size:12px;color:${T.muted};padding:0 4px;margin-left:-4px;line-height:1;background:#FFFFFF;}
+        fieldset.form-field input,fieldset.form-field textarea,fieldset.form-field select{width:100%;border:none;outline:none;font-family:"DM Sans",sans-serif;font-size:14px;color:${T.dark};background:transparent;padding:0;resize:none;appearance:none;}
+        fieldset.form-field select option{background:#fff;color:${T.dark};}
 
         .benefit-card{transition:background .22s;}
         .benefit-card:hover{background:#F5EFFE !important;}
@@ -189,71 +186,70 @@ export default function SalesPage() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} style={{display:"flex",flexDirection:"column",gap:16}}>
-                  <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12}}>
-                    <div style={{display:"flex",flexDirection:"column",gap:6}}>
-                      <label style={{fontFamily:"DM Sans, sans-serif",fontWeight:500,fontSize:13,color:T.dark}}>First name</label>
-                      <input className="sales-input" name="firstName" value={form.firstName} onChange={handleChange} placeholder="Ama" required />
-                    </div>
-                    <div style={{display:"flex",flexDirection:"column",gap:6}}>
-                      <label style={{fontFamily:"DM Sans, sans-serif",fontWeight:500,fontSize:13,color:T.dark}}>Last name</label>
-                      <input className="sales-input" name="lastName" value={form.lastName} onChange={handleChange} placeholder="Mensah" required />
-                    </div>
+
+                  <div style={{display:"grid",gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",gap:16}}>
+                    <fieldset className="form-field">
+                      <legend>First name</legend>
+                      <input name="firstName" value={form.firstName} onChange={handleChange} placeholder="enter first name" required />
+                    </fieldset>
+                    <fieldset className="form-field">
+                      <legend>Last name</legend>
+                      <input name="lastName" value={form.lastName} onChange={handleChange} placeholder="enter last name" required />
+                    </fieldset>
                   </div>
 
-                  <div style={{display:"flex",flexDirection:"column",gap:6}}>
-                    <label style={{fontFamily:"DM Sans, sans-serif",fontWeight:500,fontSize:13,color:T.dark}}>Work email</label>
-                    <input className="sales-input" type="email" name="email" value={form.email} onChange={handleChange} placeholder="ama@company.com" required />
-                  </div>
+                  <fieldset className="form-field">
+                    <legend>Work email</legend>
+                    <input type="email" name="email" value={form.email} onChange={handleChange} placeholder="enter work email" required />
+                  </fieldset>
 
-                  <div style={{display:"flex",flexDirection:"column",gap:6}}>
-                    <label style={{fontFamily:"DM Sans, sans-serif",fontWeight:500,fontSize:13,color:T.dark}}>Company</label>
-                    <input className="sales-input" name="company" value={form.company} onChange={handleChange} placeholder="Acme Corp" required />
-                  </div>
+                  <fieldset className="form-field">
+                    <legend>Company</legend>
+                    <input name="company" value={form.company} onChange={handleChange} placeholder="enter company name" required />
+                  </fieldset>
 
-                  <div style={{display:"flex",flexDirection:"column",gap:6}}>
-                    <label style={{fontFamily:"DM Sans, sans-serif",fontWeight:500,fontSize:13,color:T.dark}}>Your role</label>
-                    <input className="sales-input" name="role" value={form.role} onChange={handleChange} placeholder="CTO, Head of Finance…" />
-                  </div>
+                  <fieldset className="form-field">
+                    <legend>Your role</legend>
+                    <input name="role" value={form.role} onChange={handleChange} placeholder="e.g. CTO, Head of Finance" />
+                  </fieldset>
 
-                  <div style={{display:"flex",flexDirection:"column",gap:6}}>
-                    <label style={{fontFamily:"DM Sans, sans-serif",fontWeight:500,fontSize:13,color:T.dark}}>Monthly transaction volume</label>
-                    <select className="sales-input" name="volume" value={form.volume} onChange={handleChange} required>
-                      <option value="" disabled>Select range</option>
+                  <fieldset className="form-field">
+                    <legend>Monthly transaction volume</legend>
+                    <select name="volume" value={form.volume} onChange={handleChange} required>
+                      <option value="" disabled>select a range</option>
                       <option value="under-10k">Under $10,000</option>
                       <option value="10k-100k">$10,000 – $100,000</option>
                       <option value="100k-1m">$100,000 – $1,000,000</option>
                       <option value="over-1m">Over $1,000,000</option>
                     </select>
-                  </div>
+                  </fieldset>
 
-                  <div style={{display:"flex",flexDirection:"column",gap:6}}>
-                    <label style={{fontFamily:"DM Sans, sans-serif",fontWeight:500,fontSize:13,color:T.dark}}>How can we help?</label>
+                  <fieldset className="form-field">
+                    <legend>How can we help?</legend>
                     <textarea
-                      className="sales-input"
                       name="message"
                       value={form.message}
                       onChange={handleChange}
-                      placeholder="Tell us about your use case, challenges, or questions…"
-                      rows={4}
-                      style={{resize:"vertical"}}
+                      placeholder="describe your use case, challenges, or questions"
+                      rows={5}
                     />
-                  </div>
+                  </fieldset>
 
                   <button
                     type="submit"
-                    className="cta-pulse"
                     style={{
-                      marginTop:4,
-                      fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:14,
+                      position:"relative", overflow:"hidden",
+                      fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:15,
                       color:T.white, background:T.primary,
-                      border:"none", borderRadius:8, padding:"14px 28px",
-                      cursor:"pointer", transition:"opacity .15s",
+                      border:"none", borderRadius:8,
+                      padding:"17px 0", cursor:"pointer",
+                      width:"100%", transition:"opacity .15s",
+                      marginTop:4,
                     }}
                     onMouseEnter={e=>(e.currentTarget.style.opacity="0.88")}
                     onMouseLeave={e=>(e.currentTarget.style.opacity="1")}
-                  >
-                    Send Message
-                  </button>
+                  >Send Message</button>
+
                 </form>
               )}
             </div>
