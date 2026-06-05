@@ -130,6 +130,18 @@ export default function CareersPage() {
 
   const filtered = activeDept === "All" ? JOBS : JOBS.filter(j => j.dept === activeDept);
 
+  React.useEffect(() => {
+    const els = document.querySelectorAll("#open-roles .fade-up:not(.visible)");
+    const io = new IntersectionObserver(
+      entries => entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add("visible"); io.unobserve(e.target); }
+      }),
+      { threshold: 0.08 }
+    );
+    els.forEach(el => io.observe(el));
+    return () => io.disconnect();
+  }, [activeDept]);
+
   return (
     <>
       <style>{`
