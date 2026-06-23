@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Payonus — African Payments Infrastructure",
-  description: "Send and receive payments across 14+ African markets. Fast, compliant, and built for scale.",
+  description: "Send and receive payments across 8 African markets. Fast, compliant, and built for scale.",
 };
 
 export default function RootLayout({

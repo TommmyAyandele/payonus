@@ -38,7 +38,7 @@ function LinkArrow({ label, href }: { label: string; href?: string }) {
       <path d="M9 18l6-6-6-6" stroke={PRIMARY} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   );
-  return <a href={href ?? "/get-started"} style={style}>{label}{chevron}</a>;
+  return <a href={href ?? "https://merchantv2.payonus.com/signup"} target="_blank" rel="noopener noreferrer" style={style}>{label}{chevron}</a>;
 }
 
 function ripple(e: React.MouseEvent<HTMLButtonElement>) {
@@ -140,7 +140,7 @@ export default function CTASection() {
                   cursor:      "pointer",
                   transition:  "transform 0.4s cubic-bezier(0.16,1,0.3,1)",
                 }}
-                onClick={e => { ripple(e); window.location.href="/get-started"; }}
+                onClick={e => { ripple(e); window.open("https://merchantv2.payonus.com/signup","_blank"); }}
                 onMouseMove={e => {
                   const r = e.currentTarget.getBoundingClientRect();
                   const x = (e.clientX - r.left - r.width  / 2) * 0.25;

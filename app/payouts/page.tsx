@@ -189,7 +189,7 @@ const FEATURES = [
   },
   {
     title: "Multi-currency, one API",
-    desc: "Pay across 14+ African markets through a single integration. Payonus handles the FX, routing, and local banking rails — your team writes one line of code.",
+    desc: "Pay across 8 African markets through a single integration. Payonus handles the FX, routing, and local banking rails — your team writes one line of code.",
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
         <rect x="2" y="5" width="20" height="14" rx="2" stroke={T.primary} strokeWidth="1.5"/>
@@ -278,7 +278,7 @@ function IconBox({ children }: { children: React.ReactNode }) {
 
 function LinkArrow({ label }: { label: string }) {
   return (
-    <a href="/get-started" style={{
+    <a href="https://merchantv2.payonus.com/signup" target="_blank" rel="noopener noreferrer" style={{
       display: "inline-flex", alignItems: "center", gap: 4,
       fontFamily: "DM Sans, sans-serif", fontWeight: 600, fontSize: 14,
       color: T.primary, textDecoration: "none",
@@ -451,7 +451,7 @@ export default function PayoutsPage() {
               fontSize: 16, lineHeight: 1.65, color: T.muted,
               maxWidth: isMobile ? 320 : 440,
             }}>
-              Send bulk or single payouts to vendors, contractors, and partners across 14+ African markets — in seconds, not days.
+              Send bulk or single payouts to vendors, contractors, and partners across 8 African markets — in seconds, not days.
             </p>
 
             <div style={{ display:"flex", flexWrap:"wrap", gap:12 }}>
@@ -597,7 +597,7 @@ export default function PayoutsPage() {
               }}>
                 Payonus handles NGN, GHS, KES, XOF, USD, EUR, GBP and more — with live FX rates and local settlement rails built in. Expand to a new market without touching your integration.
               </p>
-              <a href="/get-started" style={{
+              <a href="https://merchantv2.payonus.com/signup" target="_blank" rel="noopener noreferrer" style={{
                 display: "inline-flex", alignItems: "center", gap: 6,
                 fontFamily: "DM Sans, sans-serif", fontWeight: 500, fontSize: 14,
                 color: T.white, background: T.primary,
@@ -749,7 +749,7 @@ export default function PayoutsPage() {
                     color: T.white, background: T.primary,
                     border: "none", borderRadius: 6, padding: "12px 20px", cursor: "pointer",
                   }}
-                  onClick={e => { ripple(e); window.location.href="/sales"; }}
+                  onClick={e => { ripple(e); window.open("https://merchantv2.payonus.com/signup","_blank"); }}
                 >
                   Get Started
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
@@ -798,7 +798,7 @@ export default function PayoutsPage() {
                       border: "none", borderRadius: 6, padding: "12px 20px", cursor: "pointer",
                       transition: "transform 0.4s cubic-bezier(0.16,1,0.3,1)",
                     }}
-                    onClick={e => { ripple(e); window.location.href="/sales"; }}
+                    onClick={e => { ripple(e); window.open("https://merchantv2.payonus.com/signup","_blank"); }}
                     onMouseMove={e => {
                       const r = e.currentTarget.getBoundingClientRect();
                       const x = (e.clientX - r.left - r.width  / 2) * 0.25;

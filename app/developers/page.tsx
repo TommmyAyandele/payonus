@@ -325,7 +325,7 @@ export default function DevelopersPage() {
 
               <div className="fade-up d3" style={{ display:"flex", flexWrap:"wrap", gap:12 }}>
                 <button
-                  onClick={ripple}
+                  onClick={e => { ripple(e); window.open("https://merchantv2.payonus.com/signup","_blank"); }}
                   style={{
                     position:"relative", overflow:"hidden",
                     fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14,
@@ -446,7 +446,7 @@ export default function DevelopersPage() {
 
               <div className="fade-up d2" style={{ display:"flex", flexWrap:"wrap", gap:12 }}>
                 <button
-                  onClick={ripple}
+                  onClick={e => { ripple(e); window.open("https://merchantv2.payonus.com/signup","_blank"); }}
                   style={{
                     position:"relative", overflow:"hidden",
                     fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14,
@@ -463,6 +463,7 @@ export default function DevelopersPage() {
                 }}
                   onMouseEnter={e => (e.currentTarget.style.background = "#E9DDFF")}
                   onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
+                  onClick={() => { window.location.href="/docs"; }}
                 >View API Reference</button>
               </div>
             </div>
@@ -500,7 +501,7 @@ export default function DevelopersPage() {
                 <div style={{ fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:13, color:T.muted, lineHeight:1.55 }}>
                   Get up and running with Payonus in as little as 10 minutes.
                 </div>
-                <a href="/get-started" className="dev-cta-link">
+                <a href="/docs" className="dev-cta-link">
                   Integration options
                   <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#6009FF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 </a>

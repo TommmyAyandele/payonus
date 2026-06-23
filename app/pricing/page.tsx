@@ -199,7 +199,7 @@ export default function PricingPage() {
               }}>Capped at 2000</p>
 
               <button
-                onClick={e => { ripple(e); window.location.href="/sales"; }}
+                onClick={e => { ripple(e); window.open("https://merchantv2.payonus.com/signup","_blank"); }}
                 style={{
                   position:"relative", overflow:"hidden",
                   fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:15,
@@ -239,7 +239,7 @@ export default function PricingPage() {
               }}>Subject to Negotiation</p>
 
               <button
-                onClick={e => { ripple(e); window.location.href="/sales"; }}
+                onClick={e => { ripple(e); window.open("https://merchantv2.payonus.com/signup","_blank"); }}
                 style={{
                   position:"relative", overflow:"hidden",
                   fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:15,
@@ -449,7 +449,7 @@ export default function PricingPage() {
               <div style={{display:"flex",flexWrap:"wrap",gap:12}}>
                 <button
                   className="cta-pulse"
-                  onClick={e => { ripple(e); window.location.href="/sales"; }}
+                  onClick={e => { ripple(e); window.open("https://merchantv2.payonus.com/signup","_blank"); }}
                   style={{
                     position:"relative", overflow:"hidden",
                     fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:14,
@@ -483,7 +483,7 @@ export default function PricingPage() {
               </div>
               <p style={{margin:"0 0 8px",fontFamily:"DM Sans, sans-serif",fontWeight:600,fontSize:16,color:T.dark}}>See what you'll pay</p>
               <p style={{margin:"0 0 14px",fontFamily:"DM Sans, sans-serif",fontWeight:400,fontSize:14,lineHeight:1.65,color:"#6B6877"}}>Integrated per-transaction pricing with no hidden fees.</p>
-              <a href="/get-started" className="arrow-link" style={{fontFamily:"DM Sans, sans-serif",fontWeight:600,fontSize:14,color:T.primary,textDecoration:"none"}}
+              <a href="https://merchantv2.payonus.com/signup" target="_blank" rel="noopener noreferrer" className="arrow-link" style={{fontFamily:"DM Sans, sans-serif",fontWeight:600,fontSize:14,color:T.primary,textDecoration:"none"}}
                 onMouseEnter={e=>(e.currentTarget.style.opacity="0.7")}
                 onMouseLeave={e=>(e.currentTarget.style.opacity="1")}
               >
@@ -501,7 +501,7 @@ export default function PricingPage() {
               </div>
               <p style={{margin:"0 0 8px",fontFamily:"DM Sans, sans-serif",fontWeight:600,fontSize:16,color:T.dark}}>Start building</p>
               <p style={{margin:"0 0 14px",fontFamily:"DM Sans, sans-serif",fontWeight:400,fontSize:14,lineHeight:1.65,color:"#6B6877"}}>Get up and running with Payonus in as little as 10 minutes.</p>
-              <a href="/get-started" className="arrow-link" style={{fontFamily:"DM Sans, sans-serif",fontWeight:600,fontSize:14,color:T.primary,textDecoration:"none"}}
+              <a href="https://merchantv2.payonus.com/signup" target="_blank" rel="noopener noreferrer" className="arrow-link" style={{fontFamily:"DM Sans, sans-serif",fontWeight:600,fontSize:14,color:T.primary,textDecoration:"none"}}
                 onMouseEnter={e=>(e.currentTarget.style.opacity="0.7")}
                 onMouseLeave={e=>(e.currentTarget.style.opacity="1")}
               >

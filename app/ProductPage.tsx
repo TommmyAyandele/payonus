@@ -178,7 +178,7 @@ function IconBox({ children }: { children: React.ReactNode }) {
 
 function LinkArrow({ label }: { label: string }) {
   return (
-    <a href="/get-started" style={{ display:"inline-flex",alignItems:"center",gap:4,fontFamily:"DM Sans, sans-serif",fontWeight:600,fontSize:14,color:T.primary,textDecoration:"none" }}>
+    <a href="https://merchantv2.payonus.com/signup" target="_blank" rel="noopener noreferrer" style={{ display:"inline-flex",alignItems:"center",gap:4,fontFamily:"DM Sans, sans-serif",fontWeight:600,fontSize:14,color:T.primary,textDecoration:"none" }}>
       {label}
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
         <path d="M9 18l6-6-6-6" stroke={T.primary} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -288,7 +288,7 @@ export default function ProductPage({
             <div style={{ display:"flex", flexWrap:"wrap", gap:12 }}>
               <button style={{ fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14, color:T.white, background:T.primary, border:"none", borderRadius:4, padding:"13px 28px", cursor:"pointer", transition:"opacity .15s" }}
                 onMouseEnter={e=>(e.currentTarget.style.opacity="0.88")} onMouseLeave={e=>(e.currentTarget.style.opacity="1")}
-                onClick={() => { window.location.href="/sales"; }}>
+                onClick={() => { window.open("https://merchantv2.payonus.com/signup","_blank"); }}>
                 Get Started
               </button>
               <button style={{ fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14, color:T.muted, background:"transparent", border:`1px solid ${T.muted}`, borderRadius:4, padding:"11px 24px", cursor:"pointer", transition:"background .15s" }}
@@ -402,7 +402,7 @@ export default function ProductPage({
                 {ctaSubtext}
               </p>
               <div style={{ display:"flex", flexWrap:"wrap", gap:12 }}>
-                <button className="cta-pulse" style={{ position:"relative",overflow:"hidden",display:"flex",alignItems:"center",gap:8,fontFamily:"DM Sans, sans-serif",fontWeight:500,fontSize:14,color:T.white,background:T.primary,border:"none",borderRadius:6,padding:"12px 20px",cursor:"pointer" }} onClick={e => { ripple(e); window.location.href="/sales"; }}>
+                <button className="cta-pulse" style={{ position:"relative",overflow:"hidden",display:"flex",alignItems:"center",gap:8,fontFamily:"DM Sans, sans-serif",fontWeight:500,fontSize:14,color:T.white,background:T.primary,border:"none",borderRadius:6,padding:"12px 20px",cursor:"pointer" }} onClick={e => { ripple(e); window.open("https://merchantv2.payonus.com/signup","_blank"); }}>
                   Get Started
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="#FFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 </button>
@@ -424,7 +424,7 @@ export default function ProductPage({
                 </p>
                 <div style={{ display:"flex", alignItems:"center", gap:16 }}>
                   <button className="cta-pulse" style={{ position:"relative",overflow:"hidden",display:"flex",alignItems:"center",gap:8,fontFamily:"DM Sans, sans-serif",fontWeight:500,fontSize:14,color:T.white,background:T.primary,border:"none",borderRadius:6,padding:"12px 20px",cursor:"pointer",transition:"transform 0.4s cubic-bezier(0.16,1,0.3,1)" }}
-                    onClick={e => { ripple(e); window.location.href="/sales"; }}
+                    onClick={e => { ripple(e); window.open("https://merchantv2.payonus.com/signup","_blank"); }}
                     onMouseMove={e=>{const r=e.currentTarget.getBoundingClientRect();e.currentTarget.style.transform=`translate(${(e.clientX-r.left-r.width/2)*0.25}px,${(e.clientY-r.top-r.height/2)*0.25}px)`;}}
                     onMouseLeave={e=>{e.currentTarget.style.transform="";}}>
                     Get Started

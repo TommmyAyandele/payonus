@@ -229,7 +229,7 @@ export default function Navbar({ scrolled }: { scrolled: boolean }) {
                 }}
                 onMouseEnter={e => (e.currentTarget.style.opacity="0.88")}
                 onMouseLeave={e => (e.currentTarget.style.opacity="1")}
-                onClick={() => { window.location.href="/get-started"; }}
+                onClick={() => { window.open("https://merchantv2.payonus.com/signup","_blank"); }}
               >Get Started</button>
               <button
                 style={{
@@ -288,7 +288,7 @@ export default function Navbar({ scrolled }: { scrolled: boolean }) {
               <button style={{ fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14, color:T.white, background:T.primary, border:"none", borderRadius:4, padding:"9px 14px", cursor:"pointer", transition:"opacity .15s", whiteSpace:"nowrap" }}
                 onMouseEnter={e => (e.currentTarget.style.opacity = "0.88")}
                 onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
-                onClick={() => { window.location.href="/get-started"; }}
+                onClick={() => { window.open("https://merchantv2.payonus.com/signup","_blank"); }}
               >Get Started</button>
             </div>
           </div>
