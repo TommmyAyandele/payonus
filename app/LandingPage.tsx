@@ -86,7 +86,7 @@ function Hero() {
               </h1>
 
               <p style={{ maxWidth:"100%", margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:subSize, lineHeight:1.5, color:T.muted }}>
-                Settle payments across 14+ African markets in seconds — no delays, no workarounds, no babysitting.
+                Settle payments across 8 African markets in seconds — Nigeria, Ghana, Kenya, South Africa, and beyond.
               </p>
 
               <div style={{ display:"flex", flexWrap:"wrap", alignItems:"center", gap:12 }}>

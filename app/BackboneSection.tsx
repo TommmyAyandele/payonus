@@ -4,9 +4,9 @@ import React from "react";
 import { useBreakpoint } from "./use-breakpoint";
 
 const STATS = [
-  { value: 10,  suffix: "+",  label: "Currencies",   desc: "Payonus supports transactions in USD, EUR, GBP, KES, NGN, GHS, and many more" },
-  { value: 99,  suffix: "%",  label: "Uptime",        desc: "Service uptime since July 2023 with month on month consistency" },
-  { value: 12,  suffix: "M+", label: "Transactions",  desc: "We process 12M+ transactions every month" },
+  { value: 500, prefix: "",  suffix: "+",  label: "Businesses",     desc: "500+ businesses onboarded and processing payments across 8 African markets since launch in 2023" },
+  { value: 99,  prefix: "",  suffix: "%",  label: "Uptime",         desc: "99% service uptime with 24/7 monitoring and real-time transaction notifications" },
+  { value: 300, prefix: "₦", suffix: "B+", label: "Monthly Volume", desc: "₦300B+ average transaction volume processed every month, with ₦2.5T+ total payment volume" },
 ];
 
 function useCounter(to: number, active: boolean, duration = 1500): number {
@@ -43,9 +43,9 @@ export default function BackboneSection() {
     return () => io.disconnect();
   }, []);
 
-  const c0 = useCounter(10, on);
+  const c0 = useCounter(500, on);
   const c1 = useCounter(99, on);
-  const c2 = useCounter(12, on);
+  const c2 = useCounter(300, on);
   const counts = [c0, c1, c2];
 
   const hPad     = isMobile ? 20 : isTablet ? 48 : 80;
@@ -97,7 +97,7 @@ export default function BackboneSection() {
           {STATS.map((s, i) => (
             <div key={s.label}>
               <p style={{ margin:"0 0 2px", fontFamily:"Rubik, sans-serif", fontWeight:700, fontSize:numSize, lineHeight:1, color:"#1D0057" }}>
-                {counts[i]}{s.suffix}
+                {s.prefix}{counts[i]}{s.suffix}
               </p>
               <p style={{ margin:`0 0 ${isMobile ? 8 : 16}px`, fontFamily:"Rubik, sans-serif", fontWeight:700, fontSize:lblSize, lineHeight:1.15, color:"#1D0057" }}>
                 {s.label}

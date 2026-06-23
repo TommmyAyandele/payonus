@@ -5,33 +5,33 @@ import { useBreakpoint } from "./use-breakpoint";
 
 const CARDS = [
   {
-    icon: "kyc",
-    title: "KYB/KYC Verification",
-    desc: "Regulatory requirements vary by market. payonus handles all of it at the infrastructure layer — so your team doesn't have to build, maintain, or audit it.",
+    icon: "data",
+    title: "Data Encryption",
+    desc: "ISO 27001 certified — all transaction data is encrypted to the highest industry standards. Your customers' information is always protected.",
   },
   {
-    icon: "data",
-    title: "Data Residency & Encryption",
-    desc: "Transactions are checked against OFAC, UN, EU, and local African sanctions lists on every payment. Updated continuously — not in batches.",
+    icon: "kyc",
+    title: "KYC, Audit & Regulation",
+    desc: "End-to-end digital audit trail on every transaction. Regulated by the Central Bank of Nigeria (CBN) and certified by NDPC — compliance is built in, not bolted on.",
   },
   {
     icon: "audit",
-    title: "Audit Trail & Reporting",
-    desc: "Immutable audit logs for every transaction. Regulators and internal compliance teams get exportable reports — timestamped, signed, and tamper-proof.",
+    title: "PCIDSS Level 1 Certified",
+    desc: "We are a Level 1 PCI DSS certified payment service provider, the highest level of security compliance in the payments industry, verified by a qualified security assessor.",
   },
   {
     icon: "monitor",
-    title: "Transaction Monitoring",
-    desc: "Transactions are checked against OFAC, UN, EU, and local African sanctions lists on every payment. Updated continuously — not in batches.",
+    title: "Uptime & 24/7 Monitoring",
+    desc: "99% uptime SLA backed by round-the-clock infrastructure monitoring. 3DS Authentication compliant with secured source and reply URLs across all payment flows.",
   },
 ];
 
 export const PILLS = [
-  { label: "PCI DSS Level 1", icon: "pci"  },
+  { label: "PCIDSS Level 1",  icon: "pci"  },
   { label: "ISO 27001",       icon: "iso"  },
-  { label: "CBN Licensed",    icon: "cbn"  },
-  { label: "FATF Compliant",  icon: "fatf" },
-  { label: "SOC 2 Type II",   icon: "soc2" },
+  { label: "CBN Regulated",   icon: "cbn"  },
+  { label: "NDPC Certified",  icon: "soc2" },
+  { label: "3DS Compliant",   icon: "fatf" },
 ];
 
 const EASE = "cubic-bezier(0.16,1,0.3,1)";

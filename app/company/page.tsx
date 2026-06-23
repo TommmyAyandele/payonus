@@ -85,38 +85,12 @@ function PrincipleIcon({ type }: { type: string }) {
 
 /* ─── DATA ─── */
 const PRINCIPLES = [
-  { icon: "speed",      title: "Speed Obsessed",    desc: "Seconds matter. We fight every delay so businesses can operate at the true speed of commerce." },
-  { icon: "simplicity", title: "Radical Simplicity", desc: "Complex problems deserve simple solutions. One integration. One dashboard. One reliable API." },
-  { icon: "africa",     title: "Built for Africa",   desc: "Designed for local realities — currencies, rails, mobile usage patterns, and regulatory environments." },
-  { icon: "trust",      title: "Trust by Default",   desc: "Security, compliance, and transparency are non-negotiable. We protect every transaction like it's our own." },
+  { icon: "africa",     title: "Customer Focused",   desc: "Our customers are at the centre of every decision. We listen, learn, and build solutions that solve real business problems across Africa." },
+  { icon: "simplicity", title: "Excellence",          desc: "We hold ourselves to the highest standard in everything we do — from product quality to customer support to compliance and security." },
+  { icon: "speed",      title: "Innovation",          desc: "We embrace new ideas and new approaches. Payonus is built by people who challenge convention and move fast to create better outcomes." },
+  { icon: "trust",      title: "Teamwork",            desc: "Our strength is collective. We collaborate across teams, borders, and disciplines — because the best outcomes come from working together." },
 ];
 
-const JOBS = [
-  {
-    title:    "Senior Backend Engineer (Payments)",
-    location: "Lagos",
-    type:     "Full-time",
-    desc:     "Design and scale high-throughput payment systems handling thousands of transactions per second across multiple African countries.",
-  },
-  {
-    title:    "Growth Marketing Lead",
-    location: "Lagos",
-    type:     "Full-time",
-    desc:     "Drive customer acquisition and expansion across key African markets through creative, data-driven campaigns.",
-  },
-  {
-    title:    "Senior Backend Engineer (Payments)",
-    location: "Lagos",
-    type:     "Full-time",
-    desc:     "Design and scale high-throughput payment systems handling thousands of transactions per second across multiple African countries.",
-  },
-  {
-    title:    "Growth Marketing Lead",
-    location: "Lagos",
-    type:     "Full-time",
-    desc:     "Drive customer acquisition and expansion across key African markets through creative, data-driven campaigns.",
-  },
-];
 
 /* ═══════════════════════════════════════════════
    PAGE
@@ -248,7 +222,7 @@ export default function CompanyPage() {
                 fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400,
                 fontSize: isMobile ? 16 : 20, lineHeight:1.6, color:T.muted, maxWidth:520,
               }}>
-                Payonus is on a mission to make moving money across Africa as simple, fast, and reliable as sending a message. Founded in Lagos, built for the continent.
+                Payonus is a CBN-licensed Payment Service Solution Provider building payment infrastructure for local and international businesses across Africa. Founded in Lagos, trusted across the continent.
               </p>
 
               <div className="fade-up d3" style={{ display:"flex", flexWrap:"wrap", gap:12 }}>
@@ -326,7 +300,7 @@ export default function CompanyPage() {
               letterSpacing:"-0.015em",
               color: NAVY,
             }}>
-              Africa deserves payment infrastructure that moves at the speed of its ambition.
+              Get Paid: Anywhere, Anytime. Africa's payment infrastructure, built for the next generation.
             </p>
 
             <div style={{ display:"flex", alignItems:"center", gap:16 }}>
@@ -336,7 +310,7 @@ export default function CompanyPage() {
                   Onyiye Olisah
                 </p>
                 <p style={{ margin:0, fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14, color:T.muted }}>
-                  Founder &amp; CEO, PayOnUs
+                  Founder &amp; CEO, Payonus
                 </p>
               </div>
             </div>
@@ -358,10 +332,10 @@ export default function CompanyPage() {
               <div className="fade-up">
                 <span style={{ display:"block", marginBottom:16, fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14, color:NAVY }}>• Our Mission</span>
                 <h2 style={{ margin:"0 0 20px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:22, lineHeight:1.22, color:T.headingBlack }}>
-                  Make moving money across Africa simple, instant, and accessible for every business.
+                  Creating solutions that unite people worldwide through payment and commerce.
                 </h2>
                 <p style={{ margin:"0 0 24px", fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:15, lineHeight:1.75, color:T.dark }}>
-                  We eliminate the friction, delays, and complexity that have held back African commerce for decades. Whether it's paying vendors, receiving customer payments, or moving funds across borders — Payonus makes it seamless.
+                  We build dynamic payment platforms and API-based services that enable endless possibilities for online payments across Africa — removing the friction that has held back commerce for decades.
                 </p>
                 <div style={{ height:240, borderRadius:16, overflow:"hidden" }}>
                   <img src="/company-mission.jpg" alt="Our Mission" style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center", display:"block" }} />
@@ -372,10 +346,10 @@ export default function CompanyPage() {
               <div className="fade-up d1">
                 <span style={{ display:"block", marginBottom:16, fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14, color:NAVY }}>• Our Vision</span>
                 <h2 style={{ margin:"0 0 20px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:22, lineHeight:1.22, color:T.headingBlack }}>
-                  A future where financial borders no longer limit African potential.
+                  Being the forefront of transformative payment solutions where every transaction is a step towards financial empowerment.
                 </h2>
                 <p style={{ margin:"0 0 24px", fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:15, lineHeight:1.75, color:T.dark }}>
-                  We envision a continent where any business — from a Lagos startup to a Nairobi merchant — can send and receive money instantly across 50+ African markets, just like sending a WhatsApp message.
+                  We envision a future where businesses across Africa — from Lagos to Nairobi to Accra — can send and receive money instantly and securely, unlocking true financial inclusion across the continent.
                 </p>
                 <div style={{ height:240, borderRadius:16, overflow:"hidden" }}>
                   <img src="/company-vision.jpg" alt="Our Vision" style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center", display:"block" }} />
@@ -389,19 +363,19 @@ export default function CompanyPage() {
                 <div className="fade-up">
                   <span style={{ display:"block", marginBottom:16, fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14, color:NAVY }}>• Our Mission</span>
                   <h2 style={{ margin:"0 0 20px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize: isTablet ? 26 : 32, lineHeight:1.22, color:T.headingBlack }}>
-                    Make moving money across Africa simple, instant, and accessible for every business.
+                    Creating solutions that unite people worldwide through payment and commerce.
                   </h2>
                   <p style={{ margin:0, fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:15, lineHeight:1.75, color:T.dark }}>
-                    We eliminate the friction, delays, and complexity that have held back African commerce for decades. Whether it's paying vendors, receiving customer payments, or moving funds across borders — Payonus makes it seamless.
+                    We build dynamic payment platforms and API-based services that enable endless possibilities for online payments across Africa — removing the friction that has held back commerce for decades.
                   </p>
                 </div>
                 <div className="fade-up d1">
                   <span style={{ display:"block", marginBottom:16, fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14, color:NAVY }}>• Our Vision</span>
                   <h2 style={{ margin:"0 0 20px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize: isTablet ? 26 : 32, lineHeight:1.22, color:T.headingBlack }}>
-                    A future where financial borders no longer limit African potential.
+                    Being the forefront of transformative payment solutions where every transaction is a step towards financial empowerment.
                   </h2>
                   <p style={{ margin:0, fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:15, lineHeight:1.75, color:T.dark }}>
-                    We envision a continent where any business — from a Lagos startup to a Nairobi merchant — can send and receive money instantly across 50+ African markets, just like sending a WhatsApp message.
+                    We envision a future where businesses across Africa — from Lagos to Nairobi to Accra — can send and receive money instantly and securely, unlocking true financial inclusion across the continent.
                   </p>
                 </div>
               </div>
@@ -432,7 +406,7 @@ export default function CompanyPage() {
             fontSize: isMobile ? 22 : isTablet ? 30 : 38,
             lineHeight:1.25, color:T.headingBlack,
           }}>
-            The principles that guide everything we build.
+            Our core values — Customer Focused, Excellence, Innovation, Teamwork.
           </p>
 
           <div style={{
@@ -507,56 +481,33 @@ export default function CompanyPage() {
             We're a fast-growing team based in Lagos with a remote-friendly culture. Join us if you love solving hard problems and want to have real impact across the continent.
           </p>
 
-          <div style={{
-            display:"grid",
-            gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
-            gap: isMobile ? 16 : 20,
+          <div className="fade-up" style={{
+            background: T.white,
+            borderRadius: 12,
+            padding: isMobile ? "32px 24px" : "48px 40px",
+            border: `1px solid ${T.borderLight}`,
+            textAlign: "center",
           }}>
-            {JOBS.map((job, i) => (
-              <div
-                key={i}
-                className={`fade-up job-card d${(i % 2) + 1}`}
-                style={{
-                  background:T.white, borderRadius:12,
-                  padding: isMobile ? "24px 22px" : "28px 28px",
-                  display:"flex", flexDirection:"column", gap:10,
-                  border:`1px solid ${T.borderLight}`,
-                }}
-              >
-                <p style={{ margin:0, fontFamily:"DM Sans, sans-serif", fontWeight:700, fontSize: isMobile ? 15 : 17, color:T.dark, lineHeight:1.3 }}>{job.title}</p>
-                <p style={{ margin:0, fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14, color:T.primary }}>
-                  {job.location} • {job.type}
-                </p>
-                <p style={{ margin:0, fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14, lineHeight:1.68, color:T.muted }}>{job.desc}</p>
-                <button
-                  onClick={() => { window.location.href = "/careers"; }}
-                  style={{ alignSelf:"flex-start", fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:13, color:T.white, background:T.primary, border:"none", borderRadius:6, padding:"10px 22px", cursor:"pointer", transition:"opacity .15s", marginTop:6 }}
-                  onMouseEnter={e => (e.currentTarget.style.opacity = "0.88")}
-                  onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
-                >Apply Now</button>
-              </div>
-            ))}
-          </div>
-
-          {/* See all roles CTA */}
-          <div className="fade-up" style={{marginTop: isMobile ? 32 : 40, display:"flex", justifyContent:"center"}}>
+            <p style={{ margin:"0 0 10px", fontFamily:"DM Sans, sans-serif", fontWeight:700, fontSize: isMobile ? 17 : 20, color:T.dark }}>
+              No open roles right now
+            </p>
+            <p style={{ margin:"0 0 24px", fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:15, lineHeight:1.7, color:T.muted, maxWidth:440, marginLeft:"auto", marginRight:"auto" }}>
+              We don't have any open positions at the moment, but we're always interested in hearing from talented people. Drop us a line and we'll keep you in mind.
+            </p>
             <a
-              href="/careers"
-              className="arrow-link"
+              href="/support"
               style={{
-                fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:14,
-                color:T.primary, background:"transparent",
-                border:`1.5px solid ${T.primary}`, borderRadius:6,
+                display:"inline-block",
+                fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14,
+                color:T.white, background:T.primary,
+                border:"none", borderRadius:6,
                 padding:"12px 28px", textDecoration:"none",
-                transition:"background .15s",
+                transition:"opacity .15s",
               }}
-              onMouseEnter={e => (e.currentTarget.style.background = "#EDE9FF")}
-              onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
+              onMouseEnter={e => (e.currentTarget.style.opacity = "0.88")}
+              onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
             >
-              See all open roles
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                <path d="M9 18l6-6-6-6" stroke={T.primary} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
+              Get in Touch
             </a>
           </div>
 
@@ -635,7 +586,7 @@ export default function CompanyPage() {
               </div>
               <p style={{ margin:"0 0 8px", fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:16, color:T.dark, lineHeight:1.3 }}>Start building</p>
               <p style={{ margin:"0 0 14px", fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14, lineHeight:1.65, color:"#6B6877" }}>Get up and running with Payonus in as little as 10 minutes.</p>
-              <a href="/get-started" className="arrow-link" style={{ fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:14, color:T.primary, textDecoration:"none" }}
+              <a href="/docs" className="arrow-link" style={{ fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:14, color:T.primary, textDecoration:"none" }}
                 onMouseEnter={e => (e.currentTarget.style.opacity = "0.7")}
                 onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
               >

@@ -243,7 +243,7 @@ export default function CTASection() {
               Get up and running with Payonus in as little as 10 minutes.
             </p>
 
-            <LinkArrow label="Integration options" />
+            <LinkArrow label="Integration options" href="/docs" />
           </div>
 
         </div>
