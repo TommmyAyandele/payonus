@@ -27,6 +27,18 @@ function useScrollReveal(isMobile: boolean) {
   }, [isMobile]);
 }
 
+/* ─── COUNTRIES ─── */
+const COUNTRIES = [
+  { flag: "🇳🇬", name: "Nigeria",       currency: "NGN" },
+  { flag: "🇬🇭", name: "Ghana",         currency: "GHS" },
+  { flag: "🇰🇪", name: "Kenya",         currency: "KES" },
+  { flag: "🇿🇦", name: "South Africa",  currency: "ZAR" },
+  { flag: "🇿🇲", name: "Zambia",        currency: "ZMW" },
+  { flag: "🇨🇲", name: "Cameroon",      currency: "XAF" },
+  { flag: "🇨🇮", name: "Côte d'Ivoire", currency: "XOF" },
+  { flag: "🇸🇳", name: "Senegal",       currency: "XOF" },
+];
+
 /* ─── HERO ─── */
 const CYCLE_WORDS  = ["Speed", "Security", "Reliability"];
 const CYCLE_COLORS = [T.primary, T.primary, T.orange];
@@ -106,11 +118,36 @@ function Hero() {
         </div>
       </div>
 
-      {/* Logo bar */}
-      <div style={{ position:"absolute", left:0, bottom:0, width:"100%", height:logoH, overflow:"hidden" }}>
-        <div className="marquee-track" style={{ display:"flex", width:"200%", height:"100%" }}>
-          <img src="/logo-bar.png" alt="Trusted by industry-leading businesses" style={{ display:"block", width:"50%", height:"100%", objectFit:"cover", flexShrink:0 }} />
-          <img src="/logo-bar.png" aria-hidden style={{ display:"block", width:"50%", height:"100%", objectFit:"cover", flexShrink:0 }} />
+      {/* Countries marquee */}
+      <div style={{
+        position:"absolute", left:0, bottom:0, width:"100%", height:logoH,
+        overflow:"hidden",
+        borderTop:`1px solid ${T.borderLight}`,
+        background: T.bg,
+        display:"flex", alignItems:"center",
+      }}>
+        <div
+          className="marquee-track"
+          style={{ display:"flex", alignItems:"center", width:"max-content", gap:0 }}
+          aria-label="Markets we operate in"
+        >
+          {[...COUNTRIES, ...COUNTRIES, ...COUNTRIES].map((c, i) => (
+            <div
+              key={i}
+              style={{
+                display:"flex", alignItems:"center", gap: isMobile ? 8 : 12,
+                padding: isMobile ? "0 24px" : "0 36px",
+                borderRight:`1px solid ${T.borderLight}`,
+                flexShrink:0,
+              }}
+            >
+              <span style={{ fontSize: isMobile ? 22 : 28, lineHeight:1, userSelect:"none" }}>{c.flag}</span>
+              <div>
+                <p style={{ margin:0, fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize: isMobile ? 12 : 14, color:T.dark, whiteSpace:"nowrap", lineHeight:1.25 }}>{c.name}</p>
+                <p style={{ margin:0, fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize: isMobile ? 10 : 11, color:T.muted, letterSpacing:"0.06em", lineHeight:1.4 }}>{c.currency}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
@@ -731,9 +768,9 @@ export default function PayonUsLandingPage() {
         *, *::before, *::after { box-sizing:border-box; }
         img { display:block; }
 
-        /* Marquee */
-        @keyframes marquee { from { transform:translateX(0); } to { transform:translateX(-50%); } }
-        .marquee-track { animation: marquee 32s linear infinite; }
+        /* Countries marquee */
+        @keyframes marquee { from { transform:translateX(0); } to { transform:translateX(-33.333%); } }
+        .marquee-track { animation: marquee 22s linear infinite; }
         .marquee-track:hover { animation-play-state: paused; }
 
         /* World map drift */
