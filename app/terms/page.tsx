@@ -3,133 +3,202 @@ import React from "react";
 import LegalPage, { LegalSection } from "../LegalPage";
 
 const SECTIONS: LegalSection[] = [
+
+  /* ══════════════════════════════════════
+     PART I — PAYMENT PROCESSING
+  ══════════════════════════════════════ */
   {
-    id: "acceptance",
-    heading: "1. Acceptance of Terms",
+    id: "pp-intro",
+    heading: "Payment Processing — 1. Introduction",
     content: (
       <>
-        <p>By accessing or using any Payonus product, platform, or API, you agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree with any part of these terms, you may not use our services.</p>
-        <p>These Terms apply to all users, including businesses, developers, and individuals who access Payonus services directly or through our API. Your continued use of our services constitutes your acceptance of any changes we make to these Terms.</p>
+        <p>These Terms and Conditions ("Agreement") govern your use of the payment processing services provided by Onus Financial Services ("Payonus"), located in Lagos, Nigeria. By accessing or using our services, you agree to comply with and be bound by these terms. Please read this Agreement carefully before using our services.</p>
       </>
     ),
   },
   {
-    id: "services",
-    heading: "2. Description of Services",
+    id: "pp-registration",
+    heading: "Payment Processing — 2. Account Registration",
     content: (
       <>
-        <p>Payonus provides payment infrastructure for businesses operating across Africa, including but not limited to:</p>
-        <ul>
-          <li>Bulk and single payouts to bank accounts and mobile wallets</li>
-          <li>Payment collections via various payment methods</li>
-          <li>Instant settlements to local bank accounts</li>
-          <li>Payment APIs and developer tools</li>
-          <li>Analytics and reporting dashboards</li>
-        </ul>
-        <p>We reserve the right to modify, suspend, or discontinue any part of our services at any time with reasonable notice.</p>
+        <p><strong>2.1. Eligibility.</strong> In order to use our payment processing services, you must be at least 18 years old and have the legal authority to enter into binding agreements.</p>
+        <p><strong>2.2. Registration Information.</strong> You are required to provide accurate and complete information during the registration process. It is your responsibility to keep your account information updated.</p>
+        <p><strong>2.3. Account Security.</strong> You are responsible for maintaining the confidentiality of your account credentials, including your password. You agree not to disclose your account information to any third party and to notify us immediately of any unauthorized use of your account.</p>
       </>
     ),
   },
   {
-    id: "obligations",
-    heading: "3. User Obligations",
+    id: "pp-services",
+    heading: "Payment Processing — 3. Payment Processing Services",
     content: (
       <>
-        <p>As a user of Payonus services, you agree to:</p>
-        <ul>
-          <li>Provide accurate, complete, and current information during registration and ongoing use</li>
-          <li>Maintain the security of your API keys and account credentials</li>
-          <li>Use our services only for lawful purposes and in compliance with all applicable regulations</li>
-          <li>Not attempt to reverse-engineer, copy, or replicate our platform or APIs</li>
-          <li>Promptly notify us of any unauthorised access to your account</li>
-          <li>Comply with all applicable anti-money laundering (AML) and know-your-customer (KYC) requirements</li>
-        </ul>
+        <p><strong>3.1. Transaction Processing.</strong> Our services allow you to process payments from your customers using various payment methods. We strive to provide a secure and reliable payment processing system; however, we cannot guarantee uninterrupted or error-free service.</p>
+        <p><strong>3.2. Fees and Charges.</strong> You agree to pay the applicable fees and charges for using our payment processing services. The fees will be clearly communicated to you, and you are responsible for any taxes associated with your transactions.</p>
+        <p><strong>3.3. Disputes and Chargebacks.</strong> In the event of a dispute or chargeback, you agree to cooperate with us and provide any necessary documentation or information to resolve the issue. We reserve the right to investigate and resolve disputes in our sole discretion.</p>
       </>
     ),
   },
   {
-    id: "payments",
-    heading: "4. Payment Processing",
+    id: "pp-data",
+    heading: "Payment Processing — 4. Data Protection and Privacy",
     content: (
       <>
-        <p>All transactions processed through Payonus are subject to verification and compliance checks. We reserve the right to hold, delay, or reverse any transaction that we reasonably believe to be fraudulent, in violation of these Terms, or in breach of applicable law.</p>
-        <p>You are responsible for ensuring that all payment instructions submitted through our platform are accurate. Payonus is not liable for losses arising from incorrect payment details provided by you or your end users.</p>
-        <h3>Settlement timelines</h3>
-        <p>Settlement timelines vary by market and payment method. Specific timelines are communicated within your dashboard and API documentation. Payonus does not guarantee settlement times where delays are caused by third-party financial institutions.</p>
+        <p><strong>4.1. Privacy Policy.</strong> We value your privacy and handle your personal information in accordance with our Privacy Policy. By using our services, you consent to the collection, use, and disclosure of your personal information as described in our Privacy Policy.</p>
+        <p><strong>4.2. Data Security.</strong> We employ industry-standard security measures to protect your data; however, we cannot guarantee absolute security. You are responsible for maintaining the security of your account and any data transmitted through our services.</p>
       </>
     ),
   },
   {
-    id: "fees",
-    heading: "5. Fees and Charges",
+    id: "pp-ip",
+    heading: "Payment Processing — 5. Intellectual Property",
     content: (
       <>
-        <p>Our pricing is transparent and per-transaction. Current fees are available on our <a href="/pricing">Pricing page</a>. Fees may vary by country, payment method, and transaction volume.</p>
-        <p>We reserve the right to update our fee structure with 30 days' written notice. Continued use of our services after such notice constitutes acceptance of the new fees.</p>
-        <ul>
-          <li>Fees are deducted automatically at the time of transaction settlement</li>
-          <li>VAT or applicable taxes may be charged in addition to stated fees</li>
-          <li>Volume discounts are available — contact our sales team for details</li>
-        </ul>
+        <p><strong>5.1. Ownership.</strong> All intellectual property rights related to our services, including but not limited to trademarks, logos, and software, are owned by the Company or its licensors. You may not use our intellectual property without our prior written consent.</p>
       </>
     ),
   },
   {
-    id: "ip",
-    heading: "6. Intellectual Property",
+    id: "pp-liability",
+    heading: "Payment Processing — 6. Limitation of Liability",
     content: (
       <>
-        <p>All content, trademarks, logos, APIs, and technology on the Payonus platform are the exclusive property of Payonus or its licensors. Nothing in these Terms grants you any right to use our intellectual property without express written permission.</p>
-        <p>Subject to these Terms, we grant you a limited, non-exclusive, non-transferable licence to access and use our APIs and platform solely for the purpose of integrating and using our payment services.</p>
+        <p><strong>6.1. Disclaimer of Warranties.</strong> Our payment processing services are provided on an "as is" and "as available" basis. We make no warranties, whether expressed or implied, regarding the reliability, accuracy, or availability of our services.</p>
+        <p><strong>6.2. Limitation of Liability.</strong> To the extent permitted by applicable law, the Company and its affiliates shall not be liable for any direct, indirect, incidental, special, or consequential damages arising out of or in connection with the use of our services, even if we have been advised of the possibility of such damages.</p>
       </>
     ),
   },
   {
-    id: "liability",
-    heading: "7. Limitation of Liability",
+    id: "pp-termination",
+    heading: "Payment Processing — 7. Termination",
     content: (
       <>
-        <p>To the maximum extent permitted by law, Payonus shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, goodwill, or business interruption, arising out of or in connection with your use of our services.</p>
-        <p>Our total liability to you for any claims arising under these Terms shall not exceed the total fees paid by you to Payonus in the three (3) months preceding the claim.</p>
+        <p><strong>7.1. Termination by Company.</strong> We reserve the right to terminate or suspend your access to our services at any time, with or without cause, without prior notice.</p>
       </>
     ),
   },
   {
-    id: "termination",
-    heading: "8. Termination",
+    id: "pp-governing-law",
+    heading: "Payment Processing — 8. Governing Law and Jurisdiction",
     content: (
       <>
-        <p>Either party may terminate these Terms at any time by providing 30 days' written notice. We may suspend or terminate your access immediately if we reasonably believe you have breached these Terms, engaged in fraudulent activity, or pose a risk to the platform or other users.</p>
-        <p>Upon termination, all outstanding settlements owed to you will be processed in accordance with our standard settlement procedures, subject to any applicable holds or deductions.</p>
+        <p>This Agreement shall be governed by and construed in accordance with the laws of Nigeria. Any disputes arising out of or in connection with this Agreement shall be subject to the exclusive jurisdiction of the courts in Lagos, Nigeria.</p>
       </>
     ),
   },
   {
-    id: "governing-law",
-    heading: "9. Governing Law",
+    id: "pp-modifications",
+    heading: "Payment Processing — 9. Modifications to the Agreement",
     content: (
       <>
-        <p>These Terms shall be governed by and construed in accordance with the laws of the Federal Republic of Nigeria. Any disputes arising under these Terms shall be subject to the exclusive jurisdiction of the courts of Lagos State, Nigeria.</p>
+        <p>We reserve the right to modify or update these Terms and Conditions at any time. Any changes will be effective upon posting the revised Agreement on our website. Your continued use of our services after the changes will constitute your acceptance of the modified terms.</p>
+      </>
+    ),
+  },
+
+  /* ══════════════════════════════════════
+     PART II — DIGITAL BANK
+  ══════════════════════════════════════ */
+  {
+    id: "db-intro",
+    heading: "Digital Bank — 1. Introduction",
+    content: (
+      <>
+        <p>These Terms and Conditions ("Agreement") govern your use of the digital banking services provided by Onus Financial Services ("BankOnUs"), located in Lagos, Nigeria. By accessing or using our services, you agree to comply with and be bound by these terms. Please read this Agreement carefully before using our services.</p>
       </>
     ),
   },
   {
-    id: "changes",
-    heading: "10. Changes to Terms",
+    id: "db-registration",
+    heading: "Digital Bank — 2. Account Registration",
     content: (
       <>
-        <p>We may update these Terms from time to time. When we do, we will revise the "Last updated" date at the top of this page and notify you via email or an in-platform notice. Your continued use of our services after changes take effect constitutes your acceptance of the revised Terms.</p>
+        <p><strong>2.1. Eligibility.</strong> In order to use our digital banking services, you must be at least 18 years old and have the legal authority to enter into binding agreements.</p>
+        <p><strong>2.2. Registration Information.</strong> You are required to provide accurate and complete information during the registration process. It is your responsibility to keep your account information updated.</p>
+        <p><strong>2.3. Account Security.</strong> You are responsible for maintaining the confidentiality of your account credentials, including your password. You agree not to disclose your account information to any third party and to notify us immediately of any unauthorized use of your account.</p>
       </>
     ),
   },
+  {
+    id: "db-services",
+    heading: "Digital Bank — 3. Account Services",
+    content: (
+      <>
+        <p><strong>3.1. Deposit and Withdrawal.</strong> Our digital banking services allow you to deposit funds into your account and make withdrawals, subject to any transaction limits and fees that may apply.</p>
+        <p><strong>3.2. Fund Transfers.</strong> You may transfer funds to other accounts within our digital banking system or to external accounts, subject to any applicable transfer limits and fees.</p>
+        <p><strong>3.3. Account Statements.</strong> We provide regular account statements, which reflect your account activity and balances. It is your responsibility to review your statements promptly and notify us of any errors or discrepancies.</p>
+      </>
+    ),
+  },
+  {
+    id: "db-data",
+    heading: "Digital Bank — 4. Data Protection and Privacy",
+    content: (
+      <>
+        <p><strong>4.1. Privacy Policy.</strong> We value your privacy and handle your personal information in accordance with our Privacy Policy. By using our services, you consent to the collection, use, and disclosure of your personal information as described in our Privacy Policy.</p>
+        <p><strong>4.2. Data Security.</strong> We employ industry-standard security measures to protect your data; however, we cannot guarantee absolute security. You are responsible for maintaining the security of your account and any data transmitted through our services.</p>
+      </>
+    ),
+  },
+  {
+    id: "db-ip",
+    heading: "Digital Bank — 5. Intellectual Property",
+    content: (
+      <>
+        <p><strong>5.1. Ownership.</strong> All intellectual property rights related to our digital banking services, including but not limited to trademarks, logos, and software, are owned by the Bank or its licensors. You may not use our intellectual property without our prior written consent.</p>
+      </>
+    ),
+  },
+  {
+    id: "db-liability",
+    heading: "Digital Bank — 6. Limitation of Liability",
+    content: (
+      <>
+        <p><strong>6.1. Disclaimer of Warranties.</strong> Our digital banking services are provided on an "as is" and "as available" basis. We make no warranties, whether expressed or implied, regarding the reliability, accuracy, or availability of our services.</p>
+        <p><strong>6.2. Limitation of Liability.</strong> To the extent permitted by applicable law, the Bank and its affiliates shall not be liable for any direct, indirect, incidental, special, or consequential damages arising out of or in connection with the use of our services, even if we have been advised of the possibility of such damages.</p>
+      </>
+    ),
+  },
+  {
+    id: "db-termination",
+    heading: "Digital Bank — 7. Termination",
+    content: (
+      <>
+        <p><strong>7.1. Termination by Bank.</strong> We reserve the right to terminate or suspend your access to our digital banking services at any time, with or without cause, without prior notice.</p>
+        <p><strong>7.2. Termination by User.</strong> You may terminate your account with us at any time by providing written notice to the Bank. Upon termination, you will remain responsible for any outstanding fees or charges.</p>
+      </>
+    ),
+  },
+  {
+    id: "db-governing-law",
+    heading: "Digital Bank — 8. Governing Law and Jurisdiction",
+    content: (
+      <>
+        <p>This Agreement shall be governed by and construed in accordance with the laws of Nigeria. Any disputes arising out of or in connection with this Agreement shall be subject to the exclusive jurisdiction of the courts in Lagos, Nigeria.</p>
+      </>
+    ),
+  },
+  {
+    id: "db-modifications",
+    heading: "Digital Bank — 9. Modifications to the Agreement",
+    content: (
+      <>
+        <p>We reserve the right to modify or update these Terms and Conditions at any time. Any changes will be effective upon posting the revised Agreement on our website. Your continued use of our services after the changes will constitute your acceptance of the modified terms.</p>
+      </>
+    ),
+  },
+
+  /* ══════════════════════════════════════
+     CONTACT
+  ══════════════════════════════════════ */
   {
     id: "contact",
-    heading: "11. Contact Us",
+    heading: "Contact Us",
     content: (
       <>
-        <p>If you have any questions about these Terms of Service, please contact us:</p>
+        <p>If you have any questions about these Terms and Conditions, please contact us:</p>
         <ul>
-          <li>Email: <a href="mailto:legal@payonus.com">legal@payonus.com</a></li>
+          <li>Email: <a href="mailto:Support@payonus.com">Support@payonus.com</a></li>
+          <li>Phone: <a href="tel:+2349132222249">+234 913 222 2249</a></li>
           <li>Address: Lagos, Nigeria</li>
           <li>Support: <a href="/support">payonus.com/support</a></li>
         </ul>
@@ -141,9 +210,9 @@ const SECTIONS: LegalSection[] = [
 export default function TermsPage() {
   return (
     <LegalPage
-      title="Terms of Service"
-      subtitle="Please read these terms carefully before using any Payonus product or service."
-      updated="1 May 2026"
+      title="Terms & Conditions"
+      subtitle="These terms govern your use of Payonus payment processing and digital banking services. Please read carefully before using our services."
+      updated="23 June 2026"
       sections={SECTIONS}
     />
   );
