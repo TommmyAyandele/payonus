@@ -24,9 +24,9 @@ function useScrollReveal() {
 /* ─── DATA ─── */
 const CERTS = [
   {
-    label: "PCI-DSS",
+    label: "PCIDSS Level 1",
     sub:   "Payment Card Industry",
-    desc:  "Our infrastructure and processes are built to meet PCI-DSS Level 1 standards — the highest tier of card payment security.",
+    desc:  "Payonus is PCIDSS Level 1 certified — the highest tier of card payment security, verified by a qualified security assessor.",
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
         <rect x="2" y="5" width="20" height="14" rx="3" stroke={T.primary} strokeWidth="1.6"/>
@@ -47,9 +47,9 @@ const CERTS = [
     ),
   },
   {
-    label: "NDPC",
+    label: "NDPC Trust Mark",
     sub:   "Nigeria Data Protection",
-    desc:  "We comply with the Nigeria Data Protection Act and are registered with the NDPC as a data controller and processor.",
+    desc:  "Payonus holds the NDPC Trust Mark and is registered with the Nigeria Data Protection Commission as a data controller and processor.",
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
         <circle cx="12" cy="12" r="9" stroke={T.primary} strokeWidth="1.6"/>
@@ -66,17 +66,6 @@ const CERTS = [
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
         <path d="M3 21h18M3 10h18M5 6l7-3 7 3" stroke={T.primary} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
         <path d="M6 10v11M10 10v11M14 10v11M18 10v11" stroke={T.primary} strokeWidth="1.5" strokeLinecap="round"/>
-      </svg>
-    ),
-  },
-  {
-    label: "SOC 2 Type II",
-    sub:   "In Progress",
-    desc:  "We are currently pursuing SOC 2 Type II certification with a Big Four auditor, covering security, availability, and confidentiality.",
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-        <path d="M9 11l3 3L22 4" stroke={T.primary} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" stroke={T.primary} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     ),
   },

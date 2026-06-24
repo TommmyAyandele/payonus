@@ -22,16 +22,15 @@ const CARDS = [
   {
     icon: "monitor",
     title: "Uptime & 24/7 Monitoring",
-    desc: "99% uptime SLA backed by round-the-clock infrastructure monitoring. 3DS Authentication compliant with secured source and reply URLs across all payment flows.",
+    desc: "99% uptime SLA backed by round-the-clock infrastructure monitoring, secured source and reply URLs, and real-time transaction notifications across all payment flows.",
   },
 ];
 
 export const PILLS = [
-  { label: "PCIDSS Level 1",  icon: "pci"  },
-  { label: "ISO 27001",       icon: "iso"  },
-  { label: "CBN Regulated",   icon: "cbn"  },
-  { label: "NDPC Certified",  icon: "soc2" },
-  { label: "3DS Compliant",   icon: "fatf" },
+  { label: "ISO 27001",        icon: "iso"  },
+  { label: "PCIDSS Level 1",   icon: "pci"  },
+  { label: "NDPC Trust Mark",  icon: "ndpc" },
+  { label: "CBN Licensed",     icon: "cbn"  },
 ];
 
 const EASE = "cubic-bezier(0.16,1,0.3,1)";
@@ -124,34 +123,14 @@ export function PillIcon({ type, size }: { type: string; size: number }) {
         </svg>
       );
 
-    /* FATF Compliant — balance / scales of justice */
-    case "fatf":
+    /* NDPC Trust Mark — shield with person (data protection) */
+    case "ndpc":
       return (
         <svg width={size} height={size} viewBox="0 0 16 16" fill="none">
-          {/* centre post */}
-          <path d="M8 2.5v11" stroke={c} strokeWidth="1.4" strokeLinecap="round"/>
-          {/* base */}
-          <path d="M5.5 13.5h5" stroke={c} strokeWidth="1.4" strokeLinecap="round"/>
-          {/* beam */}
-          <path d="M2.5 5h11" stroke={c} strokeWidth="1.4" strokeLinecap="round"/>
-          {/* left arm + pan */}
-          <path d="M2.5 5 1 8.5" stroke={c} strokeWidth="1.3" strokeLinecap="round"/>
-          <path d="M1 8.5a2 2 0 0 0 3 0" stroke={c} strokeWidth="1.3"/>
-          {/* right arm + pan (lower, tipped) */}
-          <path d="M13.5 5 15 8.5" stroke={c} strokeWidth="1.3" strokeLinecap="round"/>
-          <path d="M15 8.5a2 2 0 0 1-3 0" stroke={c} strokeWidth="1.3"/>
-        </svg>
-      );
-
-    /* SOC 2 Type II — magnifying glass over data (audit) */
-    case "soc2":
-      return (
-        <svg width={size} height={size} viewBox="0 0 16 16" fill="none">
-          <circle cx="6.8" cy="6.8" r="4.3" stroke={c} strokeWidth="1.4"/>
-          <path d="M10 10L14 14" stroke={c} strokeWidth="1.5" strokeLinecap="round"/>
-          {/* data rows inside lens */}
-          <path d="M4.5 6.8h4.5" stroke={c} strokeWidth="1.3" strokeLinecap="round"/>
-          <path d="M4.5 8.3h2.8" stroke={c} strokeWidth="1.3" strokeLinecap="round"/>
+          <path d="M8 1.5L2 4v4.5c0 3.5 2.5 6.5 6 7.5 3.5-1 6-4 6-7.5V4L8 1.5z"
+            stroke={c} strokeWidth="1.4" strokeLinejoin="round"/>
+          <circle cx="8" cy="7" r="1.6" stroke={c} strokeWidth="1.2"/>
+          <path d="M5 12c0-1.66 1.34-3 3-3s3 1.34 3 3" stroke={c} strokeWidth="1.2" strokeLinecap="round"/>
         </svg>
       );
 
