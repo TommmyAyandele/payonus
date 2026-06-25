@@ -399,9 +399,9 @@ export default function PricingPage() {
                   }}>+</span>
                 </button>
                 <div style={{
-                  maxHeight: openFaq===i ? 200 : 0,
+                  maxHeight: openFaq===i ? 400 : 0,
                   overflow:"hidden",
-                  transition:"max-height .32s cubic-bezier(.16,1,.3,1)",
+                  transition:"max-height .4s cubic-bezier(.16,1,.3,1)",
                 }}>
                   <p style={{
                     margin:"0 0 24px",

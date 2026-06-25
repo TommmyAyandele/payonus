@@ -124,24 +124,24 @@ const PILLARS = [
 
 const FAQS = [
   {
-    q: "What happens if there is a security incident?",
-    a: "We follow a documented incident response plan. Affected customers are notified within 72 hours of confirmation in accordance with NDPA requirements. A post-incident report is published for significant events.",
+    q: "Is Payonus licensed and regulated?",
+    a: "Yes. Payonus is licensed by the Central Bank of Nigeria (CBN) and certified under ISO 27001, PCIDSS Level 1, and the NDPC Trust Mark. These certifications represent the highest standards of financial and data security compliance in the industry.",
   },
   {
-    q: "Can I request a security questionnaire or vendor assessment?",
-    a: "Yes. Enterprise customers can request our standard security questionnaire, data processing addendum, and most recent penetration test executive summary via their account manager or security@payonus.com.",
+    q: "How does Payonus protect my transaction data?",
+    a: "All transaction data is encrypted end-to-end using AES-256 and TLS 1.2+. Our infrastructure is ISO 27001 certified, and we undergo regular third-party penetration testing. No unencrypted card data is ever stored on our systems.",
+  },
+  {
+    q: "What happens if there is a security incident?",
+    a: "We follow a documented incident response plan. Affected customers are notified within 72 hours of confirmation in accordance with NDPC requirements. A post-incident report is published for significant events, and we work swiftly to contain, remediate, and prevent recurrence.",
   },
   {
     q: "How are API keys and secrets managed?",
-    a: "API keys are hashed before storage using a one-way function — we cannot recover them. Secrets are managed through a dedicated secrets manager with audit logging on every read. Key rotation is available on demand.",
-  },
-  {
-    q: "Do you subcontract data processing to third parties?",
-    a: "We use a small number of vetted sub-processors (listed in our Privacy Policy). Each undergoes security due diligence before onboarding and is bound by data processing agreements that mirror our own obligations.",
+    a: "API keys are hashed before storage using a one-way function — we cannot recover them. Secrets are managed through a dedicated secrets manager with audit logging on every read. Key rotation is available on demand from your dashboard.",
   },
   {
     q: "What is your data retention and deletion policy?",
-    a: "Transaction records are retained for 7 years to meet regulatory requirements. All other data is deleted within 30 days of account closure. You can request immediate deletion of non-regulatory data at any time.",
+    a: "Transaction records are retained for 7 years to meet CBN and NDPC regulatory requirements. All other data is deleted within 30 days of account closure. You can request immediate deletion of non-regulatory data at any time by contacting compliance@payonus.com.",
   },
 ];
 
@@ -559,7 +559,7 @@ export default function SecurityPage() {
             Security <span style={{color:T.primary}}>FAQs.</span>
           </h2>
 
-          <div style={{
+          <div className="fade-up d2" style={{
             border:`1px solid ${T.borderLight}`,
             borderRadius:14,
             overflow:"hidden",
@@ -569,7 +569,7 @@ export default function SecurityPage() {
               return (
                 <div key={i} style={{borderBottom: i < FAQS.length - 1 ? `1px solid ${T.borderLight}` : "none"}}>
                   <button
-                    className="faq-btn fade-up"
+                    className="faq-btn"
                     onClick={() => setOpenFaq(isOpen ? null : i)}
                     style={{
                       width:"100%", background:"none", border:"none", cursor:"pointer",
@@ -592,10 +592,10 @@ export default function SecurityPage() {
                     </span>
                   </button>
                   <div style={{
-                    maxHeight: isOpen ? 300 : 0,
+                    maxHeight: isOpen ? 500 : 0,
                     opacity: isOpen ? 1 : 0,
                     overflow:"hidden",
-                    transition:"max-height .38s cubic-bezier(.16,1,.3,1), opacity .28s",
+                    transition:"max-height .4s cubic-bezier(.16,1,.3,1), opacity .3s",
                   }}>
                     <p style={{
                       margin:0, padding: isMobile ? "0 20px 20px" : "0 28px 24px",
