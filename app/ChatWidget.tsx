@@ -12,6 +12,9 @@ const BORDER    = "#E4E0F0";
 
 /* ── All FAQ knowledge base ── */
 const KB: { q: string; a: string }[] = [
+  /* Onboarding */
+  { q: "How do I become a merchant sign up get started onboard register account", a: "Getting started with Payonus is easy! Click 'Get Started' on our website to create your merchant account. Once registered, our team will guide you through KYC verification and onboarding. You can also contact our sales team at sales@payonus.com for a guided setup." },
+  { q: "How do I contact sales speak to someone talk to team", a: "You can reach our sales team by filling out the contact form on our Sales page, or by emailing sales@payonus.com. We typically respond within one business day." },
   /* Pricing */
   { q: "Are there setup fees?", a: "No. There are no setup fees, activation fees, or minimum commitments on our Starter plan. You only pay for what you process." },
   { q: "Can I switch plans mid-month?", a: "Yes. You can upgrade or downgrade at any time. Changes take effect immediately and billing is prorated for the remainder of the billing cycle." },
@@ -53,9 +56,12 @@ function findAnswer(query: string): string | null {
   let best: { score: number; answer: string } = { score: 0, answer: "" };
 
   for (const item of KB) {
-    const haystack = tokenize(item.q + " " + item.a);
-    const matches = qTokens.filter(t => haystack.some(h => h.includes(t) || t.includes(h)));
-    const score = matches.length / qTokens.length;
+    const qField = tokenize(item.q);
+    const aField = tokenize(item.a);
+    const matchQ = qTokens.filter(t => qField.some(h => h.includes(t) || t.includes(h))).length;
+    const matchA = qTokens.filter(t => aField.some(h => h.includes(t) || t.includes(h))).length;
+    // Question-field matches count 3x more than answer-field matches
+    const score = (matchQ * 3 + matchA) / (qTokens.length * 3);
     if (score > best.score) best = { score, answer: item.a };
   }
 
