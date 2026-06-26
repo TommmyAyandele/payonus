@@ -340,23 +340,23 @@ export default function ChatWidget() {
           width:        56,
           height:       56,
           borderRadius: "50%",
-          background:   PRIMARY,
+          background:   "#F4B249",
           border:       "none",
           cursor:       "pointer",
           display:      "flex",
           alignItems:   "center",
           justifyContent: "center",
-          boxShadow:    "0 8px 24px rgba(96,9,255,0.40)",
+          boxShadow:    "0 8px 24px rgba(244,178,73,0.50)",
           zIndex:       9999,
           transition:   "transform 0.2s, box-shadow 0.2s",
         }}
         onMouseEnter={e => {
           e.currentTarget.style.transform   = "scale(1.08)";
-          e.currentTarget.style.boxShadow   = "0 12px 32px rgba(96,9,255,0.50)";
+          e.currentTarget.style.boxShadow   = "0 12px 32px rgba(244,178,73,0.65)";
         }}
         onMouseLeave={e => {
           e.currentTarget.style.transform   = "scale(1)";
-          e.currentTarget.style.boxShadow   = "0 8px 24px rgba(96,9,255,0.40)";
+          e.currentTarget.style.boxShadow   = "0 8px 24px rgba(244,178,73,0.50)";
         }}
       >
         {open ? (
