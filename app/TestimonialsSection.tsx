@@ -5,9 +5,9 @@ import { useBreakpoint } from "./use-breakpoint";
 
 const TESTIMONIALS = [
   {
-    quote: `"With Payonus, we have a pan-African infrastructure partner to help our businesses–from Nigerian retail giants to Senegalese tech exporters–keep scaling and settling across the continent's borders."`,
-    name: "Tom Ford,",
-    role: "Lead Product Manager of Payments, Mindbody",
+    quote: `"My experience with Payonus has been very positive. I really appreciate how responsive the team is whenever I need assistance, and I can always reach my account officer whenever necessary. PayOnus is the lifeline of KwikX, and we truly value this partnership. Thank you for your continued commitment and excellent service."`,
+    name: "James Idowu,",
+    role: "Bureau De Change Merchant, Crownphix Technologies Limited",
   },
   {
     quote: `"Before Payonus, cross-border payments were a weekly fire drill. Now it's just working. Our team has genuinely stopped worrying about it."`,
