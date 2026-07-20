@@ -138,15 +138,15 @@ export default function IndustryPage({
       <Navbar scrolled={scrolled} />
 
       {/* ══ HERO ══ */}
-      <section style={{ position:"relative", width:"100%", background:T.bg, overflow:"hidden", minHeight:isMobile?"auto":"80vh", display:"flex", alignItems:"center" }}>
+      <section style={{ position:"relative", width:"100%", background:T.bg, overflow:"hidden" }}>
         <IndustryHeroBg industry={industry} />
 
-        <div style={{ position:"relative", zIndex:1, maxWidth:1440, margin:"0 auto", width:"100%", padding:isMobile?`80px 20px 60px`:`80px ${hPad}px` }}>
-          <div style={{ maxWidth:isMobile?"100%":680, display:"flex", flexDirection:"column", gap:isMobile?24:20 }}>
+        <div style={{ position:"relative", zIndex:1, maxWidth:1440, margin:"0 auto", padding:isMobile?`80px 20px 60px`:`0 ${hPad}px`, minHeight:isMobile?"auto":"100vh", display:isMobile?"block":"flex", alignItems:"center", justifyContent:"center" }}>
+          <div style={{ maxWidth:isMobile?"100%":760, display:"flex", flexDirection:"column", gap:isMobile?28:24, alignItems:"flex-start" }}>
             <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:isMobile?12:14, letterSpacing:"0.08em", textTransform:"uppercase", color:T.orange }}>
               {label}
             </span>
-            <h1 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?42:isTablet?56:68, lineHeight:1.05, letterSpacing:"-0.02em", color:T.headingBlack }}>
+            <h1 style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?48:isTablet?60:72, lineHeight:1.05, letterSpacing:"-0.02em", color:T.headingBlack }}>
               {heading}
             </h1>
             <p style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:isMobile?15:17, lineHeight:1.65, color:T.muted, maxWidth:480 }}>
