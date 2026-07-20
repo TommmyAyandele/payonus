@@ -120,14 +120,6 @@ export default function IndustryPage({
         .flag-scroll-track{animation:flagScrollY 18s linear infinite;}
         .flag-scroll-track:hover{animation-play-state:paused;}
         @keyframes menuSlideIn{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:translateY(0);}}
-        @keyframes pixBlink{0%,100%{opacity:.04}45%,55%{opacity:.38}}
-        @keyframes fxScroll{from{transform:translateX(0)}to{transform:translateX(-220px)}}
-        @keyframes cktFlow{from{stroke-dashoffset:0}to{stroke-dashoffset:-146}}
-        @keyframes cktNode{0%,100%{opacity:.1}50%{opacity:.65}}
-        @keyframes floatBox{0%{transform:translateY(0);opacity:0}6%{opacity:.9}88%{opacity:.6}100%{transform:translateY(-110vh);opacity:0}}
-        @keyframes arcFlow{from{stroke-dashoffset:0}to{stroke-dashoffset:-20}}
-        @keyframes gearCW{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-        @keyframes gearCCW{from{transform:rotate(0deg)}to{transform:rotate(-360deg)}}
       `}</style>
 
       {/* Scroll progress bar */}
