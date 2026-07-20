@@ -24,6 +24,15 @@ export const PRODUCTS = [
   { title: "Analytics & Reporting", desc: "Insights that drive decisions",      icon: "/icons/icon-analytics.svg",   href: "/analytics"    },
 ];
 
+export const INDUSTRIES = [
+  { title: "Gaming",        desc: "Payments built for players",         emoji: "🎮", href: "/industries/gaming"        },
+  { title: "Forex",         desc: "FX rails traders trust",             emoji: "💱", href: "/industries/forex"         },
+  { title: "Banking",       desc: "Infrastructure for fintechs",        emoji: "🏦", href: "/industries/banking"       },
+  { title: "E-commerce",    desc: "Every checkout, every method",       emoji: "🛍️", href: "/industries/ecommerce"     },
+  { title: "Aviation",      desc: "High-value payments, zero friction", emoji: "✈️", href: "/industries/aviation"      },
+  { title: "Manufacturing", desc: "B2B payments for supply chains",     emoji: "🏭", href: "/industries/manufacturing"  },
+];
+
 export function Logo({ height = 30 }: { height?: number }) {
   return (
     <a href="/" style={{ display:"flex", alignItems:"center", textDecoration:"none" }}>
@@ -35,15 +44,20 @@ export function Logo({ height = 30 }: { height?: number }) {
 export default function Navbar({ scrolled }: { scrolled: boolean }) {
   const { isMobile, isTablet } = useBreakpoint();
   const pathname = usePathname();
-  const [productsOpen,    setProductsOpen]    = React.useState(false);
-  const [mobileOpen,      setMobileOpen]      = React.useState(false);
-  const [productsExpanded,setProductsExpanded] = React.useState(false);
+  const [productsOpen,     setProductsOpen]     = React.useState(false);
+  const [industriesOpen,   setIndustriesOpen]   = React.useState(false);
+  const [mobileOpen,       setMobileOpen]       = React.useState(false);
+  const [productsExpanded, setProductsExpanded] = React.useState(false);
+  const [industriesExpanded, setIndustriesExpanded] = React.useState(false);
   const timer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const isProductActive = PRODUCTS.some(p => pathname === p.href || pathname.startsWith(p.href + "/"));
+  const isProductActive  = PRODUCTS.some(p => pathname === p.href || pathname.startsWith(p.href + "/"));
+  const isIndustryActive = INDUSTRIES.some(i => pathname === i.href || pathname.startsWith(i.href + "/"));
 
-  const open  = () => { if (timer.current) clearTimeout(timer.current); setProductsOpen(true);  };
+  const open  = () => { if (timer.current) clearTimeout(timer.current); setProductsOpen(true); setIndustriesOpen(false); };
   const close = () => { timer.current = setTimeout(() => setProductsOpen(false), 130); };
+  const openI  = () => { if (timer.current) clearTimeout(timer.current); setIndustriesOpen(true); setProductsOpen(false); };
+  const closeI = () => { timer.current = setTimeout(() => setIndustriesOpen(false), 130); };
 
   const hPad = isMobile ? 20 : isTablet ? 32 : 80;
 
@@ -187,6 +201,70 @@ export default function Navbar({ scrolled }: { scrolled: boolean }) {
                 )}
               </div>
 
+              {/* Industries accordion */}
+              <div>
+                <button
+                  onClick={() => setIndustriesExpanded(o => !o)}
+                  style={{
+                    width:"100%", border:"none", cursor:"pointer",
+                    display:"flex", justifyContent:"space-between", alignItems:"center",
+                    padding:"14px 16px", borderRadius:12,
+                    fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:17,
+                    color: industriesExpanded ? T.primary : T.dark,
+                    background: industriesExpanded ? "#EDE9FF" : "transparent",
+                    transition:"background .2s, color .2s",
+                    textAlign:"left",
+                  }}
+                  onMouseEnter={e => { if (!industriesExpanded) e.currentTarget.style.background = "#F5EFF7"; }}
+                  onMouseLeave={e => { if (!industriesExpanded) e.currentTarget.style.background = "transparent"; }}
+                >
+                  Industries
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style={{ transform: industriesExpanded ? "rotate(180deg)" : "rotate(0deg)", transition:"transform .22s", flexShrink:0 }}>
+                    <path d="M6 9l6 6 6-6" stroke={industriesExpanded ? T.primary : T.muted} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </button>
+
+                {industriesExpanded && (
+                  <div style={{
+                    background:"#F5EEFF",
+                    border:"1px solid #DDD0FF",
+                    borderRadius:16,
+                    padding:"10px",
+                    marginTop:6,
+                    display:"flex", flexDirection:"column", gap:2,
+                  }}>
+                    {INDUSTRIES.map(ind => (
+                      <a key={ind.title} href={ind.href}
+                        style={{
+                          display:"flex", alignItems:"center", gap:14,
+                          padding:"12px 10px", borderRadius:12,
+                          textDecoration:"none", background:"transparent",
+                          transition:"background .15s",
+                        }}
+                        onClick={() => { setMobileOpen(false); setIndustriesExpanded(false); }}
+                        onMouseEnter={e => (e.currentTarget.style.background = "#EDE9FF")}
+                        onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
+                      >
+                        <div style={{
+                          width:44, height:44, flexShrink:0,
+                          background:T.white, borderRadius:10,
+                          display:"flex", alignItems:"center", justifyContent:"center",
+                          boxShadow:"0 2px 8px rgba(96,9,255,0.10)",
+                          border:"1px solid #EDE9FF",
+                          fontSize:22,
+                        }}>
+                          {ind.emoji}
+                        </div>
+                        <div>
+                          <div style={{ fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:14, color:T.dark, marginBottom:2 }}>{ind.title}</div>
+                          <div style={{ fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:12, color:T.muted }}>{ind.desc}</div>
+                        </div>
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+
               {/* Regular nav links */}
               {[
                 { label:"Company",    href:"/company"  },
@@ -262,6 +340,12 @@ export default function Navbar({ scrolled }: { scrolled: boolean }) {
                   <img src="/icons/icon-chevron.svg" alt="" width={14} height={14} style={{ transform: productsOpen ? "rotate(0deg)" : "rotate(180deg)", transition:"transform .2s" }} />
                 </a>
               </div>
+              <div onMouseEnter={openI} onMouseLeave={closeI} style={{ position:"relative" }}>
+                <a href="#" style={{ ...nl, gap:6, color:(industriesOpen||isIndustryActive)?T.primary:T.dark, background:(industriesOpen||isIndustryActive)?"#F5EFF7":"transparent" }}>
+                  Industries
+                  <img src="/icons/icon-chevron.svg" alt="" width={14} height={14} style={{ transform: industriesOpen ? "rotate(0deg)" : "rotate(180deg)", transition:"transform .2s" }} />
+                </a>
+              </div>
               {[
                 { label:"Company",    href:"/company"    },
                 { label:"Developers", href:"/developers"  },
@@ -306,6 +390,27 @@ export default function Navbar({ scrolled }: { scrolled: boolean }) {
                   <div>
                     <div style={{ fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:15, color:T.dark, marginBottom:3 }}>{p.title}</div>
                     <div style={{ fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:13, color:T.muted, lineHeight:1.4 }}>{p.desc}</div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {industriesOpen && (
+          <div onMouseEnter={openI} onMouseLeave={closeI} className="nav-dropdown" style={{ position:"absolute", top:"100%", left:0, width:"100%", background:"#F8F5FF", boxShadow:"0 12px 40px rgba(96,9,255,0.08)", borderTop:`1px solid #E9DDFF`, zIndex:10 }}>
+            <div style={{ maxWidth:1440, margin:"0 auto", padding:`24px ${hPad}px 32px`, display:"grid", gridTemplateColumns: isTablet ? "1fr 1fr 1fr" : "1fr 1fr 1fr 1fr 1fr 1fr", gap:4 }}>
+              {INDUSTRIES.map(ind => (
+                <a key={ind.title} href={ind.href} style={{ display:"flex", alignItems:"center", gap:14, padding:"14px 16px", textDecoration:"none", borderRadius:10, transition:"background .15s" }}
+                  onMouseEnter={e => (e.currentTarget.style.background = "#F5EFF7")}
+                  onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
+                >
+                  <div style={{ width:45, height:45, borderRadius:10, background:T.white, border:"1px solid #EDE9FF", display:"flex", alignItems:"center", justifyContent:"center", fontSize:24, flexShrink:0 }}>
+                    {ind.emoji}
+                  </div>
+                  <div>
+                    <div style={{ fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:15, color:T.dark, marginBottom:3 }}>{ind.title}</div>
+                    <div style={{ fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:13, color:T.muted, lineHeight:1.4 }}>{ind.desc}</div>
                   </div>
                 </a>
               ))}
