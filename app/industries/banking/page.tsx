@@ -96,6 +96,7 @@ const features = [
 export default function BankingPage() {
   return (
     <IndustryPage
+      industry="banking"
       label="Industries / Banking & Fintech"
       heading={<>Infrastructure for<br />Africa's financial builders.</>}
       subtext="Neobanks, fintechs, and credit platforms rely on Payonus for battle-tested payment rails that keep their products running and their customers happy."

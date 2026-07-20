@@ -100,6 +100,7 @@ const features = [
 export default function AviationPage() {
   return (
     <IndustryPage
+      industry="aviation"
       label="Industries / Aviation"
       heading={<>High-value payments.<br />Zero turbulence.</>}
       subtext="Airlines, travel agencies, and booking platforms need payment infrastructure as reliable as their operations. Payonus delivers on every route."

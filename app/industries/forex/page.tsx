@@ -100,6 +100,7 @@ const features = [
 export default function ForexPage() {
   return (
     <IndustryPage
+      industry="forex"
       label="Industries / Forex"
       heading={<>The payment rails<br />FX traders trust.</>}
       subtext="CBN-compliant collections, real-time deposit confirmation, and full audit trails — built for forex brokers and trading platforms operating in Africa."

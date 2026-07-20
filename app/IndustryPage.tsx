@@ -6,9 +6,11 @@ import Navbar, { T } from "./Navbar";
 import Footer from "./Footer";
 import { PILLS, PillIcon } from "./ComplianceSection";
 import { useScrollReveal, ripple, ProductFeature } from "./ProductPage";
+import { IndustryHeroBg, Industry } from "./IndustryHeroBg";
 
 /* ─── TYPES ─── */
 export type { ProductFeature };
+export type { Industry };
 
 export interface IndustryChallenge {
   title: string;
@@ -17,6 +19,7 @@ export interface IndustryChallenge {
 }
 
 export interface IndustryPageProps {
+  industry:          Industry;
   label:             string;
   heading:           React.ReactNode;
   subtext:           string;
@@ -64,7 +67,7 @@ function LinkArrow({ label }: { label: string }) {
    SHARED INDUSTRY PAGE COMPONENT
 ═══════════════════════════════════════ */
 export default function IndustryPage({
-  label, heading, subtext,
+  industry, label, heading, subtext,
   challengeHeading, challenges,
   featuresHeading, features,
   marketsHeading, marketsSubtext,
@@ -113,11 +116,18 @@ export default function IndustryPage({
         .footer-link::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:#6009FF;transition:width 0.3s cubic-bezier(0.16,1,0.3,1);}
         .footer-link:hover::after{width:100%;}
         @keyframes skShimmer{from{background-position:-600px 0;}to{background-position:600px 0;}}
-        @keyframes mapScrollY{from{transform:translateX(-50%) translateY(0);}to{transform:translateX(-50%) translateY(-50%);}}
         @keyframes flagScrollY{from{transform:translateY(0);}to{transform:translateY(-50%);}}
         .flag-scroll-track{animation:flagScrollY 18s linear infinite;}
         .flag-scroll-track:hover{animation-play-state:paused;}
         @keyframes menuSlideIn{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:translateY(0);}}
+        @keyframes pixBlink{0%,100%{opacity:.04}45%,55%{opacity:.38}}
+        @keyframes fxScroll{from{transform:translateX(0)}to{transform:translateX(-220px)}}
+        @keyframes cktFlow{from{stroke-dashoffset:0}to{stroke-dashoffset:-146}}
+        @keyframes cktNode{0%,100%{opacity:.1}50%{opacity:.65}}
+        @keyframes floatBox{0%{transform:translateY(0);opacity:0}6%{opacity:.9}88%{opacity:.6}100%{transform:translateY(-110vh);opacity:0}}
+        @keyframes arcFlow{from{stroke-dashoffset:0}to{stroke-dashoffset:-20}}
+        @keyframes gearCW{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+        @keyframes gearCCW{from{transform:rotate(0deg)}to{transform:rotate(-360deg)}}
       `}</style>
 
       {/* Scroll progress bar */}
@@ -129,9 +139,7 @@ export default function IndustryPage({
 
       {/* ══ HERO ══ */}
       <section style={{ position:"relative", width:"100%", background:T.bg, overflow:"hidden", minHeight:isMobile?"auto":"80vh", display:"flex", alignItems:"center" }}>
-        <div style={{ position:"absolute", top:0, left:"50%", width:isMobile?860:1600, pointerEvents:"none", zIndex:0, animation:"mapScrollY 38s linear infinite", willChange:"transform" }}>
-          {[0,1].map(n => <img key={n} src="/world-map-dots.png" aria-hidden style={{ display:"block", width:"100%", opacity:isMobile?0.18:0.14, filter:"invert(1)" }} />)}
-        </div>
+        <IndustryHeroBg industry={industry} />
 
         <div style={{ position:"relative", zIndex:1, maxWidth:1440, margin:"0 auto", width:"100%", padding:isMobile?`80px 20px 60px`:`80px ${hPad}px` }}>
           <div style={{ maxWidth:isMobile?"100%":680, display:"flex", flexDirection:"column", gap:isMobile?24:20 }}>

@@ -95,6 +95,7 @@ const features = [
 export default function GamingPage() {
   return (
     <IndustryPage
+      industry="gaming"
       label="Industries / Gaming"
       heading={<>Payment rails built<br />for the speed of play.</>}
       subtext="Real-money in-game purchases, creator payouts, and tournament prizes — Payonus keeps your players in the game and your funds moving."

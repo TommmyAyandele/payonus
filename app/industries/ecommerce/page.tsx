@@ -97,6 +97,7 @@ const features = [
 export default function EcommercePage() {
   return (
     <IndustryPage
+      industry="ecommerce"
       label="Industries / E-commerce"
       heading={<>Every checkout.<br />Every method. Every time.</>}
       subtext="From single-product stores to enterprise marketplaces — Payonus connects your checkout to every payment method your African customers trust."

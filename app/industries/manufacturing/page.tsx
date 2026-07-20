@@ -99,6 +99,7 @@ const features = [
 export default function ManufacturingPage() {
   return (
     <IndustryPage
+      industry="manufacturing"
       label="Industries / Manufacturing"
       heading={<>B2B payments that move<br />as fast as your supply chain.</>}
       subtext="From raw material procurement to distributor payouts — Payonus gives manufacturers the payment infrastructure to run lean, pay fast, and collect reliably."
