@@ -24,14 +24,74 @@ export const PRODUCTS = [
   { title: "Analytics & Reporting", desc: "Insights that drive decisions",      icon: "/icons/icon-analytics.svg",   href: "/analytics"    },
 ];
 
+const industryIconProps = { width: 22, height: 22, viewBox: "0 0 24 24", fill: "none" as const };
+
 export const INDUSTRIES = [
-  { title: "Gaming",        desc: "Payments built for players",         emoji: "🎮", href: "/industries/gaming"        },
-  { title: "Forex",         desc: "FX rails traders trust",             emoji: "💱", href: "/industries/forex"         },
-  { title: "Fintech",       desc: "Rails for lenders, PSSPs & remittance", emoji: "💳", href: "/industries/fintech"    },
-  { title: "E-commerce",    desc: "Every checkout, every method",       emoji: "🛍️", href: "/industries/ecommerce"     },
-  { title: "Ride-hailing & Logistics", desc: "Driver payouts, on the move", emoji: "🚗", href: "/industries/logistics" },
-  { title: "Aviation",      desc: "High-value payments, zero friction", emoji: "✈️", href: "/industries/aviation"      },
-  { title: "Manufacturing", desc: "B2B payments for supply chains",     emoji: "🏭", href: "/industries/manufacturing"  },
+  {
+    title: "Gaming", desc: "Payments built for players", href: "/industries/gaming",
+    icon: (
+      <svg {...industryIconProps}>
+        <rect x="2" y="8" width="20" height="9" rx="4" stroke={T.primary} strokeWidth="1.6"/>
+        <path d="M7 10.5v3M5.5 12h3" stroke={T.primary} strokeWidth="1.6" strokeLinecap="round"/>
+        <circle cx="15.5" cy="11" r="0.9" fill={T.primary}/>
+        <circle cx="17.5" cy="13" r="0.9" fill={T.primary}/>
+      </svg>
+    ),
+  },
+  {
+    title: "Forex", desc: "FX rails traders trust", href: "/industries/forex",
+    icon: (
+      <svg {...industryIconProps}>
+        <path d="M4 8h13M13 5l4 3-4 3" stroke={T.primary} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M20 16H7M11 13l-4 3 4 3" stroke={T.primary} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
+  },
+  {
+    title: "Fintech", desc: "Rails for lenders, PSSPs & remittance", href: "/industries/fintech",
+    icon: (
+      <svg {...industryIconProps}>
+        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke={T.primary} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
+  },
+  {
+    title: "E-commerce", desc: "Every checkout, every method", href: "/industries/ecommerce",
+    icon: (
+      <svg {...industryIconProps}>
+        <path d="M6 8h12l-1.2 11.2a2 2 0 01-2 1.8H9.2a2 2 0 01-2-1.8L6 8z" stroke={T.primary} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M9 8V6a3 3 0 016 0v2" stroke={T.primary} strokeWidth="1.6" strokeLinecap="round"/>
+      </svg>
+    ),
+  },
+  {
+    title: "Ride-hailing & Logistics", desc: "Driver payouts, on the move", href: "/industries/logistics",
+    icon: (
+      <svg {...industryIconProps}>
+        <path d="M5 11l1.5-4.5A2 2 0 018.4 5h7.2a2 2 0 011.9 1.5L19 11" stroke={T.primary} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+        <rect x="3" y="11" width="18" height="6" rx="2" stroke={T.primary} strokeWidth="1.6"/>
+        <circle cx="7.5" cy="17.5" r="1.4" stroke={T.primary} strokeWidth="1.6"/>
+        <circle cx="16.5" cy="17.5" r="1.4" stroke={T.primary} strokeWidth="1.6"/>
+      </svg>
+    ),
+  },
+  {
+    title: "Aviation", desc: "High-value payments, zero friction", href: "/industries/aviation",
+    icon: (
+      <svg {...industryIconProps}>
+        <path d="M22 12l-8-3V4.5a1.5 1.5 0 00-3 0V9l-8 3v2l8-2.5V17l-2.5 1.8V20l4-1 4 1v-1.2L14 17v-5.5l8 2.5v-2z" stroke={T.primary} strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
+  },
+  {
+    title: "Manufacturing", desc: "B2B payments for supply chains", href: "/industries/manufacturing",
+    icon: (
+      <svg {...industryIconProps}>
+        <path d="M3 21V10l5 3V10l5 3V8l6 4v9H3z" stroke={T.primary} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M7 21v-4M12 21v-4M17 21v-4" stroke={T.primary} strokeWidth="1.6" strokeLinecap="round"/>
+      </svg>
+    ),
+  },
 ];
 
 export function Logo({ height = 30 }: { height?: number }) {
@@ -252,9 +312,8 @@ export default function Navbar({ scrolled }: { scrolled: boolean }) {
                           display:"flex", alignItems:"center", justifyContent:"center",
                           boxShadow:"0 2px 8px rgba(96,9,255,0.10)",
                           border:"1px solid #EDE9FF",
-                          fontSize:22,
                         }}>
-                          {ind.emoji}
+                          {ind.icon}
                         </div>
                         <div>
                           <div style={{ fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:14, color:T.dark, marginBottom:2 }}>{ind.title}</div>
@@ -408,8 +467,8 @@ export default function Navbar({ scrolled }: { scrolled: boolean }) {
                   onMouseEnter={e => (e.currentTarget.style.background = "#F5EFF7")}
                   onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
                 >
-                  <div style={{ width:45, height:45, borderRadius:10, background:T.white, border:"1px solid #EDE9FF", display:"flex", alignItems:"center", justifyContent:"center", fontSize:24, flexShrink:0 }}>
-                    {ind.emoji}
+                  <div style={{ width:45, height:45, borderRadius:10, background:T.white, border:"1px solid #EDE9FF", display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0 }}>
+                    {ind.icon}
                   </div>
                   <div>
                     <div style={{ fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:15, color:T.dark, marginBottom:3 }}>{ind.title}</div>
