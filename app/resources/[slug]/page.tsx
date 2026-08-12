@@ -1,23 +1,20 @@
-"use client";
-
-import LegalPage from "../../LegalPage";
-import { ARTICLES } from "../articles-data";
 import { notFound } from "next/navigation";
-import { useParams } from "next/navigation";
+import { getAllPosts, getPostBySlug } from "../../lib/blog";
+import ArticleView from "./ArticleView";
 
-export default function ArticlePage() {
-  const params = useParams<{ slug: string }>();
-  const article = ARTICLES.find(a => a.slug === params.slug);
+export function generateStaticParams() {
+  return getAllPosts().map(post => ({ slug: post.slug }));
+}
 
-  if (!article) notFound();
+export default async function ArticlePage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
 
-  return (
-    <LegalPage
-      eyebrow="Resources"
-      title={article.title}
-      subtitle={article.subtitle}
-      updated={article.updated}
-      sections={article.sections}
-    />
-  );
+  if (!post) notFound();
+
+  return <ArticleView post={post} />;
 }
