@@ -19,7 +19,6 @@ const STATIC_PATHS = [
   "/developers",
   "/resources",
   "/industries/aviation",
-  "/industries/banking",
   "/industries/fintech",
   "/industries/ecommerce",
   "/industries/logistics",

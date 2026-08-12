@@ -27,7 +27,6 @@ export const PRODUCTS = [
 export const INDUSTRIES = [
   { title: "Gaming",        desc: "Payments built for players",         emoji: "🎮", href: "/industries/gaming"        },
   { title: "Forex",         desc: "FX rails traders trust",             emoji: "💱", href: "/industries/forex"         },
-  { title: "Banking",       desc: "Infrastructure for neobanks",        emoji: "🏦", href: "/industries/banking"       },
   { title: "Fintech",       desc: "Rails for lenders, PSSPs & remittance", emoji: "💳", href: "/industries/fintech"    },
   { title: "E-commerce",    desc: "Every checkout, every method",       emoji: "🛍️", href: "/industries/ecommerce"     },
   { title: "Ride-hailing & Logistics", desc: "Driver payouts, on the move", emoji: "🚗", href: "/industries/logistics" },

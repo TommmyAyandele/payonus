@@ -708,7 +708,7 @@ export default function SecurityPage() {
       <RelatedLinks links={[
         { label: "ISMS Policy", href: "/isms-policy" },
         { label: "API Documentation", href: "/docs" },
-        { label: "Banking & Fintech", href: "/industries/banking" },
+        { label: "Fintech", href: "/industries/fintech" },
       ]} />
 
       <Footer />

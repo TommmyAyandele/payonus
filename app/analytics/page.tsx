@@ -49,7 +49,7 @@ export default function AnalyticsPage() {
       ctaHeading={<>Ready to understand<br /><span style={{ color: T.primary }}>your payments better?</span></>}
       ctaSubtext="Connect your account and your first insights are live in seconds. No setup required."
       relatedLinks={[
-        { label: "Banking & Fintech", href: "/industries/banking" },
+        { label: "Fintech", href: "/industries/fintech" },
         { label: "E-commerce", href: "/industries/ecommerce" },
         { label: "Security", href: "/security" },
       ]}

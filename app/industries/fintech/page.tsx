@@ -130,7 +130,7 @@ export default function FintechPage() {
       relatedLinks={[
         { label: "Payment API", href: "/payment-api" },
         { label: "Payouts", href: "/payouts" },
-        { label: "Banking & Fintech", href: "/industries/banking" },
+        { label: "Security", href: "/security" },
       ]}
       />
     </>
