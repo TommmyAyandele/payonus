@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 
-export type Industry = "gaming" | "forex" | "banking" | "ecommerce" | "aviation" | "manufacturing";
+export type Industry = "gaming" | "forex" | "banking" | "fintech" | "ecommerce" | "logistics" | "aviation" | "manufacturing";
 
 export function IndustryHeroBg({ industry: _ }: { industry: Industry }) {
   return (

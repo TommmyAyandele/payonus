@@ -855,8 +855,8 @@ export default function PayoutsPage() {
       </section>
 
       <RelatedLinks links={[
-        { label: "Manufacturing", href: "/industries/manufacturing" },
-        { label: "Gaming", href: "/industries/gaming" },
+        { label: "Ride-hailing & Logistics", href: "/industries/logistics" },
+        { label: "Fintech", href: "/industries/fintech" },
         { label: "Settlements", href: "/settlements" },
       ]} />
 

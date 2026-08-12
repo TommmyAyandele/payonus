@@ -50,7 +50,7 @@ export default function PaymentApiPage() {
       ctaSubtext="Your first API call takes minutes, not days. Full sandbox access, no approval needed."
       relatedLinks={[
         { label: "Developers", href: "/developers" },
-        { label: "Banking & Fintech", href: "/industries/banking" },
+        { label: "Fintech", href: "/industries/fintech" },
         { label: "Forex", href: "/industries/forex" },
       ]}
     />
