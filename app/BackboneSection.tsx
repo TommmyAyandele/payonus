@@ -111,7 +111,7 @@ export default function BackboneSection() {
 
         {!isMobile && (
           <div style={{ width:"100%", height: isTablet ? 300 : 417, borderRadius:16, overflow:"hidden", boxSizing:"border-box", ...fade("0.24s") }}>
-            <img src="/backbone-hero.png" alt="Abstract 3D twisted ribbon shapes in gold and purple" className="banner-inner-image" style={{ width:"100%", height:"100%", objectFit:"cover" }} />
+            <img src="/backbone-hero.png" alt="Abstract 3D twisted ribbon shapes in gold and purple" loading="lazy" className="banner-inner-image" style={{ width:"100%", height:"100%", objectFit:"cover" }} />
           </div>
         )}
 

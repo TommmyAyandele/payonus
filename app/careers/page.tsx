@@ -145,7 +145,6 @@ export default function CareersPage() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700;1,900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap');
         html,body{margin:0;padding:0;background:${T.bg};}
         *,*::before,*::after{box-sizing:border-box;}
         img{display:block;}

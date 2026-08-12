@@ -1,6 +1,17 @@
 import IndustryPage from "../../IndustryPage";
+import JsonLd from "../../JsonLd";
+import { pageMetadata, breadcrumbJsonLd } from "../../seo";
 
-export const metadata = { title: "Aviation | Payonus", description: "High-value payment processing for airlines, travel agencies, and booking platforms operating across Africa." };
+export const metadata = pageMetadata({
+  title: "Aviation",
+  description: "High-value payment processing for airlines, travel agencies, and booking platforms operating across Africa.",
+  path: "/industries/aviation",
+});
+
+const breadcrumbs = breadcrumbJsonLd([
+  { name: "Home", path: "/" },
+  { name: "Aviation", path: "/industries/aviation" },
+]);
 
 const challenges = [
   {
@@ -99,7 +110,9 @@ const features = [
 
 export default function AviationPage() {
   return (
-    <IndustryPage
+    <>
+      <JsonLd data={breadcrumbs} />
+      <IndustryPage
       industry="aviation"
       label="Industries / Aviation"
       heading={<>High-value payments.<br />Zero turbulence.</>}
@@ -112,6 +125,7 @@ export default function AviationPage() {
       marketsSubtext="From Lagos to Nairobi, Accra to Johannesburg — Payonus handles collections and refunds across African markets so your passengers can book, pay, and fly without friction."
       ctaHeading={<>Ready for payment<br />infrastructure that won't fail?</>}
       ctaSubtext="Airlines and travel platforms across Africa trust Payonus for high-value, high-reliability payment processing. Get started today."
-    />
+      />
+    </>
   );
 }

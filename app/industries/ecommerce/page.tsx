@@ -1,6 +1,17 @@
 import IndustryPage from "../../IndustryPage";
+import JsonLd from "../../JsonLd";
+import { pageMetadata, breadcrumbJsonLd } from "../../seo";
 
-export const metadata = { title: "E-commerce | Payonus", description: "Connect your checkout to every payment method African shoppers trust — cards, bank transfer, USSD, and mobile money — in one integration." };
+export const metadata = pageMetadata({
+  title: "E-commerce",
+  description: "Connect your checkout to every payment method African shoppers trust — cards, bank transfer, USSD, and mobile money — in one integration.",
+  path: "/industries/ecommerce",
+});
+
+const breadcrumbs = breadcrumbJsonLd([
+  { name: "Home", path: "/" },
+  { name: "E-commerce", path: "/industries/ecommerce" },
+]);
 
 const challenges = [
   {
@@ -96,7 +107,9 @@ const features = [
 
 export default function EcommercePage() {
   return (
-    <IndustryPage
+    <>
+      <JsonLd data={breadcrumbs} />
+      <IndustryPage
       industry="ecommerce"
       label="Industries / E-commerce"
       heading={<>Every checkout.<br />Every method. Every time.</>}
@@ -109,6 +122,7 @@ export default function EcommercePage() {
       marketsSubtext="Nigeria, Ghana, Kenya, South Africa, and beyond — Payonus gives your checkout access to the payment methods each market relies on, from a single integration."
       ctaHeading={<>Ready to stop losing<br />sales at checkout?</>}
       ctaSubtext="E-commerce merchants across Africa trust Payonus to capture every sale, settle fast, and refund with zero friction. Start your integration today."
-    />
+      />
+    </>
   );
 }

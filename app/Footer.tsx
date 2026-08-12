@@ -177,6 +177,7 @@ export default function Footer() {
             src="/logo-full.svg"
             alt="Payonus"
             height={30}
+            loading="lazy"
             style={{ display: "block" }}
           />
 

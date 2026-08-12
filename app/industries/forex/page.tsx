@@ -1,6 +1,17 @@
 import IndustryPage from "../../IndustryPage";
+import JsonLd from "../../JsonLd";
+import { pageMetadata, breadcrumbJsonLd } from "../../seo";
 
-export const metadata = { title: "Forex | Payonus", description: "CBN-compliant payment rails for FX brokers and trading platforms operating in Africa. Instant deposit confirmation and full audit trails." };
+export const metadata = pageMetadata({
+  title: "Forex",
+  description: "CBN-compliant payment rails for FX brokers and trading platforms operating in Africa. Instant deposit confirmation and full audit trails.",
+  path: "/industries/forex",
+});
+
+const breadcrumbs = breadcrumbJsonLd([
+  { name: "Home", path: "/" },
+  { name: "Forex", path: "/industries/forex" },
+]);
 
 const challenges = [
   {
@@ -99,7 +110,9 @@ const features = [
 
 export default function ForexPage() {
   return (
-    <IndustryPage
+    <>
+      <JsonLd data={breadcrumbs} />
+      <IndustryPage
       industry="forex"
       label="Industries / Forex"
       heading={<>The payment rails<br />FX traders trust.</>}
@@ -112,6 +125,7 @@ export default function ForexPage() {
       marketsSubtext="Your traders are in Nigeria, South Africa, Kenya, Ghana, and beyond. Payonus gives them every payment method they trust, with instant confirmation so they never miss a trade."
       ctaHeading={<>Ready to give your<br />traders faster deposits?</>}
       ctaSubtext="Join the growing number of African FX platforms that trust Payonus for compliant, instant payment infrastructure. Get your first integration live today."
-    />
+      />
+    </>
   );
 }

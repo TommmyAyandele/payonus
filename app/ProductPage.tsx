@@ -234,7 +234,6 @@ export default function ProductPage({
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap');
         html,body{margin:0;padding:0;background:#FAFAF8;}
         *,*::before,*::after{box-sizing:border-box;}
         img{display:block;}
@@ -356,7 +355,7 @@ export default function ProductPage({
                   <div key={ri} style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:isMobile?8:16 }}>
                     {row.map((m,j) => (
                       <div key={j} style={{ aspectRatio:"1", borderRadius:"50%", overflow:"hidden", minWidth:0 }}>
-                        <img src={`https://flagcdn.com/w160/${m.code}.png`} alt={m.name} style={{ width:"100%",height:"100%",objectFit:"cover",display:"block" }} />
+                        <img src={`https://flagcdn.com/w160/${m.code}.png`} alt={m.name} loading="lazy" style={{ width:"100%",height:"100%",objectFit:"cover",display:"block" }} />
                       </div>
                     ))}
                   </div>

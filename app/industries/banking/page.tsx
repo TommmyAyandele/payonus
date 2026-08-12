@@ -1,6 +1,17 @@
 import IndustryPage from "../../IndustryPage";
+import JsonLd from "../../JsonLd";
+import { pageMetadata, breadcrumbJsonLd } from "../../seo";
 
-export const metadata = { title: "Banking & Fintech | Payonus", description: "Battle-tested payment infrastructure for neobanks, fintechs, and credit platforms building in Africa." };
+export const metadata = pageMetadata({
+  title: "Banking & Fintech",
+  description: "Battle-tested payment infrastructure for neobanks, fintechs, and credit platforms building in Africa.",
+  path: "/industries/banking",
+});
+
+const breadcrumbs = breadcrumbJsonLd([
+  { name: "Home", path: "/" },
+  { name: "Banking & Fintech", path: "/industries/banking" },
+]);
 
 const challenges = [
   {
@@ -95,7 +106,9 @@ const features = [
 
 export default function BankingPage() {
   return (
-    <IndustryPage
+    <>
+      <JsonLd data={breadcrumbs} />
+      <IndustryPage
       industry="banking"
       label="Industries / Banking & Fintech"
       heading={<>Infrastructure for<br />Africa's financial builders.</>}
@@ -108,6 +121,7 @@ export default function BankingPage() {
       marketsSubtext="Whether you're live in Nigeria today and expanding to Kenya tomorrow, Payonus gives you a single integration that scales across African markets without rebuilding your payment stack."
       ctaHeading={<>Ready to build on<br />battle-tested rails?</>}
       ctaSubtext="Join the fintechs and financial platforms across Africa that rely on Payonus to move money reliably. Get your integration live today."
-    />
+      />
+    </>
   );
 }

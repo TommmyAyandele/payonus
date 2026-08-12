@@ -116,7 +116,6 @@ export default function CompanyPage() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700;1,900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap');
         html, body { margin:0; padding:0; background:${T.bg}; }
         *, *::before, *::after { box-sizing:border-box; }
         img { display:block; }
@@ -338,7 +337,7 @@ export default function CompanyPage() {
                   We build dynamic payment platforms and API-based services that enable endless possibilities for online payments across Africa — removing the friction that has held back commerce for decades.
                 </p>
                 <div style={{ height:240, borderRadius:16, overflow:"hidden" }}>
-                  <img src="/company-mission.jpg" alt="Our Mission" style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center", display:"block" }} />
+                  <img src="/company-mission.jpg" alt="Our Mission" loading="lazy" style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center", display:"block" }} />
                 </div>
               </div>
 
@@ -352,7 +351,7 @@ export default function CompanyPage() {
                   We envision a future where businesses across Africa — from Lagos to Nairobi to Accra — can send and receive money instantly and securely, unlocking true financial inclusion across the continent.
                 </p>
                 <div style={{ height:240, borderRadius:16, overflow:"hidden" }}>
-                  <img src="/company-vision.jpg" alt="Our Vision" style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center", display:"block" }} />
+                  <img src="/company-vision.jpg" alt="Our Vision" loading="lazy" style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center", display:"block" }} />
                 </div>
               </div>
             </div>
@@ -382,10 +381,10 @@ export default function CompanyPage() {
 
               <div className="fade-up" style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:24 }}>
                 <div style={{ height: isTablet ? 320 : 400, borderRadius:16, overflow:"hidden" }}>
-                  <img src="/company-mission.jpg" alt="Our Mission" style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center", display:"block" }} />
+                  <img src="/company-mission.jpg" alt="Our Mission" loading="lazy" style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center", display:"block" }} />
                 </div>
                 <div style={{ height: isTablet ? 320 : 400, borderRadius:16, overflow:"hidden" }}>
-                  <img src="/company-vision.jpg" alt="Our Vision" style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center", display:"block" }} />
+                  <img src="/company-vision.jpg" alt="Our Vision" loading="lazy" style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center", display:"block" }} />
                 </div>
               </div>
             </>

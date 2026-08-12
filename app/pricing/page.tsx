@@ -91,7 +91,6 @@ export default function PricingPage() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700;1,900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap');
         html,body{margin:0;padding:0;background:${T.bg};}
         *,*::before,*::after{box-sizing:border-box;}
         img{display:block;}
@@ -287,7 +286,7 @@ export default function PricingPage() {
                     borderRadius:14, padding:"18px 20px",
                   }}>
                     <div style={{ display:"flex", alignItems:"center", gap:8, fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:14, color:T.dark, marginBottom:14 }}>
-                      <img src={`https://flagcdn.com/w40/${row.flag}.png`} alt={row.country} style={{ width:20, height:14, objectFit:"cover", borderRadius:2, flexShrink:0 }} />
+                      <img src={`https://flagcdn.com/w40/${row.flag}.png`} alt={row.country} loading="lazy" style={{ width:20, height:14, objectFit:"cover", borderRadius:2, flexShrink:0 }} />
                       {row.country}
                     </div>
                     <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"10px 16px" }}>
@@ -326,7 +325,7 @@ export default function PricingPage() {
                       <tr key={i}>
                         <td style={{padding:"14px 20px 14px 0",fontSize:14,fontWeight:500,color:T.dark,whiteSpace:"nowrap" as "nowrap",borderBottom:`1px solid ${T.borderLight}`}}>
                           <span style={{display:"inline-flex",alignItems:"center",gap:8}}>
-                            <img src={`https://flagcdn.com/w40/${row.flag}.png`} alt={row.country} style={{ width:20, height:14, objectFit:"cover", borderRadius:2, flexShrink:0 }} />
+                            <img src={`https://flagcdn.com/w40/${row.flag}.png`} alt={row.country} loading="lazy" style={{ width:20, height:14, objectFit:"cover", borderRadius:2, flexShrink:0 }} />
                             {row.country}
                           </span>
                         </td>

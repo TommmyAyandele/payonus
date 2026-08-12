@@ -1,6 +1,17 @@
 import IndustryPage from "../../IndustryPage";
+import JsonLd from "../../JsonLd";
+import { pageMetadata, breadcrumbJsonLd } from "../../seo";
 
-export const metadata = { title: "Manufacturing | Payonus", description: "B2B payment infrastructure for manufacturers — bulk supplier payouts, invoice collections, and cross-border procurement payments across Africa." };
+export const metadata = pageMetadata({
+  title: "Manufacturing",
+  description: "B2B payment infrastructure for manufacturers — bulk supplier payouts, invoice collections, and cross-border procurement payments across Africa.",
+  path: "/industries/manufacturing",
+});
+
+const breadcrumbs = breadcrumbJsonLd([
+  { name: "Home", path: "/" },
+  { name: "Manufacturing", path: "/industries/manufacturing" },
+]);
 
 const challenges = [
   {
@@ -98,7 +109,9 @@ const features = [
 
 export default function ManufacturingPage() {
   return (
-    <IndustryPage
+    <>
+      <JsonLd data={breadcrumbs} />
+      <IndustryPage
       industry="manufacturing"
       label="Industries / Manufacturing"
       heading={<>B2B payments that move<br />as fast as your supply chain.</>}
@@ -111,6 +124,7 @@ export default function ManufacturingPage() {
       marketsSubtext="Your suppliers are in Nigeria, your distributors are in Ghana, Kenya, and South Africa. Payonus connects your entire supply chain payment flow across African markets."
       ctaHeading={<>Ready to tighten your<br />payment operations?</>}
       ctaSubtext="Manufacturers across Africa use Payonus to pay suppliers faster, collect from distributors reliably, and eliminate the manual coordination that slows growth."
-    />
+      />
+    </>
   );
 }
