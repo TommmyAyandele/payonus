@@ -18,9 +18,10 @@ interface LegalPageProps {
   subtitle: string;
   updated:  string;
   sections: LegalSection[];
+  eyebrow?: string;
 }
 
-export default function LegalPage({ title, subtitle, updated, sections }: LegalPageProps) {
+export default function LegalPage({ title, subtitle, updated, sections, eyebrow = "Legal" }: LegalPageProps) {
   const { isMobile, isTablet } = useBreakpoint();
   const [scrolled,    setScrolled]    = React.useState(false);
   const [scrollPct,   setScrollPct]   = React.useState(0);
@@ -79,7 +80,7 @@ export default function LegalPage({ title, subtitle, updated, sections }: LegalP
         <HeroBg />
         <div style={{ position:"relative", zIndex:1, maxWidth:1440, margin:"0 auto", padding:`0 ${hPad}px`, display:"flex", flexDirection:"column", alignItems:"flex-start" }}>
           <span className="fade-up" style={{ display:"block", marginBottom: isMobile ? 20 : 28, fontFamily:"DM Sans,sans-serif", fontWeight:500, fontSize:14, color:T.orange }}>
-            • Legal
+            • {eyebrow}
           </span>
           <h1 className="fade-up d1" style={{ margin:`0 0 ${isMobile ? 20 : 28}px`, fontFamily:"Rubik,sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?48:isTablet?60:72, lineHeight:1.04, letterSpacing:"-0.02em", color:T.headingBlack }}>
             {title}

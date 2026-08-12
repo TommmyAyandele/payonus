@@ -24,8 +24,8 @@ interface Entry {
   category: string;
   headline: string;
   desc: string;
-  href?: string;
-  cta?: string;
+  href: string;
+  cta: string;
   icon: React.ReactNode;
 }
 
@@ -100,12 +100,16 @@ const ENTRIES: Entry[] = [
     category: "Payment Infrastructure",
     headline: "How payment rails, settlement cycles, and cross-border processing actually work.",
     desc: "How payment rails, settlement cycles, and cross-border processing work across African markets.",
+    href: "/resources/payment-infrastructure-in-africa",
+    cta: "Read the guide",
     icon: <svg {...iconProps}><circle cx="6" cy="6" r="2.5" stroke={T.primary} strokeWidth="1.6"/><circle cx="18" cy="6" r="2.5" stroke={T.primary} strokeWidth="1.6"/><circle cx="12" cy="18" r="2.5" stroke={T.primary} strokeWidth="1.6"/><path d="M8.5 6h7M13.5 16.5l4-9M10.5 16.5l-4-9" stroke={T.primary} strokeWidth="1.6" strokeLinecap="round"/></svg>,
   },
   {
     category: "Enterprise Operations",
     headline: "Running payment operations at scale.",
-    desc: "Reconciliation, reporting, and multi-team access for enterprise payment operations.",
+    desc: "Reconciliation, reporting, and risk monitoring for enterprise payment operations.",
+    href: "/resources/enterprise-payment-operations",
+    cta: "Read the guide",
     icon: <svg {...iconProps}><path d="M3 21V10l5 3V10l5 3V8l6 4v9H3z" stroke={T.primary} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/><path d="M7 21v-4M12 21v-4M17 21v-4" stroke={T.primary} strokeWidth="1.6" strokeLinecap="round"/></svg>,
   },
 ];
@@ -192,30 +196,21 @@ export default function ResourcesPage() {
               borderBottom: `1px solid ${T.borderLight}`,
             }}>
               <div>
-                <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12 }}>
-                  <span style={{ fontFamily: "DM Sans, sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: "0.04em", textTransform: "uppercase", color: T.primary }}>
-                    {entry.category}
-                  </span>
-                  {!entry.href && (
-                    <span style={{ fontFamily: "DM Sans, sans-serif", fontWeight: 600, fontSize: 11, color: T.muted, background: "#F0EEEC", borderRadius: 6, padding: "2px 8px" }}>
-                      Coming soon
-                    </span>
-                  )}
-                </div>
+                <span style={{ display: "block", marginBottom: 12, fontFamily: "DM Sans, sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: "0.04em", textTransform: "uppercase", color: T.primary }}>
+                  {entry.category}
+                </span>
                 <h2 style={{ margin: "0 0 12px", fontFamily: "Rubik, sans-serif", fontStyle: "italic", fontWeight: 500, fontSize: isMobile ? 24 : 28, lineHeight: 1.25, color: T.headingBlack, maxWidth: 560 }}>
                   {entry.headline}
                 </h2>
-                <p style={{ margin: entry.href ? "0 0 16px" : 0, fontFamily: "DM Sans, sans-serif", fontWeight: 400, fontSize: 15, lineHeight: 1.65, color: T.muted, maxWidth: 520 }}>
+                <p style={{ margin: "0 0 16px", fontFamily: "DM Sans, sans-serif", fontWeight: 400, fontSize: 15, lineHeight: 1.65, color: T.muted, maxWidth: 520 }}>
                   {entry.desc}
                 </p>
-                {entry.href && (
-                  <a href={entry.href} style={{ display: "inline-flex", alignItems: "center", gap: 4, fontFamily: "DM Sans, sans-serif", fontWeight: 600, fontSize: 14, color: T.primary, textDecoration: "none" }}>
-                    {entry.cta}
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                      <path d="M9 18l6-6-6-6" stroke={T.primary} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </a>
-                )}
+                <a href={entry.href} style={{ display: "inline-flex", alignItems: "center", gap: 4, fontFamily: "DM Sans, sans-serif", fontWeight: 600, fontSize: 14, color: T.primary, textDecoration: "none" }}>
+                  {entry.cta}
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                    <path d="M9 18l6-6-6-6" stroke={T.primary} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </a>
               </div>
               <div style={{
                 width: "100%", height: isMobile ? 140 : 170, borderRadius: 14,

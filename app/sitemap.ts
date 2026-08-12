@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "./seo";
 import { JOBS } from "./careers/jobs-data";
+import { ARTICLES } from "./resources/articles-data";
 
 const STATIC_PATHS = [
   "/",
@@ -45,5 +46,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified,
   }));
 
-  return [...staticEntries, ...jobEntries];
+  const articleEntries = ARTICLES.map((article) => ({
+    url: `${SITE_URL}/resources/${article.slug}`,
+    lastModified,
+  }));
+
+  return [...staticEntries, ...jobEntries, ...articleEntries];
 }

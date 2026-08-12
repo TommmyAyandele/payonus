@@ -6,7 +6,8 @@ import Navbar, { T } from "./Navbar";
 import Footer from "./Footer";
 import { PILLS, PillIcon } from "./ComplianceSection";
 import { useScrollReveal, ripple, ProductFeature } from "./ProductPage";
-import { IndustryHeroBg, Industry } from "./IndustryHeroBg";
+import { Industry } from "./IndustryHeroBg";
+import HeroBg from "./HeroBg";
 
 /* ─── TYPES ─── */
 export type { ProductFeature };
@@ -132,7 +133,7 @@ export default function IndustryPage({
 
       {/* ══ HERO ══ */}
       <section style={{ position:"relative", width:"100%", background:T.bg, overflow:"hidden" }}>
-        <IndustryHeroBg industry={industry} />
+        <HeroBg />
 
         <div style={{ position:"relative", zIndex:1, maxWidth:1440, margin:"0 auto", padding:isMobile?`80px 20px 60px`:`0 ${hPad}px`, minHeight:isMobile?"auto":"100vh", display:isMobile?"block":"flex", alignItems:"center", justifyContent:"center" }}>
           <div style={{ maxWidth:isMobile?"100%":760, display:"flex", flexDirection:"column", gap:isMobile?28:24, alignItems:"flex-start" }}>
