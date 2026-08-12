@@ -156,22 +156,21 @@ export default function ResourcesPage() {
       </section>
 
       {/* Category tabs */}
-      <div style={{ width: "100%", background: T.bg, borderBottom: `1px solid ${T.borderLight}` }}>
+      <div style={{ width: "100%", background: T.bg, borderBottom: `1px solid ${T.borderLight}`, position: "sticky", top: 0, zIndex: 5 }}>
         <div style={{
-          maxWidth: 1440, margin: "0 auto", padding: `4px ${hPad}px 20px`,
-          display: "flex", flexWrap: "wrap", gap: 8,
+          maxWidth: 1440, margin: "0 auto", padding: `0 ${hPad}px`,
+          display: "flex", gap: isMobile ? 12 : 18, overflowX: "auto",
         }}>
           {TABS.map(tab => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
               style={{
-                background: activeTab === tab ? "#EDE9FF" : "transparent",
-                border: `1px solid ${activeTab === tab ? T.primary : T.borderLight}`,
-                borderRadius: 999, cursor: "pointer",
-                padding: "6px 14px", whiteSpace: "nowrap",
-                fontFamily: "DM Sans, sans-serif", fontWeight: 600, fontSize: 12, letterSpacing: "0.02em",
+                background: "none", border: "none", cursor: "pointer",
+                padding: "10px 0", whiteSpace: "nowrap",
+                fontFamily: "DM Sans, sans-serif", fontWeight: 700, fontSize: 10.5, letterSpacing: "0.03em", textTransform: "uppercase",
                 color: activeTab === tab ? T.primary : T.muted,
+                borderBottom: `2px solid ${activeTab === tab ? T.primary : "transparent"}`,
               }}
             >
               {tab}
