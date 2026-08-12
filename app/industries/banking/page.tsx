@@ -121,6 +121,11 @@ export default function BankingPage() {
       marketsSubtext="Whether you're live in Nigeria today and expanding to Kenya tomorrow, Payonus gives you a single integration that scales across African markets without rebuilding your payment stack."
       ctaHeading={<>Ready to build on<br />battle-tested rails?</>}
       ctaSubtext="Join the fintechs and financial platforms across Africa that rely on Payonus to move money reliably. Get your integration live today."
+      relatedLinks={[
+        { label: "Payment API", href: "/payment-api" },
+        { label: "Analytics", href: "/analytics" },
+        { label: "Security", href: "/security" },
+      ]}
       />
     </>
   );

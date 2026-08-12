@@ -48,6 +48,11 @@ export default function PaymentApiPage() {
       marketsSubtext="Stop maintaining separate integrations for each market and payment method. The Payonus API handles the complexity — local rails, regulatory differences, and currency handling — behind one clean interface."
       ctaHeading={<>Ready to build your<br /><span style={{ color: T.primary }}>first integration?</span></>}
       ctaSubtext="Your first API call takes minutes, not days. Full sandbox access, no approval needed."
+      relatedLinks={[
+        { label: "Developers", href: "/developers" },
+        { label: "Banking & Fintech", href: "/industries/banking" },
+        { label: "Forex", href: "/industries/forex" },
+      ]}
     />
   );
 }

@@ -122,6 +122,11 @@ export default function EcommercePage() {
       marketsSubtext="Nigeria, Ghana, Kenya, South Africa, and beyond — Payonus gives your checkout access to the payment methods each market relies on, from a single integration."
       ctaHeading={<>Ready to stop losing<br />sales at checkout?</>}
       ctaSubtext="E-commerce merchants across Africa trust Payonus to capture every sale, settle fast, and refund with zero friction. Start your integration today."
+      relatedLinks={[
+        { label: "Collections", href: "/collections" },
+        { label: "Settlements", href: "/settlements" },
+        { label: "Analytics", href: "/analytics" },
+      ]}
       />
     </>
   );

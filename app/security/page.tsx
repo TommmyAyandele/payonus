@@ -5,6 +5,7 @@ import { useBreakpoint } from "../use-breakpoint";
 import Navbar, { T } from "../Navbar";
 import Footer from "../Footer";
 import HeroBg from "../HeroBg";
+import RelatedLinks from "../RelatedLinks";
 
 /* ─── SCROLL REVEAL ─── */
 function useScrollReveal() {
@@ -703,6 +704,12 @@ export default function SecurityPage() {
           </div>
         </div>
       </section>
+
+      <RelatedLinks links={[
+        { label: "ISMS Policy", href: "/isms-policy" },
+        { label: "API Documentation", href: "/docs" },
+        { label: "Banking & Fintech", href: "/industries/banking" },
+      ]} />
 
       <Footer />
     </>

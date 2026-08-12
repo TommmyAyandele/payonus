@@ -14,10 +14,11 @@ const COLS: { heading: string; links: { label: string; href: string }[] }[] = [
   {
     heading: "Payonus",
     links: [
-      { label: "About",    href: "/company"   },
-      { label: "Careers",  href: "/careers"   },
-      { label: "Security", href: "/security"  },
-      { label: "Contact",  href: "/support"   },
+      { label: "About",     href: "/company"   },
+      { label: "Careers",   href: "/careers"   },
+      { label: "Security",  href: "/security"  },
+      { label: "Resources", href: "/resources" },
+      { label: "Contact",   href: "/support"   },
     ],
   },
   {

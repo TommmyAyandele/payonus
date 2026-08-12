@@ -48,6 +48,11 @@ export default function AnalyticsPage() {
       marketsSubtext="Track performance by country, payment method, and channel — all in one view. Know which markets are converting and where to invest next."
       ctaHeading={<>Ready to understand<br /><span style={{ color: T.primary }}>your payments better?</span></>}
       ctaSubtext="Connect your account and your first insights are live in seconds. No setup required."
+      relatedLinks={[
+        { label: "Banking & Fintech", href: "/industries/banking" },
+        { label: "E-commerce", href: "/industries/ecommerce" },
+        { label: "Security", href: "/security" },
+      ]}
     />
   );
 }

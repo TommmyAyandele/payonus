@@ -125,6 +125,11 @@ export default function AviationPage() {
       marketsSubtext="From Lagos to Nairobi, Accra to Johannesburg — Payonus handles collections and refunds across African markets so your passengers can book, pay, and fly without friction."
       ctaHeading={<>Ready for payment<br />infrastructure that won't fail?</>}
       ctaSubtext="Airlines and travel platforms across Africa trust Payonus for high-value, high-reliability payment processing. Get started today."
+      relatedLinks={[
+        { label: "Payment API", href: "/payment-api" },
+        { label: "Collections", href: "/collections" },
+        { label: "Security", href: "/security" },
+      ]}
       />
     </>
   );

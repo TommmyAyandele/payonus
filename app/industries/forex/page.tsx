@@ -125,6 +125,11 @@ export default function ForexPage() {
       marketsSubtext="Your traders are in Nigeria, South Africa, Kenya, Ghana, and beyond. Payonus gives them every payment method they trust, with instant confirmation so they never miss a trade."
       ctaHeading={<>Ready to give your<br />traders faster deposits?</>}
       ctaSubtext="Join the growing number of African FX platforms that trust Payonus for compliant, instant payment infrastructure. Get your first integration live today."
+      relatedLinks={[
+        { label: "Payment API", href: "/payment-api" },
+        { label: "Security", href: "/security" },
+        { label: "Collections", href: "/collections" },
+      ]}
       />
     </>
   );

@@ -48,6 +48,11 @@ export default function CollectionsPage() {
       marketsSubtext="Your customers pay the way they know — whether that's Verve, GTBank transfer, MTN Mobile Money, or USSD. Payonus handles the rails, you handle the product."
       ctaHeading={<>Ready to start accepting<br /><span style={{ color: T.primary }}>payments without friction?</span></>}
       ctaSubtext="Set up your first collection in minutes. No lengthy onboarding, no waiting weeks for approval."
+      relatedLinks={[
+        { label: "E-commerce", href: "/industries/ecommerce" },
+        { label: "Gaming", href: "/industries/gaming" },
+        { label: "Settlements", href: "/settlements" },
+      ]}
     />
   );
 }

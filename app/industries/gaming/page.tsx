@@ -120,6 +120,11 @@ export default function GamingPage() {
       marketsSubtext="Your players are spread across Nigeria, Ghana, Kenya, South Africa, and beyond. Payonus reaches them all — cards, mobile money, and bank transfer — from a single API."
       ctaHeading={<>Ready to level up<br />your payment stack?</>}
       ctaSubtext="Thousands of merchants across Africa trust Payonus to move their money. Join them and get your first transaction live in under 30 minutes."
+      relatedLinks={[
+        { label: "Collections", href: "/collections" },
+        { label: "Payouts", href: "/payouts" },
+        { label: "Payment API", href: "/payment-api" },
+      ]}
       />
     </>
   );

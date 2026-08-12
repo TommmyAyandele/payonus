@@ -4,6 +4,7 @@ import React from "react";
 import { useBreakpoint } from "../use-breakpoint";
 import Navbar, { T } from "../Navbar";
 import Footer from "../Footer";
+import RelatedLinks from "../RelatedLinks";
 import { PILLS, PillIcon } from "../ComplianceSection";
 
 /* ─── SCROLL REVEAL ─── */
@@ -276,9 +277,10 @@ function IconBox({ children }: { children: React.ReactNode }) {
   );
 }
 
-function LinkArrow({ label }: { label: string }) {
+function LinkArrow({ label, href = "https://merchantv2.payonus.com/signup" }: { label: string; href?: string }) {
+  const external = href.startsWith("http");
   return (
-    <a href="https://merchantv2.payonus.com/signup" target="_blank" rel="noopener noreferrer" style={{
+    <a href={href} {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})} style={{
       display: "inline-flex", alignItems: "center", gap: 4,
       fontFamily: "DM Sans, sans-serif", fontWeight: 600, fontSize: 14,
       color: T.primary, textDecoration: "none",
@@ -834,7 +836,7 @@ export default function PayoutsPage() {
                 </IconBox>
                 <p style={{ margin:"0 0 8px", fontFamily:"DM Sans, sans-serif", fontWeight:700, fontSize:16, lineHeight:1.3, color:T.dark }}>See what you'll pay</p>
                 <p style={{ margin:"0 0 14px", fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:13.5, lineHeight:1.65, color:"#6B6877" }}>Integrated per-transaction pricing with no hidden fees.</p>
-                <LinkArrow label="Pricing details" />
+                <LinkArrow label="Pricing details" href="/pricing" />
               </div>
 
               <div>
@@ -845,12 +847,18 @@ export default function PayoutsPage() {
                 </IconBox>
                 <p style={{ margin:"0 0 8px", fontFamily:"DM Sans, sans-serif", fontWeight:700, fontSize:16, lineHeight:1.3, color:T.dark }}>Start building</p>
                 <p style={{ margin:"0 0 14px", fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:13.5, lineHeight:1.65, color:"#6B6877" }}>Get up and running with Payonus in as little as 30 minutes.</p>
-                <LinkArrow label="Integration options" />
+                <LinkArrow label="Integration options" href="/docs" />
               </div>
             </div>
           )}
         </div>
       </section>
+
+      <RelatedLinks links={[
+        { label: "Manufacturing", href: "/industries/manufacturing" },
+        { label: "Gaming", href: "/industries/gaming" },
+        { label: "Settlements", href: "/settlements" },
+      ]} />
 
       <Footer />
     </>

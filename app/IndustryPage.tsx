@@ -31,6 +31,7 @@ export interface IndustryPageProps {
   marketsSubtext:    string;
   ctaHeading:        React.ReactNode;
   ctaSubtext:        string;
+  relatedLinks?:     { label: string; href: string }[];
 }
 
 /* ─── SHARED DATA ─── */
@@ -52,9 +53,10 @@ function IconBox({ children }: { children: React.ReactNode }) {
   );
 }
 
-function LinkArrow({ label }: { label: string }) {
+function LinkArrow({ label, href = "https://merchantv2.payonus.com/signup" }: { label: string; href?: string }) {
+  const external = href.startsWith("http");
   return (
-    <a href="https://merchantv2.payonus.com/signup" target="_blank" rel="noopener noreferrer" style={{ display:"inline-flex",alignItems:"center",gap:4,fontFamily:"DM Sans, sans-serif",fontWeight:600,fontSize:14,color:T.primary,textDecoration:"none" }}>
+    <a href={href} {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})} style={{ display:"inline-flex",alignItems:"center",gap:4,fontFamily:"DM Sans, sans-serif",fontWeight:600,fontSize:14,color:T.primary,textDecoration:"none" }}>
       {label}
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
         <path d="M9 18l6-6-6-6" stroke={T.primary} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -71,7 +73,7 @@ export default function IndustryPage({
   challengeHeading, challenges,
   featuresHeading, features,
   marketsHeading, marketsSubtext,
-  ctaHeading, ctaSubtext,
+  ctaHeading, ctaSubtext, relatedLinks,
 }: IndustryPageProps) {
   useScrollReveal();
   const { isMobile, isTablet } = useBreakpoint();
@@ -318,7 +320,7 @@ export default function IndustryPage({
                 </IconBox>
                 <p style={{ margin:"0 0 8px",fontFamily:"DM Sans, sans-serif",fontWeight:700,fontSize:16,lineHeight:1.3,color:T.dark }}>See what you'll pay</p>
                 <p style={{ margin:"0 0 14px",fontFamily:"DM Sans, sans-serif",fontWeight:400,fontSize:13.5,lineHeight:1.65,color:"#6B6877" }}>Transparent per-transaction pricing with no hidden fees.</p>
-                <LinkArrow label="Pricing details" />
+                <LinkArrow label="Pricing details" href="/pricing" />
               </div>
               <div>
                 <IconBox>
@@ -328,12 +330,25 @@ export default function IndustryPage({
                 </IconBox>
                 <p style={{ margin:"0 0 8px",fontFamily:"DM Sans, sans-serif",fontWeight:700,fontSize:16,lineHeight:1.3,color:T.dark }}>Start building</p>
                 <p style={{ margin:"0 0 14px",fontFamily:"DM Sans, sans-serif",fontWeight:400,fontSize:13.5,lineHeight:1.65,color:"#6B6877" }}>Get up and running with Payonus in as little as 30 minutes.</p>
-                <LinkArrow label="View docs" />
+                <LinkArrow label="View docs" href="/docs" />
               </div>
             </div>
           )}
         </div>
       </section>
+
+      {relatedLinks && relatedLinks.length > 0 && (
+        <section style={{ width:"100%", background:T.bg, borderTop:`1px solid ${T.borderLight}` }}>
+          <div style={{ maxWidth:1440, margin:"0 auto", padding:`32px ${hPad}px`, display:"flex", flexWrap:"wrap", alignItems:"center", gap:20 }}>
+            <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:13, color:T.muted }}>Related:</span>
+            {relatedLinks.map(link => (
+              <a key={link.href} href={link.href} style={{ fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14, color:T.primary, textDecoration:"none" }}>
+                {link.label} →
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
 
       <Footer />
     </>

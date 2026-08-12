@@ -48,6 +48,11 @@ export default function SettlementsPage() {
       marketsSubtext="Whether you're settling NGN to a Lagos bank or KES to M-Pesa, Payonus handles the local rails so funds land where they need to — same day, every day."
       ctaHeading={<>Ready to unlock<br /><span style={{ color: T.primary }}>faster settlements?</span></>}
       ctaSubtext="Set your settlement schedule and start moving money on your terms. No lengthy onboarding."
+      relatedLinks={[
+        { label: "Manufacturing", href: "/industries/manufacturing" },
+        { label: "E-commerce", href: "/industries/ecommerce" },
+        { label: "Payouts", href: "/payouts" },
+      ]}
     />
   );
 }

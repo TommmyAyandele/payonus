@@ -124,6 +124,11 @@ export default function ManufacturingPage() {
       marketsSubtext="Your suppliers are in Nigeria, your distributors are in Ghana, Kenya, and South Africa. Payonus connects your entire supply chain payment flow across African markets."
       ctaHeading={<>Ready to tighten your<br />payment operations?</>}
       ctaSubtext="Manufacturers across Africa use Payonus to pay suppliers faster, collect from distributors reliably, and eliminate the manual coordination that slows growth."
+      relatedLinks={[
+        { label: "Payouts", href: "/payouts" },
+        { label: "Settlements", href: "/settlements" },
+        { label: "Payment API", href: "/payment-api" },
+      ]}
       />
     </>
   );

@@ -268,6 +268,7 @@ export default function Navbar({ scrolled }: { scrolled: boolean }) {
               {/* Regular nav links */}
               {[
                 { label:"Company",    href:"/company"  },
+                { label:"Resources",  href:"/resources"},
                 { label:"Developers", href:"/developers"},
                 { label:"Support",    href:"/support"  },
                 { label:"Pricing",    href:"/pricing"  },
@@ -348,6 +349,7 @@ export default function Navbar({ scrolled }: { scrolled: boolean }) {
               </div>
               {[
                 { label:"Company",    href:"/company"    },
+                { label:"Resources",  href:"/resources"   },
                 { label:"Developers", href:"/developers"  },
                 { label:"Support",    href:"/support"    },
                 { label:"Pricing",    href:"/pricing"    },

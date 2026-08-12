@@ -4,6 +4,7 @@ import React from "react";
 import { useBreakpoint } from "../use-breakpoint";
 import Navbar, { T } from "../Navbar";
 import Footer from "../Footer";
+import RelatedLinks from "../RelatedLinks";
 
 /* ─── SIDEBAR DATA ─── */
 const SIDEBAR = [
@@ -741,6 +742,12 @@ export default function DocsPage() {
 
         </main>
       </div>
+
+      <RelatedLinks links={[
+        { label: "Payment API", href: "/payment-api" },
+        { label: "Security", href: "/security" },
+        { label: "Developers", href: "/developers" },
+      ]} />
 
       <Footer />
     </div>
