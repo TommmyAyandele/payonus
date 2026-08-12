@@ -81,6 +81,22 @@ const ENTRIES: Entry[] = [
     icon: <svg {...iconProps}><path d="M4 8h13M13 5l4 3-4 3" stroke={T.primary} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/><path d="M20 16H7M11 13l-4 3 4 3" stroke={T.primary} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>,
   },
   {
+    category: "Fintech",
+    headline: "Rails for lenders, PSSPs, and remittance platforms.",
+    desc: "Instant disbursement, repayment collections, and cross-border payout infrastructure for non-bank fintechs.",
+    href: "/industries/fintech",
+    cta: "Explore Fintech",
+    icon: <svg {...iconProps}><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke={T.primary} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>,
+  },
+  {
+    category: "Ride-hailing & Logistics",
+    headline: "Driver payouts that move as fast as your fleet.",
+    desc: "Instant driver and rider payouts, split payments, and fare collection for ride-hailing and delivery platforms.",
+    href: "/industries/logistics",
+    cta: "Explore Ride-hailing & Logistics",
+    icon: <svg {...iconProps}><path d="M5 11l1.5-4.5A2 2 0 018.4 5h7.2a2 2 0 011.9 1.5L19 11" stroke={T.primary} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/><rect x="3" y="11" width="18" height="6" rx="2" stroke={T.primary} strokeWidth="1.6"/><circle cx="7.5" cy="17.5" r="1.4" stroke={T.primary} strokeWidth="1.6"/><circle cx="16.5" cy="17.5" r="1.4" stroke={T.primary} strokeWidth="1.6"/></svg>,
+  },
+  {
     category: "Payment Infrastructure",
     headline: "How payment rails, settlement cycles, and cross-border processing actually work.",
     desc: "How payment rails, settlement cycles, and cross-border processing work across African markets.",
