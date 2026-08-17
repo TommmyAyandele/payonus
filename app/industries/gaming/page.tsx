@@ -1,10 +1,11 @@
 import IndustryPage from "../../IndustryPage";
 import JsonLd from "../../JsonLd";
-import { pageMetadata, breadcrumbJsonLd } from "../../seo";
+import { pageMetadata, breadcrumbJsonLd, faqJsonLd } from "../../seo";
+import { IndustryBlock } from "../../IndustryBlocks";
 
 export const metadata = pageMetadata({
-  title: "Gaming",
-  description: "Payment rails built for the speed of play. In-game purchases, creator payouts, and tournament prizes — Payonus keeps your players in the game.",
+  title: "Gaming Payment Gateway for Businesses in Africa",
+  description: "Support gaming collections, payouts, and faster settlement across African markets with payment infrastructure built for high-frequency payment flows.",
   path: "/industries/gaming",
 });
 
@@ -13,93 +14,106 @@ const breadcrumbs = breadcrumbJsonLd([
   { name: "Gaming", path: "/industries/gaming" },
 ]);
 
-const challenges = [
-  {
-    title: "Transactions fail at peak load",
-    desc: "Players lose trust the moment a purchase fails during a tournament or live event. Legacy processors can't keep up with gaming traffic spikes, and every failure means a player who may never come back.",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <path d="M12 9v4M12 17h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" stroke="#6009FF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    ),
-  },
-  {
-    title: "Paying out creators and winners takes days",
-    desc: "Routing prize money and creator earnings to recipients scattered across Africa requires manual bank coordination that delays payouts, frustrates your community, and makes your platform look amateur.",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <circle cx="12" cy="12" r="10" stroke="#6009FF" strokeWidth="1.8"/>
-        <path d="M12 6v6l4 2" stroke="#6009FF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    ),
-  },
-  {
-    title: "Fraud and chargebacks bleed margin",
-    desc: "Anonymous players and digital goods make fraud disputes costly and hard to win. Most payment processors leave you to absorb losses while disputes drag on for weeks.",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#6009FF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M9 12l2 2 4-4" stroke="#6009FF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    ),
-  },
+const faqs = [
+  { q: "What types of gaming businesses can Payonus support?", a: "Payonus can support businesses across the gaming ecosystem, including sports betting, casinos, lotteries, fantasy sports, esports, and other relevant gaming platforms." },
+  { q: "Can Payonus support high-frequency gaming payments?", a: "Yes. Payonus is designed to support high-frequency payment flows, including gaming collections and payouts, with faster settlement capabilities." },
+  { q: "Can Payonus support businesses operating across African markets?", a: "Payonus operates across Nigeria, Ghana, Kenya, Côte d'Ivoire, South Africa, Zambia, Senegal and Cameroon." },
+  { q: "Can we integrate Payonus with our existing platform?", a: "Yes. Payonus can be integrated into existing platforms and payment workflows through the Payment API." },
+  { q: "Can Payonus support payment workflows with specific business requirements?", a: "Yes. Where a standard setup does not fully meet a business's operational requirements, Payonus can support tailored payment workflows." },
 ];
+const faqSchema = faqJsonLd(faqs);
 
-const features = [
+const blocks: IndustryBlock[] = [
   {
-    title: "High-velocity payment processing",
-    desc: "Handle thousands of simultaneous in-game purchase requests without degradation. Built for burst traffic during live events and tournament finals.",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="#6009FF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    ),
+    kind: "prose", id: "relevance",
+    heading: "Built around the way gaming businesses operate",
+    body: [
+      "Gaming businesses handle a constant flow of money. Players need to deposit funds, withdraw winnings and complete transactions without unnecessary delays. As payment volumes grow, keeping those flows reliable becomes critical to the customer experience and day-to-day operations.",
+      "Sports betting · Casinos · Lotteries · Fantasy sports · Esports · Gaming platforms",
+      "Whether you run a sportsbook, casino, lottery, fantasy sports platform, or another gaming business, your payment setup needs to keep up with the pace of your operation.",
+    ],
   },
   {
-    title: "Bulk creator and prize payouts",
-    desc: "Disburse earnings to hundreds of creators, streamers, or tournament winners in a single API call. No manual bank transfers, no delays.",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75M9 7a4 4 0 110 8 4 4 0 010-8z" stroke="#6009FF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    ),
+    kind: "cards", id: "challenges", columns: 3, tint: true,
+    heading: "When payments slow down, the business feels it",
+    intro: "A payment problem does more than affect a transaction. Failed deposits can interrupt play. Delayed withdrawals can frustrate customers. Slow settlement can affect cash flow. And as payment volumes increase, it becomes harder to see what is happening across the operation.",
+    items: [
+      { icon: "alert", title: "Failed or interrupted deposits", desc: "When players cannot complete deposits smoothly, it can disrupt their experience and affect the flow of payments into the business." },
+      { icon: "route", title: "Frequent withdrawal requests", desc: "Gaming businesses need payout processes that can keep up when customers expect to access their funds." },
+      { icon: "clock", title: "Slow settlement", desc: "Long settlement cycles can delay access to funds and make day-to-day cash flow harder to manage." },
+      { icon: "eye", title: "Limited payment visibility", desc: "When payment activity becomes harder to track, resolving issues and understanding performance can take more time." },
+      { icon: "globe", title: "More complexity across markets", desc: "Operating in multiple markets can introduce different payment and operational requirements that need to work together." },
+      { icon: "layers", title: "Growing payment volumes", desc: "As transaction volumes increase, payment processes need to keep up without creating more work for the team." },
+    ],
   },
   {
-    title: "Real-time webhook notifications",
-    desc: "Confirm successful payment and unlock in-game items or tournament access instantly — not minutes later. Sub-second confirmation keeps your game loop unbroken.",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" stroke="#6009FF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    ),
+    kind: "cards", id: "help", columns: 2,
+    heading: "Keep the payment side of your operation moving",
+    intro: "Payonus brings together the payment capabilities gaming businesses need to collect money, make payouts, manage settlement and understand what is happening across their payment activity.",
+    items: [
+      { icon: "card", title: "Keep deposits moving", desc: "Help customers fund their accounts through payment infrastructure built to support high-frequency transactions.", href: "/collections", linkLabel: "Collection" },
+      { icon: "route", title: "Handle withdrawals at the pace of your business", desc: "Support frequent customer withdrawals with payout capabilities built for businesses that move money regularly.", href: "/payouts", linkLabel: "Payout" },
+      { icon: "clock", title: "Get access to settled funds faster", desc: "Support high-frequency deposits and withdrawals with faster settlement designed around the pace of gaming payments.", href: "/settlements", linkLabel: "Instant Settlement" },
+      { icon: "chart", title: "See what is happening across your payments", desc: "Use analytics and reporting to monitor transaction activity and understand payment performance across your operation.", href: "/analytics", linkLabel: "Analytics & Reporting" },
+    ],
   },
   {
-    title: "Mobile money, USSD, cards, and bank transfer",
-    desc: "Accept payments from players across Africa using every channel they trust — Mpesa, Airtel Money, USSD short codes, debit cards, or bank transfer.",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <rect x="5" y="2" width="14" height="20" rx="2" ry="2" stroke="#6009FF" strokeWidth="1.8"/>
-        <path d="M12 18h.01" stroke="#6009FF" strokeWidth="1.8" strokeLinecap="round"/>
-      </svg>
-    ),
+    kind: "prose", id: "differentiation", tint: true,
+    heading: "Built for the pace of gaming payments",
+    body: [
+      "Gaming payments do not stop at checkout. Deposits and withdrawals can happen throughout the day, often at high volume. Payonus supports these high-frequency payment flows with faster settlement to help businesses keep money moving as their operations grow.",
+      "From collecting payments and making payouts to settlement and payment visibility, Payonus gives gaming businesses connected payment capabilities without treating every part of the payment journey as a separate problem.",
+    ],
   },
   {
-    title: "Fraud detection and chargeback support",
-    desc: "Layered fraud rails flag suspicious gaming transactions before they become disputes. When chargebacks do occur, our team helps you build and submit evidence.",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#6009FF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    ),
+    kind: "cards", id: "why", columns: 2,
+    heading: "A payment setup that can keep up with your operation",
+    items: [
+      { icon: "gauge", title: "Built for frequent payment activity", desc: "Supports the regular deposits and withdrawals that are part of everyday gaming operations." },
+      { icon: "clock", title: "Faster settlement", desc: "Keep funds moving more efficiently after payment activity, helping your business manage cash flow and operations." },
+      { icon: "globe", title: "Built for African markets", desc: "Support payment operations across Nigeria, Ghana, Kenya, Côte d'Ivoire, South Africa, Zambia, Senegal and Cameroon." },
+      { icon: "plug", title: "Flexible around your payment workflows", desc: "Use API-based integrations or tailored implementations where your business has specific operational requirements." },
+    ],
   },
   {
-    title: "Developer sandbox",
-    desc: "Test every payment flow — successful purchases, failed transactions, refunds, and webhook delivery — in a staging environment built for gaming integration.",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <path d="M16 18l6-6-6-6M8 6l-6 6 6 6" stroke="#6009FF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    ),
+    kind: "cards", id: "business-fit", columns: 2, tint: true,
+    heading: "Payment workflows that fit your business",
+    intro: "Your payment setup should work with the way your business operates. Payonus can connect with existing platforms through its Payment API and support tailored payment workflows where your requirements go beyond a standard setup.",
+    items: [
+      { icon: "plug", title: "Connect with your existing platform", desc: "Integrate Payonus into your existing platform and payment workflows through the Payment API.", href: "/payment-api", linkLabel: "Payment API" },
+      { icon: "scale", title: "Support your business as it grows", desc: "Whether you are managing a smaller operation or handling growing transaction volumes, your payment setup can support changing payment and operational requirements as your business expands." },
+    ],
+  },
+  {
+    kind: "textCta", id: "custom-workflow",
+    heading: "Build around your operational requirements",
+    copy: "Where your business needs more than a standard setup, Payonus can work with you to configure payment flows around your operational requirements.",
+    cta: { label: "Talk to Our Team", href: "/sales" },
+  },
+  {
+    kind: "trust", id: "trust",
+    heading: "Built for secure, reliable payment operations",
+    intro: "Choosing a payment provider means trusting part of your business to the infrastructure behind it. Payonus applies security and operational controls designed to support reliable, accountable payment operations.",
+    items: [
+      { title: "ISO 27001", desc: "Information security aligned with ISO 27001 requirements." },
+      { title: "PCI DSS Level 1", desc: "Payment security aligned with PCI DSS Level 1 requirements." },
+      { title: "KYC and transaction audit trails", desc: "Support greater visibility and accountability across payment activity." },
+      { title: "Encryption", desc: "Payment data is protected through encryption across the infrastructure." },
+      { title: "24/7 monitoring", desc: "Infrastructure monitoring supports reliable payment operations around the clock." },
+      { title: "99% uptime SLA", desc: "A 99% uptime SLA supports dependable payment infrastructure." },
+    ],
+  },
+  {
+    kind: "faq", id: "faq",
+    heading: "Frequently Asked Questions",
+    items: faqs,
+  },
+  {
+    kind: "cta", id: "final-cta",
+    heading: "Ready to improve your gaming payment operations?",
+    subtext: "Tell us how your business collects payments, handles withdrawals, and manages settlement. We'll discuss the payment setup that fits your operation.",
+    primaryCta: { label: "Request a Demo", href: "/sales" },
+    secondaryCta: { label: "Talk to Our Team", href: "/sales" },
   },
 ];
 
@@ -107,24 +121,20 @@ export default function GamingPage() {
   return (
     <>
       <JsonLd data={breadcrumbs} />
+      <JsonLd data={faqSchema} />
       <IndustryPage
-      industry="gaming"
-      label="Industries / Gaming"
-      heading={<>Payment rails built<br />for the speed of play.</>}
-      subtext="Real-money in-game purchases, creator payouts, and tournament prizes — Payonus keeps your players in the game and your funds moving."
-      challengeHeading={<>Why gaming payments<br />are uniquely hard.</>}
-      challenges={challenges}
-      featuresHeading={<>Everything your<br />game needs to collect.</>}
-      features={features}
-      marketsHeading={<>Pan-African.<br />One integration.</>}
-      marketsSubtext="Your players are spread across Nigeria, Ghana, Kenya, South Africa, and beyond. Payonus reaches them all — cards, mobile money, and bank transfer — from a single API."
-      ctaHeading={<>Ready to level up<br />your payment stack?</>}
-      ctaSubtext="Thousands of merchants across Africa trust Payonus to move their money. Join them and get your first transaction live in under 30 minutes."
-      relatedLinks={[
-        { label: "Collections", href: "/collections" },
-        { label: "Payouts", href: "/payouts" },
-        { label: "Payment API", href: "/payment-api" },
-      ]}
+        hero={{
+          eyebrow: "Industries / Gaming",
+          heading: "Payment infrastructure built for gaming businesses across Africa",
+          subtext: "Keep deposits, withdrawals and settlements moving as your business grows. Payonus helps gaming businesses manage high-frequency payment flows across African markets.",
+          primaryCta: { label: "Request a Demo", href: "/sales" },
+        }}
+        blocks={blocks}
+        relatedLinks={[
+          { label: "Payment API", href: "/payment-api" },
+          { label: "Payouts", href: "/payouts" },
+          { label: "Security", href: "/security" },
+        ]}
       />
     </>
   );

@@ -1,10 +1,11 @@
 import IndustryPage from "../../IndustryPage";
 import JsonLd from "../../JsonLd";
-import { pageMetadata, breadcrumbJsonLd } from "../../seo";
+import { pageMetadata, breadcrumbJsonLd, faqJsonLd } from "../../seo";
+import { IndustryBlock } from "../../IndustryBlocks";
 
 export const metadata = pageMetadata({
-  title: "Forex",
-  description: "CBN-compliant payment rails for FX brokers and trading platforms operating in Africa. Instant deposit confirmation and full audit trails.",
+  title: "Forex Payment Gateway for Africa",
+  description: "Help traders fund accounts and withdraw funds with payment infrastructure for Forex and trading businesses across African markets.",
   path: "/industries/forex",
 });
 
@@ -13,98 +14,96 @@ const breadcrumbs = breadcrumbJsonLd([
   { name: "Forex", path: "/industries/forex" },
 ]);
 
-const challenges = [
-  {
-    title: "Deposits take too long to reflect",
-    desc: "Traders miss market windows when funds take hours to settle. Delayed deposits mean abandoned accounts, lost trading volume, and a reputation for being unreliable — all driven by payment infrastructure, not your platform.",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <circle cx="12" cy="12" r="10" stroke="#6009FF" strokeWidth="1.8"/>
-        <path d="M12 6v6l4 2" stroke="#6009FF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    ),
-  },
-  {
-    title: "Regulatory compliance is a moving target",
-    desc: "CBN regulations for forex payments evolve frequently. Non-compliance risks license suspension, frozen merchant accounts, and reputational damage you can't afford in a trust-sensitive industry.",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="#6009FF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M9 22V12h6v10" stroke="#6009FF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    ),
-  },
-  {
-    title: "Reconciliation is a daily operational burden",
-    desc: "Matching thousands of daily inflows from multiple payment channels to individual trader accounts is error-prone, time-consuming, and a compliance risk waiting to happen.",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="#6009FF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" stroke="#6009FF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    ),
-  },
+const faqs = [
+  { q: "Does Payonus support Forex businesses?", a: "Payonus supports approved Forex and trading businesses based on their business, market and payment requirements. Speak with our team to discuss whether your business is a suitable fit." },
+  { q: "Which countries does Payonus operate in?", a: "Nigeria, Ghana, Kenya, Côte d'Ivoire, South Africa, Zambia, Senegal and Cameroon." },
+  { q: "Can we use Payonus for deposits and withdrawals?", a: "Payonus provides collection and payout services that can support deposit and withdrawal flows, depending on your business, markets and approved payment setup." },
+  { q: "Can Payonus integrate with our trading platform?", a: "Yes. Payonus can support approved integrations through its payment API. The right approach depends on your business and technical requirements." },
+  { q: "Can Payonus support a custom payment workflow?", a: "Yes. Payonus can discuss tailored payment workflows where your business needs more than a standard setup." },
 ];
+const faqSchema = faqJsonLd(faqs);
 
-const features = [
+const blocks: IndustryBlock[] = [
   {
-    title: "Instant deposit confirmation",
-    desc: "Real-time webhooks notify your platform the moment a trader's funds hit your collection account. Traders see their balance update in seconds, not hours.",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="#6009FF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    ),
+    kind: "cards", id: "challenges", columns: 3, tint: true,
+    heading: "When payments slow down, trading operations feel it",
+    intro: "Payment problems do not stay with your payment team. A failed deposit can stop a trader from funding an account. A delayed withdrawal can damage confidence and create more work for your support team. As you enter more markets and handle more transactions, keeping payments running smoothly can become harder.",
+    items: [
+      { icon: "alert", title: "Failed deposits", desc: "When traders cannot fund their accounts, payment friction can interrupt trading activity and affect their experience." },
+      { icon: "clock", title: "Delayed withdrawals", desc: "Customers expect access to their funds. Delays can create frustration and put more pressure on your support and operations teams." },
+      { icon: "globe", title: "Different markets, different payment requirements", desc: "Expanding into new countries can mean managing different payment methods and local payment requirements." },
+      { icon: "refresh", title: "Payment disruptions", desc: "When payments fail or become unreliable, traders and internal teams are often the first to feel the impact." },
+      { icon: "eye", title: "Limited payment visibility", desc: "When you cannot easily see what is happening across transactions, finding problems and managing payment operations becomes harder." },
+      { icon: "layers", title: "More to manage as you grow", desc: "As transaction volumes and payment activity increase, different processes can become harder to manage and keep under control." },
+    ],
   },
   {
-    title: "CBN-compliant payment rails",
-    desc: "Every transaction flows through infrastructure built to satisfy Central Bank requirements. Stay audit-ready without maintaining a dedicated compliance team.",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#6009FF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M9 12l2 2 4-4" stroke="#6009FF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    ),
+    kind: "cards", id: "how-we-help", columns: 3,
+    heading: "Give your traders a better payment experience",
+    intro: "From funding accounts to processing withdrawals, Payonus helps trading businesses handle the payment activity that keeps their customers and operations moving.",
+    items: [
+      { icon: "card", title: "Help traders fund their accounts", desc: "Support account deposits and make it easier for customers to get money into their trading accounts.", href: "/collections", linkLabel: "Collections" },
+      { icon: "route", title: "Handle withdrawals with less friction", desc: "Support the movement of funds to customers when they withdraw from their accounts.", href: "/payouts", linkLabel: "Payout" },
+      { icon: "plug", title: "Connect payments to your trading platform", desc: "Integrate Payonus with your existing platform and payment workflows through the appropriate payment API.", href: "/payment-api", linkLabel: "Payment API" },
+      { icon: "clock", title: "Keep your business moving between payment and settlement", desc: "Manage settlement as part of your wider payment operation when access to settled funds matters to the way your business runs.", href: "/settlements", linkLabel: "Instant Settlement" },
+      { icon: "chart", title: "See what is happening across your payments", desc: "Use transaction data and reporting to monitor payment activity and understand what is happening across your operation.", href: "/analytics", linkLabel: "Analytics & Reporting" },
+    ],
   },
   {
-    title: "Multi-currency collections",
-    desc: "Accept trader deposits in NGN, USD, GBP, EUR, and other major currencies. Support cross-border traders without managing multiple merchant accounts.",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <circle cx="12" cy="12" r="10" stroke="#6009FF" strokeWidth="1.8"/>
-        <path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" stroke="#6009FF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    ),
+    kind: "prose", id: "differentiation", tint: true,
+    heading: "More than a way to accept payments",
+    body: [
+      "Your payment operation does not begin and end when a trader makes a deposit. You also need to handle withdrawals, manage settlement, understand what is happening across transactions and connect payments to the systems your business already uses.",
+      "Payonus brings these parts of your payment operation closer together, so you can evaluate one payment partner around the wider way your trading business needs to move and manage money.",
+    ],
   },
   {
-    title: "Automated reconciliation reports",
-    desc: "Every inflow and outflow tagged, timestamped, and downloadable. Feed clean, structured data directly to your compliance team without manual data extraction.",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="#6009FF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" stroke="#6009FF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    ),
+    kind: "cards", id: "business-fit", columns: 3,
+    heading: "Built around the way your business operates",
+    intro: "Your payment setup needs to work with your markets, the way traders fund and withdraw from accounts, and the systems your business already uses. The right approach depends on how your business operates.",
+    items: [
+      { icon: "globe", title: "Your markets", desc: "Discuss the markets where you need to accept and move money and determine the payment setup available for your business." },
+      { icon: "route", title: "How money moves through your business", desc: "Build around the deposits, withdrawals and other payment activity your operation needs to handle." },
+      { icon: "plug", title: "Your platform", desc: "Connect relevant payment functionality with your existing platform through the appropriate integration approach.", href: "/payment-api", linkLabel: "Payment API" },
+      { icon: "eye", title: "Your visibility requirements", desc: "Access payment and transaction information to help your team monitor what is happening across payment activity." },
+      { icon: "scale", title: "Your growth", desc: "As you handle more transactions or enter new markets, evaluate a payment setup that can support changing business requirements." },
+    ],
   },
   {
-    title: "High-value transaction support",
-    desc: "No arbitrary limits blocking large trader deposits or institutional transfers. Our rails are built to handle the transaction sizes that serious FX operations require.",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <line x1="12" y1="1" x2="12" y2="23" stroke="#6009FF" strokeWidth="1.8" strokeLinecap="round"/>
-        <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" stroke="#6009FF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    ),
+    kind: "textCta", id: "custom-workflow",
+    heading: "Need a payment setup built around your workflow?",
+    copy: "Some trading businesses need more than a standard payment setup. Talk to Payonus about configuring payment workflows around the way your business collects, moves and manages money.",
+    cta: { label: "Talk to Our Team", href: "/sales" },
   },
   {
-    title: "Dedicated settlement accounts",
-    desc: "Separate collection and settlement infrastructure keeps trader funds clean, auditable, and clearly demarcated from your operating capital.",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <rect x="2" y="5" width="20" height="14" rx="2" stroke="#6009FF" strokeWidth="1.8"/>
-        <path d="M2 10h20" stroke="#6009FF" strokeWidth="1.8" strokeLinecap="round"/>
-      </svg>
-    ),
+    kind: "trust", id: "trust",
+    heading: "Infrastructure supporting payments at scale",
+    intro: "Before choosing a payment partner, you need confidence that the infrastructure behind it can support serious payment operations.",
+    items: [
+      { title: "ISO 27001", desc: "Information security aligned with recognised industry standards." },
+      { title: "PCI DSS Level 1", desc: "Payment security aligned with PCI DSS Level 1 requirements." },
+      { title: "Encryption", desc: "Payment data is protected through encryption across the infrastructure." },
+      { title: "KYC & Audit Trails", desc: "Support greater visibility and accountability across payment activity." },
+      { title: "24/7 Monitoring", desc: "Infrastructure monitoring supports reliable payment operations around the clock." },
+      { title: "99% Uptime SLA", desc: "Supporting reliable payment operations." },
+    ],
+  },
+  {
+    kind: "textCta", id: "qualification",
+    heading: "Start with the requirements of your business",
+    copy: "Forex and trading businesses can have different market, business and payment requirements. Start by discussing how your business operates, where you need payment support and what your payment setup needs to handle.",
+    cta: { label: "Speak with a Payments Specialist", href: "/sales" },
+  },
+  {
+    kind: "faq", id: "faq",
+    heading: "Frequently Asked Questions",
+    items: faqs,
+  },
+  {
+    kind: "cta", id: "final-cta",
+    heading: "Ready to discuss your payment requirements?",
+    subtext: "Talk to the Payonus team about where you operate, how traders fund and withdraw from their accounts, and what your payment setup needs to handle.",
+    primaryCta: { label: "Talk to Sales", href: "/sales" },
   },
 ];
 
@@ -112,24 +111,21 @@ export default function ForexPage() {
   return (
     <>
       <JsonLd data={breadcrumbs} />
+      <JsonLd data={faqSchema} />
       <IndustryPage
-      industry="forex"
-      label="Industries / Forex"
-      heading={<>The payment rails<br />FX traders trust.</>}
-      subtext="CBN-compliant collections, real-time deposit confirmation, and full audit trails — built for forex brokers and trading platforms operating in Africa."
-      challengeHeading={<>Why FX platforms<br />struggle with payments.</>}
-      challenges={challenges}
-      featuresHeading={<>Built for the demands<br />of forex operations.</>}
-      features={features}
-      marketsHeading={<>Reach traders<br />across Africa.</>}
-      marketsSubtext="Your traders are in Nigeria, South Africa, Kenya, Ghana, and beyond. Payonus gives them every payment method they trust, with instant confirmation so they never miss a trade."
-      ctaHeading={<>Ready to give your<br />traders faster deposits?</>}
-      ctaSubtext="Join the growing number of African FX platforms that trust Payonus for compliant, instant payment infrastructure. Get your first integration live today."
-      relatedLinks={[
-        { label: "Payment API", href: "/payment-api" },
-        { label: "Security", href: "/security" },
-        { label: "Collections", href: "/collections" },
-      ]}
+        hero={{
+          eyebrow: "Industries / Forex",
+          heading: "Forex payment gateway for trading businesses across Africa",
+          subtext: "Help traders fund their accounts and withdraw their money without unnecessary payment friction. Payonus supports Forex and trading businesses with payment infrastructure for the deposits, withdrawals and payment operations that keep trading moving.",
+          primaryCta: { label: "Talk to Sales", href: "/sales" },
+          geoLine: "Operating in Nigeria, Ghana, Kenya, Côte d'Ivoire, South Africa, Zambia, Senegal and Cameroon.",
+        }}
+        blocks={blocks}
+        relatedLinks={[
+          { label: "Payment API", href: "/payment-api" },
+          { label: "Payouts", href: "/payouts" },
+          { label: "Security", href: "/security" },
+        ]}
       />
     </>
   );
