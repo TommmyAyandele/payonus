@@ -26,21 +26,28 @@ const faqSchema = faqJsonLd(faqs);
 
 const blocks: IndustryBlock[] = [
   {
-    kind: "cards", id: "problems", columns: 3, tint: true,
-    heading: "When payments become harder to manage, your business feels it",
-    intro: "Taking payments is only one part of running an online business. Failed payments can affect sales. Payouts can add more work. As transactions and markets grow, it can become harder to keep track of what is coming in, going out and waiting to be settled.",
+    kind: "stats", id: "stats",
     items: [
-      { icon: "card", title: "Lost sales at checkout", desc: "When customers cannot complete a payment, a potential sale can be lost." },
-      { icon: "alert", title: "Failed payments", desc: "Unsuccessful payment attempts can interrupt the buying experience and leave customers unable to complete their purchase." },
-      { icon: "wallet", title: "Limited ways to pay", desc: "Customers need payment options that work for the markets where you sell." },
-      { icon: "route", title: "Payout complexity", desc: "If you pay sellers, partners or other recipients, outgoing payments can add another layer to your operation." },
-      { icon: "eye", title: "Harder to track payments", desc: "As transaction volumes grow, it becomes harder to see what was collected, paid out, and settled." },
-      { icon: "globe", title: "Multi-market complexity", desc: "Expanding into new countries can bring different payment and operational requirements." },
+      { value: "8", label: "African markets" },
+      { value: "99%", label: "Uptime SLA" },
+      { value: "24/7", label: "Infrastructure monitoring" },
     ],
-    footNote: "Payment infrastructure should help you manage more of this operation, not add another disconnected system.",
   },
   {
-    kind: "cards", id: "manage", columns: 3,
+    kind: "bento", id: "problems", leadMock: "transactions",
+    heading: "When payments become harder to manage, your business feels it",
+    intro: "Taking payments is only one part of running an online business. As transactions and markets grow, it can become harder to keep track of what is coming in, going out and waiting to be settled.",
+    items: [
+      { icon: "card", title: "Lost sales at checkout", desc: "When customers cannot complete a payment, a potential sale can be lost." },
+      { icon: "alert", title: "Failed payments", desc: "Unsuccessful attempts can interrupt the buying experience." },
+      { icon: "wallet", title: "Limited ways to pay", desc: "Customers need payment options that work for the markets where you sell." },
+      { icon: "route", title: "Payout complexity", desc: "Paying sellers, partners or other recipients adds another layer to your operation." },
+      { icon: "eye", title: "Harder to track payments", desc: "As volumes grow, it becomes harder to see what was collected, paid out, and settled." },
+      { icon: "globe", title: "Multi-market complexity", desc: "New countries can bring different payment and operational requirements." },
+    ],
+  },
+  {
+    kind: "list", id: "manage",
     heading: "Manage the payment flows behind your business",
     intro: "Payonus brings together the payment capabilities e-commerce businesses may need as they collect money, pay others, manage settlement, connect payments to their systems, and monitor payment activity.",
     items: [
@@ -54,29 +61,33 @@ const blocks: IndustryBlock[] = [
   {
     kind: "flow", id: "differentiator",
     heading: "More than a way to take payments",
-    intro: "Checkout is only one part of your payment operation. Your business may also need to collect money, manage payouts, access settlement, connect payment flows to your systems and keep track of what is happening. Payonus brings these capabilities together so the conversation can focus on how your business manages payments, not only how customers pay.",
+    intro: "Checkout is only one part of your payment operation. Payonus brings these capabilities together so the conversation can focus on how your business manages payments — not only how customers pay.",
     steps: ["Customer payment", "Collections", "Settlement", "Payouts", "Reporting", "Business operations"],
   },
   {
-    kind: "cards", id: "fit", columns: 3, tint: true,
+    kind: "quote", id: "quote",
+    text: "Taking payments is only one part of running an e-commerce business.",
+  },
+  {
+    kind: "showcase", id: "fit",
     heading: "Built around the way your business operates",
-    intro: "No two e-commerce businesses manage payments in exactly the same way. Your business model, customers, recipients, markets and technology all affect the payment setup you need.",
+    intro: "No two e-commerce businesses manage payments in exactly the same way. Your business model, customers, recipients, markets and technology all affect the setup you need.",
     items: [
-      { icon: "bolt", title: "Growing online businesses", desc: "Build a payment setup around the collections, payouts and reporting needs that grow with your operation." },
-      { icon: "scale", title: "Larger e-commerce operations", desc: "Discuss a setup around higher transaction volumes and more complex payment and operational requirements." },
-      { icon: "users", title: "Marketplaces", desc: "Support marketplace-style payment flows where your business needs to collect payments and manage payouts to multiple recipients, subject to business and operational requirements." },
-      { icon: "plug", title: "Your existing technology", desc: "Use the Payment API to connect available payment capabilities to your existing platform and workflows.", href: "/payment-api", linkLabel: "Payment API" },
-      { icon: "globe", title: "Multi-market operations", desc: "Discuss the markets where you need payment support and the requirements relevant to your business." },
+      { icon: "bolt", title: "Growing online businesses", desc: "A setup around the collections, payouts and reporting needs that grow with you." },
+      { icon: "scale", title: "Larger operations", desc: "Higher transaction volumes and more complex requirements." },
+      { icon: "users", title: "Marketplaces", desc: "Collect payments and manage payouts to multiple recipients." },
+      { icon: "plug", title: "Your existing technology", desc: "Connect via the Payment API to your existing platform." },
+      { icon: "globe", title: "Multi-market operations", desc: "The markets where you need payment support." },
     ],
   },
   {
     kind: "textCta", id: "existing-setup",
     heading: "Already have a payment setup?",
-    copy: "Your business may already have a way of collecting payments and paying people. Payonus can work around how your business already handles payments. And if your payment needs are more complex, talk to us about a setup that fits how your business works.",
+    copy: "Payonus can work around how your business already handles payments. And if your payment needs are more complex, talk to us about a setup that fits how your business works.",
     cta: { label: "Discuss Your Payment Requirements", href: "/sales" },
   },
   {
-    kind: "trust", id: "trust",
+    kind: "trust", id: "trust", dark: true,
     heading: "Infrastructure your payment operation can depend on",
     intro: "When payments sit at the centre of your business, you need confidence in the infrastructure supporting them.",
     items: [
@@ -91,7 +102,7 @@ const blocks: IndustryBlock[] = [
   {
     kind: "textCta", id: "talk",
     heading: "Start with your payment operation",
-    copy: "A useful conversation starts with how your business handles payments today and what you need to manage next. The Payonus team can discuss your business model, markets, collection and payout requirements, settlement needs, existing technology and integration requirements.",
+    copy: "A useful conversation starts with how your business handles payments today and what you need to manage next.",
     cta: { label: "Talk to Sales", href: "/sales" },
   },
   {

@@ -28,9 +28,17 @@ const faqSchema = faqJsonLd(faqs);
 
 const blocks: IndustryBlock[] = [
   {
-    kind: "cards", id: "recognition", columns: 3,
+    kind: "stats", id: "stats", tint: false,
+    items: [
+      { value: "8", label: "African markets" },
+      { value: "99%", label: "Uptime SLA" },
+      { value: "24/7", label: "Infrastructure monitoring" },
+    ],
+  },
+  {
+    kind: "list", id: "recognition",
     heading: "Built for the way financial businesses move money",
-    intro: "Whether you are building a fintech product, running payment services, lending to customers or moving money across markets, payments sit at the centre of how your business works. Payonus supports businesses that need reliable infrastructure to accept payments, move funds, manage settlement and keep track of payment activity.",
+    intro: "Whether you are building a fintech product, running payment services, lending to customers or moving money across markets, payments sit at the centre of how your business works. Banks are an important part of the wider payment ecosystem — Payonus provides payment infrastructure for businesses operating within it.",
     items: [
       { icon: "bolt", title: "Fintechs", desc: "Build payment capabilities into the products and experiences your customers use." },
       { icon: "link", title: "Payment Service Providers", desc: "Support the payment flows involved in helping merchants and businesses accept and move money." },
@@ -39,24 +47,27 @@ const blocks: IndustryBlock[] = [
       { icon: "card", title: "Wallet & Payment Businesses", desc: "Connect payment infrastructure to the way users fund, use and move money through your platform." },
       { icon: "layers", title: "Other Financial-Service Businesses", desc: "Explore payment capabilities based on the way your business collects, moves, settles and manages funds." },
     ],
-    footNote: "Banks are an important part of the wider payment ecosystem. Payonus provides payment infrastructure for businesses operating within that ecosystem.",
   },
   {
-    kind: "cards", id: "challenges", columns: 3, tint: true,
+    kind: "bento", id: "challenges", leadMock: "transactions",
     heading: "When payments become harder to manage, the rest of the business feels it",
-    intro: "As a financial business grows, more customers, transactions, products and markets can create more payment complexity. The challenge is keeping money moving without creating more friction for customers or more manual work for your team.",
+    intro: "As a financial business grows, more customers, transactions, products and markets can create more payment complexity — without creating more friction for customers or more manual work for your team.",
     items: [
-      { icon: "card", title: "Make it easier for customers and users to pay", desc: "As payment activity grows, businesses need reliable ways to collect funds without creating unnecessary friction in the customer journey." },
-      { icon: "route", title: "Move money without creating more operational work", desc: "Paying customers, users, merchants or partners can become harder to manage when payout workflows are fragmented." },
-      { icon: "clock", title: "Know when funds are available", desc: "Settlement timing and visibility can affect cash flow, reconciliation and day-to-day payment operations." },
-      { icon: "layers", title: "Stop managing payments across disconnected systems", desc: "When different payment workflows sit across separate systems, teams can spend more time managing integrations and reconciling activity." },
-      { icon: "eye", title: "See what is happening across your payments", desc: "When payment data is spread across workflows, getting a clear picture of payment activity can become more difficult." },
-      { icon: "globe", title: "Expand without adding unnecessary payment complexity", desc: "Moving into new markets can introduce different payment environments and operational requirements." },
-      { icon: "shield", title: "Manage payment operations with security and accountability in mind", desc: "As payment activity grows, businesses need infrastructure that supports security, monitoring and accountability." },
+      { icon: "card", title: "Make it easier for customers and users to pay", desc: "Reliable ways to collect funds without unnecessary friction in the customer journey." },
+      { icon: "route", title: "Move money without more operational work", desc: "Paying customers, users, merchants or partners can become harder when payout workflows are fragmented." },
+      { icon: "clock", title: "Know when funds are available", desc: "Settlement timing and visibility can affect cash flow, reconciliation and day-to-day operations." },
+      { icon: "layers", title: "Stop managing payments across disconnected systems", desc: "Separate systems mean more time managing integrations and reconciling activity." },
+      { icon: "eye", title: "See what is happening across your payments", desc: "Spread-out payment data makes it harder to get a clear picture of activity." },
+      { icon: "globe", title: "Expand without unnecessary complexity", desc: "New markets can introduce different payment environments and operational requirements." },
+      { icon: "shield", title: "Security and accountability", desc: "Growing payment activity needs infrastructure that supports security and monitoring." },
     ],
   },
   {
-    kind: "cards", id: "help", columns: 3,
+    kind: "quote", id: "quote",
+    text: "You should not have to rebuild your business around your payment infrastructure.",
+  },
+  {
+    kind: "list", id: "help",
     heading: "Infrastructure built around what your payment operations need to do",
     intro: "Payonus brings together payment capabilities that can support how your business accepts money, moves funds, manages settlement, and monitors payment activity.",
     items: [
@@ -70,26 +81,26 @@ const blocks: IndustryBlock[] = [
   {
     kind: "numberedSteps", id: "technical-fit",
     heading: "Payment infrastructure that can fit into your existing environment",
-    intro: "You should not have to rebuild your business around your payment infrastructure. Payonus can be considered around your existing products, systems, workflows, and payment requirements.",
+    intro: "Payonus can be considered around your existing products, systems, workflows, and payment requirements.",
     steps: [
       { title: "Connect through the Payment API", desc: "Integrate relevant Payonus payment capabilities into your existing platforms and workflows.", href: "/payment-api", linkLabel: "Explore Payment API" },
       { title: "Bring related payment workflows closer together", desc: "Collections, payouts, settlement and reporting can support a more connected payment environment." },
       { title: "Start with the requirements of your business", desc: "The relevant setup depends on your payment flows, technical environment and operational needs." },
       { title: "Keep track of payment activity", desc: "Use Analytics & Reporting to monitor payment activity and transaction performance.", href: "/analytics", linkLabel: "Explore Analytics & Reporting" },
-      { title: "Evaluate Payonus as you expand", desc: "Payonus operates across 8 African markets and can be evaluated as your payment requirements grow across those markets." },
+      { title: "Evaluate Payonus as you expand", desc: "Payonus operates across 8 African markets and can be evaluated as your requirements grow." },
     ],
   },
   {
-    kind: "trust", id: "trust",
+    kind: "trust", id: "trust", dark: true,
     heading: "Built for secure, accountable payment operations",
     intro: "Payment infrastructure is a critical part of a financial business. Security, monitoring, and accountability matter alongside payment functionality.",
     items: [
-      { title: "ISO 27001", desc: "Payonus maintains ISO 27001 certification as part of its information security framework." },
-      { title: "PCI DSS Level 1", desc: "Payonus maintains PCI DSS Level 1 compliance for payment security." },
-      { title: "Encryption", desc: "Encryption is used to protect payment data across the infrastructure." },
-      { title: "KYC & Transaction Audit Trails", desc: "KYC processes and transaction audit trails support visibility and accountability across payment activity." },
-      { title: "24/7 Infrastructure Monitoring", desc: "Payonus provides 24/7 infrastructure monitoring to support reliable payment operations." },
-      { title: "99% Uptime SLA", desc: "Payonus maintains a 99% uptime SLA." },
+      { title: "ISO 27001", desc: "Part of Payonus's information security framework." },
+      { title: "PCI DSS Level 1", desc: "Compliance for payment security." },
+      { title: "Encryption", desc: "Protects payment data across the infrastructure." },
+      { title: "KYC & Transaction Audit Trails", desc: "Visibility and accountability across payment activity." },
+      { title: "24/7 Infrastructure Monitoring", desc: "Supporting reliable payment operations." },
+      { title: "99% Uptime SLA", desc: "A defined availability commitment." },
     ],
   },
   {
@@ -105,7 +116,7 @@ const blocks: IndustryBlock[] = [
     ],
   },
   {
-    kind: "cards", id: "outcomes", columns: 3, tint: true,
+    kind: "list", id: "outcomes", numbered: true,
     heading: "Spend less time working around payments and more time building the business",
     intro: "The value of payment infrastructure is what it allows your business to do with less friction and complexity.",
     items: [
