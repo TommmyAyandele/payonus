@@ -7,7 +7,6 @@ import Footer from "./Footer";
 import { PILLS, PillIcon } from "./ComplianceSection";
 import { useScrollReveal, ripple, ProductFeature } from "./ProductPage";
 import { Industry } from "./IndustryHeroBg";
-import HeroBg from "./HeroBg";
 
 /* ─── TYPES ─── */
 export type { ProductFeature };
@@ -118,6 +117,7 @@ export default function IndustryPage({
         .footer-link::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:#6009FF;transition:width 0.3s cubic-bezier(0.16,1,0.3,1);}
         .footer-link:hover::after{width:100%;}
         @keyframes skShimmer{from{background-position:-600px 0;}to{background-position:600px 0;}}
+        @keyframes mapScrollY{from{transform:translateX(-50%) translateY(0);}to{transform:translateX(-50%) translateY(-50%);}}
         @keyframes flagScrollY{from{transform:translateY(0);}to{transform:translateY(-50%);}}
         .flag-scroll-track{animation:flagScrollY 18s linear infinite;}
         .flag-scroll-track:hover{animation-play-state:paused;}
@@ -133,7 +133,9 @@ export default function IndustryPage({
 
       {/* ══ HERO ══ */}
       <section style={{ position:"relative", width:"100%", background:T.bg, overflow:"hidden" }}>
-        <HeroBg />
+        <div style={{ position:"absolute", top:0, left:"50%", width:isMobile?860:1600, pointerEvents:"none", zIndex:0, animation:"mapScrollY 38s linear infinite", willChange:"transform" }}>
+          {[0,1].map(n => <img key={n} src="/world-map-dots.png" aria-hidden style={{ display:"block", width:"100%", opacity:isMobile?0.18:0.14, filter:"invert(1)" }} />)}
+        </div>
 
         <div style={{ position:"relative", zIndex:1, maxWidth:1440, margin:"0 auto", padding:isMobile?`80px 20px 60px`:`0 ${hPad}px`, minHeight:isMobile?"auto":"100vh", display:isMobile?"block":"flex", alignItems:"center", justifyContent:"center" }}>
           <div style={{ maxWidth:isMobile?"100%":760, display:"flex", flexDirection:"column", gap:isMobile?28:24, alignItems:"flex-start" }}>
