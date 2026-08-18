@@ -150,23 +150,31 @@ const SKIN: Record<SkinTone, string> = {
 };
 type HairStyle = "afro" | "hijab" | "locs" | "short" | "bun";
 
-interface PersonPreset { skin: SkinTone; hair: HairStyle; hairColor: string; outfit: string; bg: string; icon: IconName; }
+/* Each scene gives the same base figure a distinct job, props and pose so the
+   fourteen illustrations read as fourteen different people with different
+   stories — a pilot, a forex trader, a rider — not one template recoloured. */
+type Scene =
+  | "cashier" | "executive" | "merchant" | "rider" | "analyst" | "pilot"
+  | "globalTrader" | "security" | "manager" | "gamer" | "auditor"
+  | "engineer" | "connector" | "freight";
+
+interface PersonPreset { skin: SkinTone; hair: HairStyle; hairColor: string; outfit: string; bg: string; icon: IconName; scene: Scene; }
 
 const PEOPLE = {
-  amara:  { skin: "s2", hair: "afro",  hairColor: "#1E140F", outfit: "#6009FF", bg: "#EDE9FF", icon: "bolt" },
-  tunde:  { skin: "s4", hair: "short", hairColor: "#170F0A", outfit: "#2B3A55", bg: "#F4F0FF", icon: "building" },
-  ngozi:  { skin: "s1", hair: "hijab", hairColor: "#C2703D", outfit: "#C2703D", bg: "#FDF3E7", icon: "card" },
-  kwame:  { skin: "s3", hair: "locs",  hairColor: "#1E140F", outfit: "#3F6650", bg: "#EDE9FF", icon: "route" },
-  fatima: { skin: "s2", hair: "hijab", hairColor: "#4B2FA0", outfit: "#4B2FA0", bg: "#F4F0FF", icon: "chart" },
-  chidi:  { skin: "s5", hair: "short", hairColor: "#1E140F", outfit: "#C98A2C", bg: "#FDF3E7", icon: "plane" },
-  aisha:  { skin: "s1", hair: "locs",  hairColor: "#1E140F", outfit: "#6009FF", bg: "#EDE9FF", icon: "globe" },
-  femi:   { skin: "s3", hair: "bun",   hairColor: "#170F0A", outfit: "#2B3A55", bg: "#F4F0FF", icon: "shield" },
-  zainab: { skin: "s4", hair: "hijab", hairColor: "#3F6650", outfit: "#3F6650", bg: "#FDF3E7", icon: "users" },
-  dele:   { skin: "s2", hair: "short", hairColor: "#1E140F", outfit: "#C2703D", bg: "#EDE9FF", icon: "gauge" },
-  amina:  { skin: "s5", hair: "hijab", hairColor: "#2B3A55", outfit: "#2B3A55", bg: "#F4F0FF", icon: "eye" },
-  tobi:   { skin: "s1", hair: "afro",  hairColor: "#170F0A", outfit: "#C98A2C", bg: "#FDF3E7", icon: "layers" },
-  yusuf:  { skin: "s3", hair: "short", hairColor: "#170F0A", outfit: "#4B2FA0", bg: "#EDE9FF", icon: "plug" },
-  halima: { skin: "s4", hair: "hijab", hairColor: "#C98A2C", outfit: "#C98A2C", bg: "#F4F0FF", icon: "truck" },
+  amara:  { skin: "s2", hair: "afro",  hairColor: "#1E140F", outfit: "#6009FF", bg: "#EDE9FF", icon: "bolt",     scene: "cashier" },
+  tunde:  { skin: "s4", hair: "short", hairColor: "#170F0A", outfit: "#2B3A55", bg: "#F4F0FF", icon: "building", scene: "executive" },
+  ngozi:  { skin: "s1", hair: "hijab", hairColor: "#C2703D", outfit: "#C2703D", bg: "#FDF3E7", icon: "card",     scene: "merchant" },
+  kwame:  { skin: "s3", hair: "locs",  hairColor: "#1E140F", outfit: "#3F6650", bg: "#EDE9FF", icon: "route",    scene: "rider" },
+  fatima: { skin: "s2", hair: "hijab", hairColor: "#4B2FA0", outfit: "#4B2FA0", bg: "#F4F0FF", icon: "chart",    scene: "analyst" },
+  chidi:  { skin: "s5", hair: "short", hairColor: "#1E140F", outfit: "#C98A2C", bg: "#FDF3E7", icon: "plane",    scene: "pilot" },
+  aisha:  { skin: "s1", hair: "locs",  hairColor: "#1E140F", outfit: "#6009FF", bg: "#EDE9FF", icon: "globe",    scene: "globalTrader" },
+  femi:   { skin: "s3", hair: "bun",   hairColor: "#170F0A", outfit: "#2B3A55", bg: "#F4F0FF", icon: "shield",   scene: "security" },
+  zainab: { skin: "s4", hair: "hijab", hairColor: "#3F6650", outfit: "#3F6650", bg: "#FDF3E7", icon: "users",    scene: "manager" },
+  dele:   { skin: "s2", hair: "short", hairColor: "#1E140F", outfit: "#C2703D", bg: "#EDE9FF", icon: "gauge",    scene: "gamer" },
+  amina:  { skin: "s5", hair: "hijab", hairColor: "#2B3A55", outfit: "#2B3A55", bg: "#F4F0FF", icon: "eye",      scene: "auditor" },
+  tobi:   { skin: "s1", hair: "afro",  hairColor: "#170F0A", outfit: "#C98A2C", bg: "#FDF3E7", icon: "layers",   scene: "engineer" },
+  yusuf:  { skin: "s3", hair: "short", hairColor: "#170F0A", outfit: "#4B2FA0", bg: "#EDE9FF", icon: "plug",     scene: "connector" },
+  halima: { skin: "s4", hair: "hijab", hairColor: "#C98A2C", outfit: "#C98A2C", bg: "#F4F0FF", icon: "truck",    scene: "freight" },
 } satisfies Record<string, PersonPreset>;
 
 export type MockName = keyof typeof PEOPLE;
@@ -191,6 +199,130 @@ function HairBack({ style, color }: { style: HairStyle; color: string }) {
   }
 }
 
+/* Head-and-shoulder level props: what makes a pilot read as a pilot, a
+   gamer as a gamer. Drawn over the hair/outfit, before the held prop. */
+function SceneGear({ scene, hijab }: { scene: Scene; hijab: boolean }) {
+  switch (scene) {
+    case "pilot": return (
+      <g>
+        <path d="M84,126 A66,66 0 01216,126 L214,108 Q150,84 86,108 Z" fill="#1C1B1F" />
+        <rect x="118" y="118" width="64" height="12" rx="5" fill="#0F0E11" />
+        <circle cx="150" cy="106" r="7" fill="#F4B61E" />
+        <rect x="66" y="252" width="34" height="12" rx="3" fill="#14131A" />
+        <rect x="200" y="252" width="34" height="12" rx="3" fill="#14131A" />
+        <path d="M143,240 L157,240 L152,272 L148,272 Z" fill="#C2262A" />
+      </g>
+    );
+    case "gamer": return (
+      <g>
+        <path d="M92,116 Q150,68 208,116" stroke="#1C1B1F" strokeWidth="9" fill="none" strokeLinecap="round" />
+        <circle cx="92" cy="126" r="12" fill="#1C1B1F" />
+        <circle cx="208" cy="126" r="12" fill="#1C1B1F" />
+        <path d="M92,132 Q100,168 130,178" stroke="#1C1B1F" strokeWidth="4" fill="none" strokeLinecap="round" />
+      </g>
+    );
+    case "freight": return (
+      <g>
+        <path d="M66,300 L108,380" stroke="#F4B61E" strokeWidth="9" strokeLinecap="round" />
+        <path d="M234,300 L192,380" stroke="#F4B61E" strokeWidth="9" strokeLinecap="round" />
+      </g>
+    );
+    case "executive":
+    case "globalTrader":
+    case "manager": return (
+      <g>
+        <path d="M118,258 L150,304 L182,258" stroke="rgba(255,255,255,0.55)" strokeWidth="5" fill="none" strokeLinecap="round" />
+        {scene === "manager" ? (
+          <>
+            <line x1="150" y1="244" x2="150" y2="312" stroke="#FFFFFF" strokeWidth="3" />
+            <rect x="138" y="306" width="24" height="30" rx="3" fill="#FFFFFF" stroke="#E5E7EB" />
+          </>
+        ) : (
+          <rect x="142" y="262" width="16" height="26" rx="2" fill="#F4B61E" />
+        )}
+      </g>
+    );
+    case "security": return (
+      <g transform="translate(134,266)">
+        <path d="M12,0 L24,5 L24,18 Q24,30 12,36 Q0,30 0,18 L0,5 Z" fill="#F4B61E" />
+        <path d="M6,17 L10,22 L18,11" stroke="#1C1B1F" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      </g>
+    );
+    case "analyst":
+    case "auditor": return (
+      <g>
+        <circle cx="130" cy="148" r="15" fill="none" stroke="#20140D" strokeWidth="3.5" />
+        <circle cx="170" cy="148" r="15" fill="none" stroke="#20140D" strokeWidth="3.5" />
+        <line x1="145" y1="148" x2="155" y2="148" stroke="#20140D" strokeWidth="3.5" />
+      </g>
+    );
+    case "merchant":
+    case "cashier": return (
+      <path d={hijab ? "M96,220 L204,220 L212,380 L88,380 Z" : "M110,258 L190,258 L198,380 L102,380 Z"} fill="rgba(255,255,255,0.82)" />
+    );
+    default: return null;
+  }
+}
+
+/* A small hand-held object in front of the outfit, unique per scene. */
+function SceneProp({ scene }: { scene: Scene }) {
+  const wrap = (children: React.ReactNode) => <g transform="translate(50,296)">{children}</g>;
+  switch (scene) {
+    case "cashier": return wrap(<>
+      <rect width="46" height="30" rx="5" fill="#1C1B1F" />
+      <rect x="6" y="6" width="34" height="12" rx="2" fill="#6009FF" />
+      <circle cx="12" cy="24" r="2.5" fill="#FFFFFF" /><circle cx="20" cy="24" r="2.5" fill="#FFFFFF" /><circle cx="28" cy="24" r="2.5" fill="#FFFFFF" />
+    </>);
+    case "merchant": return wrap(<>
+      <rect width="32" height="50" rx="6" fill="#1C1B1F" />
+      <rect x="4" y="6" width="24" height="32" rx="2" fill="#FFFFFF" />
+      <path d="M8,22 L14,28 L24,14" stroke="#3F6650" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+    </>);
+    case "rider": return wrap(<>
+      <path d="M4,30 A22,22 0 0148,30 L48,36 L4,36 Z" fill="#1C1B1F" />
+      <rect x="20" y="28" width="8" height="8" fill="#F4B61E" />
+    </>);
+    case "analyst": return wrap(<>
+      <rect width="44" height="52" rx="5" fill="#FFFFFF" stroke="#E5E7EB" strokeWidth="2" />
+      <polyline points="6,40 16,26 24,32 38,12" stroke="#4B2FA0" strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+    </>);
+    case "pilot": return null;
+    case "globalTrader": return wrap(<>
+      <circle cx="20" cy="20" r="20" fill="none" stroke="#1C1B1F" strokeWidth="3" />
+      <ellipse cx="20" cy="20" rx="8" ry="20" fill="none" stroke="#1C1B1F" strokeWidth="2" />
+      <line x1="0" y1="20" x2="40" y2="20" stroke="#1C1B1F" strokeWidth="2" />
+    </>);
+    case "security": return null;
+    case "manager": return null;
+    case "gamer": return wrap(<>
+      <rect width="56" height="26" rx="13" fill="#1C1B1F" />
+      <circle cx="16" cy="13" r="4.5" fill="#F4B61E" /><circle cx="40" cy="13" r="4.5" fill="#F4B61E" />
+    </>);
+    case "auditor": return wrap(<>
+      <circle cx="14" cy="14" r="14" fill="none" stroke="#1C1B1F" strokeWidth="4" />
+      <line x1="24" y1="24" x2="38" y2="38" stroke="#1C1B1F" strokeWidth="5" strokeLinecap="round" />
+    </>);
+    case "engineer": return wrap(<>
+      <rect width="52" height="34" rx="3" fill="#1C1B1F" />
+      <rect x="4" y="4" width="44" height="24" fill="#C98A2C" />
+      <rect y="34" width="52" height="6" rx="2" fill="#3A3742" />
+    </>);
+    case "connector": return wrap(<>
+      <path d="M0,14 L14,14 L14,4 L26,4 L26,24 L14,24 L14,34" stroke="#1C1B1F" strokeWidth="4.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="38" cy="14" r="9" fill="#4B2FA0" />
+    </>);
+    case "freight": return wrap(<>
+      <rect width="46" height="40" rx="4" fill="#FFFFFF" stroke="#E5E7EB" strokeWidth="2" />
+      <line x1="0" y1="20" x2="46" y2="20" stroke="#C98A2C" strokeWidth="5" />
+      <line x1="23" y1="0" x2="23" y2="40" stroke="#C98A2C" strokeWidth="5" />
+    </>);
+    default: return wrap(<>
+      <rect width="46" height="30" rx="5" fill="#1C1B1F" />
+      <rect x="6" y="6" width="34" height="12" rx="2" fill="#2B3A55" />
+    </>);
+  }
+}
+
 function PersonIllustration({ preset }: { preset: PersonPreset }) {
   const faceR = preset.hair === "hijab" ? 52 : 60;
   return (
@@ -205,6 +337,8 @@ function PersonIllustration({ preset }: { preset: PersonPreset }) {
       <circle cx="130" cy="148" r="4.5" fill="#20140D" />
       <circle cx="170" cy="148" r="4.5" fill="#20140D" />
       <path d="M128,172 Q150,186 172,172" stroke="#20140D" strokeWidth="4" strokeLinecap="round" fill="none" />
+      <SceneGear scene={preset.scene} hijab={preset.hair === "hijab"} />
+      <SceneProp scene={preset.scene} />
       <g transform="translate(228,256)">
         <circle r="26" fill="#FFFFFF" />
         <g transform="translate(-13,-13)"><BlockIcon name={preset.icon} size={26} /></g>
