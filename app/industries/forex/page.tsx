@@ -33,7 +33,7 @@ const blocks: IndustryBlock[] = [
     ],
   },
   {
-    kind: "bento", id: "challenges", leadMock: "transactions",
+    kind: "bento", id: "challenges", leadMock: "payouts",
     heading: "When payments slow down, trading operations feel it",
     intro: "A failed deposit can stop a trader from funding an account. A delayed withdrawal can damage confidence and create more work for your support team.",
     items: [
@@ -58,7 +58,7 @@ const blocks: IndustryBlock[] = [
     ],
   },
   {
-    kind: "split", id: "differentiation", icon: "layers", mock: "device", reverse: true,
+    kind: "split", id: "differentiation", icon: "layers", mock: "api", reverse: true,
     heading: "More than a way to accept payments",
     body: [
       "Your payment operation does not begin and end when a trader makes a deposit. You also need to handle withdrawals, manage settlement, understand what is happening across transactions and connect payments to the systems your business already uses.",
@@ -84,7 +84,7 @@ const blocks: IndustryBlock[] = [
     cta: { label: "Talk to Our Team", href: "/sales" },
   },
   {
-    kind: "trust", id: "trust", dark: true,
+    kind: "trust", id: "trust", split: true,
     heading: "Infrastructure supporting payments at scale",
     intro: "Before choosing a payment partner, you need confidence that the infrastructure behind it can support serious payment operations.",
     items: [

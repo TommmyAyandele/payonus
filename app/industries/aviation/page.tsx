@@ -37,7 +37,7 @@ const blocks: IndustryBlock[] = [
     ],
   },
   {
-    kind: "bento", id: "complexity", leadMock: "transactions",
+    kind: "bento", id: "complexity", leadMock: "collections",
     heading: "Complex payments create more work",
     intro: "The transaction is only one part of the job. Fragmented channels, markets and settlement processes can create more work behind every payment.",
     items: [
@@ -76,7 +76,7 @@ const blocks: IndustryBlock[] = [
     ],
   },
   {
-    kind: "split", id: "operational-fit", icon: "route", mock: "device",
+    kind: "split", id: "operational-fit", icon: "route", mock: "api",
     heading: "Make payments work with the way your business already operates",
     body: [
       "Your aviation business already has its own systems, payment channels and ways of managing bookings and financial activity. Your payment setup should fit into that environment without creating unnecessary work for your team.",
@@ -103,7 +103,7 @@ const blocks: IndustryBlock[] = [
     ],
   },
   {
-    kind: "trust", id: "trust", dark: true,
+    kind: "trust", id: "trust", split: true,
     heading: "Infrastructure you can rely on",
     intro: "Security, availability and visibility matter when payments support critical business operations.",
     items: [

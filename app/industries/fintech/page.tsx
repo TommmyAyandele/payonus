@@ -49,7 +49,7 @@ const blocks: IndustryBlock[] = [
     ],
   },
   {
-    kind: "bento", id: "challenges", leadMock: "transactions",
+    kind: "bento", id: "challenges", leadMock: "payouts",
     heading: "When payments become harder to manage, the rest of the business feels it",
     intro: "As a financial business grows, more customers, transactions, products and markets can create more payment complexity — without creating more friction for customers or more manual work for your team.",
     items: [
@@ -91,7 +91,7 @@ const blocks: IndustryBlock[] = [
     ],
   },
   {
-    kind: "trust", id: "trust", dark: true,
+    kind: "trust", id: "trust", split: true,
     heading: "Built for secure, accountable payment operations",
     intro: "Payment infrastructure is a critical part of a financial business. Security, monitoring, and accountability matter alongside payment functionality.",
     items: [

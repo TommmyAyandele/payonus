@@ -35,7 +35,7 @@ const blocks: IndustryBlock[] = [
     ],
   },
   {
-    kind: "bento", id: "complexity", leadMock: "transactions",
+    kind: "bento", id: "complexity", leadMock: "collections",
     heading: "Manufacturing payments are more than collecting a payment",
     intro: "A customer payment is often one step in a wider process involving invoices, payment terms, distributors, settlement and reconciliation.",
     items: [
@@ -87,7 +87,7 @@ const blocks: IndustryBlock[] = [
     text: "Getting paid is only one part of the process.",
   },
   {
-    kind: "split", id: "integration", icon: "building", mock: "device", reverse: true,
+    kind: "split", id: "integration", icon: "building", mock: "api", reverse: true,
     heading: "Connect payments with your existing finance environment",
     body: ["Your business already relies on systems to manage finance and operations. Payment infrastructure should work with that environment, not create another isolated workflow."],
     bullets: [
@@ -104,7 +104,7 @@ const blocks: IndustryBlock[] = [
     cta: { label: "Discuss Your Integration Requirements", href: "/sales" },
   },
   {
-    kind: "trust", id: "trust", dark: true,
+    kind: "trust", id: "trust", split: true,
     heading: "Keep critical payment operations secure and reliable",
     intro: "Payment infrastructure affects revenue, customer relationships and financial reporting.",
     items: [

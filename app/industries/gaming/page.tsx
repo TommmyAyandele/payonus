@@ -39,7 +39,7 @@ const blocks: IndustryBlock[] = [
     items: ["Sports Betting", "Casinos", "Lotteries", "Fantasy Sports", "Esports", "Gaming Platforms"],
   },
   {
-    kind: "bento", id: "challenges", leadMock: "transactions",
+    kind: "bento", id: "challenges", leadMock: "payouts",
     heading: "When payments slow down, the business feels it",
     intro: "Failed deposits can interrupt play. Delayed withdrawals can frustrate customers. Slow settlement can affect cash flow.",
     items: [
@@ -63,7 +63,7 @@ const blocks: IndustryBlock[] = [
     ],
   },
   {
-    kind: "split", id: "differentiation", icon: "bolt", mock: "device",
+    kind: "split", id: "differentiation", icon: "bolt", mock: "api",
     heading: "Built for the pace of gaming payments",
     body: [
       "Gaming payments do not stop at checkout. Deposits and withdrawals can happen throughout the day, often at high volume. Payonus supports these high-frequency payment flows with faster settlement to help businesses keep money moving as their operations grow.",
@@ -96,7 +96,7 @@ const blocks: IndustryBlock[] = [
     cta: { label: "Talk to Our Team", href: "/sales" },
   },
   {
-    kind: "trust", id: "trust", dark: true,
+    kind: "trust", id: "trust", split: true,
     heading: "Built for secure, reliable payment operations",
     intro: "Choosing a payment provider means trusting part of your business to the infrastructure behind it.",
     items: [

@@ -34,7 +34,7 @@ const blocks: IndustryBlock[] = [
     ],
   },
   {
-    kind: "bento", id: "problems", leadMock: "transactions",
+    kind: "bento", id: "problems", leadMock: "collections",
     heading: "When payments become harder to manage, your business feels it",
     intro: "Taking payments is only one part of running an online business. As transactions and markets grow, it can become harder to keep track of what is coming in, going out and waiting to be settled.",
     items: [
@@ -87,7 +87,7 @@ const blocks: IndustryBlock[] = [
     cta: { label: "Discuss Your Payment Requirements", href: "/sales" },
   },
   {
-    kind: "trust", id: "trust", dark: true,
+    kind: "trust", id: "trust", split: true,
     heading: "Infrastructure your payment operation can depend on",
     intro: "When payments sit at the centre of your business, you need confidence in the infrastructure supporting them.",
     items: [

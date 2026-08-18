@@ -34,7 +34,7 @@ const blocks: IndustryBlock[] = [
     ],
   },
   {
-    kind: "bento", id: "reality", leadMock: "transactions",
+    kind: "bento", id: "reality", leadMock: "payouts",
     heading: "Payment operations should not slow down your business",
     intro: "You are collecting from customers, managing what drivers or partners earn, tracking transactions, and moving funds through your operation. Disconnected processes mean more time managing payment issues instead of keeping the business moving.",
     items: [
@@ -78,7 +78,7 @@ const blocks: IndustryBlock[] = [
     cta: { label: "Talk to Our Team", href: "/sales" },
   },
   {
-    kind: "numberedSteps", id: "settlement-payout", dark: true, mock: "transactions",
+    kind: "numberedSteps", id: "settlement-payout", split: true, mock: "settlements",
     heading: "Keep collections, settlement and payouts connected",
     intro: "Payment operations continue after a customer completes a transaction.",
     steps: [
@@ -88,7 +88,7 @@ const blocks: IndustryBlock[] = [
     ],
   },
   {
-    kind: "split", id: "analytics", icon: "chart", mock: "network", reverse: true,
+    kind: "split", id: "analytics", icon: "chart", mock: "analytics", reverse: true,
     heading: "See what is happening across your payment operations",
     body: [
       "As transaction activity grows, visibility becomes more important. Finance and operations teams need to understand what is happening across collections, payouts and settlement.",
