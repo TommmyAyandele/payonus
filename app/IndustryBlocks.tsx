@@ -138,212 +138,44 @@ function SecondaryBtn({ cta }: { cta: IndustryCTA }) {
 }
 
 /* ═══════════════════════════════════════
-   ILLUSTRATED PEOPLE
-   Hand-drawn flat-style portraits instead of photography or product
-   screenshots — varied skin tones, hairstyles and outfits so the people
-   using Payonus can actually see themselves, not a handful of repeated
-   stock photos or app screenshots. Pure inline SVG, no external assets.
+   REAL PEOPLE
+   Free stock photography (Pexels license, no attribution required) —
+   one photo per role, reused across pages so a pilot always reads as a
+   pilot, a market trader always reads as a trader, etc.
 ═══════════════════════════════════════ */
-type SkinTone = "s1" | "s2" | "s3" | "s4" | "s5";
-const SKIN: Record<SkinTone, string> = {
-  s1: "#4A2E1E", s2: "#7A4B2C", s3: "#9C6B42", s4: "#C68B5C", s5: "#E0A876",
-};
-type HairStyle = "afro" | "hijab" | "locs" | "short" | "bun";
-
-/* Each scene gives the same base figure a distinct job, props and pose so the
-   fourteen illustrations read as fourteen different people with different
-   stories — a pilot, a forex trader, a rider — not one template recoloured. */
-type Scene =
-  | "cashier" | "executive" | "merchant" | "rider" | "analyst" | "pilot"
-  | "globalTrader" | "security" | "manager" | "gamer" | "auditor"
-  | "engineer" | "connector" | "freight";
-
-interface PersonPreset { skin: SkinTone; hair: HairStyle; hairColor: string; outfit: string; bg: string; icon: IconName; scene: Scene; }
+interface PersonPreset { icon: IconName; photo: string; }
 
 const PEOPLE = {
-  amara:  { skin: "s2", hair: "afro",  hairColor: "#1E140F", outfit: "#6009FF", bg: "#EDE9FF", icon: "bolt",     scene: "cashier" },
-  tunde:  { skin: "s4", hair: "short", hairColor: "#170F0A", outfit: "#2B3A55", bg: "#F4F0FF", icon: "building", scene: "executive" },
-  ngozi:  { skin: "s1", hair: "hijab", hairColor: "#C2703D", outfit: "#C2703D", bg: "#FDF3E7", icon: "card",     scene: "merchant" },
-  kwame:  { skin: "s3", hair: "locs",  hairColor: "#1E140F", outfit: "#3F6650", bg: "#EDE9FF", icon: "route",    scene: "rider" },
-  fatima: { skin: "s2", hair: "hijab", hairColor: "#4B2FA0", outfit: "#4B2FA0", bg: "#F4F0FF", icon: "chart",    scene: "analyst" },
-  chidi:  { skin: "s5", hair: "short", hairColor: "#1E140F", outfit: "#C98A2C", bg: "#FDF3E7", icon: "plane",    scene: "pilot" },
-  aisha:  { skin: "s1", hair: "locs",  hairColor: "#1E140F", outfit: "#6009FF", bg: "#EDE9FF", icon: "globe",    scene: "globalTrader" },
-  femi:   { skin: "s3", hair: "bun",   hairColor: "#170F0A", outfit: "#2B3A55", bg: "#F4F0FF", icon: "shield",   scene: "security" },
-  zainab: { skin: "s4", hair: "hijab", hairColor: "#3F6650", outfit: "#3F6650", bg: "#FDF3E7", icon: "users",    scene: "manager" },
-  dele:   { skin: "s2", hair: "short", hairColor: "#1E140F", outfit: "#C2703D", bg: "#EDE9FF", icon: "gauge",    scene: "gamer" },
-  amina:  { skin: "s5", hair: "hijab", hairColor: "#2B3A55", outfit: "#2B3A55", bg: "#F4F0FF", icon: "eye",      scene: "auditor" },
-  tobi:   { skin: "s1", hair: "afro",  hairColor: "#170F0A", outfit: "#C98A2C", bg: "#FDF3E7", icon: "layers",   scene: "engineer" },
-  yusuf:  { skin: "s3", hair: "short", hairColor: "#170F0A", outfit: "#4B2FA0", bg: "#EDE9FF", icon: "plug",     scene: "connector" },
-  halima: { skin: "s4", hair: "hijab", hairColor: "#C98A2C", outfit: "#C98A2C", bg: "#F4F0FF", icon: "truck",    scene: "freight" },
+  amara:  { icon: "bolt",     photo: "amara" },  // cashier — paying by card at checkout
+  tunde:  { icon: "building", photo: "tunde" },   // executive
+  ngozi:  { icon: "card",     photo: "ngozi" },   // market trader
+  kwame:  { icon: "route",    photo: "kwame" },   // delivery rider
+  fatima: { icon: "chart",    photo: "fatima" },  // financial analyst
+  chidi:  { icon: "plane",    photo: "chidi" },   // pilot
+  aisha:  { icon: "globe",    photo: "aisha" },   // cross-border / global trade
+  femi:   { icon: "shield",   photo: "femi" },    // security officer
+  zainab: { icon: "users",    photo: "zainab" },  // team manager
+  dele:   { icon: "gauge",    photo: "dele" },    // gamer
+  amina:  { icon: "eye",      photo: "amina" },   // auditor
+  tobi:   { icon: "layers",   photo: "tobi" },    // software engineer
+  yusuf:  { icon: "plug",     photo: "yusuf" },   // IT / integration technician
+  halima: { icon: "truck",    photo: "halima" },  // freight / logistics
 } satisfies Record<string, PersonPreset>;
 
 export type MockName = keyof typeof PEOPLE;
 
-function HairBack({ style, color }: { style: HairStyle; color: string }) {
-  switch (style) {
-    case "afro": return <circle cx="150" cy="132" r="76" fill={color} />;
-    case "locs": return (
-      <g fill={color}>
-        <circle cx="150" cy="128" r="66" />
-        {[-40, -24, -8, 8, 24, 40].map(dx => <rect key={dx} x={150 + dx - 5} y="150" width="10" height="120" rx="5" />)}
-      </g>
-    );
-    case "hijab": return <path d="M70,150 Q70,52 150,52 Q230,52 230,150 L240,300 Q150,336 60,300 Z" fill={color} />;
-    case "bun": return (
-      <g fill={color}>
-        <circle cx="150" cy="130" r="64" />
-        <circle cx="198" cy="90" r="18" />
-      </g>
-    );
-    default: return <path d="M86,130 a64,64 0 01128,0 v-16 a64,56 0 00-128,0 z" fill={color} />;
-  }
-}
-
-/* Head-and-shoulder level props: what makes a pilot read as a pilot, a
-   gamer as a gamer. Drawn over the hair/outfit, before the held prop. */
-function SceneGear({ scene, hijab }: { scene: Scene; hijab: boolean }) {
-  switch (scene) {
-    case "pilot": return (
-      <g>
-        <path d="M84,126 A66,66 0 01216,126 L214,108 Q150,84 86,108 Z" fill="#1C1B1F" />
-        <rect x="118" y="118" width="64" height="12" rx="5" fill="#0F0E11" />
-        <circle cx="150" cy="106" r="7" fill="#F4B61E" />
-        <rect x="66" y="252" width="34" height="12" rx="3" fill="#14131A" />
-        <rect x="200" y="252" width="34" height="12" rx="3" fill="#14131A" />
-        <path d="M143,240 L157,240 L152,272 L148,272 Z" fill="#C2262A" />
-      </g>
-    );
-    case "gamer": return (
-      <g>
-        <path d="M92,116 Q150,68 208,116" stroke="#1C1B1F" strokeWidth="9" fill="none" strokeLinecap="round" />
-        <circle cx="92" cy="126" r="12" fill="#1C1B1F" />
-        <circle cx="208" cy="126" r="12" fill="#1C1B1F" />
-        <path d="M92,132 Q100,168 130,178" stroke="#1C1B1F" strokeWidth="4" fill="none" strokeLinecap="round" />
-      </g>
-    );
-    case "freight": return (
-      <g>
-        <path d="M66,300 L108,380" stroke="#F4B61E" strokeWidth="9" strokeLinecap="round" />
-        <path d="M234,300 L192,380" stroke="#F4B61E" strokeWidth="9" strokeLinecap="round" />
-      </g>
-    );
-    case "executive":
-    case "globalTrader":
-    case "manager": return (
-      <g>
-        <path d="M118,258 L150,304 L182,258" stroke="rgba(255,255,255,0.55)" strokeWidth="5" fill="none" strokeLinecap="round" />
-        {scene === "manager" ? (
-          <>
-            <line x1="150" y1="244" x2="150" y2="312" stroke="#FFFFFF" strokeWidth="3" />
-            <rect x="138" y="306" width="24" height="30" rx="3" fill="#FFFFFF" stroke="#E5E7EB" />
-          </>
-        ) : (
-          <rect x="142" y="262" width="16" height="26" rx="2" fill="#F4B61E" />
-        )}
-      </g>
-    );
-    case "security": return (
-      <g transform="translate(134,266)">
-        <path d="M12,0 L24,5 L24,18 Q24,30 12,36 Q0,30 0,18 L0,5 Z" fill="#F4B61E" />
-        <path d="M6,17 L10,22 L18,11" stroke="#1C1B1F" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-      </g>
-    );
-    case "analyst":
-    case "auditor": return (
-      <g>
-        <circle cx="130" cy="148" r="15" fill="none" stroke="#20140D" strokeWidth="3.5" />
-        <circle cx="170" cy="148" r="15" fill="none" stroke="#20140D" strokeWidth="3.5" />
-        <line x1="145" y1="148" x2="155" y2="148" stroke="#20140D" strokeWidth="3.5" />
-      </g>
-    );
-    case "merchant":
-    case "cashier": return (
-      <path d={hijab ? "M96,220 L204,220 L212,380 L88,380 Z" : "M110,258 L190,258 L198,380 L102,380 Z"} fill="rgba(255,255,255,0.82)" />
-    );
-    default: return null;
-  }
-}
-
-/* A small hand-held object in front of the outfit, unique per scene. */
-function SceneProp({ scene }: { scene: Scene }) {
-  const wrap = (children: React.ReactNode) => <g transform="translate(50,296)">{children}</g>;
-  switch (scene) {
-    case "cashier": return wrap(<>
-      <rect width="46" height="30" rx="5" fill="#1C1B1F" />
-      <rect x="6" y="6" width="34" height="12" rx="2" fill="#6009FF" />
-      <circle cx="12" cy="24" r="2.5" fill="#FFFFFF" /><circle cx="20" cy="24" r="2.5" fill="#FFFFFF" /><circle cx="28" cy="24" r="2.5" fill="#FFFFFF" />
-    </>);
-    case "merchant": return wrap(<>
-      <rect width="32" height="50" rx="6" fill="#1C1B1F" />
-      <rect x="4" y="6" width="24" height="32" rx="2" fill="#FFFFFF" />
-      <path d="M8,22 L14,28 L24,14" stroke="#3F6650" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-    </>);
-    case "rider": return wrap(<>
-      <path d="M4,30 A22,22 0 0148,30 L48,36 L4,36 Z" fill="#1C1B1F" />
-      <rect x="20" y="28" width="8" height="8" fill="#F4B61E" />
-    </>);
-    case "analyst": return wrap(<>
-      <rect width="44" height="52" rx="5" fill="#FFFFFF" stroke="#E5E7EB" strokeWidth="2" />
-      <polyline points="6,40 16,26 24,32 38,12" stroke="#4B2FA0" strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-    </>);
-    case "pilot": return null;
-    case "globalTrader": return wrap(<>
-      <circle cx="20" cy="20" r="20" fill="none" stroke="#1C1B1F" strokeWidth="3" />
-      <ellipse cx="20" cy="20" rx="8" ry="20" fill="none" stroke="#1C1B1F" strokeWidth="2" />
-      <line x1="0" y1="20" x2="40" y2="20" stroke="#1C1B1F" strokeWidth="2" />
-    </>);
-    case "security": return null;
-    case "manager": return null;
-    case "gamer": return wrap(<>
-      <rect width="56" height="26" rx="13" fill="#1C1B1F" />
-      <circle cx="16" cy="13" r="4.5" fill="#F4B61E" /><circle cx="40" cy="13" r="4.5" fill="#F4B61E" />
-    </>);
-    case "auditor": return wrap(<>
-      <circle cx="14" cy="14" r="14" fill="none" stroke="#1C1B1F" strokeWidth="4" />
-      <line x1="24" y1="24" x2="38" y2="38" stroke="#1C1B1F" strokeWidth="5" strokeLinecap="round" />
-    </>);
-    case "engineer": return wrap(<>
-      <rect width="52" height="34" rx="3" fill="#1C1B1F" />
-      <rect x="4" y="4" width="44" height="24" fill="#C98A2C" />
-      <rect y="34" width="52" height="6" rx="2" fill="#3A3742" />
-    </>);
-    case "connector": return wrap(<>
-      <path d="M0,14 L14,14 L14,4 L26,4 L26,24 L14,24 L14,34" stroke="#1C1B1F" strokeWidth="4.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-      <circle cx="38" cy="14" r="9" fill="#4B2FA0" />
-    </>);
-    case "freight": return wrap(<>
-      <rect width="46" height="40" rx="4" fill="#FFFFFF" stroke="#E5E7EB" strokeWidth="2" />
-      <line x1="0" y1="20" x2="46" y2="20" stroke="#C98A2C" strokeWidth="5" />
-      <line x1="23" y1="0" x2="23" y2="40" stroke="#C98A2C" strokeWidth="5" />
-    </>);
-    default: return wrap(<>
-      <rect width="46" height="30" rx="5" fill="#1C1B1F" />
-      <rect x="6" y="6" width="34" height="12" rx="2" fill="#2B3A55" />
-    </>);
-  }
-}
-
 function PersonIllustration({ preset }: { preset: PersonPreset }) {
-  const faceR = preset.hair === "hijab" ? 52 : 60;
   return (
-    <svg viewBox="0 0 300 380" preserveAspectRatio="xMidYMid slice" style={{ width: "100%", height: "100%", display: "block" }} role="img" aria-label="Illustrated portrait">
-      <rect width="300" height="380" fill={preset.bg} />
-      <circle cx="252" cy="56" r="90" fill="rgba(96,9,255,0.06)" />
-      <circle cx="26" cy="344" r="112" fill="rgba(244,178,73,0.10)" />
-      <HairBack style={preset.hair} color={preset.hairColor} />
-      <path d="M40,380 Q40,258 150,258 Q260,258 260,380 Z" fill={preset.outfit} />
-      <rect x="130" y="188" width="40" height="52" fill={SKIN[preset.skin]} />
-      <circle cx="150" cy="150" r={faceR} fill={SKIN[preset.skin]} />
-      <circle cx="130" cy="148" r="4.5" fill="#20140D" />
-      <circle cx="170" cy="148" r="4.5" fill="#20140D" />
-      <path d="M128,172 Q150,186 172,172" stroke="#20140D" strokeWidth="4" strokeLinecap="round" fill="none" />
-      <SceneGear scene={preset.scene} hijab={preset.hair === "hijab"} />
-      <SceneProp scene={preset.scene} />
-      <g transform="translate(228,256)">
-        <circle r="26" fill="#FFFFFF" />
-        <g transform="translate(-13,-13)"><BlockIcon name={preset.icon} size={26} /></g>
-      </g>
-    </svg>
+    <div style={{ position: "relative", width: "100%", height: "100%" }}>
+      <img
+        src={`/industry-people/${preset.photo}.jpg`}
+        alt=""
+        style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+      />
+      <div style={{ position: "absolute", right: 16, bottom: 16, width: 44, height: 44, borderRadius: "50%", background: "#FFFFFF", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 2px 10px rgba(0,0,0,0.16)" }}>
+        <BlockIcon name={preset.icon} size={22} />
+      </div>
+    </div>
   );
 }
 
@@ -861,29 +693,57 @@ function NumberedStepsBlock({ block }: { block: Extract<IndustryBlock, { kind: "
 }
 
 /* ═══════════════════════════════════════
-   MARKETS BLOCK — text-based, crawlable
+   MARKETS BLOCK — continuous marquee, matching the homepage's countries strip
 ═══════════════════════════════════════ */
 export const MARKET_COUNTRIES = ["Nigeria", "Ghana", "Kenya", "Côte d'Ivoire", "South Africa", "Zambia", "Senegal", "Cameroon"];
+
+const COUNTRY_INFO: Record<string, { flag: string; currency: string }> = {
+  "Nigeria": { flag: "🇳🇬", currency: "NGN" },
+  "Ghana": { flag: "🇬🇭", currency: "GHS" },
+  "Kenya": { flag: "🇰🇪", currency: "KES" },
+  "South Africa": { flag: "🇿🇦", currency: "ZAR" },
+  "Zambia": { flag: "🇿🇲", currency: "ZMW" },
+  "Cameroon": { flag: "🇨🇲", currency: "XAF" },
+  "Côte d'Ivoire": { flag: "🇨🇮", currency: "XOF" },
+  "Senegal": { flag: "🇸🇳", currency: "XOF" },
+};
 
 function MarketsBlock({ block }: { block: Extract<IndustryBlock, { kind: "markets" }> }) {
   const { isMobile } = useBreakpoint();
   const hPad = useHPad();
+  const loop = [...block.countries, ...block.countries, ...block.countries];
   return (
     <section style={{ width: "100%", background: T.bg, padding: `${isMobile ? 56 : 80}px 0` }}>
+      <style>{`
+        @keyframes indMarketsMarquee{from{transform:translateX(0);}to{transform:translateX(-33.333%);}}
+        .ind-markets-track{animation:indMarketsMarquee 22s linear infinite;}
+        .ind-markets-track:hover{animation-play-state:paused;}
+      `}</style>
       <div style={{ maxWidth: 1440, margin: "0 auto", padding: `0 ${hPad}px` }}>
         <Heading>{block.heading}</Heading>
         {block.intro && <Intro marginBottom={32}>{block.intro}</Intro>}
-        <ul className="fade-up" style={{ margin: "0 0 32px", padding: 0, listStyle: "none", display: "flex", flexWrap: "wrap", gap: 12 }}>
-          {block.countries.map(c => (
-            <li key={c} style={{ display: "inline-flex", alignItems: "center", padding: "10px 20px", border: `1px solid ${T.borderLight}`, borderRadius: 999, fontFamily: "DM Sans, sans-serif", fontWeight: 500, fontSize: 14, color: T.dark, background: T.white }}>
-              {c}
-            </li>
-          ))}
-        </ul>
-        {block.ctaLabel && block.ctaHref && (
-          <div className="fade-up"><PrimaryBtn cta={{ label: block.ctaLabel, href: block.ctaHref }} /></div>
-        )}
       </div>
+      <div className="fade-up" style={{ width: "100%", overflow: "hidden", borderTop: `1px solid ${T.borderLight}`, borderBottom: `1px solid ${T.borderLight}` }}>
+        <div className="ind-markets-track" style={{ display: "flex", alignItems: "center", width: "max-content" }} aria-label="Markets we operate in">
+          {loop.map((c, i) => {
+            const info = COUNTRY_INFO[c];
+            return (
+              <div key={i} style={{ display: "flex", alignItems: "center", gap: isMobile ? 8 : 12, padding: isMobile ? "20px 24px" : "26px 36px", borderRight: `1px solid ${T.borderLight}`, flexShrink: 0 }}>
+                {info && <span style={{ fontSize: isMobile ? 22 : 28, lineHeight: 1, userSelect: "none" }}>{info.flag}</span>}
+                <div>
+                  <p style={{ margin: 0, fontFamily: "DM Sans, sans-serif", fontWeight: 600, fontSize: isMobile ? 12 : 14, color: T.dark, whiteSpace: "nowrap", lineHeight: 1.25 }}>{c}</p>
+                  {info && <p style={{ margin: 0, fontFamily: "DM Sans, sans-serif", fontWeight: 400, fontSize: isMobile ? 10 : 11, color: T.muted, letterSpacing: "0.06em", lineHeight: 1.4 }}>{info.currency}</p>}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      {block.ctaLabel && block.ctaHref && (
+        <div style={{ maxWidth: 1440, margin: "0 auto", padding: `0 ${hPad}px` }}>
+          <div className="fade-up" style={{ marginTop: 32 }}><PrimaryBtn cta={{ label: block.ctaLabel, href: block.ctaHref }} /></div>
+        </div>
+      )}
     </section>
   );
 }

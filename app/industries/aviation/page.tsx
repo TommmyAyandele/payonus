@@ -37,7 +37,7 @@ const blocks: IndustryBlock[] = [
     ],
   },
   {
-    kind: "bento", id: "complexity", leadMock: "dele",
+    kind: "bento", id: "complexity", leadMock: "chidi",
     heading: "Complex payments create more work",
     intro: "The transaction is only one part of the job. Fragmented channels, markets and settlement processes can create more work behind every payment.",
     items: [

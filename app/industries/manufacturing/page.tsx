@@ -66,10 +66,10 @@ const blocks: IndustryBlock[] = [
     intro: "Manufacturers manage different customers, invoices, transaction values, and payment requirements.",
     items: [
       { icon: "card", title: "Invoice Payments", desc: "Support collections around invoice-based B2B transactions.", illustration: "tunde" },
-      { icon: "route", title: "Bank Transfers", desc: "Account-based options for completing payments.", illustration: "kwame" },
+      { icon: "route", title: "Bank Transfers", desc: "Account-based options for completing payments.", illustration: "amina" },
       { icon: "wallet", title: "Card Payments", desc: "Support card payments where they fit your model.", illustration: "ngozi" },
-      { icon: "link", title: "Payment Links", desc: "Direct payment journeys for specific invoices.", illustration: "dele" },
-      { icon: "clock", title: "Deposits & Milestones", desc: "Structured payment journeys with staged amounts.", illustration: "chidi" },
+      { icon: "link", title: "Payment Links", desc: "Direct payment journeys for specific invoices.", illustration: "amara" },
+      { icon: "clock", title: "Deposits & Milestones", desc: "Structured payment journeys with staged amounts.", illustration: "fatima" },
       { icon: "globe", title: "Multi-Currency", desc: "Relevant currencies and markets where available.", illustration: "aisha" },
       { icon: "users", title: "Distributor Collections", desc: "Across distributor and business-customer relationships.", illustration: "zainab" },
       { icon: "plug", title: "Payment APIs", desc: "Connect functionality to your operation's systems.", illustration: "tobi" },

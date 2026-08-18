@@ -78,7 +78,7 @@ const blocks: IndustryBlock[] = [
     cta: { label: "Talk to Our Team", href: "/sales" },
   },
   {
-    kind: "numberedSteps", id: "settlement-payout", split: true, mock: "dele",
+    kind: "numberedSteps", id: "settlement-payout", split: true, mock: "kwame",
     heading: "Keep collections, settlement and payouts connected",
     intro: "Payment operations continue after a customer completes a transaction.",
     steps: [

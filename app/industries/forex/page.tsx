@@ -33,7 +33,7 @@ const blocks: IndustryBlock[] = [
     ],
   },
   {
-    kind: "bento", id: "challenges", leadMock: "kwame",
+    kind: "bento", id: "challenges", leadMock: "fatima",
     heading: "When payments slow down, trading operations feel it",
     intro: "A failed deposit can stop a trader from funding an account. A delayed withdrawal can damage confidence and create more work for your support team.",
     items: [
@@ -71,10 +71,10 @@ const blocks: IndustryBlock[] = [
     intro: "Your payment setup needs to work with your markets, the way traders fund and withdraw from accounts, and the systems your business already uses.",
     items: [
       { icon: "globe", title: "Your markets", desc: "Where you need to accept and move money.", illustration: "aisha" },
-      { icon: "route", title: "How money moves", desc: "Deposits, withdrawals and other payment activity.", illustration: "ngozi" },
+      { icon: "route", title: "How money moves", desc: "Deposits, withdrawals and other payment activity.", illustration: "amara" },
       { icon: "plug", title: "Your platform", desc: "Connect through the appropriate integration approach.", illustration: "yusuf" },
       { icon: "eye", title: "Your visibility", desc: "Monitor what is happening across payment activity.", illustration: "amina" },
-      { icon: "scale", title: "Your growth", desc: "A setup that supports changing business requirements.", illustration: "amara" },
+      { icon: "scale", title: "Your growth", desc: "A setup that supports changing business requirements.", illustration: "tunde" },
     ],
   },
   {
