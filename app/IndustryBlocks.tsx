@@ -53,7 +53,7 @@ export type IndustryBlock =
   | { kind: "cards"; id: string; eyebrow?: string; heading: React.ReactNode; intro?: string; columns?: 2 | 3; tint?: boolean; items: CardItem[]; footNote?: string }
   | { kind: "list"; id: string; heading: React.ReactNode; intro?: string; items: CardItem[]; tint?: boolean; numbered?: boolean }
   | { kind: "bento"; id: string; heading: React.ReactNode; intro?: string; items: CardItem[]; leadMock?: MockName }
-  | { kind: "showcase"; id: string; heading: React.ReactNode; intro?: string; items: { title: string; desc: string; icon: IconName; image: string }[] }
+  | { kind: "showcase"; id: string; heading: React.ReactNode; intro?: string; items: { title: string; desc: string; icon: IconName; illustration: MockName }[] }
   | { kind: "split"; id: string; heading: React.ReactNode; body: string[]; bullets?: string[]; icon: IconName; mock?: MockName; reverse?: boolean; tint?: boolean }
   | { kind: "stats"; id: string; heading?: React.ReactNode; intro?: string; items: { value: string; label: string }[]; tint?: boolean }
   | { kind: "quote"; id: string; text: string; tint?: boolean }
@@ -138,54 +138,83 @@ function SecondaryBtn({ cta }: { cta: IndustryCTA }) {
 }
 
 /* ═══════════════════════════════════════
-   PRODUCT SCREENSHOTS
-   Real Payonus dashboard screenshots (already shipped as static
-   assets — /public/card-*.png) instead of hand-drawn stand-ins.
-   Framed as a floating card, cropped to the UI content and away
-   from each screenshot's own title header.
+   ILLUSTRATED PEOPLE
+   Hand-drawn flat-style portraits instead of photography or product
+   screenshots — varied skin tones, hairstyles and outfits so the people
+   using Payonus can actually see themselves, not a handful of repeated
+   stock photos or app screenshots. Pure inline SVG, no external assets.
 ═══════════════════════════════════════ */
-const PRODUCT_SHOTS = {
-  payouts:     { src: "/card-payouts.png",              alt: "Payonus payouts dashboard" },
-  collections: { src: "/card-collections.png",           alt: "Payonus collections payment link" },
-  settlements: { src: "/card-instant-settlements.png",   alt: "Payonus instant settlement split" },
-  api:         { src: "/card-payment-api.png",           alt: "Payonus payment API code sample" },
-  analytics:   { src: "/card-analytics.png",              alt: "Payonus analytics and reporting chart" },
-  dashboard:   { src: "/dashboard-preview.png",           alt: "Payonus merchant dashboard" },
-} as const;
+type SkinTone = "s1" | "s2" | "s3" | "s4" | "s5";
+const SKIN: Record<SkinTone, string> = {
+  s1: "#4A2E1E", s2: "#7A4B2C", s3: "#9C6B42", s4: "#C68B5C", s5: "#E0A876",
+};
+type HairStyle = "afro" | "hijab" | "locs" | "short" | "bun";
 
-function ProductShot({ name, height }: { name: keyof typeof PRODUCT_SHOTS; height?: number }) {
-  const { isMobile } = useBreakpoint();
-  const shot = PRODUCT_SHOTS[name];
-  const h = height ?? (isMobile ? 200 : 264);
-  /* The five card-*.png screenshots carry a bold title header taking up ~20% of their
-     height; at these container ratios object-fit:cover has no vertical slack to crop it
-     away, so show those uncropped (contain, on their own light bg) instead of covering. */
-  const isCardShot = name !== "dashboard";
+interface PersonPreset { skin: SkinTone; hair: HairStyle; hairColor: string; outfit: string; bg: string; icon: IconName; }
+
+const PEOPLE = {
+  amara:  { skin: "s2", hair: "afro",  hairColor: "#1E140F", outfit: "#6009FF", bg: "#EDE9FF", icon: "bolt" },
+  tunde:  { skin: "s4", hair: "short", hairColor: "#170F0A", outfit: "#2B3A55", bg: "#F4F0FF", icon: "building" },
+  ngozi:  { skin: "s1", hair: "hijab", hairColor: "#C2703D", outfit: "#C2703D", bg: "#FDF3E7", icon: "card" },
+  kwame:  { skin: "s3", hair: "locs",  hairColor: "#1E140F", outfit: "#3F6650", bg: "#EDE9FF", icon: "route" },
+  fatima: { skin: "s2", hair: "hijab", hairColor: "#4B2FA0", outfit: "#4B2FA0", bg: "#F4F0FF", icon: "chart" },
+  chidi:  { skin: "s5", hair: "short", hairColor: "#1E140F", outfit: "#C98A2C", bg: "#FDF3E7", icon: "plane" },
+  aisha:  { skin: "s1", hair: "locs",  hairColor: "#1E140F", outfit: "#6009FF", bg: "#EDE9FF", icon: "globe" },
+  femi:   { skin: "s3", hair: "bun",   hairColor: "#170F0A", outfit: "#2B3A55", bg: "#F4F0FF", icon: "shield" },
+  zainab: { skin: "s4", hair: "hijab", hairColor: "#3F6650", outfit: "#3F6650", bg: "#FDF3E7", icon: "users" },
+  dele:   { skin: "s2", hair: "short", hairColor: "#1E140F", outfit: "#C2703D", bg: "#EDE9FF", icon: "gauge" },
+  amina:  { skin: "s5", hair: "hijab", hairColor: "#2B3A55", outfit: "#2B3A55", bg: "#F4F0FF", icon: "eye" },
+  tobi:   { skin: "s1", hair: "afro",  hairColor: "#170F0A", outfit: "#C98A2C", bg: "#FDF3E7", icon: "layers" },
+  yusuf:  { skin: "s3", hair: "short", hairColor: "#170F0A", outfit: "#4B2FA0", bg: "#EDE9FF", icon: "plug" },
+  halima: { skin: "s4", hair: "hijab", hairColor: "#C98A2C", outfit: "#C98A2C", bg: "#F4F0FF", icon: "truck" },
+} satisfies Record<string, PersonPreset>;
+
+export type MockName = keyof typeof PEOPLE;
+
+function HairBack({ style, color }: { style: HairStyle; color: string }) {
+  switch (style) {
+    case "afro": return <circle cx="150" cy="132" r="76" fill={color} />;
+    case "locs": return (
+      <g fill={color}>
+        <circle cx="150" cy="128" r="66" />
+        {[-40, -24, -8, 8, 24, 40].map(dx => <rect key={dx} x={150 + dx - 5} y="150" width="10" height="120" rx="5" />)}
+      </g>
+    );
+    case "hijab": return <path d="M70,150 Q70,52 150,52 Q230,52 230,150 L240,300 Q150,336 60,300 Z" fill={color} />;
+    case "bun": return (
+      <g fill={color}>
+        <circle cx="150" cy="130" r="64" />
+        <circle cx="198" cy="90" r="18" />
+      </g>
+    );
+    default: return <path d="M86,130 a64,64 0 01128,0 v-16 a64,56 0 00-128,0 z" fill={color} />;
+  }
+}
+
+function PersonIllustration({ preset }: { preset: PersonPreset }) {
+  const faceR = preset.hair === "hijab" ? 52 : 60;
   return (
-    <div style={{ width: "100%", maxWidth: 320, borderRadius: 16, overflow: "hidden", border: `1px solid ${T.borderLight}`, boxShadow: "0 20px 48px rgba(28,27,31,0.16)", height: h, background: isCardShot ? "#F4F0FF" : undefined }}>
-      <img src={shot.src} alt={shot.alt} loading="lazy" style={{ width: "100%", height: "100%", objectFit: isCardShot ? "contain" : "cover", objectPosition: isCardShot ? "center 25%" : "center bottom", display: "block" }} />
-    </div>
+    <svg viewBox="0 0 300 380" preserveAspectRatio="xMidYMid slice" style={{ width: "100%", height: "100%", display: "block" }} role="img" aria-label="Illustrated portrait">
+      <rect width="300" height="380" fill={preset.bg} />
+      <circle cx="252" cy="56" r="90" fill="rgba(96,9,255,0.06)" />
+      <circle cx="26" cy="344" r="112" fill="rgba(244,178,73,0.10)" />
+      <HairBack style={preset.hair} color={preset.hairColor} />
+      <path d="M40,380 Q40,258 150,258 Q260,258 260,380 Z" fill={preset.outfit} />
+      <rect x="130" y="188" width="40" height="52" fill={SKIN[preset.skin]} />
+      <circle cx="150" cy="150" r={faceR} fill={SKIN[preset.skin]} />
+      <circle cx="130" cy="148" r="4.5" fill="#20140D" />
+      <circle cx="170" cy="148" r="4.5" fill="#20140D" />
+      <path d="M128,172 Q150,186 172,172" stroke="#20140D" strokeWidth="4" strokeLinecap="round" fill="none" />
+      <g transform="translate(228,256)">
+        <circle r="26" fill="#FFFFFF" />
+        <g transform="translate(-13,-13)"><BlockIcon name={preset.icon} size={26} /></g>
+      </g>
+    </svg>
   );
 }
 
-function MarketMock() {
-  const rows = ["Nigeria", "Ghana", "Kenya", "South Africa"];
-  return (
-    <div style={{ width: "100%", maxWidth: 210, background: "#FFFFFF", borderRadius: 14, padding: "8px 6px", boxShadow: "0 18px 40px rgba(28,27,31,0.20)" }}>
-      {rows.map((c, i) => (
-        <div key={c} style={{ display: "flex", alignItems: "center", gap: 10, padding: "8px 10px", borderRadius: 8, background: i === 0 ? "#EDE9FF" : "transparent" }}>
-          <span style={{ width: 7, height: 7, borderRadius: "50%", background: i === 0 ? T.primary : "#D8D3E6", flexShrink: 0 }} />
-          <span style={{ fontFamily: "DM Sans, sans-serif", fontWeight: i === 0 ? 600 : 400, fontSize: 12, color: i === 0 ? T.primary : T.dark }}>{c}</span>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-export type MockName = "payouts" | "collections" | "settlements" | "api" | "analytics" | "dashboard" | "markets";
 function MockVisual({ name }: { name: MockName }) {
-  if (name === "markets") return <MarketMock />;
-  return <ProductShot name={name} />;
+  return <PersonIllustration preset={PEOPLE[name]} />;
 }
 
 /* Decorative panel — stands in for a product illustration where none exists. Always light. */
@@ -193,14 +222,14 @@ function AbstractPanel({ icon, mock }: { icon: IconName; mock?: MockName }) {
   const { isMobile } = useBreakpoint();
   return (
     <div className="fade-up" style={{ position: "relative", overflow: "hidden", borderRadius: 20, background: "#EDE9FF", minHeight: isMobile ? 220 : 340, display: "flex", alignItems: "center", justifyContent: "center" }}>
-      <div style={{ position: "absolute", top: "-18%", right: "-12%", width: "55%", aspectRatio: "1", borderRadius: "50%", background: "rgba(96,9,255,0.08)" }} />
-      <div style={{ position: "absolute", bottom: "-22%", left: "-14%", width: "60%", aspectRatio: "1", borderRadius: "50%", background: "rgba(244,178,73,0.14)" }} />
-      <div style={{ position: "absolute", top: "18%", left: "12%", width: 10, height: 10, borderRadius: "50%", background: T.primary, opacity: 0.35 }} />
-      <div style={{ position: "absolute", bottom: "22%", right: "18%", width: 7, height: 7, borderRadius: "50%", background: T.primary, opacity: 0.35 }} />
-      {mock ? <div style={{ position: "relative" }}><MockVisual name={mock} /></div> : (
-        <div style={{ position: "relative", width: isMobile ? 84 : 108, height: isMobile ? 84 : 108, borderRadius: "50%", background: "#FFFFFF", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 12px 32px rgba(96,9,255,0.14)" }}>
-          <BlockIcon name={icon} size={isMobile ? 36 : 46} color={T.primary} />
-        </div>
+      {mock ? <MockVisual name={mock} /> : (
+        <>
+          <div style={{ position: "absolute", top: "-18%", right: "-12%", width: "55%", aspectRatio: "1", borderRadius: "50%", background: "rgba(96,9,255,0.08)" }} />
+          <div style={{ position: "absolute", bottom: "-22%", left: "-14%", width: "60%", aspectRatio: "1", borderRadius: "50%", background: "rgba(244,178,73,0.14)" }} />
+          <div style={{ position: "relative", width: isMobile ? 84 : 108, height: isMobile ? 84 : 108, borderRadius: "50%", background: "#FFFFFF", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 12px 32px rgba(96,9,255,0.14)" }}>
+            <BlockIcon name={icon} size={isMobile ? 36 : 46} color={T.primary} />
+          </div>
+        </>
       )}
     </div>
   );
@@ -218,7 +247,7 @@ function CardsBlock({ block }: { block: Extract<IndustryBlock, { kind: "cards" }
   const cols = isMobile ? 1 : isTablet ? 2 : (block.columns ?? 3);
   const gridCols = cols === 1 ? "1fr" : cols === 2 ? "1fr 1fr" : "1fr 1fr 1fr";
   return (
-    <section style={{ width: "100%", background: block.tint ? "#F4F0FF" : T.bg, padding: `${isMobile ? 56 : 80}px 0` }}>
+    <section style={{ width: "100%", background: T.bg, padding: `${isMobile ? 56 : 80}px 0` }}>
       <div style={{ maxWidth: 1440, margin: "0 auto", padding: `0 ${hPad}px` }}>
         {block.eyebrow && <Eyebrow>{block.eyebrow}</Eyebrow>}
         <Heading>{block.heading}</Heading>
@@ -258,7 +287,7 @@ function ListBlock({ block }: { block: Extract<IndustryBlock, { kind: "list" }> 
   const { isMobile } = useBreakpoint();
   const hPad = useHPad();
   return (
-    <section style={{ width: "100%", background: block.tint ? "#F4F0FF" : T.bg, padding: `${isMobile ? 56 : 80}px 0` }}>
+    <section style={{ width: "100%", background: T.bg, padding: `${isMobile ? 56 : 80}px 0` }}>
       <div style={{ maxWidth: 1080, margin: "0 auto", padding: `0 ${hPad}px` }}>
         <Heading maxWidth={680}>{block.heading}</Heading>
         {block.intro && <Intro>{block.intro}</Intro>}
@@ -393,34 +422,17 @@ function ShowcaseBlock({ block }: { block: Extract<IndustryBlock, { kind: "showc
           )}
         </div>
       </div>
-      <div ref={trackRef} className="fade-up" style={{ display: "flex", gap: 16, overflowX: "auto", padding: `28px ${hPad}px 12px`, scrollSnapType: "x mandatory", scrollBehavior: "smooth" }}>
+      <div ref={trackRef} className="fade-up showcase-track" style={{ display: "flex", gap: 16, overflowX: "auto", padding: `28px ${hPad}px 12px`, scrollSnapType: "x mandatory", scrollBehavior: "smooth" }}>
+        <style>{`.showcase-track{scrollbar-width:none;-ms-overflow-style:none;}.showcase-track::-webkit-scrollbar{display:none;}`}</style>
         {block.items.map((item, i) => (
           <div key={i} style={{
             position: "relative", flex: `0 0 ${cardW}px`, height: isMobile ? 320 : 380, borderRadius: 20, overflow: "hidden",
             scrollSnapAlign: "start", background: "#EDE9FF",
           }}>
-            {(() => {
-              const isProductShot = item.image.includes("/card-") || item.image.includes("dashboard-preview");
-              return (
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  loading="lazy"
-                  style={{
-                    position: "absolute", inset: 0, width: "100%", height: "100%",
-                    objectFit: isProductShot ? "contain" : "cover",
-                    objectPosition: isProductShot ? "center 30%" : "center 20%",
-                    background: isProductShot ? "#F4F0FF" : undefined,
-                  }}
-                />
-              );
-            })()}
+            <div style={{ position: "absolute", inset: 0 }}><PersonIllustration preset={PEOPLE[item.illustration]} /></div>
             <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(15,12,20,0.82) 0%, rgba(15,12,20,0.35) 42%, rgba(15,12,20,0) 68%)" }} />
-            <div style={{ position: "absolute", top: 18, left: 18, right: 18, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <div style={{ position: "absolute", top: 18, left: 18 }}>
               <span style={{ fontFamily: "DM Sans, sans-serif", fontWeight: 700, fontSize: 12, color: "rgba(255,255,255,0.75)", letterSpacing: "0.04em" }}>{String(i + 1).padStart(2, "0")}</span>
-              <div style={{ width: 34, height: 34, borderRadius: 9, background: "rgba(255,255,255,0.18)", backdropFilter: "blur(4px)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <BlockIcon name={item.icon} size={16} color="#FFFFFF" />
-              </div>
             </div>
             <div style={{ position: "absolute", left: 20, right: 20, bottom: 20 }}>
               <p style={{ margin: "0 0 6px", fontFamily: "Rubik, sans-serif", fontStyle: "italic", fontWeight: 500, fontSize: 20, lineHeight: 1.25, color: "#FFFFFF" }}>{item.title}</p>
@@ -508,7 +520,7 @@ function QuoteBlock({ block }: { block: Extract<IndustryBlock, { kind: "quote" }
   const { isMobile, isTablet } = useBreakpoint();
   const hPad = useHPad();
   return (
-    <section style={{ width: "100%", background: block.tint ? "#F4F0FF" : T.bg, padding: `${isMobile ? 56 : 96}px 0` }}>
+    <section style={{ width: "100%", background: T.bg, padding: `${isMobile ? 56 : 96}px 0` }}>
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: `0 ${hPad}px`, textAlign: "center" }}>
         <span className="fade-up" style={{ display: "block", fontFamily: "Rubik, sans-serif", fontSize: isMobile ? 34 : 44, color: T.primary, lineHeight: 1, marginBottom: 12 }}>"</span>
         <p className="fade-up" style={{ margin: 0, fontFamily: "Rubik, sans-serif", fontStyle: "italic", fontWeight: 500, fontSize: isMobile ? 24 : isTablet ? 32 : 38, lineHeight: 1.35, color: T.headingBlack }}>
@@ -583,8 +595,8 @@ function TrustBlock({ block }: { block: Extract<IndustryBlock, { kind: "trust" }
               {block.intro && <Intro marginBottom={32}>{block.intro}</Intro>}
               {list}
             </div>
-            <div className="fade-up" style={{ borderRadius: 20, background: "#F4F0FF", minHeight: isMobile ? 200 : 320, display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
-              <ProductShot name="dashboard" height={isMobile ? 180 : 280} />
+            <div className="fade-up" style={{ borderRadius: 20, overflow: "hidden", minHeight: isMobile ? 220 : 340 }}>
+              <PersonIllustration preset={PEOPLE.femi} />
             </div>
           </div>
         </div>
@@ -593,7 +605,7 @@ function TrustBlock({ block }: { block: Extract<IndustryBlock, { kind: "trust" }
   }
 
   return (
-    <section style={{ width: "100%", background: "#F4F0FF", padding: `${isMobile ? 56 : 80}px 0` }}>
+    <section style={{ width: "100%", background: T.bg, padding: `${isMobile ? 56 : 80}px 0` }}>
       <div style={{ maxWidth: 1440, margin: "0 auto", padding: `0 ${hPad}px` }}>
         <Heading>{block.heading}</Heading>
         {block.intro && <Intro>{block.intro}</Intro>}
@@ -610,7 +622,7 @@ function FlowBlock({ block }: { block: Extract<IndustryBlock, { kind: "flow" }> 
   const { isMobile, isTablet } = useBreakpoint();
   const hPad = useHPad();
   return (
-    <section style={{ width: "100%", background: "#F4F0FF", padding: `${isMobile ? 56 : 80}px 0` }}>
+    <section style={{ width: "100%", background: T.bg, padding: `${isMobile ? 56 : 80}px 0` }}>
       <div style={{ maxWidth: 1440, margin: "0 auto", padding: `0 ${hPad}px` }}>
         <div style={{ display: "grid", gridTemplateColumns: isMobile || isTablet ? "1fr" : "1fr 1fr", gap: isMobile ? 36 : 56, alignItems: "center" }}>
           <div>
@@ -671,11 +683,11 @@ function NumberedStepsBlock({ block }: { block: Extract<IndustryBlock, { kind: "
       </div>
     );
     return (
-      <section style={{ width: "100%", background: "#F4F0FF", padding: `${isMobile ? 56 : 80}px 0` }}>
+      <section style={{ width: "100%", background: T.bg, padding: `${isMobile ? 56 : 80}px 0` }}>
         <div style={{ maxWidth: 1440, margin: "0 auto", padding: `0 ${hPad}px` }}>
           <div style={{ display: "grid", gridTemplateColumns: stacked ? "1fr" : "1fr 1.1fr", gap: isMobile ? 32 : 56, alignItems: "center" }}>
-            <div className="fade-up" style={{ borderRadius: 20, background: T.white, border: `1px solid ${T.borderLight}`, minHeight: isMobile ? 200 : 320, display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
-              <MockVisual name={block.mock ?? "dashboard"} />
+            <div className="fade-up" style={{ borderRadius: 20, overflow: "hidden", minHeight: isMobile ? 200 : 320 }}>
+              <MockVisual name={block.mock ?? "kwame"} />
             </div>
             <div>
               <Heading>{block.heading}</Heading>
@@ -782,7 +794,7 @@ function TextCtaBlock({ block }: { block: Extract<IndustryBlock, { kind: "textCt
   const { isMobile, isTablet } = useBreakpoint();
   const hPad = useHPad();
   return (
-    <section style={{ width: "100%", background: "#F4F0FF", padding: `${isMobile ? 44 : 64}px 0` }}>
+    <section style={{ width: "100%", background: T.bg, padding: `${isMobile ? 44 : 64}px 0` }}>
       <div style={{ maxWidth: 1440, margin: "0 auto", padding: `0 ${hPad}px` }}>
         <div style={{ display: "flex", flexDirection: isMobile || isTablet ? "column" : "row", alignItems: isMobile || isTablet ? "flex-start" : "center", justifyContent: "space-between", gap: 24 }}>
           <div style={{ maxWidth: 640 }}>
@@ -803,7 +815,7 @@ function ProseBlock({ block }: { block: Extract<IndustryBlock, { kind: "prose" }
   const { isMobile } = useBreakpoint();
   const hPad = useHPad();
   return (
-    <section style={{ width: "100%", background: block.tint ? "#F4F0FF" : T.bg, padding: `${isMobile ? 48 : 72}px 0` }}>
+    <section style={{ width: "100%", background: T.bg, padding: `${isMobile ? 48 : 72}px 0` }}>
       <div style={{ maxWidth: 1440, margin: "0 auto", padding: `0 ${hPad}px` }}>
         <Heading maxWidth={680}>{block.heading}</Heading>
         {block.body.map((p, i) => (

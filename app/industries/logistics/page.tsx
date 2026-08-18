@@ -34,7 +34,7 @@ const blocks: IndustryBlock[] = [
     ],
   },
   {
-    kind: "bento", id: "reality", leadMock: "payouts",
+    kind: "bento", id: "reality", leadMock: "halima",
     heading: "Payment operations should not slow down your business",
     intro: "You are collecting from customers, managing what drivers or partners earn, tracking transactions, and moving funds through your operation. Disconnected processes mean more time managing payment issues instead of keeping the business moving.",
     items: [
@@ -78,7 +78,7 @@ const blocks: IndustryBlock[] = [
     cta: { label: "Talk to Our Team", href: "/sales" },
   },
   {
-    kind: "numberedSteps", id: "settlement-payout", split: true, mock: "settlements",
+    kind: "numberedSteps", id: "settlement-payout", split: true, mock: "dele",
     heading: "Keep collections, settlement and payouts connected",
     intro: "Payment operations continue after a customer completes a transaction.",
     steps: [
@@ -88,7 +88,7 @@ const blocks: IndustryBlock[] = [
     ],
   },
   {
-    kind: "split", id: "analytics", icon: "chart", mock: "analytics", reverse: true,
+    kind: "split", id: "analytics", icon: "chart", mock: "fatima", reverse: true,
     heading: "See what is happening across your payment operations",
     body: [
       "As transaction activity grows, visibility becomes more important. Finance and operations teams need to understand what is happening across collections, payouts and settlement.",
@@ -120,11 +120,11 @@ const blocks: IndustryBlock[] = [
     heading: "Why growing operations need flexible payment infrastructure",
     intro: "As your operation grows, payment infrastructure needs to fit the way money, technology, and operational responsibilities move across the business.",
     items: [
-      { icon: "route", title: "Built Around Your Workflow", desc: "Connect infrastructure to the systems that already run your business.", image: "/company-hero-2.png" },
-      { icon: "card", title: "Collections and Payouts", desc: "Support both customer collection and operational payout workflows.", image: "/card-payouts.png" },
-      { icon: "plug", title: "API-Based Integration", desc: "Build payment capabilities into your existing platform.", image: "/card-payment-api.png" },
-      { icon: "scale", title: "Flexible Implementation", desc: "Tailored implementations for specialised payment workflows.", image: "/company-hero-1.png" },
-      { icon: "globe", title: "Regional Operations", desc: "Support requirements across the approved Payonus markets.", image: "/company-hero-3.png" },
+      { icon: "route", title: "Built Around Your Workflow", desc: "Connect infrastructure to the systems that already run your business.", illustration: "kwame" },
+      { icon: "card", title: "Collections and Payouts", desc: "Support both customer collection and operational payout workflows.", illustration: "ngozi" },
+      { icon: "plug", title: "API-Based Integration", desc: "Build payment capabilities into your existing platform.", illustration: "yusuf" },
+      { icon: "scale", title: "Flexible Implementation", desc: "Tailored implementations for specialised payment workflows.", illustration: "tobi" },
+      { icon: "globe", title: "Regional Operations", desc: "Support requirements across the approved Payonus markets.", illustration: "aisha" },
     ],
   },
   {

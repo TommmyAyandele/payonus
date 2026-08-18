@@ -34,7 +34,7 @@ const blocks: IndustryBlock[] = [
     ],
   },
   {
-    kind: "bento", id: "problems", leadMock: "collections",
+    kind: "bento", id: "problems", leadMock: "ngozi",
     heading: "When payments become harder to manage, your business feels it",
     intro: "Taking payments is only one part of running an online business. As transactions and markets grow, it can become harder to keep track of what is coming in, going out and waiting to be settled.",
     items: [
@@ -73,11 +73,11 @@ const blocks: IndustryBlock[] = [
     heading: "Built around the way your business operates",
     intro: "No two e-commerce businesses manage payments in exactly the same way. Your business model, customers, recipients, markets and technology all affect the setup you need.",
     items: [
-      { icon: "bolt", title: "Growing online businesses", desc: "A setup around the collections, payouts and reporting needs that grow with you.", image: "/company-hero-1.png" },
-      { icon: "scale", title: "Larger operations", desc: "Higher transaction volumes and more complex requirements.", image: "/company-hero-2.png" },
-      { icon: "users", title: "Marketplaces", desc: "Collect payments and manage payouts to multiple recipients.", image: "/company-mission.jpg" },
-      { icon: "plug", title: "Your existing technology", desc: "Connect via the Payment API to your existing platform.", image: "/card-payment-api.png" },
-      { icon: "globe", title: "Multi-market operations", desc: "The markets where you need payment support.", image: "/dashboard-preview.png" },
+      { icon: "bolt", title: "Growing online businesses", desc: "A setup around the collections, payouts and reporting needs that grow with you.", illustration: "amara" },
+      { icon: "scale", title: "Larger operations", desc: "Higher transaction volumes and more complex requirements.", illustration: "tunde" },
+      { icon: "users", title: "Marketplaces", desc: "Collect payments and manage payouts to multiple recipients.", illustration: "zainab" },
+      { icon: "plug", title: "Your existing technology", desc: "Connect via the Payment API to your existing platform.", illustration: "yusuf" },
+      { icon: "globe", title: "Multi-market operations", desc: "The markets where you need payment support.", illustration: "aisha" },
     ],
   },
   {

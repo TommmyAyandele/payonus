@@ -39,7 +39,7 @@ const blocks: IndustryBlock[] = [
     items: ["Sports Betting", "Casinos", "Lotteries", "Fantasy Sports", "Esports", "Gaming Platforms"],
   },
   {
-    kind: "bento", id: "challenges", leadMock: "payouts",
+    kind: "bento", id: "challenges", leadMock: "amara",
     heading: "When payments slow down, the business feels it",
     intro: "Failed deposits can interrupt play. Delayed withdrawals can frustrate customers. Slow settlement can affect cash flow.",
     items: [
@@ -63,7 +63,7 @@ const blocks: IndustryBlock[] = [
     ],
   },
   {
-    kind: "split", id: "differentiation", icon: "bolt", mock: "api",
+    kind: "split", id: "differentiation", icon: "bolt", mock: "yusuf",
     heading: "Built for the pace of gaming payments",
     body: [
       "Gaming payments do not stop at checkout. Deposits and withdrawals can happen throughout the day, often at high volume. Payonus supports these high-frequency payment flows with faster settlement to help businesses keep money moving as their operations grow.",
@@ -74,10 +74,10 @@ const blocks: IndustryBlock[] = [
     kind: "showcase", id: "why",
     heading: "A payment setup that can keep up with your operation",
     items: [
-      { icon: "gauge", title: "Frequent payment activity", desc: "Supports regular deposits and withdrawals.", image: "/card-payouts.png" },
-      { icon: "clock", title: "Faster settlement", desc: "Keep funds moving efficiently after payment activity.", image: "/card-instant-settlements.png" },
-      { icon: "globe", title: "Built for African markets", desc: "Nigeria, Ghana, Kenya, Côte d'Ivoire, South Africa, Zambia, Senegal, Cameroon.", image: "/company-mission.jpg" },
-      { icon: "plug", title: "Flexible workflows", desc: "API-based or tailored implementations.", image: "/card-payment-api.png" },
+      { icon: "gauge", title: "Frequent payment activity", desc: "Supports regular deposits and withdrawals.", illustration: "dele" },
+      { icon: "clock", title: "Faster settlement", desc: "Keep funds moving efficiently after payment activity.", illustration: "kwame" },
+      { icon: "globe", title: "Built for African markets", desc: "Nigeria, Ghana, Kenya, Côte d'Ivoire, South Africa, Zambia, Senegal, Cameroon.", illustration: "zainab" },
+      { icon: "plug", title: "Flexible workflows", desc: "API-based or tailored implementations.", illustration: "yusuf" },
     ],
   },
   {

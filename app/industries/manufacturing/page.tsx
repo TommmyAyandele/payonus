@@ -35,7 +35,7 @@ const blocks: IndustryBlock[] = [
     ],
   },
   {
-    kind: "bento", id: "complexity", leadMock: "collections",
+    kind: "bento", id: "complexity", leadMock: "tunde",
     heading: "Manufacturing payments are more than collecting a payment",
     intro: "A customer payment is often one step in a wider process involving invoices, payment terms, distributors, settlement and reconciliation.",
     items: [
@@ -65,14 +65,14 @@ const blocks: IndustryBlock[] = [
     heading: "Support the payment workflows your business already runs",
     intro: "Manufacturers manage different customers, invoices, transaction values, and payment requirements.",
     items: [
-      { icon: "card", title: "Invoice Payments", desc: "Support collections around invoice-based B2B transactions.", image: "/dashboard-preview.png" },
-      { icon: "route", title: "Bank Transfers", desc: "Account-based options for completing payments.", image: "/card-payouts.png" },
-      { icon: "wallet", title: "Card Payments", desc: "Support card payments where they fit your model.", image: "/company-mission.jpg" },
-      { icon: "link", title: "Payment Links", desc: "Direct payment journeys for specific invoices.", image: "/card-collections.png" },
-      { icon: "clock", title: "Deposits & Milestones", desc: "Structured payment journeys with staged amounts.", image: "/card-instant-settlements.png" },
-      { icon: "globe", title: "Multi-Currency", desc: "Relevant currencies and markets where available.", image: "/company-hero-3.png" },
-      { icon: "users", title: "Distributor Collections", desc: "Across distributor and business-customer relationships.", image: "/company-hero-2.png" },
-      { icon: "plug", title: "Payment APIs", desc: "Connect functionality to your operation's systems.", image: "/card-payment-api.png" },
+      { icon: "card", title: "Invoice Payments", desc: "Support collections around invoice-based B2B transactions.", illustration: "tunde" },
+      { icon: "route", title: "Bank Transfers", desc: "Account-based options for completing payments.", illustration: "kwame" },
+      { icon: "wallet", title: "Card Payments", desc: "Support card payments where they fit your model.", illustration: "ngozi" },
+      { icon: "link", title: "Payment Links", desc: "Direct payment journeys for specific invoices.", illustration: "dele" },
+      { icon: "clock", title: "Deposits & Milestones", desc: "Structured payment journeys with staged amounts.", illustration: "chidi" },
+      { icon: "globe", title: "Multi-Currency", desc: "Relevant currencies and markets where available.", illustration: "aisha" },
+      { icon: "users", title: "Distributor Collections", desc: "Across distributor and business-customer relationships.", illustration: "zainab" },
+      { icon: "plug", title: "Payment APIs", desc: "Connect functionality to your operation's systems.", illustration: "tobi" },
     ],
   },
   {
@@ -87,7 +87,7 @@ const blocks: IndustryBlock[] = [
     text: "Getting paid is only one part of the process.",
   },
   {
-    kind: "split", id: "integration", icon: "building", mock: "api", reverse: true,
+    kind: "split", id: "integration", icon: "building", mock: "yusuf", reverse: true,
     heading: "Connect payments with your existing finance environment",
     body: ["Your business already relies on systems to manage finance and operations. Payment infrastructure should work with that environment, not create another isolated workflow."],
     bullets: [

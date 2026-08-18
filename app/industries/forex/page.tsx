@@ -33,7 +33,7 @@ const blocks: IndustryBlock[] = [
     ],
   },
   {
-    kind: "bento", id: "challenges", leadMock: "payouts",
+    kind: "bento", id: "challenges", leadMock: "kwame",
     heading: "When payments slow down, trading operations feel it",
     intro: "A failed deposit can stop a trader from funding an account. A delayed withdrawal can damage confidence and create more work for your support team.",
     items: [
@@ -58,7 +58,7 @@ const blocks: IndustryBlock[] = [
     ],
   },
   {
-    kind: "split", id: "differentiation", icon: "layers", mock: "api", reverse: true,
+    kind: "split", id: "differentiation", icon: "layers", mock: "tobi", reverse: true,
     heading: "More than a way to accept payments",
     body: [
       "Your payment operation does not begin and end when a trader makes a deposit. You also need to handle withdrawals, manage settlement, understand what is happening across transactions and connect payments to the systems your business already uses.",
@@ -70,11 +70,11 @@ const blocks: IndustryBlock[] = [
     heading: "Built around the way your business operates",
     intro: "Your payment setup needs to work with your markets, the way traders fund and withdraw from accounts, and the systems your business already uses.",
     items: [
-      { icon: "globe", title: "Your markets", desc: "Where you need to accept and move money.", image: "/dashboard-preview.png" },
-      { icon: "route", title: "How money moves", desc: "Deposits, withdrawals and other payment activity.", image: "/card-payouts.png" },
-      { icon: "plug", title: "Your platform", desc: "Connect through the appropriate integration approach.", image: "/card-payment-api.png" },
-      { icon: "eye", title: "Your visibility", desc: "Monitor what is happening across payment activity.", image: "/card-analytics.png" },
-      { icon: "scale", title: "Your growth", desc: "A setup that supports changing business requirements.", image: "/company-hero-1.png" },
+      { icon: "globe", title: "Your markets", desc: "Where you need to accept and move money.", illustration: "aisha" },
+      { icon: "route", title: "How money moves", desc: "Deposits, withdrawals and other payment activity.", illustration: "ngozi" },
+      { icon: "plug", title: "Your platform", desc: "Connect through the appropriate integration approach.", illustration: "yusuf" },
+      { icon: "eye", title: "Your visibility", desc: "Monitor what is happening across payment activity.", illustration: "amina" },
+      { icon: "scale", title: "Your growth", desc: "A setup that supports changing business requirements.", illustration: "amara" },
     ],
   },
   {

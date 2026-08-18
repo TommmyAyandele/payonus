@@ -28,16 +28,16 @@ const blocks: IndustryBlock[] = [
     heading: "Make payments easier to manage across your aviation business",
     intro: "Bookings, charter services, agency payments, and other services can all create different payment flows. Payonus helps bring the payment side of those operations into one infrastructure.",
     items: [
-      { icon: "card", title: "Bookings", desc: "Manage payments connected to passenger bookings.", image: "/company-mission.jpg" },
-      { icon: "layers", title: "Ancillary Services", desc: "Manage payments from additional services alongside your core bookings.", image: "/card-collections.png" },
-      { icon: "building", title: "Corporate Payments", desc: "Support payment arrangements for corporate customers and business accounts.", image: "/company-hero-2.png" },
-      { icon: "bolt", title: "Charter Operations", desc: "Handle payment requirements for charter services and higher-value bookings.", image: "/company-hero-1.png" },
-      { icon: "users", title: "Agency Channels", desc: "Manage payments involving travel agencies and commercial partners.", image: "/company-hero-3.png" },
-      { icon: "globe", title: "Cross-Border Payments", desc: "Support payment activity when you collect from customers across markets.", image: "/dashboard-preview.png" },
+      { icon: "card", title: "Bookings", desc: "Manage payments connected to passenger bookings.", illustration: "ngozi" },
+      { icon: "layers", title: "Ancillary Services", desc: "Manage payments from additional services alongside your core bookings.", illustration: "zainab" },
+      { icon: "building", title: "Corporate Payments", desc: "Support payment arrangements for corporate customers and business accounts.", illustration: "tunde" },
+      { icon: "bolt", title: "Charter Operations", desc: "Handle payment requirements for charter services and higher-value bookings.", illustration: "chidi" },
+      { icon: "users", title: "Agency Channels", desc: "Manage payments involving travel agencies and commercial partners.", illustration: "femi" },
+      { icon: "globe", title: "Cross-Border Payments", desc: "Support payment activity when you collect from customers across markets.", illustration: "aisha" },
     ],
   },
   {
-    kind: "bento", id: "complexity", leadMock: "collections",
+    kind: "bento", id: "complexity", leadMock: "dele",
     heading: "Complex payments create more work",
     intro: "The transaction is only one part of the job. Fragmented channels, markets and settlement processes can create more work behind every payment.",
     items: [
@@ -76,7 +76,7 @@ const blocks: IndustryBlock[] = [
     ],
   },
   {
-    kind: "split", id: "operational-fit", icon: "route", mock: "api",
+    kind: "split", id: "operational-fit", icon: "route", mock: "yusuf",
     heading: "Make payments work with the way your business already operates",
     body: [
       "Your aviation business already has its own systems, payment channels and ways of managing bookings and financial activity. Your payment setup should fit into that environment without creating unnecessary work for your team.",
