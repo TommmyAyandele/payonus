@@ -120,11 +120,11 @@ const blocks: IndustryBlock[] = [
     heading: "Why growing operations need flexible payment infrastructure",
     intro: "As your operation grows, payment infrastructure needs to fit the way money, technology, and operational responsibilities move across the business.",
     items: [
-      { icon: "route", title: "Built Around Your Workflow", desc: "Connect infrastructure to the systems that already run your business." },
-      { icon: "card", title: "Collections and Payouts", desc: "Support both customer collection and operational payout workflows." },
-      { icon: "plug", title: "API-Based Integration", desc: "Build payment capabilities into your existing platform." },
-      { icon: "scale", title: "Flexible Implementation", desc: "Tailored implementations for specialised payment workflows." },
-      { icon: "globe", title: "Regional Operations", desc: "Support requirements across the approved Payonus markets." },
+      { icon: "route", title: "Built Around Your Workflow", desc: "Connect infrastructure to the systems that already run your business.", image: "/company-hero-2.png" },
+      { icon: "card", title: "Collections and Payouts", desc: "Support both customer collection and operational payout workflows.", image: "/card-payouts.png" },
+      { icon: "plug", title: "API-Based Integration", desc: "Build payment capabilities into your existing platform.", image: "/card-payment-api.png" },
+      { icon: "scale", title: "Flexible Implementation", desc: "Tailored implementations for specialised payment workflows.", image: "/company-hero-1.png" },
+      { icon: "globe", title: "Regional Operations", desc: "Support requirements across the approved Payonus markets.", image: "/company-hero-3.png" },
     ],
   },
   {

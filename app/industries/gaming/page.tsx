@@ -74,10 +74,10 @@ const blocks: IndustryBlock[] = [
     kind: "showcase", id: "why",
     heading: "A payment setup that can keep up with your operation",
     items: [
-      { icon: "gauge", title: "Frequent payment activity", desc: "Supports regular deposits and withdrawals." },
-      { icon: "clock", title: "Faster settlement", desc: "Keep funds moving efficiently after payment activity." },
-      { icon: "globe", title: "Built for African markets", desc: "Nigeria, Ghana, Kenya, Côte d'Ivoire, South Africa, Zambia, Senegal, Cameroon." },
-      { icon: "plug", title: "Flexible workflows", desc: "API-based or tailored implementations." },
+      { icon: "gauge", title: "Frequent payment activity", desc: "Supports regular deposits and withdrawals.", image: "/card-payouts.png" },
+      { icon: "clock", title: "Faster settlement", desc: "Keep funds moving efficiently after payment activity.", image: "/card-instant-settlements.png" },
+      { icon: "globe", title: "Built for African markets", desc: "Nigeria, Ghana, Kenya, Côte d'Ivoire, South Africa, Zambia, Senegal, Cameroon.", image: "/company-mission.jpg" },
+      { icon: "plug", title: "Flexible workflows", desc: "API-based or tailored implementations.", image: "/card-payment-api.png" },
     ],
   },
   {

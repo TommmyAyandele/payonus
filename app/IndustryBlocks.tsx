@@ -53,7 +53,7 @@ export type IndustryBlock =
   | { kind: "cards"; id: string; eyebrow?: string; heading: React.ReactNode; intro?: string; columns?: 2 | 3; tint?: boolean; items: CardItem[]; footNote?: string }
   | { kind: "list"; id: string; heading: React.ReactNode; intro?: string; items: CardItem[]; tint?: boolean; numbered?: boolean }
   | { kind: "bento"; id: string; heading: React.ReactNode; intro?: string; items: CardItem[]; leadMock?: MockName }
-  | { kind: "showcase"; id: string; heading: React.ReactNode; intro?: string; items: { title: string; desc: string; icon: IconName }[] }
+  | { kind: "showcase"; id: string; heading: React.ReactNode; intro?: string; items: { title: string; desc: string; icon: IconName; image: string }[] }
   | { kind: "split"; id: string; heading: React.ReactNode; body: string[]; bullets?: string[]; icon: IconName; mock?: MockName; reverse?: boolean; tint?: boolean }
   | { kind: "stats"; id: string; heading?: React.ReactNode; intro?: string; items: { value: string; label: string }[]; tint?: boolean }
   | { kind: "quote"; id: string; text: string; tint?: boolean }
@@ -157,9 +157,13 @@ function ProductShot({ name, height }: { name: keyof typeof PRODUCT_SHOTS; heigh
   const { isMobile } = useBreakpoint();
   const shot = PRODUCT_SHOTS[name];
   const h = height ?? (isMobile ? 200 : 264);
+  /* The five card-*.png screenshots carry a bold title header taking up ~20% of their
+     height; at these container ratios object-fit:cover has no vertical slack to crop it
+     away, so show those uncropped (contain, on their own light bg) instead of covering. */
+  const isCardShot = name !== "dashboard";
   return (
-    <div style={{ width: "100%", maxWidth: 320, borderRadius: 16, overflow: "hidden", border: `1px solid ${T.borderLight}`, boxShadow: "0 20px 48px rgba(28,27,31,0.16)", height: h }}>
-      <img src={shot.src} alt={shot.alt} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center bottom", display: "block" }} />
+    <div style={{ width: "100%", maxWidth: 320, borderRadius: 16, overflow: "hidden", border: `1px solid ${T.borderLight}`, boxShadow: "0 20px 48px rgba(28,27,31,0.16)", height: h, background: isCardShot ? "#F4F0FF" : undefined }}>
+      <img src={shot.src} alt={shot.alt} loading="lazy" style={{ width: "100%", height: "100%", objectFit: isCardShot ? "contain" : "cover", objectPosition: isCardShot ? "center 25%" : "center bottom", display: "block" }} />
     </div>
   );
 }
@@ -341,44 +345,96 @@ function BentoBlock({ block }: { block: Extract<IndustryBlock, { kind: "bento" }
 /* ═══════════════════════════════════════
    SHOWCASE BLOCK — horizontal scroll of gradient panels
 ═══════════════════════════════════════ */
-const SHOWCASE_FILLS = [
-  { bg: "#F4F0FF", border: "none" },
-  { bg: T.white, border: `1px solid ${T.borderLight}` },
-  { bg: "#FDF3E7", border: "none" },
-];
+/* Matches TestimonialsSection's arrow button exactly — same size, color, radius, hover. */
+const showcaseArrowBtn: React.CSSProperties = {
+  width: 52, height: 52,
+  display: "flex", alignItems: "center", justifyContent: "center",
+  background: "#EDE9FF", border: "none", borderRadius: 8,
+  cursor: "pointer", flexShrink: 0, transition: "background 0.15s",
+};
+
+function ShowcaseArrow({ dir, onClick }: { dir: "left" | "right"; onClick: () => void }) {
+  return (
+    <button
+      aria-label={dir === "left" ? "Previous" : "Next"}
+      onClick={onClick}
+      style={showcaseArrowBtn}
+      onMouseEnter={e => (e.currentTarget.style.background = "#DDD6FE")}
+      onMouseLeave={e => (e.currentTarget.style.background = "#EDE9FF")}
+    >
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <path d={dir === "left" ? "M15 18l-6-6 6-6" : "M9 18l6-6-6-6"} stroke="#4B2FA0" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    </button>
+  );
+}
 
 function ShowcaseBlock({ block }: { block: Extract<IndustryBlock, { kind: "showcase" }> }) {
   const { isMobile } = useBreakpoint();
   const hPad = useHPad();
+  const trackRef = React.useRef<HTMLDivElement>(null);
+  const cardW = isMobile ? 240 : 300;
+  const scroll = (dir: 1 | -1) => {
+    trackRef.current?.scrollBy({ left: dir * (cardW + 16), behavior: "smooth" });
+  };
   return (
     <section style={{ width: "100%", background: T.bg, padding: `${isMobile ? 56 : 80}px 0` }}>
       <div style={{ maxWidth: 1440, margin: "0 auto", padding: `0 ${hPad}px` }}>
-        <Heading>{block.heading}</Heading>
-        {block.intro && <Intro>{block.intro}</Intro>}
+        <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 24, marginBottom: 8 }}>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <Heading>{block.heading}</Heading>
+            {block.intro && <Intro marginBottom={0}>{block.intro}</Intro>}
+          </div>
+          {!isMobile && (
+            <div style={{ display: "flex", gap: 12, flexShrink: 0, marginTop: 4 }}>
+              <ShowcaseArrow dir="left" onClick={() => scroll(-1)} />
+              <ShowcaseArrow dir="right" onClick={() => scroll(1)} />
+            </div>
+          )}
+        </div>
       </div>
-      <div className="fade-up" style={{ display: "flex", gap: 16, overflowX: "auto", padding: `4px ${hPad}px 12px`, scrollSnapType: "x mandatory" }}>
-        {block.items.map((item, i) => {
-          const f = SHOWCASE_FILLS[i % SHOWCASE_FILLS.length];
-          return (
-            <div key={i} style={{
-              flex: `0 0 ${isMobile ? 220 : 260}px`, height: isMobile ? 280 : 320, borderRadius: 20,
-              background: f.bg, border: f.border, scrollSnapAlign: "start", padding: "24px 22px",
-              display: "flex", flexDirection: "column", justifyContent: "space-between",
-            }}>
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                <span style={{ fontFamily: "DM Sans, sans-serif", fontWeight: 700, fontSize: 12, color: "#C4B5FD", letterSpacing: "0.04em" }}>{String(i + 1).padStart(2, "0")}</span>
-                <div style={{ width: 38, height: 38, borderRadius: 10, background: T.white, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <BlockIcon name={item.icon} size={18} />
-                </div>
-              </div>
-              <div>
-                <p style={{ margin: "0 0 6px", fontFamily: "Rubik, sans-serif", fontStyle: "italic", fontWeight: 500, fontSize: 19, lineHeight: 1.25, color: T.headingBlack }}>{item.title}</p>
-                <p style={{ margin: 0, fontFamily: "DM Sans, sans-serif", fontWeight: 400, fontSize: 12.5, lineHeight: 1.55, color: T.muted }}>{item.desc}</p>
+      <div ref={trackRef} className="fade-up" style={{ display: "flex", gap: 16, overflowX: "auto", padding: `28px ${hPad}px 12px`, scrollSnapType: "x mandatory", scrollBehavior: "smooth" }}>
+        {block.items.map((item, i) => (
+          <div key={i} style={{
+            position: "relative", flex: `0 0 ${cardW}px`, height: isMobile ? 320 : 380, borderRadius: 20, overflow: "hidden",
+            scrollSnapAlign: "start", background: "#EDE9FF",
+          }}>
+            {(() => {
+              const isProductShot = item.image.includes("/card-") || item.image.includes("dashboard-preview");
+              return (
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  loading="lazy"
+                  style={{
+                    position: "absolute", inset: 0, width: "100%", height: "100%",
+                    objectFit: isProductShot ? "contain" : "cover",
+                    objectPosition: isProductShot ? "center 30%" : "center 20%",
+                    background: isProductShot ? "#F4F0FF" : undefined,
+                  }}
+                />
+              );
+            })()}
+            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(15,12,20,0.82) 0%, rgba(15,12,20,0.35) 42%, rgba(15,12,20,0) 68%)" }} />
+            <div style={{ position: "absolute", top: 18, left: 18, right: 18, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+              <span style={{ fontFamily: "DM Sans, sans-serif", fontWeight: 700, fontSize: 12, color: "rgba(255,255,255,0.75)", letterSpacing: "0.04em" }}>{String(i + 1).padStart(2, "0")}</span>
+              <div style={{ width: 34, height: 34, borderRadius: 9, background: "rgba(255,255,255,0.18)", backdropFilter: "blur(4px)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <BlockIcon name={item.icon} size={16} color="#FFFFFF" />
               </div>
             </div>
-          );
-        })}
+            <div style={{ position: "absolute", left: 20, right: 20, bottom: 20 }}>
+              <p style={{ margin: "0 0 6px", fontFamily: "Rubik, sans-serif", fontStyle: "italic", fontWeight: 500, fontSize: 20, lineHeight: 1.25, color: "#FFFFFF" }}>{item.title}</p>
+              <p style={{ margin: 0, fontFamily: "DM Sans, sans-serif", fontWeight: 400, fontSize: 12.5, lineHeight: 1.55, color: "rgba(255,255,255,0.82)" }}>{item.desc}</p>
+            </div>
+          </div>
+        ))}
       </div>
+      {isMobile && (
+        <div style={{ display: "flex", gap: 12, padding: `0 ${hPad}px`, marginTop: 8 }}>
+          <ShowcaseArrow dir="left" onClick={() => scroll(-1)} />
+          <ShowcaseArrow dir="right" onClick={() => scroll(1)} />
+        </div>
+      )}
     </section>
   );
 }

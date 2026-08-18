@@ -28,12 +28,12 @@ const blocks: IndustryBlock[] = [
     heading: "Make payments easier to manage across your aviation business",
     intro: "Bookings, charter services, agency payments, and other services can all create different payment flows. Payonus helps bring the payment side of those operations into one infrastructure.",
     items: [
-      { icon: "card", title: "Bookings", desc: "Manage payments connected to passenger bookings." },
-      { icon: "layers", title: "Ancillary Services", desc: "Manage payments from additional services alongside your core bookings." },
-      { icon: "building", title: "Corporate Payments", desc: "Support payment arrangements for corporate customers and business accounts." },
-      { icon: "bolt", title: "Charter Operations", desc: "Handle payment requirements for charter services and higher-value bookings." },
-      { icon: "users", title: "Agency Channels", desc: "Manage payments involving travel agencies and commercial partners." },
-      { icon: "globe", title: "Cross-Border Payments", desc: "Support payment activity when you collect from customers across markets." },
+      { icon: "card", title: "Bookings", desc: "Manage payments connected to passenger bookings.", image: "/company-mission.jpg" },
+      { icon: "layers", title: "Ancillary Services", desc: "Manage payments from additional services alongside your core bookings.", image: "/card-collections.png" },
+      { icon: "building", title: "Corporate Payments", desc: "Support payment arrangements for corporate customers and business accounts.", image: "/company-hero-2.png" },
+      { icon: "bolt", title: "Charter Operations", desc: "Handle payment requirements for charter services and higher-value bookings.", image: "/company-hero-1.png" },
+      { icon: "users", title: "Agency Channels", desc: "Manage payments involving travel agencies and commercial partners.", image: "/company-hero-3.png" },
+      { icon: "globe", title: "Cross-Border Payments", desc: "Support payment activity when you collect from customers across markets.", image: "/dashboard-preview.png" },
     ],
   },
   {

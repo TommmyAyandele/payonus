@@ -70,11 +70,11 @@ const blocks: IndustryBlock[] = [
     heading: "Built around the way your business operates",
     intro: "Your payment setup needs to work with your markets, the way traders fund and withdraw from accounts, and the systems your business already uses.",
     items: [
-      { icon: "globe", title: "Your markets", desc: "Where you need to accept and move money." },
-      { icon: "route", title: "How money moves", desc: "Deposits, withdrawals and other payment activity." },
-      { icon: "plug", title: "Your platform", desc: "Connect through the appropriate integration approach." },
-      { icon: "eye", title: "Your visibility", desc: "Monitor what is happening across payment activity." },
-      { icon: "scale", title: "Your growth", desc: "A setup that supports changing business requirements." },
+      { icon: "globe", title: "Your markets", desc: "Where you need to accept and move money.", image: "/dashboard-preview.png" },
+      { icon: "route", title: "How money moves", desc: "Deposits, withdrawals and other payment activity.", image: "/card-payouts.png" },
+      { icon: "plug", title: "Your platform", desc: "Connect through the appropriate integration approach.", image: "/card-payment-api.png" },
+      { icon: "eye", title: "Your visibility", desc: "Monitor what is happening across payment activity.", image: "/card-analytics.png" },
+      { icon: "scale", title: "Your growth", desc: "A setup that supports changing business requirements.", image: "/company-hero-1.png" },
     ],
   },
   {
