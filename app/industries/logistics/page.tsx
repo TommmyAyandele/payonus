@@ -121,7 +121,7 @@ const blocks: IndustryBlock[] = [
     intro: "As your operation grows, payment infrastructure needs to fit the way money, technology, and operational responsibilities move across the business.",
     items: [
       { icon: "route", title: "Built Around Your Workflow", desc: "Connect infrastructure to the systems that already run your business.", illustration: "kwame" },
-      { icon: "card", title: "Collections and Payouts", desc: "Support both customer collection and operational payout workflows.", illustration: "ngozi" },
+      { icon: "card", title: "Collections and Payouts", desc: "Support both customer collection and operational payout workflows.", illustration: "cardTap" },
       { icon: "plug", title: "API-Based Integration", desc: "Build payment capabilities into your existing platform.", illustration: "yusuf" },
       { icon: "scale", title: "Flexible Implementation", desc: "Tailored implementations for specialised payment workflows.", illustration: "tobi" },
       { icon: "globe", title: "Regional Operations", desc: "Support requirements across the approved Payonus markets.", illustration: "aisha" },
