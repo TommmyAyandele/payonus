@@ -49,6 +49,7 @@ function Hero() {
   const { isMobile, isTablet } = useBreakpoint();
   const [wordIdx, setWordIdx] = React.useState(0);
   const [animKey, setAnimKey] = React.useState(0);
+  const [marqueePaused, setMarqueePaused] = React.useState(false);
 
   React.useEffect(() => {
     const id = setInterval(() => {
@@ -130,8 +131,10 @@ function Hero() {
       }}>
         <div
           className="marquee-track"
-          style={{ display:"flex", alignItems:"center", width:"max-content", gap:0 }}
+          style={{ display:"flex", alignItems:"center", width:"max-content", gap:0, animationPlayState: marqueePaused ? "paused" : "running" }}
           aria-label="Markets we operate in"
+          onMouseEnter={() => setMarqueePaused(true)}
+          onMouseLeave={() => setMarqueePaused(false)}
         >
           {[...COUNTRIES, ...COUNTRIES, ...COUNTRIES].map((c, i) => (
             <div
@@ -772,7 +775,6 @@ export default function PayonUsLandingPage() {
         /* Countries marquee */
         @keyframes marquee { from { transform:translateX(0); } to { transform:translateX(-33.333%); } }
         .marquee-track { animation: marquee 22s linear infinite; }
-        @media (hover: hover) { .marquee-track:hover { animation-play-state: paused; } }
 
         /* World map drift */
         @keyframes mapDrift {

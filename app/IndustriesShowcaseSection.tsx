@@ -19,13 +19,17 @@ export default function IndustriesShowcaseSection() {
   const cardW = isMobile ? 240 : 300;
   const loop = [...INDUSTRIES, ...INDUSTRIES, ...INDUSTRIES];
   const duration = Math.max(24, INDUSTRIES.length * 6);
+  /* Pausing via JS mouse events instead of CSS :hover — touch never fires
+     onMouseEnter/onMouseLeave, so this can't get stuck "hovered" on mobile
+     the way a CSS :hover rule can (some mobile browsers apply :hover
+     permanently after a tap, since there's no touch equivalent of mouseleave). */
+  const [paused, setPaused] = React.useState(false);
 
   return (
     <section style={{ width: "100%", background: "#FAFAF8", padding: `${isMobile ? 56 : 88}px 0` }}>
       <style>{`
         @keyframes homeIndustriesMarquee{from{transform:translateX(0);}to{transform:translateX(-33.333%);}}
         .home-industries-track{animation:homeIndustriesMarquee ${duration}s linear infinite;}
-        @media (hover: hover) { .home-industries-track:hover{animation-play-state:paused;} }
       `}</style>
       <div style={{ maxWidth: 1440, margin: "0 auto", padding: `0 ${hPad}px` }}>
         <h2 style={{
@@ -44,7 +48,12 @@ export default function IndustriesShowcaseSection() {
         </p>
       </div>
       <div style={{ width: "100%", overflow: "hidden", marginTop: 32 }}>
-        <div className="home-industries-track" style={{ display: "flex", gap: 16, width: "max-content", padding: `0 ${hPad}px 12px` }}>
+        <div
+          className="home-industries-track"
+          style={{ display: "flex", gap: 16, width: "max-content", padding: `0 ${hPad}px 12px`, animationPlayState: paused ? "paused" : "running" }}
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+        >
           {loop.map((item, i) => (
             <a
               key={i}

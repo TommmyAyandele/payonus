@@ -220,6 +220,8 @@ export default function ProductPage({
   const { isMobile, isTablet } = useBreakpoint();
   const [scrolled, setScrolled] = React.useState(false);
   const [scrollPct, setScrollPct] = React.useState(0);
+  const [flagsPaused, setFlagsPaused] = React.useState(false);
+  const [compliancePaused, setCompliancePaused] = React.useState(false);
 
   React.useEffect(() => {
     const fn = () => {
@@ -243,7 +245,6 @@ export default function ProductPage({
         .fade-up.visible{opacity:1;transform:translateY(0);}
         @keyframes complianceMarquee{from{transform:translateX(0);}to{transform:translateX(-25%);}}
         .compliance-marquee-track{display:flex;flex-wrap:nowrap;width:max-content;animation:complianceMarquee 22s linear infinite;}
-        @media (hover: hover) { .compliance-marquee-track:hover{animation-play-state:paused;} }
         @keyframes ctaPulse{0%,100%{box-shadow:0 0 0 0 rgba(96,9,255,0.40);}60%{box-shadow:0 0 0 14px rgba(96,9,255,0);}}
         .cta-pulse{animation:ctaPulse 2.8s ease-in-out infinite;}
         @keyframes rippleOut{from{transform:scale(0);opacity:0.55;}to{transform:scale(1);opacity:0;}}
@@ -259,7 +260,6 @@ export default function ProductPage({
         @keyframes mapScrollY{from{transform:translateX(-50%) translateY(0);}to{transform:translateX(-50%) translateY(-50%);}}
         @keyframes flagScrollY{from{transform:translateY(0);}to{transform:translateY(-50%);}}
         .flag-scroll-track{animation:flagScrollY 18s linear infinite;}
-        @media (hover: hover) { .flag-scroll-track:hover{animation-play-state:paused;} }
       `}</style>
 
       {/* Scroll progress bar */}
@@ -352,7 +352,12 @@ export default function ProductPage({
               </a>
             </div>
             <div style={{ position:"relative", overflow:"hidden", height:isMobile?280:460, maxWidth:isMobile?"100%":380 }}>
-              <div className="flag-scroll-track" style={{ display:"flex", flexDirection:"column", width:"100%", gap:isMobile?8:16, willChange:"transform" }}>
+              <div
+                className="flag-scroll-track"
+                style={{ display:"flex", flexDirection:"column", width:"100%", gap:isMobile?8:16, willChange:"transform", animationPlayState: flagsPaused ? "paused" : "running" }}
+                onMouseEnter={() => setFlagsPaused(true)}
+                onMouseLeave={() => setFlagsPaused(false)}
+              >
                 {[...FLAG_ROWS,...FLAG_ROWS].map((row,ri) => (
                   <div key={ri} style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:isMobile?8:16 }}>
                     {row.map((m,j) => (
@@ -379,7 +384,12 @@ export default function ProductPage({
             Every transaction moves through an infrastructure your enterprise already requires.
           </p>
           <div style={{ width:"100%", overflow:"hidden" }}>
-            <div className="compliance-marquee-track">
+            <div
+              className="compliance-marquee-track"
+              style={{ animationPlayState: compliancePaused ? "paused" : "running" }}
+              onMouseEnter={() => setCompliancePaused(true)}
+              onMouseLeave={() => setCompliancePaused(false)}
+            >
               {[...PILLS,...PILLS,...PILLS,...PILLS].map((pill,i) => (
                 <div key={i} style={{ display:"inline-flex",alignItems:"center",gap:8,padding:"9px 22px",border:"1.5px solid #D0D5DD",borderRadius:999,background:"transparent",whiteSpace:"nowrap",flexShrink:0,marginRight:12 }}>
                   <PillIcon type={pill.icon} size={isMobile ? 13 : 17} />

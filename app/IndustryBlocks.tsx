@@ -358,19 +358,24 @@ function ShowcaseBlock({ block }: { block: Extract<IndustryBlock, { kind: "showc
   const cardW = isMobile ? 240 : 300;
   const loop = [...block.items, ...block.items, ...block.items];
   const duration = Math.max(24, block.items.length * 6);
+  const [paused, setPaused] = React.useState(false);
   return (
     <section style={{ width: "100%", background: T.bg, padding: `${isMobile ? 56 : 80}px 0` }}>
       <style>{`
         @keyframes indShowcaseMarquee{from{transform:translateX(0);}to{transform:translateX(-33.333%);}}
         .ind-showcase-track{animation:indShowcaseMarquee ${duration}s linear infinite;}
-        @media (hover: hover) { .ind-showcase-track:hover{animation-play-state:paused;} }
       `}</style>
       <div style={{ maxWidth: 1440, margin: "0 auto", padding: `0 ${hPad}px` }}>
         <Heading>{block.heading}</Heading>
         {block.intro && <Intro marginBottom={0}>{block.intro}</Intro>}
       </div>
       <div className="fade-up" style={{ width: "100%", overflow: "hidden", marginTop: 28 }}>
-        <div className="ind-showcase-track" style={{ display: "flex", gap: 16, width: "max-content", padding: `0 ${hPad}px 12px` }}>
+        <div
+          className="ind-showcase-track"
+          style={{ display: "flex", gap: 16, width: "max-content", padding: `0 ${hPad}px 12px`, animationPlayState: paused ? "paused" : "running" }}
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+        >
           {loop.map((item, i) => (
             <div key={i} style={{
               position: "relative", flex: `0 0 ${cardW}px`, height: isMobile ? 320 : 380, borderRadius: 20, overflow: "hidden",
@@ -485,19 +490,24 @@ function MarqueeListBlock({ block }: { block: Extract<IndustryBlock, { kind: "ma
   const { isMobile } = useBreakpoint();
   const hPad = useHPad();
   const loop = [...block.items, ...block.items, ...block.items, ...block.items];
+  const [paused, setPaused] = React.useState(false);
   return (
     <section style={{ width: "100%", background: T.bg, padding: `${isMobile ? 48 : 72}px 0` }}>
       <style>{`
         @keyframes indTicker{from{transform:translateX(0);}to{transform:translateX(-25%);}}
         .ind-ticker-track{display:flex;flex-wrap:nowrap;width:max-content;animation:indTicker 26s linear infinite;}
-        @media (hover: hover) { .ind-ticker-track:hover{animation-play-state:paused;} }
       `}</style>
       <div style={{ maxWidth: 1440, margin: "0 auto", padding: `0 ${hPad}px` }}>
         <Heading maxWidth={680}>{block.heading}</Heading>
         {block.intro && <Intro marginBottom={36}>{block.intro}</Intro>}
       </div>
       <div className="fade-up" style={{ width: "100%", overflow: "hidden" }}>
-        <div className="ind-ticker-track">
+        <div
+          className="ind-ticker-track"
+          style={{ animationPlayState: paused ? "paused" : "running" }}
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+        >
           {loop.map((item, i) => (
             <div key={i} style={{ display: "inline-flex", alignItems: "center", padding: "12px 26px", border: `1.5px solid ${T.borderLight}`, borderRadius: 999, whiteSpace: "nowrap", flexShrink: 0, marginRight: 12, fontFamily: "DM Sans, sans-serif", fontWeight: 500, fontSize: 14.5, color: T.dark }}>
               {item}
@@ -693,19 +703,25 @@ function MarketsBlock({ block }: { block: Extract<IndustryBlock, { kind: "market
   const { isMobile } = useBreakpoint();
   const hPad = useHPad();
   const loop = [...block.countries, ...block.countries, ...block.countries];
+  const [paused, setPaused] = React.useState(false);
   return (
     <section style={{ width: "100%", background: T.bg, padding: `${isMobile ? 56 : 80}px 0` }}>
       <style>{`
         @keyframes indMarketsMarquee{from{transform:translateX(0);}to{transform:translateX(-33.333%);}}
         .ind-markets-track{animation:indMarketsMarquee 22s linear infinite;}
-        @media (hover: hover) { .ind-markets-track:hover{animation-play-state:paused;} }
       `}</style>
       <div style={{ maxWidth: 1440, margin: "0 auto", padding: `0 ${hPad}px` }}>
         <Heading>{block.heading}</Heading>
         {block.intro && <Intro marginBottom={32}>{block.intro}</Intro>}
       </div>
       <div className="fade-up" style={{ width: "100%", overflow: "hidden", borderTop: `1px solid ${T.borderLight}`, borderBottom: `1px solid ${T.borderLight}` }}>
-        <div className="ind-markets-track" style={{ display: "flex", alignItems: "center", width: "max-content" }} aria-label="Markets we operate in">
+        <div
+          className="ind-markets-track"
+          style={{ display: "flex", alignItems: "center", width: "max-content", animationPlayState: paused ? "paused" : "running" }}
+          aria-label="Markets we operate in"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+        >
           {loop.map((c, i) => {
             const info = COUNTRY_INFO[c];
             return (
