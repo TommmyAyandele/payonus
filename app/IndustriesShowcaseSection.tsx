@@ -5,12 +5,12 @@ import { useBreakpoint } from "./use-breakpoint";
 
 const INDUSTRIES = [
   { title: "Gaming", desc: "Payments built for players", href: "/industries/gaming", photo: "dele" },
-  { title: "Forex", desc: "FX rails traders trust", href: "/industries/forex", photo: "fatima" },
-  { title: "Fintech", desc: "Rails for lenders, PSSPs & remittance", href: "/industries/fintech", photo: "bankApp" },
-  { title: "E-commerce", desc: "Every checkout, every method", href: "/industries/ecommerce", photo: "ngozi" },
+  { title: "Forex", desc: "FX rails traders trust", href: "/industries/forex", photo: "homeForex" },
+  { title: "Fintech", desc: "Rails for lenders, PSSPs & remittance", href: "/industries/fintech", photo: "homeFintech" },
+  { title: "E-commerce", desc: "Every checkout, every method", href: "/industries/ecommerce", photo: "homeEcommerce" },
   { title: "Ride-hailing & Logistics", desc: "Driver payouts, on the move", href: "/industries/logistics", photo: "halima" },
   { title: "Aviation", desc: "High-value payments, zero friction", href: "/industries/aviation", photo: "chidi" },
-  { title: "Manufacturing", desc: "B2B payments for supply chains", href: "/industries/manufacturing", photo: "tunde" },
+  { title: "Manufacturing", desc: "B2B payments for supply chains", href: "/industries/manufacturing", photo: "homeManufacturing" },
 ];
 
 export default function IndustriesShowcaseSection() {
