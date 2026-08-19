@@ -6,6 +6,8 @@ import Navbar, { T } from "./Navbar";
 import BackboneSection from "./BackboneSection";
 import ComplianceSection from "./ComplianceSection";
 import TestimonialsSection from "./TestimonialsSection";
+import IndustriesShowcaseSection from "./IndustriesShowcaseSection";
+import HomeFaqSection from "./HomeFaqSection";
 import CTASection from "./CTASection";
 import Footer from "./Footer";
 
@@ -824,9 +826,11 @@ export default function PayonUsLandingPage() {
       <Navbar scrolled={scrolled} />
       <Hero />
       <ProductSection />
+      <IndustriesShowcaseSection />
       <BackboneSection />
       <ComplianceSection />
       <TestimonialsSection />
+      <HomeFaqSection />
       <CTASection />
       <Footer />
     </>
