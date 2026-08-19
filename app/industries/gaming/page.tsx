@@ -75,7 +75,7 @@ const blocks: IndustryBlock[] = [
     heading: "A payment setup that can keep up with your operation",
     items: [
       { icon: "gauge", title: "Frequent payment activity", desc: "Supports regular deposits and withdrawals.", illustration: "dele" },
-      { icon: "clock", title: "Faster settlement", desc: "Keep funds moving efficiently after payment activity.", illustration: "tobi" },
+      { icon: "clock", title: "Faster settlement", desc: "Keep funds moving efficiently after payment activity.", illustration: "bankApp" },
       { icon: "globe", title: "Built for African markets", desc: "Nigeria, Ghana, Kenya, Côte d'Ivoire, South Africa, Zambia, Senegal, Cameroon.", illustration: "aisha" },
       { icon: "plug", title: "Flexible workflows", desc: "API-based or tailored implementations.", illustration: "yusuf" },
     ],

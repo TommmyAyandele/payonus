@@ -243,7 +243,7 @@ export default function ProductPage({
         .fade-up.visible{opacity:1;transform:translateY(0);}
         @keyframes complianceMarquee{from{transform:translateX(0);}to{transform:translateX(-25%);}}
         .compliance-marquee-track{display:flex;flex-wrap:nowrap;width:max-content;animation:complianceMarquee 22s linear infinite;}
-        .compliance-marquee-track:hover{animation-play-state:paused;}
+        @media (hover: hover) { .compliance-marquee-track:hover{animation-play-state:paused;} }
         @keyframes ctaPulse{0%,100%{box-shadow:0 0 0 0 rgba(96,9,255,0.40);}60%{box-shadow:0 0 0 14px rgba(96,9,255,0);}}
         .cta-pulse{animation:ctaPulse 2.8s ease-in-out infinite;}
         @keyframes rippleOut{from{transform:scale(0);opacity:0.55;}to{transform:scale(1);opacity:0;}}
@@ -259,7 +259,7 @@ export default function ProductPage({
         @keyframes mapScrollY{from{transform:translateX(-50%) translateY(0);}to{transform:translateX(-50%) translateY(-50%);}}
         @keyframes flagScrollY{from{transform:translateY(0);}to{transform:translateY(-50%);}}
         .flag-scroll-track{animation:flagScrollY 18s linear infinite;}
-        .flag-scroll-track:hover{animation-play-state:paused;}
+        @media (hover: hover) { .flag-scroll-track:hover{animation-play-state:paused;} }
       `}</style>
 
       {/* Scroll progress bar */}

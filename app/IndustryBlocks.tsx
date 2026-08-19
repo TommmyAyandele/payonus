@@ -363,7 +363,7 @@ function ShowcaseBlock({ block }: { block: Extract<IndustryBlock, { kind: "showc
       <style>{`
         @keyframes indShowcaseMarquee{from{transform:translateX(0);}to{transform:translateX(-33.333%);}}
         .ind-showcase-track{animation:indShowcaseMarquee ${duration}s linear infinite;}
-        .ind-showcase-track:hover{animation-play-state:paused;}
+        @media (hover: hover) { .ind-showcase-track:hover{animation-play-state:paused;} }
       `}</style>
       <div style={{ maxWidth: 1440, margin: "0 auto", padding: `0 ${hPad}px` }}>
         <Heading>{block.heading}</Heading>
@@ -490,7 +490,7 @@ function MarqueeListBlock({ block }: { block: Extract<IndustryBlock, { kind: "ma
       <style>{`
         @keyframes indTicker{from{transform:translateX(0);}to{transform:translateX(-25%);}}
         .ind-ticker-track{display:flex;flex-wrap:nowrap;width:max-content;animation:indTicker 26s linear infinite;}
-        .ind-ticker-track:hover{animation-play-state:paused;}
+        @media (hover: hover) { .ind-ticker-track:hover{animation-play-state:paused;} }
       `}</style>
       <div style={{ maxWidth: 1440, margin: "0 auto", padding: `0 ${hPad}px` }}>
         <Heading maxWidth={680}>{block.heading}</Heading>
@@ -698,7 +698,7 @@ function MarketsBlock({ block }: { block: Extract<IndustryBlock, { kind: "market
       <style>{`
         @keyframes indMarketsMarquee{from{transform:translateX(0);}to{transform:translateX(-33.333%);}}
         .ind-markets-track{animation:indMarketsMarquee 22s linear infinite;}
-        .ind-markets-track:hover{animation-play-state:paused;}
+        @media (hover: hover) { .ind-markets-track:hover{animation-play-state:paused;} }
       `}</style>
       <div style={{ maxWidth: 1440, margin: "0 auto", padding: `0 ${hPad}px` }}>
         <Heading>{block.heading}</Heading>
@@ -709,11 +709,11 @@ function MarketsBlock({ block }: { block: Extract<IndustryBlock, { kind: "market
           {loop.map((c, i) => {
             const info = COUNTRY_INFO[c];
             return (
-              <div key={i} style={{ display: "flex", alignItems: "center", gap: isMobile ? 8 : 12, padding: isMobile ? "20px 24px" : "26px 36px", borderRight: `1px solid ${T.borderLight}`, flexShrink: 0 }}>
-                {info && <span style={{ fontSize: isMobile ? 22 : 28, lineHeight: 1, userSelect: "none" }}>{info.flag}</span>}
+              <div key={i} style={{ display: "flex", alignItems: "center", gap: isMobile ? 6 : 12, padding: isMobile ? "12px 14px" : "26px 36px", borderRight: `1px solid ${T.borderLight}`, flexShrink: 0 }}>
+                {info && <span style={{ fontSize: isMobile ? 16 : 28, lineHeight: 1, userSelect: "none" }}>{info.flag}</span>}
                 <div>
-                  <p style={{ margin: 0, fontFamily: "DM Sans, sans-serif", fontWeight: 600, fontSize: isMobile ? 12 : 14, color: T.dark, whiteSpace: "nowrap", lineHeight: 1.25 }}>{c}</p>
-                  {info && <p style={{ margin: 0, fontFamily: "DM Sans, sans-serif", fontWeight: 400, fontSize: isMobile ? 10 : 11, color: T.muted, letterSpacing: "0.06em", lineHeight: 1.4 }}>{info.currency}</p>}
+                  <p style={{ margin: 0, fontFamily: "DM Sans, sans-serif", fontWeight: 600, fontSize: isMobile ? 11 : 14, color: T.dark, whiteSpace: "nowrap", lineHeight: 1.25 }}>{c}</p>
+                  {info && <p style={{ margin: 0, fontFamily: "DM Sans, sans-serif", fontWeight: 400, fontSize: isMobile ? 9 : 11, color: T.muted, letterSpacing: "0.06em", lineHeight: 1.4 }}>{info.currency}</p>}
                 </div>
               </div>
             );

@@ -58,7 +58,7 @@ const blocks: IndustryBlock[] = [
     ],
   },
   {
-    kind: "split", id: "differentiation", icon: "layers", mock: "tobi", reverse: true,
+    kind: "split", id: "differentiation", icon: "layers", mock: "amina", reverse: true,
     heading: "More than a way to accept payments",
     body: [
       "Your payment operation does not begin and end when a trader makes a deposit. You also need to handle withdrawals, manage settlement, understand what is happening across transactions and connect payments to the systems your business already uses.",

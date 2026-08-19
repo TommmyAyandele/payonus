@@ -770,7 +770,7 @@ export default function PayonUsLandingPage() {
         /* Countries marquee */
         @keyframes marquee { from { transform:translateX(0); } to { transform:translateX(-33.333%); } }
         .marquee-track { animation: marquee 22s linear infinite; }
-        .marquee-track:hover { animation-play-state: paused; }
+        @media (hover: hover) { .marquee-track:hover { animation-play-state: paused; } }
 
         /* World map drift */
         @keyframes mapDrift {
