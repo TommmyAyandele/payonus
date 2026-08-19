@@ -100,11 +100,12 @@ function Intro({ children, marginBottom = 48 }: { children: React.ReactNode; mar
   );
 }
 
-function ArrowLink({ href, label }: { href: string; label: string }) {
+function ArrowLink({ href, label, light }: { href: string; label: string; light?: boolean }) {
+  const color = light ? "#FFFFFF" : T.primary;
   return (
-    <a href={href} style={{ display: "inline-flex", alignItems: "center", gap: 4, marginTop: 12, fontFamily: "DM Sans, sans-serif", fontWeight: 600, fontSize: 13, color: T.primary, textDecoration: "none" }}>
+    <a href={href} style={{ display: "inline-flex", alignItems: "center", gap: 4, marginTop: 12, fontFamily: "DM Sans, sans-serif", fontWeight: 600, fontSize: 13, color, textDecoration: "none" }}>
       {label}
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke={T.primary} strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" /></svg>
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke={color} strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" /></svg>
     </a>
   );
 }
@@ -302,19 +303,22 @@ function BentoBlock({ block }: { block: Extract<IndustryBlock, { kind: "bento" }
         {block.intro && <Intro>{block.intro}</Intro>}
         <div className="fade-up" style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : isTablet ? "1fr 1fr" : "1.4fr 1fr 1fr", gridAutoRows: "min-content", gap: isMobile ? 14 : 18 }}>
           {lead && (
-            <div style={{ position: "relative", overflow: "hidden", gridRow: isMobile ? "auto" : isTablet ? "auto" : "span 2", background: "#EDE9FF", border: `2px solid ${T.primary}`, borderRadius: 20, padding: isMobile ? "26px 22px" : "38px 32px", display: "flex", flexDirection: "column", justifyContent: block.leadMock ? "space-between" : "flex-end", minHeight: isMobile ? 220 : 340 }}>
-              <div style={{ width: 48, height: 48, borderRadius: 12, background: T.white, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <BlockIcon name={lead.icon} size={24} />
-              </div>
+            <div style={{ position: "relative", overflow: "hidden", gridRow: isMobile ? "auto" : isTablet ? "auto" : "span 2", borderRadius: 20, minHeight: isMobile ? 280 : 420, ...(block.leadMock ? {} : { background: "#EDE9FF", border: `2px solid ${T.primary}` }) }}>
               {block.leadMock && (
-                <div style={{ alignSelf: isMobile ? "center" : "flex-end", margin: isMobile ? "16px 0" : "0" }}>
-                  <MockVisual name={block.leadMock} />
-                </div>
+                <>
+                  <div style={{ position: "absolute", inset: 0 }}><MockVisual name={block.leadMock} /></div>
+                  <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(15,12,20,0.86) 0%, rgba(15,12,20,0.5) 42%, rgba(15,12,20,0.05) 68%)" }} />
+                </>
               )}
-              <div>
-                <p style={{ margin: "20px 0 8px", fontFamily: "Rubik, sans-serif", fontStyle: "italic", fontWeight: 500, fontSize: isMobile ? 22 : 26, lineHeight: 1.2, color: T.headingBlack }}>{lead.title}</p>
-                <p style={{ margin: 0, fontFamily: "DM Sans, sans-serif", fontWeight: 400, fontSize: 14, lineHeight: 1.65, color: T.muted }}>{lead.desc}</p>
-                {lead.href && lead.linkLabel && <ArrowLink href={lead.href} label={lead.linkLabel} />}
+              <div style={{ position: "relative", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between", padding: isMobile ? "26px 22px" : "32px 30px" }}>
+                <div style={{ width: 48, height: 48, borderRadius: 12, background: T.white, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <BlockIcon name={lead.icon} size={24} />
+                </div>
+                <div>
+                  <p style={{ margin: "0 0 8px", fontFamily: "Rubik, sans-serif", fontStyle: "italic", fontWeight: 500, fontSize: isMobile ? 22 : 26, lineHeight: 1.2, color: block.leadMock ? "#FFFFFF" : T.headingBlack }}>{lead.title}</p>
+                  <p style={{ margin: 0, fontFamily: "DM Sans, sans-serif", fontWeight: 400, fontSize: 14, lineHeight: 1.65, color: block.leadMock ? "rgba(255,255,255,0.85)" : T.muted }}>{lead.desc}</p>
+                  {lead.href && lead.linkLabel && <ArrowLink href={lead.href} label={lead.linkLabel} light={!!block.leadMock} />}
+                </div>
               </div>
             </div>
           )}
@@ -442,11 +446,16 @@ function SplitBlock({ block }: { block: Extract<IndustryBlock, { kind: "split" }
     </div>
   );
   const panelCol = <AbstractPanel icon={block.icon} mock={block.mock} />;
+  const reverseDesktop = !!block.reverse && !stacked;
   return (
     <section style={{ width: "100%", background: T.bg, padding: `${isMobile ? 56 : 80}px 0` }}>
       <div style={{ maxWidth: 1440, margin: "0 auto", padding: `0 ${hPad}px` }}>
+        {/* Text and panel always stay in the same DOM order — only visual order flips via CSS `order`.
+            Swapping JSX child order instead (based on a post-hydration breakpoint value) makes React
+            unmount/remount fresh DOM nodes, which the one-shot scroll-reveal observer never sees again. */}
         <div style={{ display: "grid", gridTemplateColumns: stacked ? "1fr" : "1fr 1fr", gap: isMobile ? 32 : 56, alignItems: "center" }}>
-          {block.reverse && !stacked ? <>{panelCol}{textCol}</> : <>{textCol}{panelCol}</>}
+          <div style={{ order: reverseDesktop ? 2 : 1 }}>{textCol}</div>
+          <div style={{ order: reverseDesktop ? 1 : 2 }}>{panelCol}</div>
         </div>
       </div>
     </section>
