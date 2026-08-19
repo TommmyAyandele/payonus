@@ -161,6 +161,12 @@ const PEOPLE = {
   tobi:   { icon: "layers",   photo: "tobi" },    // software engineer
   yusuf:  { icon: "plug",     photo: "yusuf" },   // IT / integration technician
   halima: { icon: "truck",    photo: "halima" },  // freight / logistics
+  invoiceDoc:      { icon: "layers", photo: "invoiceDoc" },      // hands reviewing an invoice document
+  bankApp:         { icon: "route",  photo: "bankApp" },         // banking app + financial data on a phone
+  cardTap:         { icon: "card",   photo: "cardTap" },         // tapping a card on a payment terminal
+  qrLink:          { icon: "link",   photo: "qrLink" },          // scanning a QR / payment link
+  milestoneDeal:   { icon: "clock",  photo: "milestoneDeal" },   // handshake sealing a staged agreement
+  currencyExchange:{ icon: "globe",  photo: "currencyExchange" },// hands exchanging currency
 } satisfies Record<string, PersonPreset>;
 
 export type MockName = keyof typeof PEOPLE;
