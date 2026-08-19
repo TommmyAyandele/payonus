@@ -154,7 +154,7 @@ const PEOPLE = {
   fatima: { icon: "chart",    photo: "fatima" },  // financial analyst
   chidi:  { icon: "plane",    photo: "chidi" },   // pilot
   aisha:  { icon: "globe",    photo: "aisha" },   // cross-border / global trade
-  femi:   { icon: "shield",   photo: "femi" },    // security officer
+  femi:   { icon: "shield",   photo: "femi" },    // security & compliance professional
   zainab: { icon: "users",    photo: "zainab" },  // team manager
   dele:   { icon: "gauge",    photo: "dele" },    // gamer
   amina:  { icon: "eye",      photo: "amina" },   // auditor
@@ -348,81 +348,47 @@ function BentoBlock({ block }: { block: Extract<IndustryBlock, { kind: "bento" }
 }
 
 /* ═══════════════════════════════════════
-   SHOWCASE BLOCK — horizontal scroll of gradient panels
+   SHOWCASE BLOCK — continuous marquee of gradient panels, same
+   endless-motion mechanic as the countries strip (tripled content,
+   linear CSS loop, pauses on hover — no manual scroll/arrows).
 ═══════════════════════════════════════ */
-/* Matches TestimonialsSection's arrow button exactly — same size, color, radius, hover. */
-const showcaseArrowBtn: React.CSSProperties = {
-  width: 52, height: 52,
-  display: "flex", alignItems: "center", justifyContent: "center",
-  background: "#EDE9FF", border: "none", borderRadius: 8,
-  cursor: "pointer", flexShrink: 0, transition: "background 0.15s",
-};
-
-function ShowcaseArrow({ dir, onClick }: { dir: "left" | "right"; onClick: () => void }) {
-  return (
-    <button
-      aria-label={dir === "left" ? "Previous" : "Next"}
-      onClick={onClick}
-      style={showcaseArrowBtn}
-      onMouseEnter={e => (e.currentTarget.style.background = "#DDD6FE")}
-      onMouseLeave={e => (e.currentTarget.style.background = "#EDE9FF")}
-    >
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-        <path d={dir === "left" ? "M15 18l-6-6 6-6" : "M9 18l6-6-6-6"} stroke="#4B2FA0" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    </button>
-  );
-}
-
 function ShowcaseBlock({ block }: { block: Extract<IndustryBlock, { kind: "showcase" }> }) {
   const { isMobile } = useBreakpoint();
   const hPad = useHPad();
-  const trackRef = React.useRef<HTMLDivElement>(null);
   const cardW = isMobile ? 240 : 300;
-  const scroll = (dir: 1 | -1) => {
-    trackRef.current?.scrollBy({ left: dir * (cardW + 16), behavior: "smooth" });
-  };
+  const loop = [...block.items, ...block.items, ...block.items];
+  const duration = Math.max(24, block.items.length * 6);
   return (
     <section style={{ width: "100%", background: T.bg, padding: `${isMobile ? 56 : 80}px 0` }}>
+      <style>{`
+        @keyframes indShowcaseMarquee{from{transform:translateX(0);}to{transform:translateX(-33.333%);}}
+        .ind-showcase-track{animation:indShowcaseMarquee ${duration}s linear infinite;}
+        .ind-showcase-track:hover{animation-play-state:paused;}
+      `}</style>
       <div style={{ maxWidth: 1440, margin: "0 auto", padding: `0 ${hPad}px` }}>
-        <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 24, marginBottom: 8 }}>
-          <div style={{ flex: 1, minWidth: 0 }}>
-            <Heading>{block.heading}</Heading>
-            {block.intro && <Intro marginBottom={0}>{block.intro}</Intro>}
-          </div>
-          {!isMobile && (
-            <div style={{ display: "flex", gap: 12, flexShrink: 0, marginTop: 4 }}>
-              <ShowcaseArrow dir="left" onClick={() => scroll(-1)} />
-              <ShowcaseArrow dir="right" onClick={() => scroll(1)} />
+        <Heading>{block.heading}</Heading>
+        {block.intro && <Intro marginBottom={0}>{block.intro}</Intro>}
+      </div>
+      <div className="fade-up" style={{ width: "100%", overflow: "hidden", marginTop: 28 }}>
+        <div className="ind-showcase-track" style={{ display: "flex", gap: 16, width: "max-content", padding: `0 ${hPad}px 12px` }}>
+          {loop.map((item, i) => (
+            <div key={i} style={{
+              position: "relative", flex: `0 0 ${cardW}px`, height: isMobile ? 320 : 380, borderRadius: 20, overflow: "hidden",
+              background: "#EDE9FF",
+            }}>
+              <div style={{ position: "absolute", inset: 0 }}><PersonIllustration preset={PEOPLE[item.illustration]} /></div>
+              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(15,12,20,0.82) 0%, rgba(15,12,20,0.35) 42%, rgba(15,12,20,0) 68%)" }} />
+              <div style={{ position: "absolute", top: 18, left: 18 }}>
+                <span style={{ fontFamily: "DM Sans, sans-serif", fontWeight: 700, fontSize: 12, color: "rgba(255,255,255,0.75)", letterSpacing: "0.04em" }}>{String((i % block.items.length) + 1).padStart(2, "0")}</span>
+              </div>
+              <div style={{ position: "absolute", left: 20, right: 20, bottom: 20 }}>
+                <p style={{ margin: "0 0 6px", fontFamily: "Rubik, sans-serif", fontStyle: "italic", fontWeight: 500, fontSize: 20, lineHeight: 1.25, color: "#FFFFFF" }}>{item.title}</p>
+                <p style={{ margin: 0, fontFamily: "DM Sans, sans-serif", fontWeight: 400, fontSize: 12.5, lineHeight: 1.55, color: "rgba(255,255,255,0.82)" }}>{item.desc}</p>
+              </div>
             </div>
-          )}
+          ))}
         </div>
       </div>
-      <div ref={trackRef} className="fade-up showcase-track" style={{ display: "flex", gap: 16, overflowX: "auto", padding: `28px ${hPad}px 12px`, scrollSnapType: "x mandatory", scrollBehavior: "smooth" }}>
-        <style>{`.showcase-track{scrollbar-width:none;-ms-overflow-style:none;}.showcase-track::-webkit-scrollbar{display:none;}`}</style>
-        {block.items.map((item, i) => (
-          <div key={i} style={{
-            position: "relative", flex: `0 0 ${cardW}px`, height: isMobile ? 320 : 380, borderRadius: 20, overflow: "hidden",
-            scrollSnapAlign: "start", background: "#EDE9FF",
-          }}>
-            <div style={{ position: "absolute", inset: 0 }}><PersonIllustration preset={PEOPLE[item.illustration]} /></div>
-            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(15,12,20,0.82) 0%, rgba(15,12,20,0.35) 42%, rgba(15,12,20,0) 68%)" }} />
-            <div style={{ position: "absolute", top: 18, left: 18 }}>
-              <span style={{ fontFamily: "DM Sans, sans-serif", fontWeight: 700, fontSize: 12, color: "rgba(255,255,255,0.75)", letterSpacing: "0.04em" }}>{String(i + 1).padStart(2, "0")}</span>
-            </div>
-            <div style={{ position: "absolute", left: 20, right: 20, bottom: 20 }}>
-              <p style={{ margin: "0 0 6px", fontFamily: "Rubik, sans-serif", fontStyle: "italic", fontWeight: 500, fontSize: 20, lineHeight: 1.25, color: "#FFFFFF" }}>{item.title}</p>
-              <p style={{ margin: 0, fontFamily: "DM Sans, sans-serif", fontWeight: 400, fontSize: 12.5, lineHeight: 1.55, color: "rgba(255,255,255,0.82)" }}>{item.desc}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-      {isMobile && (
-        <div style={{ display: "flex", gap: 12, padding: `0 ${hPad}px`, marginTop: 8 }}>
-          <ShowcaseArrow dir="left" onClick={() => scroll(-1)} />
-          <ShowcaseArrow dir="right" onClick={() => scroll(1)} />
-        </div>
-      )}
     </section>
   );
 }
