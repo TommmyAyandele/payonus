@@ -335,7 +335,7 @@ export default function Navbar({ scrolled }: { scrolled: boolean }) {
               {[
                 { label:"Company",    href:"/company"  },
                 { label:"Resources",  href:"/resources"},
-                { label:"Developers", href:"/developers"},
+                { label:"Developers", href:"https://documentation.payonus.com"},
                 { label:"Support",    href:"/support"  },
                 { label:"Pricing",    href:"/pricing"  },
               ].map(({ label, href }) => (
@@ -416,7 +416,7 @@ export default function Navbar({ scrolled }: { scrolled: boolean }) {
               {[
                 { label:"Company",    href:"/company"    },
                 { label:"Resources",  href:"/resources"   },
-                { label:"Developers", href:"/developers"  },
+                { label:"Developers", href:"https://documentation.payonus.com"  },
                 { label:"Support",    href:"/support"    },
                 { label:"Pricing",    href:"/pricing"    },
               ].map(({ label, href }) => {

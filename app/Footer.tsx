@@ -34,11 +34,7 @@ const COLS: { heading: string; links: { label: string; href: string }[] }[] = [
   {
     heading: "Developers",
     links: [
-      { label: "Documentation", href: "/docs" },
-      { label: "API Reference",  href: "/docs" },
-      { label: "SDKs",           href: "/docs" },
-      { label: "Status",         href: "/docs" },
-      { label: "Changelog",      href: "/docs" },
+      { label: "Documentation", href: "https://documentation.payonus.com" },
     ],
   },
   {
