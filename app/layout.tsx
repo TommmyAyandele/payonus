@@ -5,6 +5,7 @@ import CookieBanner from "./CookieBanner";
 import ChatWidget from "./ChatWidget";
 import JsonLd from "./JsonLd";
 import { organizationJsonLd, websiteJsonLd } from "./seo";
+import { SalesModalProvider } from "./SalesModalContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -58,9 +59,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
-        {children}
-        <CookieBanner />
-        <ChatWidget />
+        <SalesModalProvider>
+          {children}
+          <CookieBanner />
+          <ChatWidget />
+        </SalesModalProvider>
       </body>
     </html>
   );

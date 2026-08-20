@@ -6,6 +6,7 @@ import Navbar, { T } from "./Navbar";
 import Footer from "./Footer";
 import { useScrollReveal, ripple } from "./ProductPage";
 import { IndustryBlock, IndustryBlockRenderer, IndustryCTA } from "./IndustryBlocks";
+import { useSalesModal } from "./SalesModalContext";
 
 export interface IndustryHeroData {
   eyebrow: string;
@@ -31,6 +32,7 @@ export default function IndustryPage({ hero, blocks, relatedLinks }: IndustryPag
   const { isMobile, isTablet } = useBreakpoint();
   const [scrolled, setScrolled] = React.useState(false);
   const [scrollPct, setScrollPct] = React.useState(0);
+  const { open: openSalesModal } = useSalesModal();
 
   React.useEffect(() => {
     const fn = () => {
@@ -91,13 +93,13 @@ export default function IndustryPage({ hero, blocks, relatedLinks }: IndustryPag
             </p>
             <div style={{ display:"flex", flexWrap:"wrap", gap:12, marginTop:4 }}>
               <button className="cta-pulse" style={{ position:"relative", overflow:"hidden", fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14, color:T.white, background:T.primary, border:"none", borderRadius:4, padding:"13px 28px", cursor:"pointer", transition:"opacity .15s" }}
-                onClick={e => { ripple(e); if (hero.primaryCta.external) window.open(hero.primaryCta.href,"_blank"); else window.location.href = hero.primaryCta.href; }}>
+                onClick={e => { ripple(e); if (hero.primaryCta.href === "/sales") { openSalesModal(); return; } if (hero.primaryCta.external) window.open(hero.primaryCta.href,"_blank"); else window.location.href = hero.primaryCta.href; }}>
                 {hero.primaryCta.label}
               </button>
               {hero.secondaryCta && (
                 <button style={{ fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14, color:T.muted, background:"transparent", border:`1px solid ${T.muted}`, borderRadius:4, padding:"11px 24px", cursor:"pointer", transition:"background .15s" }}
                   onMouseEnter={e=>(e.currentTarget.style.background="#E9DDFF")} onMouseLeave={e=>(e.currentTarget.style.background="transparent")}
-                  onClick={() => { if (hero.secondaryCta!.external) window.open(hero.secondaryCta!.href,"_blank"); else window.location.href = hero.secondaryCta!.href; }}>
+                  onClick={() => { if (hero.secondaryCta!.href === "/sales") { openSalesModal(); return; } if (hero.secondaryCta!.external) window.open(hero.secondaryCta!.href,"_blank"); else window.location.href = hero.secondaryCta!.href; }}>
                   {hero.secondaryCta.label}
                 </button>
               )}

@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useBreakpoint } from "./use-breakpoint";
+import { useSalesModal } from "./SalesModalContext";
 
 const PRIMARY = "#6009FF";
 const DARK    = "#0F0C36";
@@ -60,6 +61,7 @@ function ripple(e: React.MouseEvent<HTMLButtonElement>) {
 
 export default function CTASection() {
   const { isMobile, isTablet } = useBreakpoint();
+  const { open: openSalesModal } = useSalesModal();
   const hPad    = isMobile ? 20 : isTablet ? 48 : 80;
   const h2Size  = isMobile ? 28 : 44;
   const cols    = isMobile ? "1fr" : "2fr 1fr 1fr";
@@ -172,7 +174,7 @@ export default function CTASection() {
                 }}
                 onMouseEnter={e => (e.currentTarget.style.background = "#E9DDFF")}
                 onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
-                onClick={() => { window.location.href="/sales"; }}
+                onClick={openSalesModal}
               >
                 Contact Sales
               </button>

@@ -6,6 +6,7 @@ import Navbar, { T } from "../Navbar";
 import Footer from "../Footer";
 import RelatedLinks from "../RelatedLinks";
 import { PILLS, PillIcon } from "../ComplianceSection";
+import { useSalesModal } from "../SalesModalContext";
 
 /* ─── SCROLL REVEAL ─── */
 function useScrollReveal() {
@@ -316,6 +317,7 @@ export default function PayoutsPage() {
   const { isMobile, isTablet } = useBreakpoint();
   const [scrolled, setScrolled] = React.useState(false);
   const [scrollPct, setScrollPct] = React.useState(0);
+  const { open: openSalesModal } = useSalesModal();
 
   React.useEffect(() => {
     const onScroll = () => {
@@ -463,7 +465,7 @@ export default function PayoutsPage() {
               }}
                 onMouseEnter={e => (e.currentTarget.style.opacity = "0.88")}
                 onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
-                onClick={() => { window.location.href="/sales"; }}
+                onClick={openSalesModal}
               >Get Started</button>
               <button style={{
                 fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14,
@@ -472,7 +474,7 @@ export default function PayoutsPage() {
               }}
                 onMouseEnter={e => (e.currentTarget.style.background = "#E9DDFF")}
                 onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
-                onClick={() => { window.location.href="/sales"; }}
+                onClick={openSalesModal}
               >Contact Sales</button>
             </div>
           </div>
@@ -766,7 +768,7 @@ export default function PayoutsPage() {
                 }}
                   onMouseEnter={e => (e.currentTarget.style.background = "#E9DDFF")}
                   onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
-                  onClick={() => { window.location.href="/sales"; }}
+                  onClick={openSalesModal}
                 >Contact Sales</button>
               </div>
             </div>
@@ -822,7 +824,7 @@ export default function PayoutsPage() {
                   }}
                     onMouseEnter={e => (e.currentTarget.style.background = "#E9DDFF")}
                     onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
-                    onClick={() => { window.location.href="/sales"; }}
+                    onClick={openSalesModal}
                   >Contact Sales</button>
                 </div>
               </div>

@@ -6,6 +6,7 @@ import Navbar, { T } from "../Navbar";
 import Footer from "../Footer";
 import TestimonialsSection from "../TestimonialsSection";
 import HeroBg from "../HeroBg";
+import { useSalesModal } from "../SalesModalContext";
 
 /* ─── SCROLL REVEAL ─── */
 function useScrollReveal() {
@@ -75,6 +76,7 @@ export default function PricingPage() {
   const [scrolled,  setScrolled]  = React.useState(false);
   const [scrollPct, setScrollPct] = React.useState(0);
   const [openFaq,   setOpenFaq]   = React.useState<number | null>(null);
+  const { open: openSalesModal }  = useSalesModal();
 
   const hPad = isMobile ? 20 : isTablet ? 48 : 80;
 
@@ -467,7 +469,7 @@ export default function PricingPage() {
                   }}
                   onMouseEnter={e=>(e.currentTarget.style.background="#E9DDFF")}
                   onMouseLeave={e=>(e.currentTarget.style.background="transparent")}
-                  onClick={() => { window.location.href="/sales"; }}
+                  onClick={openSalesModal}
                 >Contact Sales</button>
               </div>
             </div>

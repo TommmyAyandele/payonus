@@ -10,6 +10,7 @@ import IndustriesShowcaseSection from "./IndustriesShowcaseSection";
 import HomeFaqSection from "./HomeFaqSection";
 import CTASection from "./CTASection";
 import Footer from "./Footer";
+import { useSalesModal } from "./SalesModalContext";
 
 /* ─── SCROLL REVEAL HOOK ─── */
 function useScrollReveal(isMobile: boolean) {
@@ -50,6 +51,7 @@ function Hero() {
   const [wordIdx, setWordIdx] = React.useState(0);
   const [animKey, setAnimKey] = React.useState(0);
   const [marqueePaused, setMarqueePaused] = React.useState(false);
+  const { open: openSalesModal } = useSalesModal();
 
   React.useEffect(() => {
     const id = setInterval(() => {
@@ -113,7 +115,7 @@ function Hero() {
                 <button style={{ fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14, color:T.muted, background:"transparent", border:`1px solid ${T.muted}`, borderRadius:4, padding:"11px 24px", cursor:"pointer", transition:"background .15s" }}
                   onMouseEnter={e => (e.currentTarget.style.background = "#E9DDFF")}
                   onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
-                  onClick={() => { window.location.href="/sales"; }}
+                  onClick={openSalesModal}
                 >Contact Sales</button>
               </div>
             </div>

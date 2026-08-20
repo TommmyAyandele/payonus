@@ -4,6 +4,7 @@ import React from "react";
 import { useBreakpoint } from "./use-breakpoint";
 import { T } from "./Navbar";
 import { ripple } from "./ProductPage";
+import { useSalesModal } from "./SalesModalContext";
 
 /* ═══════════════════════════════════════
    ICON LIBRARY — shared outline-icon set
@@ -113,12 +114,13 @@ function ArrowLink({ href, label, light }: { href: string; label: string; light?
 /* Button styling matches the site-wide convention (hero CTAs, ProductPage, pricing) exactly:
    radius 4, 13px/28px primary padding, 11px/24px secondary padding. Kept identical everywhere. */
 function PrimaryBtn({ cta }: { cta: IndustryCTA }) {
+  const { open: openSalesModal } = useSalesModal();
   return (
     <button
       style={{ fontFamily: "DM Sans, sans-serif", fontWeight: 500, fontSize: 14, color: T.white, background: T.primary, border: "none", borderRadius: 4, padding: "13px 28px", cursor: "pointer", transition: "opacity .15s" }}
       onMouseEnter={e => (e.currentTarget.style.opacity = "0.88")}
       onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
-      onClick={e => { ripple(e); if (cta.external) window.open(cta.href, "_blank"); else window.location.href = cta.href; }}
+      onClick={e => { ripple(e); if (cta.href === "/sales") { openSalesModal(); return; } if (cta.external) window.open(cta.href, "_blank"); else window.location.href = cta.href; }}
     >
       {cta.label}
     </button>
@@ -126,12 +128,13 @@ function PrimaryBtn({ cta }: { cta: IndustryCTA }) {
 }
 
 function SecondaryBtn({ cta }: { cta: IndustryCTA }) {
+  const { open: openSalesModal } = useSalesModal();
   return (
     <button
       style={{ fontFamily: "DM Sans, sans-serif", fontWeight: 400, fontSize: 14, color: T.muted, background: "transparent", border: `1px solid ${T.muted}`, borderRadius: 4, padding: "11px 24px", cursor: "pointer", transition: "background .15s" }}
       onMouseEnter={e => (e.currentTarget.style.background = "#E9DDFF")}
       onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
-      onClick={() => { if (cta.external) window.open(cta.href, "_blank"); else window.location.href = cta.href; }}
+      onClick={() => { if (cta.href === "/sales") { openSalesModal(); return; } if (cta.external) window.open(cta.href, "_blank"); else window.location.href = cta.href; }}
     >
       {cta.label}
     </button>

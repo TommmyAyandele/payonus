@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useSalesModal } from "./SalesModalContext";
 
 /* ── Brand tokens ── */
 const PRIMARY   = "#6009FF";
@@ -85,6 +86,7 @@ export default function ChatWidget() {
   const [typing, setTyping]   = React.useState(false);
   const bottomRef             = React.useRef<HTMLDivElement>(null);
   const inputRef              = React.useRef<HTMLInputElement>(null);
+  const { open: openSalesModal } = useSalesModal();
 
   React.useEffect(() => {
     if (open) {
@@ -229,6 +231,7 @@ export default function ChatWidget() {
                   {msg.link && (
                     <a
                       href={msg.link.href}
+                      onClick={e => { if (msg.link!.href === "/sales") { e.preventDefault(); openSalesModal(); } }}
                       style={{
                         display:       "inline-block",
                         marginTop:     6,
