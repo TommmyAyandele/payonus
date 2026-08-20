@@ -28,7 +28,6 @@ const STATIC_PATHS = [
   "/industries/manufacturing",
   "/privacy",
   "/terms",
-  "/cookies",
   "/isms-policy",
   "/whistleblower",
 ];

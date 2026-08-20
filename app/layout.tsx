@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import CookieBanner from "./CookieBanner";
-import ChatWidget from "./ChatWidget";
 import JsonLd from "./JsonLd";
 import { organizationJsonLd, websiteJsonLd } from "./seo";
 import { SalesModalProvider } from "./SalesModalContext";
+import LeadCaptureCard from "./LeadCaptureCard";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -61,8 +60,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </noscript>
         <SalesModalProvider>
           {children}
-          <CookieBanner />
-          <ChatWidget />
+          <LeadCaptureCard />
         </SalesModalProvider>
       </body>
     </html>
