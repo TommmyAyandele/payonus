@@ -3,7 +3,7 @@
 import React from "react";
 import { useBreakpoint } from "./use-breakpoint";
 
-const INDUSTRIES = [
+const INDUSTRIES_EN = [
   { title: "Gaming", desc: "Payments built for players", href: "/industries/gaming", photo: "dele" },
   { title: "Forex", desc: "FX rails traders trust", href: "/industries/forex", photo: "homeForex" },
   { title: "Fintech", desc: "Rails for lenders, PSSPs & remittance", href: "/industries/fintech", photo: "homeFintech" },
@@ -13,8 +13,19 @@ const INDUSTRIES = [
   { title: "Manufacturing", desc: "B2B payments for supply chains", href: "/industries/manufacturing", photo: "homeManufacturing" },
 ];
 
-export default function IndustriesShowcaseSection() {
+const INDUSTRIES_FR = [
+  { title: "Jeux & Paris en ligne", desc: "Des paiements pensés pour les joueurs", href: "/fr/industries/gaming", photo: "dele" },
+  { title: "Forex", desc: "Des rails FX auxquels les traders font confiance", href: "/fr/industries/forex", photo: "homeForex" },
+  { title: "Fintech", desc: "Des rails pour prêteurs, PSSP et transferts", href: "/fr/industries/fintech", photo: "homeFintech" },
+  { title: "E-commerce", desc: "Chaque paiement, chaque méthode", href: "/fr/industries/ecommerce", photo: "homeEcommerce" },
+  { title: "VTC & Logistique", desc: "Paiement des chauffeurs, en mouvement", href: "/fr/industries/logistics", photo: "halima" },
+  { title: "Aviation", desc: "Paiements à forte valeur, sans friction", href: "/fr/industries/aviation", photo: "chidi" },
+  { title: "Industrie manufacturière", desc: "Paiements B2B pour chaînes d'approvisionnement", href: "/fr/industries/manufacturing", photo: "homeManufacturing" },
+];
+
+export default function IndustriesShowcaseSection({ locale = "en" }: { locale?: "en" | "fr" }) {
   const { isMobile, isTablet } = useBreakpoint();
+  const INDUSTRIES = locale === "fr" ? INDUSTRIES_FR : INDUSTRIES_EN;
   const hPad = isMobile ? 20 : isTablet ? 48 : 80;
   const cardW = isMobile ? 240 : 300;
   const loop = [...INDUSTRIES, ...INDUSTRIES, ...INDUSTRIES];
@@ -46,10 +57,10 @@ export default function IndustriesShowcaseSection() {
           lineHeight: 1.12,
           color: "#0F0C36",
         }}>
-          Built for every industry we serve
+          {locale === "fr" ? "Conçu pour chaque secteur que nous servons" : "Built for every industry we serve"}
         </h2>
         <p style={{ margin: 0, fontFamily: "DM Sans, sans-serif", fontWeight: 400, fontSize: isMobile ? 14 : 16, lineHeight: 1.6, color: "#6B6877", maxWidth: 620 }}>
-          From gaming to logistics, Payonus adapts to how each industry actually moves money.
+          {locale === "fr" ? "Des jeux à la logistique, Payonus s'adapte à la façon dont chaque secteur fait circuler l'argent." : "From gaming to logistics, Payonus adapts to how each industry actually moves money."}
         </p>
       </div>
       <div style={{ width: "100%", overflow: "hidden", marginTop: 32 }}>

@@ -22,12 +22,13 @@ export interface IndustryPageProps {
   hero: IndustryHeroData;
   blocks: IndustryBlock[];
   relatedLinks?: { label: string; href: string }[];
+  locale?: "en" | "fr";
 }
 
 /* ═══════════════════════════════════════
    SHARED INDUSTRY PAGE COMPONENT
 ═══════════════════════════════════════ */
-export default function IndustryPage({ hero, blocks, relatedLinks }: IndustryPageProps) {
+export default function IndustryPage({ hero, blocks, relatedLinks, locale = "en" }: IndustryPageProps) {
   useScrollReveal();
   const { isMobile, isTablet } = useBreakpoint();
   const [scrolled, setScrolled] = React.useState(false);
@@ -72,7 +73,7 @@ export default function IndustryPage({ hero, blocks, relatedLinks }: IndustryPag
         <div style={{ height:"100%",width:`${scrollPct*100}%`,background:"linear-gradient(90deg,#6009FF 0%,#F4B249 100%)",transition:"width 0.1s linear",borderRadius:"0 2px 2px 0",boxShadow:"0 0 8px rgba(96,9,255,0.4)" }} />
       </div>
 
-      <Navbar scrolled={scrolled} />
+      <Navbar scrolled={scrolled} locale={locale} />
 
       {/* ══ HERO ══ */}
       <section style={{ position:"relative", width:"100%", background:T.bg, overflow:"hidden" }}>
@@ -119,7 +120,7 @@ export default function IndustryPage({ hero, blocks, relatedLinks }: IndustryPag
       {relatedLinks && relatedLinks.length > 0 && (
         <section style={{ width:"100%", background:T.bg, borderTop:`1px solid ${T.borderLight}` }}>
           <div style={{ maxWidth:1440, margin:"0 auto", padding:`32px ${hPad}px`, display:"flex", flexWrap:"wrap", alignItems:"center", gap:20 }}>
-            <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:13, color:T.muted }}>Related:</span>
+            <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:13, color:T.muted }}>{locale === "fr" ? "À voir aussi :" : "Related:"}</span>
             {relatedLinks.map(link => (
               <a key={link.href} href={link.href} style={{ fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14, color:T.primary, textDecoration:"none" }}>
                 {link.label} →
@@ -129,7 +130,7 @@ export default function IndustryPage({ hero, blocks, relatedLinks }: IndustryPag
         </section>
       )}
 
-      <Footer />
+      <Footer locale={locale} />
     </>
   );
 }

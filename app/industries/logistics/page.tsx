@@ -7,6 +7,7 @@ export const metadata = pageMetadata({
   title: "Payment Gateway for Logistics & Ride-Hailing",
   description: "Collect payments, manage payouts, support settlement, and connect payment workflows to your logistics or ride-hailing platform with Payonus.",
   path: "/industries/logistics",
+  alternatePath: "/fr/industries/logistics",
 });
 
 const breadcrumbs = breadcrumbJsonLd([

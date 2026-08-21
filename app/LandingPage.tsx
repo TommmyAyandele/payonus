@@ -31,7 +31,7 @@ function useScrollReveal(isMobile: boolean) {
 }
 
 /* ─── COUNTRIES ─── */
-const COUNTRIES = [
+const COUNTRIES_EN = [
   { flag: "🇳🇬", name: "Nigeria",       currency: "NGN" },
   { flag: "🇬🇭", name: "Ghana",         currency: "GHS" },
   { flag: "🇰🇪", name: "Kenya",         currency: "KES" },
@@ -41,17 +41,46 @@ const COUNTRIES = [
   { flag: "🇨🇮", name: "Côte d'Ivoire", currency: "XOF" },
   { flag: "🇸🇳", name: "Senegal",       currency: "XOF" },
 ];
+const COUNTRIES_FR = [
+  { flag: "🇳🇬", name: "Nigéria",       currency: "NGN" },
+  { flag: "🇬🇭", name: "Ghana",         currency: "GHS" },
+  { flag: "🇰🇪", name: "Kenya",         currency: "KES" },
+  { flag: "🇿🇦", name: "Afrique du Sud", currency: "ZAR" },
+  { flag: "🇿🇲", name: "Zambie",        currency: "ZMW" },
+  { flag: "🇨🇲", name: "Cameroun",      currency: "XAF" },
+  { flag: "🇨🇮", name: "Côte d'Ivoire", currency: "XOF" },
+  { flag: "🇸🇳", name: "Sénégal",       currency: "XOF" },
+];
 
 /* ─── HERO ─── */
-const CYCLE_WORDS  = ["Speed", "Security", "Reliability"];
+const CYCLE_WORDS_EN = ["Speed", "Security", "Reliability"];
+const CYCLE_WORDS_FR = ["Rapidité", "Sécurité", "Fiabilité"];
 const CYCLE_COLORS = [T.primary, T.primary, T.orange];
 
-function Hero() {
+const HERO_COPY = {
+  en: {
+    eyebrow: "— PAN-AFRICAN PAYMENT INFRASTRUCTURE",
+    headingLine1: "Built for", headingLine3: "Made for trust.",
+    subtext: "Settle payments across 8 African markets in seconds — Nigeria, Ghana, Kenya, South Africa, and beyond.",
+    getStarted: "Get Started", contactSales: "Contact Sales",
+  },
+  fr: {
+    eyebrow: "— INFRASTRUCTURE DE PAIEMENT PANAFRICAINE",
+    headingLine1: "Conçu pour la", headingLine3: "Fait pour la confiance.",
+    subtext: "Réglez vos paiements dans 8 marchés africains en quelques secondes — Nigéria, Ghana, Kenya, Afrique du Sud, et bien d'autres.",
+    getStarted: "Commencer", contactSales: "Contacter les ventes",
+  },
+} as const;
+
+function Hero({ locale = "en" }: { locale?: "en" | "fr" }) {
   const { isMobile, isTablet } = useBreakpoint();
   const [wordIdx, setWordIdx] = React.useState(0);
   const [animKey, setAnimKey] = React.useState(0);
   const [marqueePaused, setMarqueePaused] = React.useState(false);
   const { open: openSalesModal } = useSalesModal();
+  const hc = HERO_COPY[locale];
+  const CYCLE_WORDS = locale === "fr" ? CYCLE_WORDS_FR : CYCLE_WORDS_EN;
+  const COUNTRIES = locale === "fr" ? COUNTRIES_FR : COUNTRIES_EN;
 
   React.useEffect(() => {
     const id = setInterval(() => {
@@ -92,18 +121,18 @@ function Hero() {
           <div style={{ width: isMobile ? "100%" : 700, display:"flex", flexDirection:"column", gap: isMobile ? 20 : 40 }}>
 
             <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize: isMobile ? 13 : 16, letterSpacing:"0.0094em", color:T.orange }}>
-              — PAN-AFRICAN PAYMENT INFRASTRUCTURE
+              {hc.eyebrow}
             </span>
 
             <div style={{ display:"flex", flexDirection:"column", gap: isMobile ? 16 : 24 }}>
               <h1 style={{ maxWidth:"100%", margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:h1Size, lineHeight:1.05, letterSpacing:"-0.02em", color:T.headingBlack }}>
-                Built for<br />
+                {hc.headingLine1}<br />
                 <span key={animKey} className="word-in" style={{ color:CYCLE_COLORS[wordIdx] }}>{CYCLE_WORDS[wordIdx]}.</span><br />
-                Made for trust.
+                {hc.headingLine3}
               </h1>
 
               <p style={{ maxWidth:"100%", margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:subSize, lineHeight:1.5, color:T.muted }}>
-                Settle payments across 8 African markets in seconds — Nigeria, Ghana, Kenya, South Africa, and beyond.
+                {hc.subtext}
               </p>
 
               <div style={{ display:"flex", flexWrap:"wrap", alignItems:"center", gap:12 }}>
@@ -111,12 +140,12 @@ function Hero() {
                   onMouseEnter={e => (e.currentTarget.style.opacity = "0.88")}
                   onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
                   onClick={() => { window.open("https://merchantv2.payonus.com/signup","_blank"); }}
-                >Get Started</button>
+                >{hc.getStarted}</button>
                 <button style={{ fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14, color:T.muted, background:"transparent", border:`1px solid ${T.muted}`, borderRadius:4, padding:"11px 24px", cursor:"pointer", transition:"background .15s" }}
                   onMouseEnter={e => (e.currentTarget.style.background = "#E9DDFF")}
                   onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
                   onClick={openSalesModal}
-                >Contact Sales</button>
+                >{hc.contactSales}</button>
               </div>
             </div>
           </div>
@@ -134,7 +163,7 @@ function Hero() {
         <div
           className="marquee-track"
           style={{ display:"flex", alignItems:"center", width:"max-content", gap:0, animationPlayState: marqueePaused ? "paused" : "running" }}
-          aria-label="Markets we operate in"
+          aria-label={locale === "fr" ? "Marchés où nous opérons" : "Markets we operate in"}
           onMouseEnter={() => setMarqueePaused(true)}
           onMouseLeave={() => setMarqueePaused(false)}
         >
@@ -515,21 +544,47 @@ function AnalyticsWireframe({ loaded }: { loaded: boolean }) {
 /* ─── PRODUCT SECTION ─── */
 type WireframeComp = React.FC<{ loaded: boolean }>;
 
-const PRODUCT_CARDS_TOP: { title: string; Wireframe: WireframeComp }[] = [
+const PRODUCT_CARDS_TOP_EN: { title: string; Wireframe: WireframeComp }[] = [
   { title: "Payouts",     Wireframe: PayoutsWireframe     },
   { title: "Collections", Wireframe: CollectionsWireframe },
 ];
-const PRODUCT_CARDS_BOTTOM: { title: string; Wireframe: WireframeComp }[] = [
+const PRODUCT_CARDS_BOTTOM_EN: { title: string; Wireframe: WireframeComp }[] = [
   { title: "Instant Settlements",   Wireframe: SettlementsWireframe },
   { title: "Payment API",           Wireframe: PaymentApiWireframe  },
   { title: "Analytics & Reporting", Wireframe: AnalyticsWireframe   },
 ];
+const PRODUCT_CARDS_TOP_FR: { title: string; Wireframe: WireframeComp }[] = [
+  { title: "Décaissements", Wireframe: PayoutsWireframe     },
+  { title: "Encaissements", Wireframe: CollectionsWireframe },
+];
+const PRODUCT_CARDS_BOTTOM_FR: { title: string; Wireframe: WireframeComp }[] = [
+  { title: "Règlements instantanés",  Wireframe: SettlementsWireframe },
+  { title: "API de paiement",         Wireframe: PaymentApiWireframe  },
+  { title: "Analytique & Rapports",   Wireframe: AnalyticsWireframe   },
+];
 
-const ALL_CARDS = [...PRODUCT_CARDS_TOP, ...PRODUCT_CARDS_BOTTOM];
+const PRODUCT_SECTION_COPY = {
+  en: {
+    eyebrow: "Products",
+    taglineMobile: <>Built for operations that<br />can't afford a delay.</>,
+    taglineDesktop: "Built for operations that can't afford a delay. Every product in the payonus suite is designed to eliminate payment friction at scale.",
+    swipe: "swipe",
+  },
+  fr: {
+    eyebrow: "Produits",
+    taglineMobile: <>Conçu pour des opérations<br />qui ne tolèrent aucun retard.</>,
+    taglineDesktop: "Conçu pour des opérations qui ne tolèrent aucun retard. Chaque produit de la suite payonus est pensé pour éliminer la friction de paiement à grande échelle.",
+    swipe: "glisser",
+  },
+} as const;
 
-function ProductSection() {
+function ProductSection({ locale = "en" }: { locale?: "en" | "fr" }) {
   const { isMobile, isTablet } = useBreakpoint();
   const loaded = useLoadCycle(0);
+  const pc = PRODUCT_SECTION_COPY[locale];
+  const PRODUCT_CARDS_TOP    = locale === "fr" ? PRODUCT_CARDS_TOP_FR    : PRODUCT_CARDS_TOP_EN;
+  const PRODUCT_CARDS_BOTTOM = locale === "fr" ? PRODUCT_CARDS_BOTTOM_FR : PRODUCT_CARDS_BOTTOM_EN;
+  const ALL_CARDS = [...PRODUCT_CARDS_TOP, ...PRODUCT_CARDS_BOTTOM];
 
   /* ── Mobile: touch-swipe carousel ── */
   const [activeIdx, setActiveIdx] = React.useState(0);
@@ -622,10 +677,10 @@ function ProductSection() {
         {/* Header */}
         <div style={{ padding:"72px 20px 16px", flexShrink:0 }}>
           <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:700, fontSize:14, letterSpacing:"0.08em", textTransform:"uppercase", color:T.primary, display:"block", marginBottom:14 }}>
-            Products
+            {pc.eyebrow}
           </span>
           <p style={{ margin:0, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:24, lineHeight:1.22, color:T.headingBlack }}>
-            Built for operations that<br />can't afford a delay.
+            {pc.taglineMobile}
           </p>
         </div>
 
@@ -678,7 +733,7 @@ function ProductSection() {
             ))}
           </div>
           <div ref={hintRef} style={{ display:"flex", alignItems:"center", gap:5, opacity:0.4, transition:"opacity 0.25s" }}>
-            <span style={{ fontFamily:"DM Sans, sans-serif", fontSize:12, color:T.muted }}>swipe</span>
+            <span style={{ fontFamily:"DM Sans, sans-serif", fontSize:12, color:T.muted }}>{pc.swipe}</span>
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
               <path d="M12 5v14M5 12l7 7 7-7" stroke={T.muted} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
@@ -700,11 +755,11 @@ function ProductSection() {
       <div style={{ maxWidth:1440, margin:"0 auto", padding:`0 ${hPad}px` }}>
 
         <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:700, fontSize:16, letterSpacing:"0.08em", textTransform:"uppercase", color:T.primary, display:"block", marginBottom:24 }}>
-          Products
+          {pc.eyebrow}
         </span>
 
         <p className="fade-up" style={{ margin:`0 0 64px`, fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400, fontSize:descSz, lineHeight:1.15, color:T.headingBlack }}>
-          Built for operations that can't afford a delay. Every product in the payonus suite is designed to eliminate payment friction at scale.
+          {pc.taglineDesktop}
         </p>
 
         <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:24, marginBottom:24 }}>
@@ -751,7 +806,7 @@ function ProductSection() {
 }
 
 /* ─── ROOT ─── */
-export default function PayonUsLandingPage() {
+export default function PayonUsLandingPage({ locale = "en" }: { locale?: "en" | "fr" }) {
   const { isMobile } = useBreakpoint();
   useScrollReveal(isMobile);
   const [scrolled, setScrolled]   = React.useState(false);
@@ -827,16 +882,16 @@ export default function PayonUsLandingPage() {
         <div style={{ height:"100%", width:`${scrollPct * 100}%`, background:"linear-gradient(90deg,#6009FF 0%,#F4B249 100%)", transition:"width 0.1s linear", borderRadius:"0 2px 2px 0", boxShadow:"0 0 8px rgba(96,9,255,0.4)" }} />
       </div>
 
-      <Navbar scrolled={scrolled} />
-      <Hero />
-      <ProductSection />
-      <IndustriesShowcaseSection />
-      <BackboneSection />
-      <ComplianceSection />
-      <TestimonialsSection />
-      <HomeFaqSection />
-      <CTASection />
-      <Footer />
+      <Navbar scrolled={scrolled} locale={locale} />
+      <Hero locale={locale} />
+      <ProductSection locale={locale} />
+      <IndustriesShowcaseSection locale={locale} />
+      <BackboneSection locale={locale} />
+      <ComplianceSection locale={locale} />
+      <TestimonialsSection locale={locale} />
+      <HomeFaqSection locale={locale} />
+      <CTASection locale={locale} />
+      <Footer locale={locale} />
     </>
   );
 }

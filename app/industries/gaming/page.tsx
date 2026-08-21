@@ -7,6 +7,7 @@ export const metadata = pageMetadata({
   title: "Gaming Payment Gateway for Businesses in Africa",
   description: "Support gaming collections, payouts, and faster settlement across African markets with payment infrastructure built for high-frequency payment flows.",
   path: "/industries/gaming",
+  alternatePath: "/fr/industries/gaming",
 });
 
 const breadcrumbs = breadcrumbJsonLd([

@@ -57,25 +57,36 @@ export function pageMetadata({
   title,
   description,
   path,
+  locale = "en",
+  alternatePath,
 }: {
   title: string;
   description: string;
   path: string;
+  locale?: "en" | "fr";
+  /** Path of this page's translation in the other language, e.g. "/fr/industries/logistics" from "/industries/logistics". */
+  alternatePath?: string;
 }): Metadata {
   const fullTitle = `${title} | Payonus`;
   const url = `${SITE_URL}${path}`;
 
+  const languages: Record<string, string> | undefined = alternatePath
+    ? locale === "fr"
+      ? { en: `${SITE_URL}${alternatePath}`, fr: url, "x-default": `${SITE_URL}${alternatePath}` }
+      : { en: url, fr: `${SITE_URL}${alternatePath}`, "x-default": url }
+    : undefined;
+
   return {
     title: fullTitle,
     description,
-    alternates: { canonical: url },
+    alternates: { canonical: url, ...(languages ? { languages } : {}) },
     openGraph: {
       title: fullTitle,
       description,
       url,
       siteName: SITE_NAME,
       images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630 }],
-      locale: "en_US",
+      locale: locale === "fr" ? "fr_FR" : "en_US",
       type: "website",
     },
     twitter: {

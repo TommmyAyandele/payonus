@@ -697,6 +697,7 @@ function NumberedStepsBlock({ block }: { block: Extract<IndustryBlock, { kind: "
    MARKETS BLOCK — continuous marquee, matching the homepage's countries strip
 ═══════════════════════════════════════ */
 export const MARKET_COUNTRIES = ["Nigeria", "Ghana", "Kenya", "Côte d'Ivoire", "South Africa", "Zambia", "Senegal", "Cameroon"];
+export const MARKET_COUNTRIES_FR = ["Nigéria", "Ghana", "Kenya", "Côte d'Ivoire", "Afrique du Sud", "Zambie", "Sénégal", "Cameroun"];
 
 const COUNTRY_INFO: Record<string, { flag: string; currency: string }> = {
   "Nigeria": { flag: "🇳🇬", currency: "NGN" },

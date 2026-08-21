@@ -7,6 +7,7 @@ export const metadata = pageMetadata({
   title: "Forex Payment Gateway for Africa",
   description: "Help traders fund accounts and withdraw funds with payment infrastructure for Forex and trading businesses across African markets.",
   path: "/industries/forex",
+  alternatePath: "/fr/industries/forex",
 });
 
 const breadcrumbs = breadcrumbJsonLd([

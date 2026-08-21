@@ -5,6 +5,7 @@ export const metadata = pageMetadata({
   title: "African Payments Infrastructure",
   description: "Send and receive payments across 8 African markets. Fast, compliant, and built for scale.",
   path: "/",
+  alternatePath: "/fr",
 });
 
 export default function Home() {

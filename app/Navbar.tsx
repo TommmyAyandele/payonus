@@ -30,6 +30,16 @@ const industryIconProps = { width: 22, height: 22, viewBox: "0 0 24 24", fill: "
    are drawn inline rather than shipped as pre-composed SVG files. */
 const industryIconColor = "#1D0057";
 
+export const INDUSTRIES_FR_META: Record<string, { title: string; desc: string }> = {
+  "/industries/gaming":        { title: "Jeux & Paris en ligne",        desc: "Des paiements pensés pour les joueurs" },
+  "/industries/forex":         { title: "Forex",                       desc: "Des rails FX auxquels les traders font confiance" },
+  "/industries/fintech":       { title: "Fintech",                     desc: "Des rails pour prêteurs, PSSP et transferts" },
+  "/industries/ecommerce":     { title: "E-commerce",                  desc: "Chaque paiement, chaque méthode" },
+  "/industries/logistics":     { title: "VTC & Logistique",            desc: "Paiement des chauffeurs, en mouvement" },
+  "/industries/aviation":      { title: "Aviation",                    desc: "Paiements à forte valeur, sans friction" },
+  "/industries/manufacturing": { title: "Industrie manufacturière",    desc: "Paiements B2B pour chaînes d'approvisionnement" },
+};
+
 export const INDUSTRIES = [
   {
     title: "Gaming", desc: "Payments built for players", href: "/industries/gaming",
@@ -98,17 +108,85 @@ export const INDUSTRIES = [
   },
 ];
 
-export function Logo({ height = 30 }: { height?: number }) {
+const FR_INDUSTRY_SLUGS = ["aviation", "ecommerce", "fintech", "forex", "gaming", "logistics", "manufacturing"];
+
+function getLocaleSwitch(pathname: string): { en: string; fr: string } {
+  const industryMatch = pathname.match(/^\/industries\/([a-z-]+)\/?$/);
+  if (industryMatch && FR_INDUSTRY_SLUGS.includes(industryMatch[1])) {
+    return { en: `/industries/${industryMatch[1]}`, fr: `/fr/industries/${industryMatch[1]}` };
+  }
+  const frIndustryMatch = pathname.match(/^\/fr\/industries\/([a-z-]+)\/?$/);
+  if (frIndustryMatch && FR_INDUSTRY_SLUGS.includes(frIndustryMatch[1])) {
+    return { en: `/industries/${frIndustryMatch[1]}`, fr: `/fr/industries/${frIndustryMatch[1]}` };
+  }
+  // No translation for this page: send toggles to each locale's homepage.
+  return { en: "/", fr: "/fr" };
+}
+
+function LangSwitcher({ pathname, compact = false }: { pathname: string; compact?: boolean }) {
+  const isFr = pathname === "/fr" || pathname.startsWith("/fr/");
+  const { en, fr } = getLocaleSwitch(pathname);
+  const item = (label: string, href: string, active: boolean): React.CSSProperties => ({
+    padding: compact ? "9px 13px" : "6px 10px",
+    fontFamily: "DM Sans, sans-serif",
+    fontWeight: 600,
+    fontSize: compact ? 14 : 12.5,
+    color: active ? T.white : T.muted,
+    background: active ? T.primary : "transparent",
+    textDecoration: "none",
+    transition: "background .15s, color .15s",
+  });
   return (
-    <a href="/" style={{ display:"flex", alignItems:"center", textDecoration:"none" }}>
+    <div style={{ display: "flex", alignItems: "center", border: `1px solid ${T.borderLight}`, borderRadius: 6, overflow: "hidden", flexShrink: 0 }}>
+      <a href={en} aria-label="English" aria-current={!isFr ? "true" : undefined} style={item("EN", en, !isFr)}>EN</a>
+      <a href={fr} aria-label="Français" aria-current={isFr ? "true" : undefined} style={item("FR", fr, isFr)}>FR</a>
+    </div>
+  );
+}
+
+export function Logo({ height = 30, href = "/" }: { height?: number; href?: string }) {
+  return (
+    <a href={href} style={{ display:"flex", alignItems:"center", textDecoration:"none" }}>
       <img src="/logo-full.svg" alt="payonus" height={height} style={{ display:"block" }} />
     </a>
   );
 }
 
-export default function Navbar({ scrolled }: { scrolled: boolean }) {
+const NAV_COPY = {
+  en: {
+    products: "Products", industries: "Industries",
+    links: [
+      { label: "Company",    href: "/company"  },
+      { label: "Resources",  href: "/resources"},
+      { label: "Developers", href: "https://documentation.payonus.com"},
+      { label: "Support",    href: "/support"  },
+      { label: "Pricing",    href: "/pricing"  },
+    ],
+    getStarted: "Get Started", demoCheckout: "Demo Checkout",
+    toggleMenu: "Toggle menu", closeMenu: "Close menu",
+  },
+  fr: {
+    products: "Produits", industries: "Secteurs",
+    links: [
+      { label: "Entreprise",   href: "/company"  },
+      { label: "Ressources",   href: "/resources"},
+      { label: "Développeurs", href: "https://documentation.payonus.com"},
+      { label: "Support",      href: "/support"  },
+      { label: "Tarifs",       href: "/pricing"  },
+    ],
+    getStarted: "Commencer", demoCheckout: "Démo de paiement",
+    toggleMenu: "Ouvrir le menu", closeMenu: "Fermer le menu",
+  },
+} as const;
+
+export default function Navbar({ scrolled, locale = "en" }: { scrolled: boolean; locale?: "en" | "fr" }) {
   const { isMobile, isTablet } = useBreakpoint();
   const pathname = usePathname();
+  const nc = NAV_COPY[locale];
+  const industries = locale === "fr"
+    ? INDUSTRIES.map(ind => ({ ...ind, ...INDUSTRIES_FR_META[ind.href], href: `/fr${ind.href}` }))
+    : INDUSTRIES;
+  const logoHref = locale === "fr" ? "/fr" : "/";
   const [productsOpen,     setProductsOpen]     = React.useState(false);
   const [industriesOpen,   setIndustriesOpen]   = React.useState(false);
   const [mobileOpen,       setMobileOpen]       = React.useState(false);
@@ -117,7 +195,7 @@ export default function Navbar({ scrolled }: { scrolled: boolean }) {
   const timer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const isProductActive  = PRODUCTS.some(p => pathname === p.href || pathname.startsWith(p.href + "/"));
-  const isIndustryActive = INDUSTRIES.some(i => pathname === i.href || pathname.startsWith(i.href + "/"));
+  const isIndustryActive = industries.some(i => pathname === i.href || pathname.startsWith(i.href + "/"));
 
   const open  = () => { if (timer.current) clearTimeout(timer.current); setProductsOpen(true); setIndustriesOpen(false); };
   const close = () => { timer.current = setTimeout(() => setProductsOpen(false), 130); };
@@ -149,9 +227,9 @@ export default function Navbar({ scrolled }: { scrolled: boolean }) {
       <div style={{ position:"sticky", top:0, zIndex:100 }}>
         <nav style={navBg}>
           <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", padding:`14px ${hPad}px` }}>
-            <Logo />
+            <Logo href={logoHref} />
             <button
-              aria-label="Toggle menu"
+              aria-label={nc.toggleMenu}
               onClick={() => setMobileOpen(o => !o)}
               style={{
                 background: mobileOpen ? "#EDE9FF" : "none",
@@ -184,19 +262,22 @@ export default function Navbar({ scrolled }: { scrolled: boolean }) {
               borderBottom:`1px solid ${T.borderLight}`,
               flexShrink:0,
             }}>
-              <Logo />
-              <button
-                onClick={() => setMobileOpen(false)}
-                aria-label="Close menu"
-                style={{
-                  background:"#EDE9FF", border:"1px solid #D4C8F5",
-                  borderRadius:8, padding:8, cursor:"pointer", lineHeight:0,
-                }}
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                  <path d="M18 6L6 18M6 6l12 12" stroke={T.primary} strokeWidth="2" strokeLinecap="round"/>
-                </svg>
-              </button>
+              <Logo href={logoHref} />
+              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                <LangSwitcher pathname={pathname} compact />
+                <button
+                  onClick={() => setMobileOpen(false)}
+                  aria-label={nc.closeMenu}
+                  style={{
+                    background:"#EDE9FF", border:"1px solid #D4C8F5",
+                    borderRadius:8, padding:8, cursor:"pointer", lineHeight:0,
+                  }}
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M18 6L6 18M6 6l12 12" stroke={T.primary} strokeWidth="2" strokeLinecap="round"/>
+                  </svg>
+                </button>
+              </div>
             </div>
 
             {/* Menu links */}
@@ -219,7 +300,7 @@ export default function Navbar({ scrolled }: { scrolled: boolean }) {
                   onMouseEnter={e => { if (!productsExpanded) e.currentTarget.style.background = "#F5EFF7"; }}
                   onMouseLeave={e => { if (!productsExpanded) e.currentTarget.style.background = "transparent"; }}
                 >
-                  Products
+                  {nc.products}
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style={{ transform: productsExpanded ? "rotate(180deg)" : "rotate(0deg)", transition:"transform .22s", flexShrink:0 }}>
                     <path d="M6 9l6 6 6-6" stroke={productsExpanded ? T.primary : T.muted} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
@@ -283,7 +364,7 @@ export default function Navbar({ scrolled }: { scrolled: boolean }) {
                   onMouseEnter={e => { if (!industriesExpanded) e.currentTarget.style.background = "#F5EFF7"; }}
                   onMouseLeave={e => { if (!industriesExpanded) e.currentTarget.style.background = "transparent"; }}
                 >
-                  Industries
+                  {nc.industries}
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style={{ transform: industriesExpanded ? "rotate(180deg)" : "rotate(0deg)", transition:"transform .22s", flexShrink:0 }}>
                     <path d="M6 9l6 6 6-6" stroke={industriesExpanded ? T.primary : T.muted} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
@@ -298,7 +379,7 @@ export default function Navbar({ scrolled }: { scrolled: boolean }) {
                     marginTop:6,
                     display:"flex", flexDirection:"column", gap:2,
                   }}>
-                    {INDUSTRIES.map(ind => (
+                    {industries.map(ind => (
                       <a key={ind.title} href={ind.href}
                         style={{
                           display:"flex", alignItems:"center", gap:14,
@@ -332,13 +413,7 @@ export default function Navbar({ scrolled }: { scrolled: boolean }) {
               </div>
 
               {/* Regular nav links */}
-              {[
-                { label:"Company",    href:"/company"  },
-                { label:"Resources",  href:"/resources"},
-                { label:"Developers", href:"https://documentation.payonus.com"},
-                { label:"Support",    href:"/support"  },
-                { label:"Pricing",    href:"/pricing"  },
-              ].map(({ label, href }) => (
+              {nc.links.map(({ label, href }) => (
                 <a key={label} href={href}
                   style={{
                     display:"block",
@@ -349,7 +424,7 @@ export default function Navbar({ scrolled }: { scrolled: boolean }) {
                   onClick={(e) => {
                     e.preventDefault();
                     setMobileOpen(false);
-                    if (href !== "#") window.location.href = href;
+                    window.location.href = href;
                   }}
                   onMouseEnter={e => (e.currentTarget.style.background = "#F5EFF7")}
                   onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
@@ -375,7 +450,7 @@ export default function Navbar({ scrolled }: { scrolled: boolean }) {
                 onMouseEnter={e => (e.currentTarget.style.opacity="0.88")}
                 onMouseLeave={e => (e.currentTarget.style.opacity="1")}
                 onClick={() => { window.open("https://merchantv2.payonus.com/signup","_blank"); }}
-              >Get Started</button>
+              >{nc.getStarted}</button>
               <button
                 style={{
                   fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:15,
@@ -386,7 +461,7 @@ export default function Navbar({ scrolled }: { scrolled: boolean }) {
                 }}
                 onMouseEnter={e => (e.currentTarget.style.background="#E9DDFF")}
                 onMouseLeave={e => (e.currentTarget.style.background="transparent")}
-              >Demo Checkout</button>
+              >{nc.demoCheckout}</button>
             </div>
           </div>
         )}
@@ -398,28 +473,22 @@ export default function Navbar({ scrolled }: { scrolled: boolean }) {
     <div style={{ position:"sticky", top:0, zIndex:100 }}>
       <nav style={navBg}>
         <div style={{ maxWidth:1440, margin:"0 auto", display:"flex", justifyContent:"space-between", alignItems:"center", padding:`20px ${hPad}px` }}>
-          <Logo />
+          <Logo href={logoHref} />
           <div style={{ display:"flex", alignItems:"center", gap: isTablet ? 24 : 40 }}>
             <div style={{ display:"flex", alignItems:"center", gap: isTablet ? 4 : 16 }}>
               <div onMouseEnter={open} onMouseLeave={close} style={{ position:"relative" }}>
                 <a href="#" style={{ ...nl, gap:6, color:(productsOpen||isProductActive)?T.primary:T.dark, background:(productsOpen||isProductActive)?"#F5EFF7":"transparent" }}>
-                  Products
+                  {nc.products}
                   <img src="/icons/icon-chevron.svg" alt="" width={14} height={14} style={{ transform: productsOpen ? "rotate(0deg)" : "rotate(180deg)", transition:"transform .2s" }} />
                 </a>
               </div>
               <div onMouseEnter={openI} onMouseLeave={closeI} style={{ position:"relative" }}>
                 <a href="#" style={{ ...nl, gap:6, color:(industriesOpen||isIndustryActive)?T.primary:T.dark, background:(industriesOpen||isIndustryActive)?"#F5EFF7":"transparent" }}>
-                  Industries
+                  {nc.industries}
                   <img src="/icons/icon-chevron.svg" alt="" width={14} height={14} style={{ transform: industriesOpen ? "rotate(0deg)" : "rotate(180deg)", transition:"transform .2s" }} />
                 </a>
               </div>
-              {[
-                { label:"Company",    href:"/company"    },
-                { label:"Resources",  href:"/resources"   },
-                { label:"Developers", href:"https://documentation.payonus.com"  },
-                { label:"Support",    href:"/support"    },
-                { label:"Pricing",    href:"/pricing"    },
-              ].map(({ label, href }) => {
+              {nc.links.map(({ label, href }) => {
                 const active = pathname === href || pathname.startsWith(href + "/");
                 return (
                   <a key={label} href={href}
@@ -431,17 +500,18 @@ export default function Navbar({ scrolled }: { scrolled: boolean }) {
               })}
             </div>
             <div style={{ display:"flex", alignItems:"center", gap:12 }}>
+              <LangSwitcher pathname={pathname} />
               {!isTablet && (
                 <button style={{ fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14, color:T.muted, background:"transparent", border:`1px solid ${T.muted}`, borderRadius:4, padding:"9px 14px", cursor:"pointer", transition:"background .15s", whiteSpace:"nowrap" }}
                   onMouseEnter={e => (e.currentTarget.style.background = "#E9DDFF")}
                   onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
-                >Demo Checkout</button>
+                >{nc.demoCheckout}</button>
               )}
               <button style={{ fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14, color:T.white, background:T.primary, border:"none", borderRadius:4, padding:"9px 14px", cursor:"pointer", transition:"opacity .15s", whiteSpace:"nowrap" }}
                 onMouseEnter={e => (e.currentTarget.style.opacity = "0.88")}
                 onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
                 onClick={() => { window.open("https://merchantv2.payonus.com/signup","_blank"); }}
-              >Get Started</button>
+              >{nc.getStarted}</button>
             </div>
           </div>
         </div>
@@ -468,7 +538,7 @@ export default function Navbar({ scrolled }: { scrolled: boolean }) {
         {industriesOpen && (
           <div onMouseEnter={openI} onMouseLeave={closeI} className="nav-dropdown" style={{ position:"absolute", top:"100%", left:0, width:"100%", background:"#F8F5FF", boxShadow:"0 12px 40px rgba(96,9,255,0.08)", borderTop:`1px solid #E9DDFF`, zIndex:10 }}>
             <div style={{ maxWidth:1440, margin:"0 auto", padding:`24px ${hPad}px 32px`, display:"grid", gridTemplateColumns: isTablet ? "1fr 1fr 1fr" : "1fr 1fr 1fr 1fr 1fr 1fr", gap:4 }}>
-              {INDUSTRIES.map(ind => (
+              {industries.map(ind => (
                 <a key={ind.title} href={ind.href} style={{ display:"flex", alignItems:"center", gap:14, padding:"14px 16px", textDecoration:"none", borderRadius:10, transition:"background .15s" }}
                   onMouseEnter={e => (e.currentTarget.style.background = "#F5EFF7")}
                   onMouseLeave={e => (e.currentTarget.style.background = "transparent")}

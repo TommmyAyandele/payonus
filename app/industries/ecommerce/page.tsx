@@ -7,6 +7,7 @@ export const metadata = pageMetadata({
   title: "E-commerce Payment Gateway for Africa",
   description: "Help your customers pay while managing collections, payouts, and payment operations across 8 African markets with Payonus.",
   path: "/industries/ecommerce",
+  alternatePath: "/fr/industries/ecommerce",
 });
 
 const breadcrumbs = breadcrumbJsonLd([

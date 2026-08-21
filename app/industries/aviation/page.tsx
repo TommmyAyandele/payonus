@@ -7,6 +7,7 @@ export const metadata = pageMetadata({
   title: "Aviation Payment Infrastructure & Solutions",
   description: "Payment infrastructure for airlines, charter operators, FBOs, MROs and aviation businesses managing complex, high-value and cross-border payments.",
   path: "/industries/aviation",
+  alternatePath: "/fr/industries/aviation",
 });
 
 const breadcrumbs = breadcrumbJsonLd([

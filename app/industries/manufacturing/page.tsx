@@ -7,6 +7,7 @@ export const metadata = pageMetadata({
   title: "Manufacturing Payment Solutions",
   description: "Improve cash collection, working capital and payment operations with infrastructure built for complex manufacturing workflows.",
   path: "/industries/manufacturing",
+  alternatePath: "/fr/industries/manufacturing",
 });
 
 const breadcrumbs = breadcrumbJsonLd([

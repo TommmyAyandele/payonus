@@ -7,6 +7,7 @@ export const metadata = pageMetadata({
   title: "Payment Infrastructure for Fintechs & Financial Businesses in Africa",
   description: "Secure, scalable payment infrastructure for fintechs and financial businesses across 8 African markets. Support how you collect, move, settle, and manage payments with Payonus.",
   path: "/industries/fintech",
+  alternatePath: "/fr/industries/fintech",
 });
 
 const breadcrumbs = breadcrumbJsonLd([

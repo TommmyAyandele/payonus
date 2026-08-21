@@ -3,7 +3,7 @@
 import React from "react";
 import { useBreakpoint } from "./use-breakpoint";
 
-const TESTIMONIALS = [
+const TESTIMONIALS_EN = [
   {
     quote: `"My experience with Payonus has been very positive. I really appreciate how responsive the team is whenever I need assistance, and I can always reach my account officer whenever necessary. PayOnus is the lifeline of KwikX, and we truly value this partnership. Thank you for your continued commitment and excellent service."`,
     name: "James Idowu,",
@@ -16,12 +16,26 @@ const TESTIMONIALS = [
   },
 ];
 
-const N = TESTIMONIALS.length;
-const TRACK = [TESTIMONIALS[N - 1], ...TESTIMONIALS, TESTIMONIALS[0]];
+const TESTIMONIALS_FR = [
+  {
+    quote: `"Mon expérience avec Payonus a été très positive. J'apprécie vraiment la réactivité de l'équipe chaque fois que j'ai besoin d'assistance, et je peux toujours joindre mon chargé de compte en cas de besoin. PayOnus est la bouée de sauvetage de KwikX, et nous tenons vraiment à ce partenariat. Merci pour votre engagement continu et votre excellent service."`,
+    name: "James Idowu,",
+    role: "Marchand Bureau de Change, Crownphix Technologies Limited",
+  },
+  {
+    quote: `"Avant Payonus, les paiements transfrontaliers étaient un exercice d'urgence hebdomadaire. Maintenant, ça fonctionne, tout simplement. Notre équipe a vraiment cessé de s'en inquiéter."`,
+    name: "John Kent,",
+    role: "Directeur financier, Bet9ja",
+  },
+];
+
 const SLIDE_GAP = 48;
 
-export default function TestimonialsSection() {
+export default function TestimonialsSection({ locale = "en" }: { locale?: "en" | "fr" }) {
   const { isMobile, isTablet } = useBreakpoint();
+  const TESTIMONIALS = locale === "fr" ? TESTIMONIALS_FR : TESTIMONIALS_EN;
+  const N = TESTIMONIALS.length;
+  const TRACK = [TESTIMONIALS[N - 1], ...TESTIMONIALS, TESTIMONIALS[0]];
   const SLIDE_FRAC = isMobile ? 1 : isTablet ? 0.88 : 0.78;
   const hPad       = isMobile ? 20 : isTablet ? 48 : 80;
   const quoteSz    = isMobile ? 22 : isTablet ? 30 : 40;
@@ -118,7 +132,7 @@ export default function TestimonialsSection() {
           display:       "block",
           marginBottom:  isMobile ? 28 : 48,
         }}>
-          — Testimonials
+          {locale === "fr" ? "— Témoignages" : "— Testimonials"}
         </span>
 
         {/* Carousel viewport */}
@@ -204,7 +218,7 @@ export default function TestimonialsSection() {
         {/* Navigation arrows */}
         <div style={{ display: "flex", gap: 12, marginTop: isMobile ? 28 : 40 }}>
           <button
-            aria-label="Previous testimonial"
+            aria-label={locale === "fr" ? "Témoignage précédent" : "Previous testimonial"}
             onClick={() => { step(-1); resetTimer(); }}
             style={arrowBtn}
             onMouseEnter={e => (e.currentTarget.style.background = "#DDD6FE")}
@@ -215,7 +229,7 @@ export default function TestimonialsSection() {
             </svg>
           </button>
           <button
-            aria-label="Next testimonial"
+            aria-label={locale === "fr" ? "Témoignage suivant" : "Next testimonial"}
             onClick={() => { step(1); resetTimer(); }}
             style={arrowBtn}
             onMouseEnter={e => (e.currentTarget.style.background = "#DDD6FE")}

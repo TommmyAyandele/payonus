@@ -59,9 +59,27 @@ function ripple(e: React.MouseEvent<HTMLButtonElement>) {
   setTimeout(() => span.remove(), 600);
 }
 
-export default function CTASection() {
+const CTA_COPY = {
+  en: {
+    heading: "Ready to get started?",
+    subtext: "Create an account instantly, or contact us to design a custom package for your business.",
+    getStarted: "Get Started", contactSales: "Contact Sales",
+    pricingTitle: "See what you'll pay", pricingDesc: "Integrated per-transaction pricing with no hidden fees.", pricingLink: "Pricing details",
+    buildTitle: "Start building", buildDesc: "Get up and running with Payonus in as little as 10 minutes.", buildLink: "Integration options",
+  },
+  fr: {
+    heading: "Prêt à démarrer ?",
+    subtext: "Créez un compte instantanément, ou contactez-nous pour concevoir une offre sur mesure pour votre entreprise.",
+    getStarted: "Commencer", contactSales: "Contacter les ventes",
+    pricingTitle: "Découvrez nos tarifs", pricingDesc: "Une tarification intégrée par transaction, sans frais cachés.", pricingLink: "Voir les tarifs",
+    buildTitle: "Commencez à développer", buildDesc: "Soyez opérationnel avec Payonus en aussi peu que 10 minutes.", buildLink: "Options d'intégration",
+  },
+} as const;
+
+export default function CTASection({ locale = "en" }: { locale?: "en" | "fr" }) {
   const { isMobile, isTablet } = useBreakpoint();
   const { open: openSalesModal } = useSalesModal();
+  const cc = CTA_COPY[locale];
   const hPad    = isMobile ? 20 : isTablet ? 48 : 80;
   const h2Size  = isMobile ? 28 : 44;
   const cols    = isMobile ? "1fr" : "2fr 1fr 1fr";
@@ -104,7 +122,7 @@ export default function CTASection() {
               lineHeight: 1.1,
               color:      DARK,
             }}>
-              Ready to get started?
+              {cc.heading}
             </h2>
 
             <p style={{
@@ -116,8 +134,7 @@ export default function CTASection() {
               color:      MUTED,
               maxWidth:   440,
             }}>
-              Create an account instantly, or contact us to design a
-              custom package for your business.
+              {cc.subtext}
             </p>
 
             <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
@@ -151,7 +168,7 @@ export default function CTASection() {
                 }}
                 onMouseLeave={e => { e.currentTarget.style.transform = ""; }}
               >
-                Get Started
+                {cc.getStarted}
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
                   <path d="M9 18l6-6-6-6" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
@@ -176,7 +193,7 @@ export default function CTASection() {
                 onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
                 onClick={openSalesModal}
               >
-                Contact Sales
+                {cc.contactSales}
               </button>
             </div>
           </div>
@@ -198,7 +215,7 @@ export default function CTASection() {
               lineHeight: 1.3,
               color:      DARK,
             }}>
-              See what you'll pay
+              {cc.pricingTitle}
             </p>
 
             <p style={{
@@ -209,10 +226,10 @@ export default function CTASection() {
               lineHeight: 1.65,
               color:      DESC,
             }}>
-              Integrated per-transaction pricing with no hidden fees.
+              {cc.pricingDesc}
             </p>
 
-            <LinkArrow label="Pricing details" />
+            <LinkArrow label={cc.pricingLink} />
           </div>
 
           {/* ── Right: Integration ── */}
@@ -231,7 +248,7 @@ export default function CTASection() {
               lineHeight: 1.3,
               color:      DARK,
             }}>
-              Start building
+              {cc.buildTitle}
             </p>
 
             <p style={{
@@ -242,10 +259,10 @@ export default function CTASection() {
               lineHeight: 1.65,
               color:      DESC,
             }}>
-              Get up and running with Payonus in as little as 10 minutes.
+              {cc.buildDesc}
             </p>
 
-            <LinkArrow label="Integration options" href="/docs" />
+            <LinkArrow label={cc.buildLink} href="/docs" />
           </div>
 
         </div>

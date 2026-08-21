@@ -10,7 +10,7 @@ const COPY      = "#49454F";
 const DIVIDER   = "rgba(96,9,255,0.18)";
 const ICON_RING = "rgba(96,9,255,0.28)";
 
-const COLS: { heading: string; links: { label: string; href: string }[] }[] = [
+const COLS_EN: { heading: string; links: { label: string; href: string }[] }[] = [
   {
     heading: "Payonus",
     links: [
@@ -44,6 +44,44 @@ const COLS: { heading: string; links: { label: string; href: string }[] }[] = [
       { label: "Privacy Policy",   href: "/privacy"        },
       { label: "ISMS Policy",      href: "/isms-policy"    },
       { label: "Whistleblower",    href: "/whistleblower"  },
+    ],
+  },
+];
+
+const COLS_FR: { heading: string; links: { label: string; href: string }[] }[] = [
+  {
+    heading: "Payonus",
+    links: [
+      { label: "À propos",   href: "/company"   },
+      { label: "Carrières",  href: "/careers"   },
+      { label: "Sécurité",   href: "/security"  },
+      { label: "Ressources", href: "/resources" },
+      { label: "Contact",    href: "/support"   },
+    ],
+  },
+  {
+    heading: "Produits",
+    links: [
+      { label: "Décaissements", href: "/payouts"     },
+      { label: "Encaissements", href: "/collections" },
+      { label: "Règlements",    href: "/settlements" },
+      { label: "API de paiement", href: "/payment-api" },
+      { label: "Analytique",    href: "/analytics"   },
+    ],
+  },
+  {
+    heading: "Développeurs",
+    links: [
+      { label: "Documentation", href: "https://documentation.payonus.com" },
+    ],
+  },
+  {
+    heading: "Mentions légales",
+    links: [
+      { label: "Conditions d'utilisation",   href: "/terms"          },
+      { label: "Politique de confidentialité", href: "/privacy"      },
+      { label: "Politique ISMS",              href: "/isms-policy"   },
+      { label: "Lanceurs d'alerte",           href: "/whistleblower" },
     ],
   },
 ];
@@ -89,8 +127,9 @@ function SocialBtn({ label, href, children }: { label: string; href?: string; ch
   );
 }
 
-export default function Footer() {
+export default function Footer({ locale = "en" }: { locale?: "en" | "fr" }) {
   const { isMobile, isTablet } = useBreakpoint();
+  const COLS = locale === "fr" ? COLS_FR : COLS_EN;
   const hPad     = isMobile ? 20 : isTablet ? 48 : 80;
   const gridCols = isMobile ? "1fr 1fr" : "1fr 1fr 1fr 1fr";
   const gridGap  = isMobile ? 32 : 48;
@@ -185,7 +224,7 @@ export default function Footer() {
             fontSize:   14,
             color:      COPY,
           }}>
-            © 2026 Payonus All Rights Reserved
+            {locale === "fr" ? "© 2026 Payonus Tous droits réservés" : "© 2026 Payonus All Rights Reserved"}
           </p>
 
           {/* Social icons */}

@@ -3,10 +3,16 @@
 import React from "react";
 import { useBreakpoint } from "./use-breakpoint";
 
-const STATS = [
+const STATS_EN = [
   { value: 500, prefix: "",  suffix: "+",  label: "Businesses",     desc: "500+ businesses onboarded and processing payments across 8 African markets since launch in 2023" },
   { value: 99,  prefix: "",  suffix: "%",  label: "Uptime",         desc: "99% service uptime with 24/7 monitoring and real-time transaction notifications" },
   { value: 300, prefix: "₦", suffix: "B+", label: "Monthly Volume", desc: "₦300B+ average transaction volume processed every month, with ₦2.5T+ total payment volume" },
+];
+
+const STATS_FR = [
+  { value: 500, prefix: "",  suffix: "+",  label: "Entreprises",     desc: "Plus de 500 entreprises intégrées et traitant des paiements dans 8 marchés africains depuis le lancement en 2023" },
+  { value: 99,  prefix: "",  suffix: "%",  label: "Disponibilité",   desc: "99 % de disponibilité de service avec surveillance 24h/24, 7j/7 et notifications de transaction en temps réel" },
+  { value: 300, prefix: "₦", suffix: "Md+", label: "Volume mensuel", desc: "Plus de ₦300 Md de volume de transactions traité en moyenne chaque mois, pour un volume total de paiements de plus de ₦2 500 Md" },
 ];
 
 function useCounter(to: number, active: boolean, duration = 1500): number {
@@ -27,8 +33,9 @@ function useCounter(to: number, active: boolean, duration = 1500): number {
 
 const EASE = "cubic-bezier(0.16,1,0.3,1)";
 
-export default function BackboneSection() {
+export default function BackboneSection({ locale = "en" }: { locale?: "en" | "fr" }) {
   const { isMobile, isTablet } = useBreakpoint();
+  const STATS = locale === "fr" ? STATS_FR : STATS_EN;
   const ref = React.useRef<HTMLElement>(null);
   const [on, setOn] = React.useState(false);
 
@@ -83,7 +90,7 @@ export default function BackboneSection() {
           lineHeight: 1.12,
           color:      "#0F0C36",
         }}>
-          The Backbone of African Commerce
+          {locale === "fr" ? "L'épine dorsale du commerce africain" : "The Backbone of African Commerce"}
         </h2>
 
         <div style={{
@@ -111,7 +118,7 @@ export default function BackboneSection() {
 
         {!isMobile && (
           <div style={{ width:"100%", height: isTablet ? 300 : 417, borderRadius:16, overflow:"hidden", boxSizing:"border-box", ...fade("0.24s") }}>
-            <img src="/backbone-hero.png" alt="Abstract 3D twisted ribbon shapes in gold and purple" loading="lazy" className="banner-inner-image" style={{ width:"100%", height:"100%", objectFit:"cover" }} />
+            <img src="/backbone-hero.png" alt={locale === "fr" ? "Formes de rubans torsadés 3D abstraits en or et violet" : "Abstract 3D twisted ribbon shapes in gold and purple"} loading="lazy" className="banner-inner-image" style={{ width:"100%", height:"100%", objectFit:"cover" }} />
           </div>
         )}
 

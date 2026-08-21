@@ -3,7 +3,7 @@
 import React from "react";
 import { useBreakpoint } from "./use-breakpoint";
 
-const CARDS = [
+const CARDS_EN = [
   {
     icon: "data",
     title: "Data Encryption",
@@ -23,6 +23,29 @@ const CARDS = [
     icon: "monitor",
     title: "Uptime & 24/7 Monitoring",
     desc: "99% uptime SLA backed by round-the-clock infrastructure monitoring, secured source and reply URLs, and real-time transaction notifications across all payment flows.",
+  },
+];
+
+const CARDS_FR = [
+  {
+    icon: "data",
+    title: "Chiffrement des données",
+    desc: "Certifié ISO 27001 — toutes les données de transaction sont chiffrées selon les normes les plus élevées du secteur. Les informations de vos clients sont toujours protégées.",
+  },
+  {
+    icon: "kyc",
+    title: "KYC, audit & réglementation",
+    desc: "Piste d'audit numérique de bout en bout sur chaque transaction. Régulé par la Banque centrale du Nigéria (CBN) et certifié par le NDPC — la conformité est intégrée, pas ajoutée après coup.",
+  },
+  {
+    icon: "audit",
+    title: "Certifié PCI DSS niveau 1",
+    desc: "Nous sommes un prestataire de services de paiement certifié PCI DSS niveau 1, le plus haut niveau de conformité sécuritaire du secteur des paiements, vérifié par un évaluateur de sécurité qualifié.",
+  },
+  {
+    icon: "monitor",
+    title: "Disponibilité & surveillance 24/7",
+    desc: "SLA de disponibilité de 99 % soutenu par une surveillance de l'infrastructure permanente, des URL source et de réponse sécurisées, et des notifications de transaction en temps réel sur tous les flux de paiement.",
   },
 ];
 
@@ -139,8 +162,9 @@ export function PillIcon({ type, size }: { type: string; size: number }) {
   }
 }
 
-export default function ComplianceSection() {
+export default function ComplianceSection({ locale = "en" }: { locale?: "en" | "fr" }) {
   const { isMobile, isTablet } = useBreakpoint();
+  const CARDS = locale === "fr" ? CARDS_FR : CARDS_EN;
   const hPad     = isMobile ? 20 : isTablet ? 48 : 80;
   const h2Size   = isMobile ? 28 : isTablet ? 38 : 48;
   const cardCols = isMobile ? "1fr" : "1fr 1fr";
@@ -196,7 +220,7 @@ export default function ComplianceSection() {
           display:       "block",
           marginBottom:  gap,
         }}>
-          — Compliance
+          {locale === "fr" ? "— Conformité" : "— Compliance"}
         </span>
 
         {/* Headline */}
@@ -209,9 +233,9 @@ export default function ComplianceSection() {
           fontSize:   h2Size,
           lineHeight: 1.12,
         }}>
-          <span style={{ color: "#6009FF" }}>Enterprise-grade compliance.</span>
+          <span style={{ color: "#6009FF" }}>{locale === "fr" ? "Conformité de niveau entreprise." : "Enterprise-grade compliance."}</span>
           <br />
-          <span style={{ color: "#0F0C36" }}>Built into the infrastructure.</span>
+          <span style={{ color: "#0F0C36" }}>{locale === "fr" ? "Intégrée à l'infrastructure." : "Built into the infrastructure."}</span>
         </h2>
 
         {/* Subtext */}
@@ -226,8 +250,9 @@ export default function ComplianceSection() {
           color:      "#49454F",
           maxWidth:   680,
         }}>
-          Regulatory requirements vary by market. payonus handles all of it at the
-          infrastructure layer — so your team doesn't have to build, maintain, or audit it.
+          {locale === "fr"
+            ? "Les exigences réglementaires varient selon les marchés. payonus s'en occupe entièrement au niveau de l'infrastructure — pour que votre équipe n'ait pas à les construire, les maintenir ou les auditer."
+            : "Regulatory requirements vary by market. payonus handles all of it at the infrastructure layer — so your team doesn't have to build, maintain, or audit it."}
         </p>
 
         {/* 2×2 card grid */}
@@ -298,7 +323,7 @@ export default function ComplianceSection() {
           lineHeight: 1.3,
           color:      "#0F0C36",
         }}>
-          Certifications and Standards
+          {locale === "fr" ? "Certifications et normes" : "Certifications and Standards"}
         </p>
 
         {/* Marquee */}
