@@ -9,6 +9,8 @@ const STORAGE_KEY = "payonus_lead_capture_last_interaction";
 const COOLDOWN_MS = 30 * 24 * 60 * 60 * 1000; // 30 days — reappear on a later visit, not the next one
 const SCROLL_THRESHOLD = 500;
 const AUTO_CLOSE_MS = 2500;
+const SCROLL_SETTLE_MS = 600; // wait for scrolling to stop before popping up, so it never appears mid-flick
+const ARM_DELAY_MS = 400; // ignore dismiss taps for a beat after showing, so the tap that reveals it can't also swallow-close it
 
 function withinCooldown(): boolean {
   const last = localStorage.getItem(STORAGE_KEY);
@@ -20,25 +22,43 @@ export default function LeadCaptureCard() {
   const { isMobile } = useBreakpoint();
   const { isOpen: salesModalOpen } = useSalesModal();
   const [visible, setVisible] = React.useState(false);
+  const [armed, setArmed] = React.useState(false);
   const [submitted, setSubmitted] = React.useState(false);
   const [form, setForm] = React.useState({ business: "", email: "" });
 
   React.useEffect(() => {
     if (withinCooldown()) return;
+    let settleTimer: ReturnType<typeof setTimeout> | null = null;
     const onScroll = () => {
-      if (window.scrollY > SCROLL_THRESHOLD) {
+      if (window.scrollY <= SCROLL_THRESHOLD) return;
+      if (settleTimer) clearTimeout(settleTimer);
+      settleTimer = setTimeout(() => {
         setVisible(true);
         window.removeEventListener("scroll", onScroll);
-      }
+      }, SCROLL_SETTLE_MS);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (settleTimer) clearTimeout(settleTimer);
+    };
   }, []);
+
+  React.useEffect(() => {
+    if (!visible) { setArmed(false); return; }
+    const id = setTimeout(() => setArmed(true), ARM_DELAY_MS);
+    return () => clearTimeout(id);
+  }, [visible]);
 
   const close = React.useCallback(() => {
     localStorage.setItem(STORAGE_KEY, String(Date.now()));
     setVisible(false);
   }, []);
+
+  const requestClose = React.useCallback(() => {
+    if (!armed) return;
+    close();
+  }, [armed, close]);
 
   React.useEffect(() => {
     if (!visible) return;
@@ -75,7 +95,7 @@ export default function LeadCaptureCard() {
       role="dialog"
       aria-modal="true"
       aria-label="Stay in touch"
-      onClick={close}
+      onClick={requestClose}
       style={{
         position: "fixed", inset: 0, zIndex: 900,
         background: "rgba(15,12,20,0.55)",
