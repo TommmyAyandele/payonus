@@ -5,6 +5,23 @@ import { useBreakpoint } from "./use-breakpoint";
 import { T } from "./Navbar";
 import { ripple } from "./ProductPage";
 import { useSalesModal } from "./SalesModalContext";
+import { trackEvent } from "./analytics";
+
+/* ═══════════════════════════════════════
+   TRACKING CONTEXT — carries the current page's industry name down to
+   every CTA/link so GA4 events don't need it threaded through every block.
+═══════════════════════════════════════ */
+const IndustryTrackingContext = React.createContext<string>("");
+export function IndustryTrackingProvider({ pageIndustry, children }: { pageIndustry: string; children: React.ReactNode }) {
+  return <IndustryTrackingContext.Provider value={pageIndustry}>{children}</IndustryTrackingContext.Provider>;
+}
+function usePageIndustry() {
+  return React.useContext(IndustryTrackingContext);
+}
+/** Documentation links (e.g. "/docs", "Explore Developer Documentation") get their own event per spec; everything else is a regular internal link. */
+function isDocumentationLink(href: string, label: string) {
+  return href === "/docs" || href.includes("documentation.payonus.com") || /documentation/i.test(label);
+}
 
 /* ═══════════════════════════════════════
    ICON LIBRARY — shared outline-icon set
@@ -101,10 +118,18 @@ function Intro({ children, marginBottom = 48 }: { children: React.ReactNode; mar
   );
 }
 
-function ArrowLink({ href, label, light }: { href: string; label: string; light?: boolean }) {
+function ArrowLink({ href, label, light, location }: { href: string; label: string; light?: boolean; location: string }) {
   const color = light ? "#FFFFFF" : T.primary;
+  const pageIndustry = usePageIndustry();
+  const isDocs = isDocumentationLink(href, label);
   return (
-    <a href={href} style={{ display: "inline-flex", alignItems: "center", gap: 4, marginTop: 12, fontFamily: "DM Sans, sans-serif", fontWeight: 600, fontSize: 13, color, textDecoration: "none" }}>
+    <a
+      href={href}
+      onClick={() => trackEvent(isDocs ? "documentation_click" : "internal_link_click", {
+        page_industry: pageIndustry, link_name: label, link_location: location, destination: href,
+      })}
+      style={{ display: "inline-flex", alignItems: "center", gap: 4, marginTop: 12, fontFamily: "DM Sans, sans-serif", fontWeight: 600, fontSize: 13, color, textDecoration: "none" }}
+    >
       {label}
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke={color} strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" /></svg>
     </a>
@@ -113,28 +138,39 @@ function ArrowLink({ href, label, light }: { href: string; label: string; light?
 
 /* Button styling matches the site-wide convention (hero CTAs, ProductPage, pricing) exactly:
    radius 4, 13px/28px primary padding, 11px/24px secondary padding. Kept identical everywhere. */
-function PrimaryBtn({ cta }: { cta: IndustryCTA }) {
+function PrimaryBtn({ cta, location }: { cta: IndustryCTA; location: string }) {
   const { open: openSalesModal } = useSalesModal();
+  const pageIndustry = usePageIndustry();
   return (
     <button
       style={{ fontFamily: "DM Sans, sans-serif", fontWeight: 500, fontSize: 14, color: T.white, background: T.primary, border: "none", borderRadius: 4, padding: "13px 28px", cursor: "pointer", transition: "opacity .15s" }}
       onMouseEnter={e => (e.currentTarget.style.opacity = "0.88")}
       onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
-      onClick={e => { ripple(e); if (cta.href === "/sales") { openSalesModal(); return; } if (cta.external) window.open(cta.href, "_blank"); else window.location.href = cta.href; }}
+      onClick={e => {
+        ripple(e);
+        trackEvent("cta_click", { page_industry: pageIndustry, cta_name: cta.label, cta_location: location, destination: cta.href === "/sales" ? "Sales Form" : cta.href });
+        if (cta.href === "/sales") { openSalesModal({ pageIndustry, formName: `${pageIndustry} Merchant Enquiry` }); return; }
+        if (cta.external) window.open(cta.href, "_blank"); else window.location.href = cta.href;
+      }}
     >
       {cta.label}
     </button>
   );
 }
 
-function SecondaryBtn({ cta }: { cta: IndustryCTA }) {
+function SecondaryBtn({ cta, location }: { cta: IndustryCTA; location: string }) {
   const { open: openSalesModal } = useSalesModal();
+  const pageIndustry = usePageIndustry();
   return (
     <button
       style={{ fontFamily: "DM Sans, sans-serif", fontWeight: 400, fontSize: 14, color: T.muted, background: "transparent", border: `1px solid ${T.muted}`, borderRadius: 4, padding: "11px 24px", cursor: "pointer", transition: "background .15s" }}
       onMouseEnter={e => (e.currentTarget.style.background = "#E9DDFF")}
       onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
-      onClick={() => { if (cta.href === "/sales") { openSalesModal(); return; } if (cta.external) window.open(cta.href, "_blank"); else window.location.href = cta.href; }}
+      onClick={() => {
+        trackEvent("cta_click", { page_industry: pageIndustry, cta_name: cta.label, cta_location: location, destination: cta.href === "/sales" ? "Sales Form" : cta.href });
+        if (cta.href === "/sales") { openSalesModal({ pageIndustry, formName: `${pageIndustry} Merchant Enquiry` }); return; }
+        if (cta.external) window.open(cta.href, "_blank"); else window.location.href = cta.href;
+      }}
     >
       {cta.label}
     </button>
@@ -240,7 +276,7 @@ function CardsBlock({ block }: { block: Extract<IndustryBlock, { kind: "cards" }
                   </div>
                   <p style={{ margin: "0 0 12px", fontFamily: "DM Sans, sans-serif", fontWeight: 500, fontSize: isMobile ? 16 : 20, lineHeight: 1.3, color: T.dark }}>{item.title}</p>
                   <p style={{ margin: 0, fontFamily: "DM Sans, sans-serif", fontWeight: 400, fontSize: 14, lineHeight: 1.65, color: T.muted }}>{item.desc}</p>
-                  {item.href && item.linkLabel && <ArrowLink href={item.href} label={item.linkLabel} />}
+                  {item.href && item.linkLabel && <ArrowLink href={item.href} label={item.linkLabel} location={block.id} />}
                 </div>
               );
             })}
@@ -280,7 +316,7 @@ function ListBlock({ block }: { block: Extract<IndustryBlock, { kind: "list" }> 
               <div style={{ flex: 1, minWidth: 0 }}>
                 <p style={{ margin: "0 0 4px", fontFamily: "DM Sans, sans-serif", fontWeight: 600, fontSize: isMobile ? 15 : 16, color: T.dark }}>{item.title}</p>
                 <p style={{ margin: 0, fontFamily: "DM Sans, sans-serif", fontWeight: 400, fontSize: 14, lineHeight: 1.6, color: T.muted, maxWidth: 640 }}>{item.desc}</p>
-                {item.href && item.linkLabel && <ArrowLink href={item.href} label={item.linkLabel} />}
+                {item.href && item.linkLabel && <ArrowLink href={item.href} label={item.linkLabel} location={block.id} />}
               </div>
             </div>
           ))}
@@ -326,7 +362,7 @@ function BentoBlock({ block }: { block: Extract<IndustryBlock, { kind: "bento" }
                 <div>
                   <p style={{ margin: "0 0 8px", fontFamily: "Rubik, sans-serif", fontStyle: "italic", fontWeight: 500, fontSize: isMobile ? 22 : 26, lineHeight: 1.2, color: block.leadMock ? "#FFFFFF" : T.headingBlack }}>{lead.title}</p>
                   <p style={{ margin: 0, fontFamily: "DM Sans, sans-serif", fontWeight: 400, fontSize: 14, lineHeight: 1.65, color: block.leadMock ? "rgba(255,255,255,0.85)" : T.muted }}>{lead.desc}</p>
-                  {lead.href && lead.linkLabel && <ArrowLink href={lead.href} label={lead.linkLabel} light={!!block.leadMock} />}
+                  {lead.href && lead.linkLabel && <ArrowLink href={lead.href} label={lead.linkLabel} light={!!block.leadMock} location={block.id} />}
                 </div>
               </div>
             </div>
@@ -340,7 +376,7 @@ function BentoBlock({ block }: { block: Extract<IndustryBlock, { kind: "bento" }
                 </div>
                 <p style={{ margin: "0 0 6px", fontFamily: "DM Sans, sans-serif", fontWeight: 600, fontSize: 15.5, color: T.dark }}>{item.title}</p>
                 <p style={{ margin: 0, fontFamily: "DM Sans, sans-serif", fontWeight: 400, fontSize: 13.5, lineHeight: 1.6, color: T.muted }}>{item.desc}</p>
-                {item.href && item.linkLabel && <ArrowLink href={item.href} label={item.linkLabel} />}
+                {item.href && item.linkLabel && <ArrowLink href={item.href} label={item.linkLabel} location={block.id} />}
               </div>
             );
           })}
@@ -644,7 +680,7 @@ function NumberedStepsBlock({ block }: { block: Extract<IndustryBlock, { kind: "
             <span style={{ position: "absolute", left: 0, top: 0, fontFamily: "Rubik, sans-serif", fontWeight: 500, fontSize: 15, color: "#C4B5FD" }}>{String(i + 1).padStart(2, "0")}</span>
             <p style={{ margin: "0 0 4px", fontFamily: "DM Sans, sans-serif", fontWeight: 600, fontSize: 16, color: T.dark }}>{step.title}</p>
             <p style={{ margin: 0, fontFamily: "DM Sans, sans-serif", fontWeight: 400, fontSize: 13.5, lineHeight: 1.6, color: T.muted }}>{step.desc}</p>
-            {step.href && step.linkLabel && <ArrowLink href={step.href} label={step.linkLabel} />}
+            {step.href && step.linkLabel && <ArrowLink href={step.href} label={step.linkLabel} location={block.id} />}
           </div>
         ))}
       </div>
@@ -683,7 +719,7 @@ function NumberedStepsBlock({ block }: { block: Extract<IndustryBlock, { kind: "
               <div>
                 <p style={{ margin: "0 0 6px", fontFamily: "DM Sans, sans-serif", fontWeight: 600, fontSize: 15, color: T.dark }}>{step.title}</p>
                 <p style={{ margin: 0, fontFamily: "DM Sans, sans-serif", fontWeight: 400, fontSize: 13.5, lineHeight: 1.6, color: T.muted }}>{step.desc}</p>
-                {step.href && step.linkLabel && <ArrowLink href={step.href} label={step.linkLabel} />}
+                {step.href && step.linkLabel && <ArrowLink href={step.href} label={step.linkLabel} location={block.id} />}
               </div>
             </div>
           ))}
@@ -749,7 +785,7 @@ function MarketsBlock({ block }: { block: Extract<IndustryBlock, { kind: "market
       </div>
       {block.ctaLabel && block.ctaHref && (
         <div style={{ maxWidth: 1440, margin: "0 auto", padding: `0 ${hPad}px` }}>
-          <div className="fade-up" style={{ marginTop: 32 }}><PrimaryBtn cta={{ label: block.ctaLabel, href: block.ctaHref }} /></div>
+          <div className="fade-up" style={{ marginTop: 32 }}><PrimaryBtn cta={{ label: block.ctaLabel, href: block.ctaHref }} location={block.id} /></div>
         </div>
       )}
     </section>
@@ -803,7 +839,7 @@ function TextCtaBlock({ block }: { block: Extract<IndustryBlock, { kind: "textCt
             <p className="fade-up" style={{ margin: "0 0 8px", fontFamily: "Rubik, sans-serif", fontStyle: "italic", fontWeight: 500, fontSize: isMobile ? 22 : 26, color: T.headingBlack }}>{block.heading}</p>
             <p className="fade-up" style={{ margin: 0, fontFamily: "DM Sans, sans-serif", fontWeight: 400, fontSize: 14.5, lineHeight: 1.65, color: T.muted }}>{block.copy}</p>
           </div>
-          <div className="fade-up" style={{ flexShrink: 0 }}><PrimaryBtn cta={block.cta} /></div>
+          <div className="fade-up" style={{ flexShrink: 0 }}><PrimaryBtn cta={block.cta} location={block.id} /></div>
         </div>
       </div>
     </section>
@@ -843,8 +879,8 @@ function CtaBlock({ block }: { block: Extract<IndustryBlock, { kind: "cta" }> })
           <h2 className="fade-up" style={{ margin: "0 0 14px", fontFamily: "Rubik, sans-serif", fontStyle: "italic", fontWeight: 500, fontSize: isMobile ? 30 : 42, lineHeight: 1.1, color: T.headingBlack }}>{block.heading}</h2>
           {block.subtext && <p className="fade-up" style={{ margin: "0 0 28px", fontFamily: "DM Sans, sans-serif", fontWeight: 400, fontSize: 15, lineHeight: 1.65, color: T.muted }}>{block.subtext}</p>}
           <div className="fade-up" style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
-            <PrimaryBtn cta={block.primaryCta} />
-            {block.secondaryCta && <SecondaryBtn cta={block.secondaryCta} />}
+            <PrimaryBtn cta={block.primaryCta} location={block.id} />
+            {block.secondaryCta && <SecondaryBtn cta={block.secondaryCta} location={block.id} />}
           </div>
         </div>
       </div>

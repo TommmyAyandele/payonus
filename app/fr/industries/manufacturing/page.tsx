@@ -159,6 +159,7 @@ export default function ManufacturingPageFr() {
       <JsonLd data={breadcrumbs} />
       <JsonLd data={faqSchema} />
       <IndustryPage
+        industryName="Manufacturing"
         locale="fr"
         hero={{
           eyebrow: "Secteurs / Industrie manufacturière",

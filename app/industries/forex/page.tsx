@@ -122,6 +122,7 @@ export default function ForexPage() {
       <JsonLd data={breadcrumbs} />
       <JsonLd data={faqSchema} />
       <IndustryPage
+        industryName="Forex"
         hero={{
           eyebrow: "Industries / Forex",
           heading: "Forex payment gateway for trading businesses across Africa",

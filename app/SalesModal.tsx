@@ -3,10 +3,13 @@
 import React from "react";
 import { useBreakpoint } from "./use-breakpoint";
 import { T } from "./Navbar";
+import { trackEvent } from "./analytics";
 
 interface SalesModalProps {
   isOpen: boolean;
   onClose: () => void;
+  pageIndustry?: string;
+  formName?: string;
 }
 
 const initialForm = {
@@ -14,13 +17,16 @@ const initialForm = {
   role: "", volume: "", message: "",
 };
 
-export default function SalesModal({ isOpen, onClose }: SalesModalProps) {
+export default function SalesModal({ isOpen, onClose, pageIndustry, formName }: SalesModalProps) {
   const { isMobile } = useBreakpoint();
   const [form, setForm] = React.useState(initialForm);
   const [submitted, setSubmitted] = React.useState(false);
+  const hasStartedRef = React.useRef(false);
+  const resolvedFormName = formName ?? "Sales Enquiry";
 
   React.useEffect(() => {
     if (!isOpen) return;
+    hasStartedRef.current = false;
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
@@ -41,12 +47,17 @@ export default function SalesModal({ isOpen, onClose }: SalesModalProps) {
   if (!isOpen) return null;
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
+    if (!hasStartedRef.current) {
+      hasStartedRef.current = true;
+      trackEvent("form_start", { page_industry: pageIndustry, form_name: resolvedFormName });
+    }
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setSubmitted(true);
+    trackEvent("form_submit", { page_industry: pageIndustry, form_name: resolvedFormName });
   }
 
   return (

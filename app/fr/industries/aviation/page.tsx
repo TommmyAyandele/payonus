@@ -136,6 +136,7 @@ export default function AviationPageFr() {
     <>
       <JsonLd data={breadcrumbs} />
       <IndustryPage
+        industryName="Aviation"
         locale="fr"
         hero={{
           eyebrow: "Secteurs / Aviation",

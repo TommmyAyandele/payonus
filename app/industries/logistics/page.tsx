@@ -154,6 +154,7 @@ export default function LogisticsPage() {
       <JsonLd data={breadcrumbs} />
       <JsonLd data={faqSchema} />
       <IndustryPage
+        industryName="Logistics & Ride-Hailing"
         hero={{
           eyebrow: "Industries / Logistics & Ride-Hailing",
           heading: "Payment infrastructure for logistics & ride-hailing businesses",

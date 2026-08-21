@@ -123,6 +123,7 @@ export default function ForexPageFr() {
       <JsonLd data={breadcrumbs} />
       <JsonLd data={faqSchema} />
       <IndustryPage
+        industryName="Forex"
         locale="fr"
         hero={{
           eyebrow: "Secteurs / Forex",

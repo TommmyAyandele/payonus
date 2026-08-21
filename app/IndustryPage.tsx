@@ -5,8 +5,9 @@ import { useBreakpoint } from "./use-breakpoint";
 import Navbar, { T } from "./Navbar";
 import Footer from "./Footer";
 import { useScrollReveal, ripple } from "./ProductPage";
-import { IndustryBlock, IndustryBlockRenderer, IndustryCTA } from "./IndustryBlocks";
+import { IndustryBlock, IndustryBlockRenderer, IndustryCTA, IndustryTrackingProvider } from "./IndustryBlocks";
 import { useSalesModal } from "./SalesModalContext";
+import { trackEvent } from "./analytics";
 
 export interface IndustryHeroData {
   eyebrow: string;
@@ -23,12 +24,14 @@ export interface IndustryPageProps {
   blocks: IndustryBlock[];
   relatedLinks?: { label: string; href: string }[];
   locale?: "en" | "fr";
+  /** Canonical industry name used as the GA4 page_industry parameter, e.g. "Forex", "Logistics & Ride-Hailing". */
+  industryName: string;
 }
 
 /* ═══════════════════════════════════════
    SHARED INDUSTRY PAGE COMPONENT
 ═══════════════════════════════════════ */
-export default function IndustryPage({ hero, blocks, relatedLinks, locale = "en" }: IndustryPageProps) {
+export default function IndustryPage({ hero, blocks, relatedLinks, locale = "en", industryName }: IndustryPageProps) {
   useScrollReveal();
   const { isMobile, isTablet } = useBreakpoint();
   const [scrolled, setScrolled] = React.useState(false);
@@ -94,13 +97,22 @@ export default function IndustryPage({ hero, blocks, relatedLinks, locale = "en"
             </p>
             <div style={{ display:"flex", flexWrap:"wrap", gap:12, marginTop:4 }}>
               <button className="cta-pulse" style={{ position:"relative", overflow:"hidden", fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14, color:T.white, background:T.primary, border:"none", borderRadius:4, padding:"13px 28px", cursor:"pointer", transition:"opacity .15s" }}
-                onClick={e => { ripple(e); if (hero.primaryCta.href === "/sales") { openSalesModal(); return; } if (hero.primaryCta.external) window.open(hero.primaryCta.href,"_blank"); else window.location.href = hero.primaryCta.href; }}>
+                onClick={e => {
+                  ripple(e);
+                  trackEvent("cta_click", { page_industry: industryName, cta_name: hero.primaryCta.label, cta_location: "Hero", destination: hero.primaryCta.href === "/sales" ? "Sales Form" : hero.primaryCta.href });
+                  if (hero.primaryCta.href === "/sales") { openSalesModal({ pageIndustry: industryName, formName: `${industryName} Merchant Enquiry` }); return; }
+                  if (hero.primaryCta.external) window.open(hero.primaryCta.href,"_blank"); else window.location.href = hero.primaryCta.href;
+                }}>
                 {hero.primaryCta.label}
               </button>
               {hero.secondaryCta && (
                 <button style={{ fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14, color:T.muted, background:"transparent", border:`1px solid ${T.muted}`, borderRadius:4, padding:"11px 24px", cursor:"pointer", transition:"background .15s" }}
                   onMouseEnter={e=>(e.currentTarget.style.background="#E9DDFF")} onMouseLeave={e=>(e.currentTarget.style.background="transparent")}
-                  onClick={() => { if (hero.secondaryCta!.href === "/sales") { openSalesModal(); return; } if (hero.secondaryCta!.external) window.open(hero.secondaryCta!.href,"_blank"); else window.location.href = hero.secondaryCta!.href; }}>
+                  onClick={() => {
+                    trackEvent("cta_click", { page_industry: industryName, cta_name: hero.secondaryCta!.label, cta_location: "Hero", destination: hero.secondaryCta!.href === "/sales" ? "Sales Form" : hero.secondaryCta!.href });
+                    if (hero.secondaryCta!.href === "/sales") { openSalesModal({ pageIndustry: industryName, formName: `${industryName} Merchant Enquiry` }); return; }
+                    if (hero.secondaryCta!.external) window.open(hero.secondaryCta!.href,"_blank"); else window.location.href = hero.secondaryCta!.href;
+                  }}>
                   {hero.secondaryCta.label}
                 </button>
               )}
@@ -115,7 +127,9 @@ export default function IndustryPage({ hero, blocks, relatedLinks, locale = "en"
         </div>
       </section>
 
-      <IndustryBlockRenderer blocks={blocks} />
+      <IndustryTrackingProvider pageIndustry={industryName}>
+        <IndustryBlockRenderer blocks={blocks} />
+      </IndustryTrackingProvider>
 
       {relatedLinks && relatedLinks.length > 0 && (
         <section style={{ width:"100%", background:T.bg, borderTop:`1px solid ${T.borderLight}` }}>

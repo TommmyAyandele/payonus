@@ -126,6 +126,7 @@ export default function EcommercePage() {
       <JsonLd data={breadcrumbs} />
       <JsonLd data={faqSchema} />
       <IndustryPage
+        industryName="E-commerce"
         hero={{
           eyebrow: "Industries / E-commerce",
           heading: "E-commerce payment gateway for businesses across Africa",

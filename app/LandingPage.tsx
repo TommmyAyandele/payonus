@@ -144,7 +144,7 @@ function Hero({ locale = "en" }: { locale?: "en" | "fr" }) {
                 <button style={{ fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14, color:T.muted, background:"transparent", border:`1px solid ${T.muted}`, borderRadius:4, padding:"11px 24px", cursor:"pointer", transition:"background .15s" }}
                   onMouseEnter={e => (e.currentTarget.style.background = "#E9DDFF")}
                   onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
-                  onClick={openSalesModal}
+                  onClick={() => openSalesModal()}
                 >{hc.contactSales}</button>
               </div>
             </div>

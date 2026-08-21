@@ -158,6 +158,7 @@ export default function ManufacturingPage() {
       <JsonLd data={breadcrumbs} />
       <JsonLd data={faqSchema} />
       <IndustryPage
+        industryName="Manufacturing"
         hero={{
           eyebrow: "Industries / Manufacturing",
           heading: "Payment infrastructure built for manufacturing",

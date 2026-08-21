@@ -129,6 +129,7 @@ export default function GamingPage() {
       <JsonLd data={breadcrumbs} />
       <JsonLd data={faqSchema} />
       <IndustryPage
+        industryName="Gaming"
         hero={{
           eyebrow: "Industries / Gaming",
           heading: "Payment infrastructure built for gaming businesses across Africa",

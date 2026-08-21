@@ -469,7 +469,7 @@ export default function PricingPage() {
                   }}
                   onMouseEnter={e=>(e.currentTarget.style.background="#E9DDFF")}
                   onMouseLeave={e=>(e.currentTarget.style.background="transparent")}
-                  onClick={openSalesModal}
+                  onClick={() => openSalesModal()}
                 >Contact Sales</button>
               </div>
             </div>

@@ -155,6 +155,7 @@ export default function LogisticsPageFr() {
       <JsonLd data={breadcrumbs} />
       <JsonLd data={faqSchema} />
       <IndustryPage
+        industryName="Logistics & Ride-Hailing"
         locale="fr"
         hero={{
           eyebrow: "Secteurs / Logistique & VTC",

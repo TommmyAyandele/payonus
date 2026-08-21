@@ -135,6 +135,7 @@ export default function AviationPage() {
     <>
       <JsonLd data={breadcrumbs} />
       <IndustryPage
+        industryName="Aviation"
         hero={{
           eyebrow: "Industries / Aviation",
           heading: "Payments built for aviation complexity",

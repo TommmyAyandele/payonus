@@ -169,6 +169,7 @@ export default function FintechPage() {
       <JsonLd data={breadcrumbs} />
       <JsonLd data={faqSchema} />
       <IndustryPage
+        industryName="Fintech"
         hero={{
           eyebrow: "Industries / Fintech",
           heading: "Payment infrastructure for financial businesses across Africa",

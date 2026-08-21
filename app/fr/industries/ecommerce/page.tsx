@@ -127,6 +127,7 @@ export default function EcommercePageFr() {
       <JsonLd data={breadcrumbs} />
       <JsonLd data={faqSchema} />
       <IndustryPage
+        industryName="E-commerce"
         locale="fr"
         hero={{
           eyebrow: "Secteurs / E-commerce",

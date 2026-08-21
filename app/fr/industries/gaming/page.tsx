@@ -130,6 +130,7 @@ export default function GamingPageFr() {
       <JsonLd data={breadcrumbs} />
       <JsonLd data={faqSchema} />
       <IndustryPage
+        industryName="Gaming"
         locale="fr"
         hero={{
           eyebrow: "Secteurs / Jeux & Paris en ligne",

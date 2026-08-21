@@ -170,6 +170,7 @@ export default function FintechPageFr() {
       <JsonLd data={breadcrumbs} />
       <JsonLd data={faqSchema} />
       <IndustryPage
+        industryName="Fintech"
         locale="fr"
         hero={{
           eyebrow: "Secteurs / Fintech",

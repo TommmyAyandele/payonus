@@ -191,7 +191,7 @@ export default function CTASection({ locale = "en" }: { locale?: "en" | "fr" }) 
                 }}
                 onMouseEnter={e => (e.currentTarget.style.background = "#E9DDFF")}
                 onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
-                onClick={openSalesModal}
+                onClick={() => openSalesModal()}
               >
                 {cc.contactSales}
               </button>
