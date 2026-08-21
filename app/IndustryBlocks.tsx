@@ -360,7 +360,14 @@ function ShowcaseBlock({ block }: { block: Extract<IndustryBlock, { kind: "showc
   const hPad = useHPad();
   const cardW = isMobile ? 240 : 300;
   const loop = [...block.items, ...block.items, ...block.items];
-  const duration = Math.max(24, block.items.length * 6);
+  /* Duration scales with actual pixel distance, not just item count — a fixed
+     duration made mobile (narrower cards, narrower viewport, so fewer cards
+     visible at once) feel sluggish since the same wait revealed less. Faster
+     px/s on mobile on top of that keeps it feeling snappy despite the smaller
+     viewport. */
+  const setWidthPx = block.items.length * (cardW + 16);
+  const pxPerSec = isMobile ? 95 : 60;
+  const duration = Math.max(10, setWidthPx / pxPerSec);
   const [paused, setPaused] = React.useState(false);
   return (
     <section style={{ width: "100%", background: T.bg, padding: `${isMobile ? 56 : 80}px 0` }}>

@@ -18,7 +18,12 @@ export default function IndustriesShowcaseSection() {
   const hPad = isMobile ? 20 : isTablet ? 48 : 80;
   const cardW = isMobile ? 240 : 300;
   const loop = [...INDUSTRIES, ...INDUSTRIES, ...INDUSTRIES];
-  const duration = Math.max(24, INDUSTRIES.length * 6);
+  /* Duration scales with actual pixel distance, not just item count — a fixed
+     duration made mobile (narrower cards, narrower viewport, so fewer cards
+     visible at once) feel sluggish since the same wait revealed less. */
+  const setWidthPx = INDUSTRIES.length * (cardW + 16);
+  const pxPerSec = isMobile ? 95 : 60;
+  const duration = Math.max(10, setWidthPx / pxPerSec);
   /* Pausing via JS mouse events instead of CSS :hover — touch never fires
      onMouseEnter/onMouseLeave, so this can't get stuck "hovered" on mobile
      the way a CSS :hover rule can (some mobile browsers apply :hover
