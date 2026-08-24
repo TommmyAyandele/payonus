@@ -157,7 +157,6 @@ const NAV_COPY = {
     products: "Products", industries: "Industries",
     links: [
       { label: "Company",    href: "/company"  },
-      { label: "Resources",  href: "/resources"},
       { label: "Developers", href: "https://documentation.payonus.com"},
       { label: "Support",    href: "/support"  },
       { label: "Pricing",    href: "/pricing"  },
@@ -169,7 +168,6 @@ const NAV_COPY = {
     products: "Produits", industries: "Secteurs",
     links: [
       { label: "Entreprise",   href: "/company"  },
-      { label: "Ressources",   href: "/resources"},
       { label: "Développeurs", href: "https://documentation.payonus.com"},
       { label: "Support",      href: "/support"  },
       { label: "Tarifs",       href: "/pricing"  },
