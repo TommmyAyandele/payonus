@@ -21,6 +21,8 @@ export default function SalesModal({ isOpen, onClose, pageIndustry, formName }: 
   const { isMobile } = useBreakpoint();
   const [form, setForm] = React.useState(initialForm);
   const [submitted, setSubmitted] = React.useState(false);
+  const [submitting, setSubmitting] = React.useState(false);
+  const [submitError, setSubmitError] = React.useState(false);
   const hasStartedRef = React.useRef(false);
   const resolvedFormName = formName ?? "Sales Enquiry";
 
@@ -40,7 +42,7 @@ export default function SalesModal({ isOpen, onClose, pageIndustry, formName }: 
   // Reset to a fresh form a moment after the close animation finishes.
   React.useEffect(() => {
     if (isOpen) return;
-    const id = setTimeout(() => { setForm(initialForm); setSubmitted(false); }, 300);
+    const id = setTimeout(() => { setForm(initialForm); setSubmitted(false); setSubmitError(false); }, 300);
     return () => clearTimeout(id);
   }, [isOpen]);
 
@@ -54,10 +56,24 @@ export default function SalesModal({ isOpen, onClose, pageIndustry, formName }: 
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setSubmitted(true);
-    trackEvent("form_submit", { page_industry: pageIndustry, form_name: resolvedFormName });
+    setSubmitting(true);
+    setSubmitError(false);
+    try {
+      const res = await fetch("/api/sales-enquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...form, pageIndustry, formName: resolvedFormName }),
+      });
+      if (!res.ok) throw new Error("Submission failed");
+      setSubmitted(true);
+      trackEvent("form_submit", { page_industry: pageIndustry, form_name: resolvedFormName });
+    } catch {
+      setSubmitError(true);
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -193,17 +209,25 @@ export default function SalesModal({ isOpen, onClose, pageIndustry, formName }: 
                 <textarea name="message" value={form.message} onChange={handleChange} placeholder="describe your use case, challenges, or questions" rows={3} />
               </fieldset>
 
+              {submitError && (
+                <p style={{ margin: 0, fontFamily: "DM Sans, sans-serif", fontWeight: 500, fontSize: 13, color: "#C0392B" }}>
+                  Something went wrong sending your message. Please try again, or email us directly below.
+                </p>
+              )}
+
               <button
                 type="submit"
+                disabled={submitting}
                 style={{
                   fontFamily: "DM Sans, sans-serif", fontWeight: 600, fontSize: 15,
                   color: T.white, background: T.primary, border: "none", borderRadius: 8,
-                  padding: "15px 0", cursor: "pointer", width: "100%", transition: "opacity .15s", marginTop: 2,
+                  padding: "15px 0", cursor: submitting ? "default" : "pointer", width: "100%", transition: "opacity .15s", marginTop: 2,
+                  opacity: submitting ? 0.7 : 1,
                 }}
-                onMouseEnter={e => (e.currentTarget.style.opacity = "0.88")}
-                onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
+                onMouseEnter={e => { if (!submitting) e.currentTarget.style.opacity = "0.88"; }}
+                onMouseLeave={e => { if (!submitting) e.currentTarget.style.opacity = "1"; }}
               >
-                Send Message
+                {submitting ? "Sending…" : "Send Message"}
               </button>
             </form>
 
