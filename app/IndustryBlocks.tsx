@@ -70,7 +70,7 @@ export interface CardItem { title: string; desc: string; icon: IconName; href?: 
 export type IndustryBlock =
   | { kind: "cards"; id: string; eyebrow?: string; heading: React.ReactNode; intro?: string; columns?: 2 | 3; tint?: boolean; items: CardItem[]; footNote?: string }
   | { kind: "list"; id: string; heading: React.ReactNode; intro?: string; items: CardItem[]; tint?: boolean; numbered?: boolean }
-  | { kind: "bento"; id: string; heading: React.ReactNode; intro?: string; items: CardItem[]; leadMock?: MockName }
+  | { kind: "bento"; id: string; heading: React.ReactNode; intro?: string; items: CardItem[]; leadMock?: MockName; leadMockPosition?: string }
   | { kind: "showcase"; id: string; heading: React.ReactNode; intro?: string; items: { title: string; desc: string; icon: IconName; illustration: MockName }[] }
   | { kind: "split"; id: string; heading: React.ReactNode; body: string[]; bullets?: string[]; icon: IconName; mock?: MockName; reverse?: boolean; tint?: boolean }
   | { kind: "stats"; id: string; heading?: React.ReactNode; intro?: string; items: { value: string; label: string }[]; tint?: boolean }
@@ -212,13 +212,13 @@ const PEOPLE = {
 
 export type MockName = keyof typeof PEOPLE;
 
-function PersonIllustration({ preset }: { preset: PersonPreset }) {
+function PersonIllustration({ preset, position }: { preset: PersonPreset; position?: string }) {
   return (
     <div style={{ position: "relative", width: "100%", height: "100%" }}>
       <img
         src={`/industry-people/${preset.photo}.jpg`}
         alt=""
-        style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+        style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: position ?? "50% 50%", display: "block" }}
       />
       <div style={{ position: "absolute", right: 16, bottom: 16, width: 44, height: 44, borderRadius: "50%", background: "#FFFFFF", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 2px 10px rgba(0,0,0,0.16)" }}>
         <BlockIcon name={preset.icon} size={22} />
@@ -227,8 +227,8 @@ function PersonIllustration({ preset }: { preset: PersonPreset }) {
   );
 }
 
-function MockVisual({ name }: { name: MockName }) {
-  return <PersonIllustration preset={PEOPLE[name]} />;
+function MockVisual({ name, position }: { name: MockName; position?: string }) {
+  return <PersonIllustration preset={PEOPLE[name]} position={position} />;
 }
 
 /* Decorative panel — stands in for a product illustration where none exists. Always light. */
@@ -353,7 +353,7 @@ function BentoBlock({ block }: { block: Extract<IndustryBlock, { kind: "bento" }
             <div style={{ position: "relative", overflow: "hidden", gridRow: isMobile ? "auto" : isTablet ? "auto" : "span 2", borderRadius: 20, minHeight: isMobile ? 280 : 420, ...(block.leadMock ? {} : { background: "#EDE9FF", border: `2px solid ${T.primary}` }) }}>
               {block.leadMock && (
                 <>
-                  <div style={{ position: "absolute", inset: 0 }}><MockVisual name={block.leadMock} /></div>
+                  <div style={{ position: "absolute", inset: 0 }}><MockVisual name={block.leadMock} position={block.leadMockPosition} /></div>
                   <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(15,12,20,0.86) 0%, rgba(15,12,20,0.5) 42%, rgba(15,12,20,0.05) 68%)" }} />
                 </>
               )}

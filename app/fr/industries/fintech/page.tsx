@@ -51,7 +51,7 @@ const blocks: IndustryBlock[] = [
     ],
   },
   {
-    kind: "bento", id: "challenges", leadMock: "fatima",
+    kind: "bento", id: "challenges", leadMock: "cardTap", leadMockPosition: "50% 86%",
     heading: "Lorsque les paiements deviennent plus difficiles à gérer, le reste de l'entreprise en ressent l'impact",
     intro: "À mesure qu'une entreprise financière se développe, davantage de clients, de transactions, de produits et de marchés peuvent générer plus de complexité de paiement — sans pour autant créer plus de friction pour les clients ni plus de travail manuel pour votre équipe.",
     items: [

@@ -50,7 +50,7 @@ const blocks: IndustryBlock[] = [
     ],
   },
   {
-    kind: "bento", id: "challenges", leadMock: "fatima",
+    kind: "bento", id: "challenges", leadMock: "cardTap", leadMockPosition: "50% 86%",
     heading: "When payments become harder to manage, the rest of the business feels it",
     intro: "As a financial business grows, more customers, transactions, products and markets can create more payment complexity — without creating more friction for customers or more manual work for your team.",
     items: [
