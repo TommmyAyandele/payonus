@@ -65,7 +65,7 @@ const blocks: IndustryBlock[] = [
     ],
   },
   {
-    kind: "split", id: "differentiation", icon: "bolt", mock: "yusuf",
+    kind: "split", id: "differentiation", icon: "bolt", mock: "dele",
     heading: "Conçu pour le rythme des paiements de jeu",
     body: [
       "Les paiements de jeu ne s'arrêtent pas au moment du paiement. Les dépôts et retraits peuvent avoir lieu tout au long de la journée, souvent en grand volume. Payonus prend en charge ces flux de paiement à haute fréquence avec un règlement plus rapide, pour aider les entreprises à faire circuler l'argent à mesure que leurs opérations se développent.",

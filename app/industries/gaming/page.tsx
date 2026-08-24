@@ -64,7 +64,7 @@ const blocks: IndustryBlock[] = [
     ],
   },
   {
-    kind: "split", id: "differentiation", icon: "bolt", mock: "yusuf",
+    kind: "split", id: "differentiation", icon: "bolt", mock: "dele",
     heading: "Built for the pace of gaming payments",
     body: [
       "Gaming payments do not stop at checkout. Deposits and withdrawals can happen throughout the day, often at high volume. Payonus supports these high-frequency payment flows with faster settlement to help businesses keep money moving as their operations grow.",
