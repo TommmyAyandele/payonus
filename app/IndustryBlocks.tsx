@@ -208,7 +208,7 @@ const PEOPLE = {
   cardTap:         { icon: "card",   photo: "cardTap" },         // tapping a card on a payment terminal
   qrLink:          { icon: "link",   photo: "qrLink" },          // scanning a QR / payment link
   milestoneDeal:   { icon: "clock",  photo: "milestoneDeal" },   // handshake sealing a staged agreement
-  currencyExchange:{ icon: "globe",  photo: "currencyExchange" },// hands exchanging currency
+  currencyExchange:{ icon: "globe",  photo: "currencyExchange" },// a mix of different countries' banknotes together
 } satisfies Record<string, PersonPreset>;
 
 export type MockName = keyof typeof PEOPLE;
