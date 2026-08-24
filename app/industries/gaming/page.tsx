@@ -40,7 +40,7 @@ const blocks: IndustryBlock[] = [
     items: ["Sports Betting", "Casinos", "Lotteries", "Fantasy Sports", "Esports", "Gaming Platforms"],
   },
   {
-    kind: "bento", id: "challenges", leadMock: "amara",
+    kind: "bento", id: "challenges", leadMock: "chuka",
     heading: "When payments slow down, the business feels it",
     intro: "Failed deposits can interrupt play. Delayed withdrawals can frustrate customers. Slow settlement can affect cash flow.",
     items: [

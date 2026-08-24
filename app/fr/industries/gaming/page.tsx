@@ -41,7 +41,7 @@ const blocks: IndustryBlock[] = [
     items: ["Paris sportifs", "Casinos", "Loteries", "Fantasy sport", "Esport", "Plateformes de jeu"],
   },
   {
-    kind: "bento", id: "challenges", leadMock: "amara",
+    kind: "bento", id: "challenges", leadMock: "chuka",
     heading: "Quand les paiements ralentissent, l'entreprise en ressent l'impact",
     intro: "Des dépôts échoués peuvent interrompre le jeu. Des retraits retardés peuvent frustrer les clients. Un règlement lent peut affecter la trésorerie.",
     items: [

@@ -196,6 +196,7 @@ const PEOPLE = {
   femi:   { icon: "shield",   photo: "femi" },    // security & compliance professional
   zainab: { icon: "users",    photo: "zainab" },  // team manager
   dele:   { icon: "gauge",    photo: "dele" },    // gamer
+  chuka:  { icon: "alert",    photo: "chuka" },   // gamer — frustrated after a failed deposit/payment
   amina:  { icon: "eye",      photo: "amina" },   // auditor
   tobi:   { icon: "layers",   photo: "tobi" },    // software engineer
   yusuf:  { icon: "plug",     photo: "yusuf" },   // IT / integration technician
