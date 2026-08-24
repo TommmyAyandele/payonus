@@ -35,7 +35,7 @@ const blocks: IndustryBlock[] = [
     ],
   },
   {
-    kind: "bento", id: "problems", leadMock: "ngozi",
+    kind: "bento", id: "problems", leadMock: "aduke",
     heading: "When payments become harder to manage, your business feels it",
     intro: "Taking payments is only one part of running an online business. As transactions and markets grow, it can become harder to keep track of what is coming in, going out and waiting to be settled.",
     items: [

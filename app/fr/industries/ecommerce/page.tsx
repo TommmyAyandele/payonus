@@ -36,7 +36,7 @@ const blocks: IndustryBlock[] = [
     ],
   },
   {
-    kind: "bento", id: "problems", leadMock: "ngozi",
+    kind: "bento", id: "problems", leadMock: "aduke",
     heading: "Lorsque les paiements deviennent plus difficiles à gérer, votre entreprise en ressent l'impact",
     intro: "Encaisser des paiements n'est qu'une partie de la gestion d'une entreprise en ligne. À mesure que les transactions et les marchés se développent, il peut devenir plus difficile de suivre ce qui entre, ce qui sort et ce qui est en attente de règlement.",
     items: [

@@ -36,7 +36,7 @@ const blocks: IndustryBlock[] = [
     ],
   },
   {
-    kind: "bento", id: "complexity", leadMock: "tunde",
+    kind: "bento", id: "complexity", leadMock: "obi",
     heading: "Manufacturing payments are more than collecting a payment",
     intro: "A customer payment is often one step in a wider process involving invoices, payment terms, distributors, settlement and reconciliation.",
     items: [

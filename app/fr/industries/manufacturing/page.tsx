@@ -37,7 +37,7 @@ const blocks: IndustryBlock[] = [
     ],
   },
   {
-    kind: "bento", id: "complexity", leadMock: "tunde",
+    kind: "bento", id: "complexity", leadMock: "obi",
     heading: "Les paiements dans l'industrie manufacturière vont bien au-delà de l'encaissement",
     intro: "Le paiement d'un client n'est souvent qu'une étape dans un processus plus large impliquant factures, conditions de paiement, distributeurs, règlement et rapprochement.",
     items: [

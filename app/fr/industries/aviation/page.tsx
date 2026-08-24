@@ -39,7 +39,7 @@ const blocks: IndustryBlock[] = [
     ],
   },
   {
-    kind: "bento", id: "complexity", leadMock: "chidi",
+    kind: "bento", id: "complexity", leadMock: "obi",
     heading: "Des paiements complexes génèrent plus de travail",
     intro: "La transaction n'est qu'une partie du travail. Des canaux, marchés et processus de règlement fragmentés peuvent générer davantage de travail derrière chaque paiement.",
     items: [

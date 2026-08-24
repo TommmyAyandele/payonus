@@ -189,6 +189,7 @@ const PEOPLE = {
   amara:  { icon: "bolt",     photo: "amara" },  // cashier — paying by card at checkout
   tunde:  { icon: "building", photo: "tunde" },   // executive
   ngozi:  { icon: "card",     photo: "ngozi" },   // market trader
+  aduke:  { icon: "alert",    photo: "aduke" },   // shopper — worried after a checkout/payment problem
   kwame:  { icon: "route",    photo: "kwame" },   // delivery rider
   fatima: { icon: "chart",    photo: "fatima" },  // financial analyst
   obi:    { icon: "alert",    photo: "obi" },     // trader — worried after a failed deposit
