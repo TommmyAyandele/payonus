@@ -191,6 +191,7 @@ const PEOPLE = {
   ngozi:  { icon: "card",     photo: "ngozi" },   // market trader
   kwame:  { icon: "route",    photo: "kwame" },   // delivery rider
   fatima: { icon: "chart",    photo: "fatima" },  // financial analyst
+  obi:    { icon: "alert",    photo: "obi" },     // trader — worried after a failed deposit
   chidi:  { icon: "plane",    photo: "chidi" },   // pilot
   aisha:  { icon: "globe",    photo: "aisha" },   // cross-border / global trade
   femi:   { icon: "shield",   photo: "femi" },    // security & compliance professional

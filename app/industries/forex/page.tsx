@@ -34,7 +34,7 @@ const blocks: IndustryBlock[] = [
     ],
   },
   {
-    kind: "bento", id: "challenges", leadMock: "fatima",
+    kind: "bento", id: "challenges", leadMock: "obi",
     heading: "When payments slow down, trading operations feel it",
     intro: "A failed deposit can stop a trader from funding an account. A delayed withdrawal can damage confidence and create more work for your support team.",
     items: [

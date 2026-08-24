@@ -35,7 +35,7 @@ const blocks: IndustryBlock[] = [
     ],
   },
   {
-    kind: "bento", id: "challenges", leadMock: "fatima",
+    kind: "bento", id: "challenges", leadMock: "obi",
     heading: "Quand les paiements ralentissent, les opérations de trading en ressentent l'impact",
     intro: "Un dépôt échoué peut empêcher un trader d'alimenter son compte. Un retrait retardé peut nuire à la confiance et créer davantage de travail pour votre équipe support.",
     items: [
