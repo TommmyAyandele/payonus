@@ -23,6 +23,7 @@ export const metadata: Metadata = {
 };
 
 const GTM_ID = "GTM-NPZK45W9";
+const GA4_MEASUREMENT_ID = "G-8W11DS3Q5K";
 
 export default function RootLayout({
   children,
@@ -45,6 +46,18 @@ new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','${GTM_ID}');`,
+          }}
+        />
+        {/* Sends our custom dataLayer events (cta_click, form_submit, etc.) straight to GA4,
+            independent of GTM trigger config. send_page_view is off so page_view isn't double-counted
+            against GTM's own GA4 config tag. */}
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA4_MEASUREMENT_ID}`} />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${GA4_MEASUREMENT_ID}', { send_page_view: false });`,
           }}
         />
         <JsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
