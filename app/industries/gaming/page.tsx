@@ -61,6 +61,7 @@ const blocks: IndustryBlock[] = [
       { icon: "route", title: "Handle withdrawals at the pace of your business", desc: "Payout capabilities built for businesses that move money regularly.", href: "/payouts", linkLabel: "Payout" },
       { icon: "clock", title: "Get access to settled funds faster", desc: "Faster settlement designed around the pace of gaming payments.", href: "/settlements", linkLabel: "Instant Settlement" },
       { icon: "chart", title: "See what is happening across your payments", desc: "Monitor transaction activity and payment performance.", href: "/analytics", linkLabel: "Analytics & Reporting" },
+      { icon: "link", title: "Explore integration documentation", desc: "Explore technical documentation to help your team integrate and connect Payonus payment capabilities.", href: "/docs", linkLabel: "Explore Developer Documentation" },
     ],
   },
   {

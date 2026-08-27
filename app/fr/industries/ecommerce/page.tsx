@@ -58,6 +58,7 @@ const blocks: IndustryBlock[] = [
       { icon: "clock", title: "Accédez au règlement", desc: "Gardez un meilleur contrôle sur la circulation des fonds au sein de votre opération de paiement.", href: "/settlements", linkLabel: "Règlement instantané" },
       { icon: "plug", title: "Connectez les paiements à vos systèmes", desc: "Utilisez l'API de paiement Payonus pour connecter les capacités de paiement disponibles à votre plateforme et vos flux existants.", href: "/payment-api", linkLabel: "API de paiement" },
       { icon: "chart", title: "Visualisez ce qui se passe dans vos paiements", desc: "Facilitez la compréhension des transactions que votre entreprise doit gérer.", href: "/analytics", linkLabel: "Analytique & rapports" },
+      { icon: "link", title: "Connectez-vous via la documentation développeur", desc: "Explorez la documentation technique pour aider votre équipe à intégrer et connecter les capacités de paiement Payonus.", href: "/docs", linkLabel: "Découvrir la documentation développeur" },
     ],
   },
   {

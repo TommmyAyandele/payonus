@@ -62,6 +62,7 @@ const blocks: IndustryBlock[] = [
       { icon: "route", title: "Gérez les retraits au rythme de votre entreprise", desc: "Des capacités de décaissement conçues pour les entreprises qui font circuler l'argent régulièrement.", href: "/payouts", linkLabel: "Décaissement" },
       { icon: "clock", title: "Accédez plus rapidement aux fonds réglés", desc: "Un règlement plus rapide conçu autour du rythme des paiements de jeu.", href: "/settlements", linkLabel: "Règlement instantané" },
       { icon: "chart", title: "Voyez ce qui se passe dans vos paiements", desc: "Suivez l'activité transactionnelle et la performance des paiements.", href: "/analytics", linkLabel: "Analytique & Rapports" },
+      { icon: "link", title: "Explorez la documentation d'intégration", desc: "Explorez la documentation technique pour aider votre équipe à intégrer et connecter les capacités de paiement Payonus.", href: "/docs", linkLabel: "Découvrir la documentation développeur" },
     ],
   },
   {

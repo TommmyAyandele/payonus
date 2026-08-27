@@ -57,6 +57,7 @@ const blocks: IndustryBlock[] = [
       { icon: "clock", title: "Access settlement", desc: "Maintain better control over the movement of funds within your payment operation.", href: "/settlements", linkLabel: "Instant settlement" },
       { icon: "plug", title: "Connect payments to your systems", desc: "Use the Payonus Payment API to connect available payment capabilities to your existing platform and workflows.", href: "/payment-api", linkLabel: "Payment API" },
       { icon: "chart", title: "See what is happening across your payments", desc: "Make it easier to understand the transactions your business needs to manage.", href: "/analytics", linkLabel: "Analytics & reporting" },
+      { icon: "link", title: "Connect through developer documentation", desc: "Explore technical documentation to help your team integrate and connect Payonus payment capabilities.", href: "/docs", linkLabel: "Explore Developer Documentation" },
     ],
   },
   {
