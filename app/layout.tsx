@@ -27,7 +27,11 @@ export const metadata: Metadata = {
    change is needed when payonus.com goes live. */
 const GTM_ID_PRODUCTION = "GTM-NPZK45W9"; // payonus.com / www.payonus.com only
 const GTM_ID_STAGING = "GTM-NPHWJ2NK"; // everywhere else (vercel.app, previews, localhost)
-const GA4_MEASUREMENT_ID = "G-8W11DS3Q5K";
+// GA4_ID_STAGING is the measurement ID GA4 actually has bound to the payonus.vercel.app stream
+// ("payonustest"). GA4_ID_PRODUCTION is unverified against a real payonus.com stream yet —
+// confirm it once that stream exists, same as GA4_ID_STAGING was confirmed against its stream.
+const GA4_ID_PRODUCTION = "G-8W11DS3Q5K"; // payonus.com / www.payonus.com only
+const GA4_ID_STAGING = "G-KLBGC7GGSZ"; // everywhere else (vercel.app, previews, localhost)
 
 export default function RootLayout({
   children,
@@ -55,14 +59,18 @@ j.src='https://www.googletagmanager.com/gtm.js?id='+gtmId+dl;f.parentNode.insert
         />
         {/* Sends our custom dataLayer events (cta_click, form_submit, etc.) straight to GA4,
             independent of GTM trigger config. send_page_view is off so page_view isn't double-counted
-            against GTM's own GA4 config tag. */}
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA4_MEASUREMENT_ID}`} />
+            against GTM's own GA4 config tag. Measurement ID picked by hostname, same as GTM above. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `window.dataLayer = window.dataLayer || [];
+            __html: `var gaId=(window.location.hostname==='payonus.com'||window.location.hostname==='www.payonus.com')?'${GA4_ID_PRODUCTION}':'${GA4_ID_STAGING}';
+window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-gtag('config', '${GA4_MEASUREMENT_ID}', { send_page_view: false });`,
+gtag('config', gaId, { send_page_view: false });
+var gaScript=document.createElement('script');
+gaScript.async=true;
+gaScript.src='https://www.googletagmanager.com/gtag/js?id='+gaId;
+document.head.appendChild(gaScript);`,
           }}
         />
         <JsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
