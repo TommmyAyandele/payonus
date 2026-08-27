@@ -51,7 +51,7 @@ export default function SalesModal({ isOpen, onClose, pageIndustry, formName }: 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
     if (!hasStartedRef.current) {
       hasStartedRef.current = true;
-      trackEvent("custom_form_start", { page_industry: pageIndustry, form_name: resolvedFormName });
+      trackEvent("form_start", { page_industry: pageIndustry, form_name: resolvedFormName });
     }
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
   }
