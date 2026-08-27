@@ -27,10 +27,10 @@ export const metadata: Metadata = {
    change is needed when payonus.com goes live. */
 const GTM_ID_PRODUCTION = "GTM-NPZK45W9"; // payonus.com / www.payonus.com only
 const GTM_ID_STAGING = "GTM-NPHWJ2NK"; // everywhere else (vercel.app, previews, localhost)
-// Per the GA4 & GTM Event Tracking Implementation Guide: G-8W11DS3Q5K is the correct GA4
-// Measurement ID sitewide. (The payonustest stream's G-KLBGC7GGSZ, seen in GA4's admin UI, is
-// most likely a stray/unused test stream that happens to share the same Stream URL field.)
-const GA4_MEASUREMENT_ID = "G-8W11DS3Q5K";
+// G-KLBGC7GGSZ is the measurement ID GA4 has bound to the payonus.vercel.app stream
+// ("payonustest") — confirmed accessible in the account being used to check GA4, unlike
+// G-8W11DS3Q5K from the spec doc, which couldn't be located under that account.
+const GA4_MEASUREMENT_ID = "G-KLBGC7GGSZ";
 
 export default function RootLayout({
   children,
