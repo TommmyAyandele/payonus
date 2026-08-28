@@ -206,7 +206,7 @@ export interface ProductPageProps {
   extraSection?: {
     heading: React.ReactNode;
     subtext?: string;
-    cards: ProductFeature[];
+    items: { title: string; desc: string; visual: React.ReactNode; ctaLabel: string; ctaHref: string }[];
     note: string;
   };
   marketsHeading:  React.ReactNode;
@@ -352,27 +352,30 @@ export default function ProductPage({
               {extraSection.heading}
             </h2>
             {extraSection.subtext && (
-              <p style={{ margin:`0 0 ${isMobile?32:40}px`, fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:15, lineHeight:1.65, color:T.muted, maxWidth:560 }}>
+              <p style={{ margin:`0 0 ${isMobile?48:64}px`, fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:15, lineHeight:1.65, color:T.muted, maxWidth:560 }}>
                 {extraSection.subtext}
               </p>
             )}
-            <div style={{ border:"1px solid #E5E7EB", borderRadius:16, overflow:"hidden", background:T.white, marginBottom:24 }}>
-              <div style={{ display:"grid", gridTemplateColumns:isMobile?"1fr":`repeat(${extraSection.cards.length},1fr)` }}>
-                {extraSection.cards.map((f, i) => {
-                  const isLastCol = isMobile || i === extraSection.cards.length - 1;
-                  return (
-                    <div key={i} className="fade-up" style={{ padding:isMobile?"32px 24px":"40px", borderRight:!isLastCol?"1px solid #E5E7EB":"none", borderBottom:isMobile && i < extraSection.cards.length-1 ? "1px solid #E5E7EB":"none", transitionDelay:`${i*0.09}s` }}>
-                      <div style={{ width:52,height:52,borderRadius:10,background:"#F3F4F6",display:"flex",alignItems:"center",justifyContent:"center",marginBottom:24 }}>
-                        {f.icon}
-                      </div>
-                      <p style={{ margin:"0 0 12px", fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:isMobile?16:20, lineHeight:1.3, color:T.dark }}>{f.title}</p>
-                      <p style={{ margin:0, fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14, lineHeight:1.65, color:T.muted }}>{f.desc}</p>
+            <div style={{ display:"flex", flexDirection:"column", gap:isMobile?56:96 }}>
+              {extraSection.items.map((item, i) => {
+                const reverse = !isMobile && i % 2 === 1;
+                return (
+                  <div key={i} className="fade-up" style={{ display:"grid", gridTemplateColumns:isMobile?"1fr":"1fr 1fr", gap:isMobile?32:72, alignItems:"center", transitionDelay:`${i*0.1}s` }}>
+                    <div style={{ order: reverse ? 2 : 1 }}>{item.visual}</div>
+                    <div style={{ order: reverse ? 1 : 2 }}>
+                      <h3 style={{ margin:"0 0 14px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?24:32, lineHeight:1.15, color:T.headingBlack }}>{item.title}</h3>
+                      <p style={{ margin:"0 0 24px", fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:15, lineHeight:1.7, color:T.muted, maxWidth:440 }}>{item.desc}</p>
+                      <a href={item.ctaHref} target="_blank" rel="noopener noreferrer" style={{ display:"inline-flex", alignItems:"center", gap:6, fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14, color:T.white, background:T.primary, border:`1px solid ${T.primary}`, borderRadius:4, padding:"10px 20px", textDecoration:"none", transition:"opacity .15s" }}
+                        onMouseEnter={e=>(e.currentTarget.style.opacity="0.88")} onMouseLeave={e=>(e.currentTarget.style.opacity="1")}>
+                        {item.ctaLabel}
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="#FFF" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                      </a>
                     </div>
-                  );
-                })}
-              </div>
+                  </div>
+                );
+              })}
             </div>
-            <div style={{ display:"flex", alignItems:"flex-start", gap:10, maxWidth:720 }}>
+            <div style={{ display:"flex", alignItems:"flex-start", gap:10, maxWidth:720, marginTop:isMobile?48:64 }}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style={{ flexShrink:0, marginTop:2 }}><circle cx="12" cy="12" r="10" stroke={T.primary} strokeWidth="1.5"/><path d="M8 12l3 3 5-6" stroke={T.primary} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
               <p style={{ margin:0, fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14, lineHeight:1.65, color:T.muted }}>
                 {extraSection.note}

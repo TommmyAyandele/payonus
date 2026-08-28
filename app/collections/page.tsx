@@ -36,18 +36,73 @@ const FEATURES: ProductFeature[] = [
   },
 ];
 
-const SME_CARDS: ProductFeature[] = [
-  {
-    title: "Payment Links",
-    desc: "Share a link or QR code to collect payment — no checkout integration needed. Choose one-time, reusable, or group-contribution links, control how the amount works, and track who's paid from a live dashboard.",
-    icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" stroke={T.primary} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" stroke={T.primary} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>,
-  },
-  {
-    title: "Invoicing",
-    desc: "Create itemized invoices with VAT and deductions, then send a branded payment page your customer can pay in one click — with a downloadable PDF or receipt, on any device.",
-    icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="5" y="2" width="14" height="20" rx="2" stroke={T.primary} strokeWidth="1.5"/><path d="M9 7h6M9 11h6M9 15h3" stroke={T.primary} strokeWidth="1.5" strokeLinecap="round"/></svg>,
-  },
+/* Fixed 6x6 dot pattern — deterministic (no Math.random) so SSR/client markup always matches. */
+const QR_PATTERN = [
+  1,1,1,0,1,1, 1,0,1,0,0,1, 1,1,1,0,1,0,
+  0,0,0,1,0,1, 1,0,1,0,1,1, 1,1,0,1,0,1,
 ];
+
+function MockCard({ children }: { children: React.ReactNode }) {
+  return (
+    <div style={{ borderRadius:16, border:"1px solid #E5E7EB", boxShadow:"0 12px 40px rgba(96,9,255,0.08)", background:T.white, padding:28, maxWidth:400, margin:"0 auto" }}>
+      {children}
+    </div>
+  );
+}
+
+function PaymentLinkVisual() {
+  return (
+    <MockCard>
+      <div style={{ display:"flex", alignItems:"center", gap:8, marginBottom:24 }}>
+        <div style={{ width:8, height:8, borderRadius:"50%", background:"#22C55E", flexShrink:0 }} />
+        <span style={{ fontFamily:"DM Sans, sans-serif", fontSize:12, color:T.muted, overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap" }}>pay.payonus.com/2fK9xR</span>
+      </div>
+      <div style={{ display:"flex", justifyContent:"center", marginBottom:20 }}>
+        <div style={{ width:120, height:120, borderRadius:10, background:"#111", padding:8, display:"grid", gridTemplateColumns:"repeat(6,1fr)", gap:3 }}>
+          {QR_PATTERN.map((on, i) => <div key={i} style={{ background: on ? "#FFF" : "transparent", borderRadius:1 }} />)}
+        </div>
+      </div>
+      <p style={{ textAlign:"center", margin:"0 0 4px", fontFamily:"DM Sans, sans-serif", fontSize:13, color:T.muted }}>Amount due</p>
+      <p style={{ textAlign:"center", margin:"0 0 20px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:600, fontSize:32, color:T.headingBlack }}>₦45,000</p>
+      <div style={{ width:"100%", textAlign:"center", fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14, color:T.white, background:T.primary, borderRadius:4, padding:"12px 0" }}>Pay Now</div>
+      <div style={{ display:"flex", justifyContent:"center", flexWrap:"wrap", gap:8, marginTop:16 }}>
+        {["Card","Bank Transfer","USSD","Mobile Money"].map(m => (
+          <span key={m} style={{ fontFamily:"DM Sans, sans-serif", fontSize:11, color:T.muted, border:"1px solid #E5E7EB", borderRadius:999, padding:"4px 10px" }}>{m}</span>
+        ))}
+      </div>
+    </MockCard>
+  );
+}
+
+function InvoiceVisual() {
+  const lines: [string, string][] = [
+    ["Product design — 3 units", "₦120,000"],
+    ["VAT (7.5%)", "₦9,000"],
+    ["Discount", "-₦4,000"],
+  ];
+  return (
+    <MockCard>
+      <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:20 }}>
+        <span style={{ fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:600, fontSize:18, color:T.headingBlack }}>Invoice</span>
+        <span style={{ fontFamily:"DM Sans, sans-serif", fontSize:12, color:T.muted }}>#INV-0142</span>
+      </div>
+      <div style={{ display:"flex", flexDirection:"column", gap:10, marginBottom:16, paddingBottom:16, borderBottom:"1px dashed #E5E7EB" }}>
+        {lines.map(([label, amt]) => (
+          <div key={label} style={{ display:"flex", justifyContent:"space-between" }}>
+            <span style={{ fontFamily:"DM Sans, sans-serif", fontSize:13, color:T.muted }}>{label}</span>
+            <span style={{ fontFamily:"DM Sans, sans-serif", fontSize:13, color:T.dark }}>{amt}</span>
+          </div>
+        ))}
+      </div>
+      <div style={{ display:"flex", justifyContent:"space-between", marginBottom:24 }}>
+        <span style={{ fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:15, color:T.headingBlack }}>Total</span>
+        <span style={{ fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:600, fontSize:20, color:T.primary }}>₦125,000</span>
+      </div>
+      <div style={{ width:"100%", textAlign:"center", fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14, color:T.white, background:T.primary, borderRadius:4, padding:"12px 0" }}>Pay Invoice</div>
+      <p style={{ textAlign:"center", margin:"12px 0 0", fontFamily:"DM Sans, sans-serif", fontSize:12, color:T.muted }}>↓ Download PDF</p>
+    </MockCard>
+  );
+}
 
 export default function CollectionsPage() {
   return (
@@ -60,7 +115,22 @@ export default function CollectionsPage() {
       extraSection={{
         heading: <>Built for <span style={{ color: T.primary }}>SMEs.</span></>,
         subtext: "Self-serve tools for merchants who don't need a full integration — set up in minutes, no developer required.",
-        cards: SME_CARDS,
+        items: [
+          {
+            title: "Payment Links",
+            desc: "Share a link or QR code to collect payment — no checkout integration needed. Choose one-time, reusable, or group-contribution links, control how the amount works, and track who's paid from a live dashboard.",
+            visual: <PaymentLinkVisual />,
+            ctaLabel: "Get Started",
+            ctaHref: "https://merchantv2.payonus.com/signup",
+          },
+          {
+            title: "Invoicing",
+            desc: "Create itemized invoices with VAT and deductions, then send a branded payment page your customer can pay in one click — with a downloadable PDF or receipt, on any device.",
+            visual: <InvoiceVisual />,
+            ctaLabel: "Get Started",
+            ctaHref: "https://merchantv2.payonus.com/signup",
+          },
+        ],
         note: "Not formally registered yet? You can still onboard and start collecting — verified with your BVN, a government-issued ID, and proof of address instead of registration documents.",
       }}
       marketsHeading={<><span style={{ color: T.dark }}>One checkout,</span><br /><span style={{ color: T.primary }}>every customer.</span></>}
