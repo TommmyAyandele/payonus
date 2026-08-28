@@ -10,7 +10,6 @@ const NAVY = "#1D0057";
 /* ─── SCROLL REVEAL ─── */
 function useScrollReveal() {
   React.useEffect(() => {
-    const els = document.querySelectorAll(".fade-up");
     const io = new IntersectionObserver(
       entries =>
         entries.forEach(e => {
@@ -21,8 +20,15 @@ function useScrollReveal() {
         }),
       { threshold: 0.08 }
     );
-    els.forEach(el => io.observe(el));
-    return () => io.disconnect();
+    // Re-scan on DOM changes too, not just once on mount — elements gated behind a
+    // breakpoint check (e.g. useBreakpoint's client-side width correction swapping in a
+    // different layout branch) can appear after the initial querySelectorAll and would
+    // otherwise never get observed, staying stuck at opacity:0 forever.
+    const observeAll = () => document.querySelectorAll(".fade-up:not(.visible)").forEach(el => io.observe(el));
+    observeAll();
+    const mo = new MutationObserver(observeAll);
+    mo.observe(document.body, { childList: true, subtree: true });
+    return () => { io.disconnect(); mo.disconnect(); };
   }, []);
 }
 
