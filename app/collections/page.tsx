@@ -36,6 +36,19 @@ const FEATURES: ProductFeature[] = [
   },
 ];
 
+const SME_CARDS: ProductFeature[] = [
+  {
+    title: "Payment Links",
+    desc: "Share a link or QR code to collect payment — no checkout integration needed. Choose one-time, reusable, or group-contribution links, control how the amount works, and track who's paid from a live dashboard.",
+    icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" stroke={T.primary} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" stroke={T.primary} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>,
+  },
+  {
+    title: "Invoicing",
+    desc: "Create itemized invoices with VAT and deductions, then send a branded payment page your customer can pay in one click — with a downloadable PDF or receipt, on any device.",
+    icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="5" y="2" width="14" height="20" rx="2" stroke={T.primary} strokeWidth="1.5"/><path d="M9 7h6M9 11h6M9 15h3" stroke={T.primary} strokeWidth="1.5" strokeLinecap="round"/></svg>,
+  },
+];
+
 export default function CollectionsPage() {
   return (
     <ProductPage
@@ -44,6 +57,12 @@ export default function CollectionsPage() {
       subtext="A unified checkout and collections API for card, bank transfer, USSD, and mobile money across 8 African markets — in one integration."
       features={FEATURES}
       featuresHeading={<>Everything you need to<br />collect payments <span style={{ color: T.primary }}>reliably.</span></>}
+      extraSection={{
+        heading: <>Built for <span style={{ color: T.primary }}>SMEs.</span></>,
+        subtext: "Self-serve tools for merchants who don't need a full integration — set up in minutes, no developer required.",
+        cards: SME_CARDS,
+        note: "Not formally registered yet? You can still onboard and start collecting — verified with your BVN, a government-issued ID, and proof of address instead of registration documents.",
+      }}
       marketsHeading={<><span style={{ color: T.dark }}>One checkout,</span><br /><span style={{ color: T.primary }}>every customer.</span></>}
       marketsSubtext="Your customers pay the way they know — whether that's Verve, GTBank transfer, MTN Mobile Money, or USSD. Payonus handles the rails, you handle the product."
       ctaHeading={<>Ready to start accepting<br /><span style={{ color: T.primary }}>payments without friction?</span></>}

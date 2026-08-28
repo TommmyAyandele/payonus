@@ -202,6 +202,13 @@ export interface ProductPageProps {
   subtext:         string;
   features:        ProductFeature[];
   featuresHeading: React.ReactNode;
+  /** Optional additive block rendered between Features and Markets — e.g. self-serve tools alongside a core enterprise feature set. */
+  extraSection?: {
+    heading: React.ReactNode;
+    subtext?: string;
+    cards: ProductFeature[];
+    note: string;
+  };
   marketsHeading:  React.ReactNode;
   marketsSubtext:  string;
   ctaHeading:      React.ReactNode;
@@ -214,7 +221,7 @@ export interface ProductPageProps {
 ═══════════════════════════════════════ */
 export default function ProductPage({
   label, heading, subtext, features,
-  featuresHeading, marketsHeading, marketsSubtext,
+  featuresHeading, extraSection, marketsHeading, marketsSubtext,
   ctaHeading, ctaSubtext, relatedLinks,
 }: ProductPageProps) {
   useScrollReveal();
@@ -336,6 +343,44 @@ export default function ProductPage({
           </div>
         </div>
       </section>
+
+      {/* ══ EXTRA SECTION (optional, additive) ══ */}
+      {extraSection && (
+        <section style={{ width:"100%", background:T.bg, padding:`${isMobile?60:80}px 0` }}>
+          <div style={{ maxWidth:1440, margin:"0 auto", padding:`0 ${hPad}px` }}>
+            <h2 className="fade-up" style={{ margin:"0 0 16px", fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:500, fontSize:isMobile?28:isTablet?38:48, lineHeight:1.1, color:T.headingBlack, maxWidth:600 }}>
+              {extraSection.heading}
+            </h2>
+            {extraSection.subtext && (
+              <p style={{ margin:`0 0 ${isMobile?32:40}px`, fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:15, lineHeight:1.65, color:T.muted, maxWidth:560 }}>
+                {extraSection.subtext}
+              </p>
+            )}
+            <div style={{ border:"1px solid #E5E7EB", borderRadius:16, overflow:"hidden", background:T.white, marginBottom:24 }}>
+              <div style={{ display:"grid", gridTemplateColumns:isMobile?"1fr":`repeat(${extraSection.cards.length},1fr)` }}>
+                {extraSection.cards.map((f, i) => {
+                  const isLastCol = isMobile || i === extraSection.cards.length - 1;
+                  return (
+                    <div key={i} className="fade-up" style={{ padding:isMobile?"32px 24px":"40px", borderRight:!isLastCol?"1px solid #E5E7EB":"none", borderBottom:isMobile && i < extraSection.cards.length-1 ? "1px solid #E5E7EB":"none", transitionDelay:`${i*0.09}s` }}>
+                      <div style={{ width:52,height:52,borderRadius:10,background:"#F3F4F6",display:"flex",alignItems:"center",justifyContent:"center",marginBottom:24 }}>
+                        {f.icon}
+                      </div>
+                      <p style={{ margin:"0 0 12px", fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:isMobile?16:20, lineHeight:1.3, color:T.dark }}>{f.title}</p>
+                      <p style={{ margin:0, fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14, lineHeight:1.65, color:T.muted }}>{f.desc}</p>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            <div style={{ display:"flex", alignItems:"flex-start", gap:10, maxWidth:720 }}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style={{ flexShrink:0, marginTop:2 }}><circle cx="12" cy="12" r="10" stroke={T.primary} strokeWidth="1.5"/><path d="M8 12l3 3 5-6" stroke={T.primary} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+              <p style={{ margin:0, fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14, lineHeight:1.65, color:T.muted }}>
+                {extraSection.note}
+              </p>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ══ MARKETS ══ */}
       <section style={{ width:"100%", background:T.bg, padding:`${isMobile?60:80}px 0` }}>
