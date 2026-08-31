@@ -21,6 +21,9 @@ export function trackEvent(event: string, params: AnalyticsParams = {}) {
   }
   window.dataLayer.push({ event, ...cleaned });
   if (typeof window.gtag === "function") {
-    window.gtag("event", event, cleaned);
+    // CTAs navigate away (window.location.href) right after firing this event, which can
+    // cancel a regular in-flight request before it reaches GA4. beacon transport is sent via
+    // navigator.sendBeacon, which browsers guarantee to deliver even if the page unloads next.
+    window.gtag("event", event, { ...cleaned, transport_type: "beacon" });
   }
 }
