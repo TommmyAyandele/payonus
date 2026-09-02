@@ -6,13 +6,13 @@ import { useBreakpoint } from "./use-breakpoint";
 const STATS_EN = [
   { value: 500, prefix: "",  suffix: "+",  label: "Businesses",     desc: "500+ businesses onboarded and processing payments across 8 African markets since launch in 2023" },
   { value: 99,  prefix: "",  suffix: "%",  label: "Uptime",         desc: "99% service uptime with 24/7 monitoring and real-time transaction notifications" },
-  { value: 300, prefix: "₦", suffix: "B+", label: "Monthly Volume", desc: "₦300B+ average transaction volume processed every month, with ₦2.5T+ total payment volume" },
+  { value: 200, prefix: "$", suffix: "M+", label: "Monthly Volume", desc: "$200M+ average transaction volume processed every month, with $1.6B+ total payment volume" },
 ];
 
 const STATS_FR = [
   { value: 500, prefix: "",  suffix: "+",  label: "Entreprises",     desc: "Plus de 500 entreprises intégrées et traitant des paiements dans 8 marchés africains depuis le lancement en 2023" },
   { value: 99,  prefix: "",  suffix: "%",  label: "Disponibilité",   desc: "99 % de disponibilité de service avec surveillance 24h/24, 7j/7 et notifications de transaction en temps réel" },
-  { value: 300, prefix: "₦", suffix: "Md+", label: "Volume mensuel", desc: "Plus de ₦300 Md de volume de transactions traité en moyenne chaque mois, pour un volume total de paiements de plus de ₦2 500 Md" },
+  { value: 200, prefix: "$", suffix: "M+", label: "Volume mensuel", desc: "Plus de 200 M$ de volume de transactions traité en moyenne chaque mois, pour un volume total de paiements de plus de 1,6 Md$" },
 ];
 
 function useCounter(to: number, active: boolean, duration = 1500): number {

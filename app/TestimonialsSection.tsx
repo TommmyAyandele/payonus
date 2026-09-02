@@ -10,9 +10,9 @@ const TESTIMONIALS_EN = [
     role: "Bureau De Change Merchant, Crownphix Technologies Limited",
   },
   {
-    quote: `"Before Payonus, cross-border payments were a weekly fire drill. Now it's just working. Our team has genuinely stopped worrying about it."`,
-    name: "John Kent,",
-    role: "Head of Finance, Bet9ja",
+    quote: `"At checkout the process is seamless and straightforward, and even for us collecting as well, it is very simple. So I'll recommend Payonus to any growing brand out there — try PAYONUS and you'll be happy that you did."`,
+    name: "Mofoluwaso Nwamara,",
+    role: "CEO, Boss-Blossoms",
   },
 ];
 

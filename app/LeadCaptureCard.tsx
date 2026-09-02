@@ -87,7 +87,13 @@ export default function LeadCaptureCard() {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    // Passive popup: acknowledge immediately, deliver the lead in the background.
     setSubmitted(true);
+    fetch("/api/sales-enquiry", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ business: form.business, email: form.email, formName: "Lead Capture" }),
+    }).catch(err => console.error("Lead capture submit failed:", err));
   }
 
   return (

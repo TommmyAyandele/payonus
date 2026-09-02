@@ -76,7 +76,34 @@ export default function SupportPage() {
   const [scrollPct, setScrollPct] = React.useState(0);
   const [openFaq,   setOpenFaq]   = React.useState<number | null>(null);
 
+  const [form, setForm] = React.useState({
+    firstName: "", lastName: "", email: "", subject: "", message: "",
+  });
+  const [submitted, setSubmitted] = React.useState(false);
+  const [submitError, setSubmitError] = React.useState(false);
+
   const hPad = isMobile ? 20 : isTablet ? 48 : 80;
+
+  function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  }
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setSubmitError(false);
+    try {
+      const res = await fetch("/api/sales-enquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...form, formName: "Support Contact" }),
+      });
+      if (!res.ok) throw new Error("Submission failed");
+      setSubmitted(true);
+    } catch (err) {
+      console.error("Support form submit failed:", err);
+      setSubmitError(true);
+    }
+  }
 
   React.useEffect(() => {
     const onScroll = () => {
@@ -353,37 +380,52 @@ export default function SupportPage() {
                 lineHeight:1.65, color:T.muted,
               }}>Fill in the form and we'll get back to you within 2 hours.</p>
 
-              <form onSubmit={e => e.preventDefault()} style={{ display:"flex", flexDirection:"column", gap:16 }}>
+              {submitted ? (
+                <p style={{
+                  margin:0, fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:15,
+                  lineHeight:1.65, color:T.dark,
+                }}>Thanks — we&apos;ve got your message and will get back to you within 2 hours.</p>
+              ) : (
+              <form onSubmit={handleSubmit} style={{ display:"flex", flexDirection:"column", gap:16 }}>
 
                 {/* First + Last name */}
                 <div style={{ display:"grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap:16 }}>
                   <fieldset className="form-field">
                     <legend>First name</legend>
-                    <input placeholder="enter first name" />
+                    <input name="firstName" value={form.firstName} onChange={handleChange} placeholder="enter first name" required />
                   </fieldset>
                   <fieldset className="form-field">
                     <legend>Last Name</legend>
-                    <input placeholder="enter last name" />
+                    <input name="lastName" value={form.lastName} onChange={handleChange} placeholder="enter last name" required />
                   </fieldset>
                 </div>
 
                 <fieldset className="form-field">
                   <legend>Email address</legend>
-                  <input type="email" placeholder="enter email address" />
+                  <input type="email" name="email" value={form.email} onChange={handleChange} placeholder="enter email address" required />
                 </fieldset>
 
                 <fieldset className="form-field">
                   <legend>Subject</legend>
-                  <input placeholder="enter a subject" />
+                  <input name="subject" value={form.subject} onChange={handleChange} placeholder="enter a subject" />
                 </fieldset>
 
                 <fieldset className="form-field">
-                  <legend>Merchant name</legend>
+                  <legend>Message</legend>
                   <textarea
+                    name="message"
+                    value={form.message}
+                    onChange={handleChange}
                     placeholder="describe your issues or questions in as much detail as you can"
                     rows={6}
                   />
                 </fieldset>
+
+                {submitError && (
+                  <p style={{ margin:0, fontFamily:"DM Sans, sans-serif", fontSize:13, color:"#D14343" }}>
+                    Something went wrong. Please try again.
+                  </p>
+                )}
 
                 <button
                   type="submit"
@@ -402,6 +444,7 @@ export default function SupportPage() {
                 >Send Message</button>
 
               </form>
+              )}
             </div>
 
           </div>
