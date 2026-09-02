@@ -142,6 +142,7 @@ export default function GamingPage() {
           { label: "Payment API", href: "/payment-api" },
           { label: "Payouts", href: "/payouts" },
           { label: "Security", href: "/security" },
+          { label: "Gaming Payment Guide", href: "/resources/gaming" },
         ]}
       />
     </>

@@ -147,6 +147,7 @@ export default function AviationPage() {
           { label: "Payment API", href: "/payment-api" },
           { label: "Payouts", href: "/payouts" },
           { label: "Security", href: "/security" },
+          { label: "Aviation Payment Guide", href: "/resources/aviation" },
         ]}
       />
     </>

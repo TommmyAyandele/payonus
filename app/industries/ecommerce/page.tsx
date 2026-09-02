@@ -141,6 +141,7 @@ export default function EcommercePage() {
           { label: "Collections", href: "/collections" },
           { label: "Payment API", href: "/payment-api" },
           { label: "Payouts", href: "/payouts" },
+          { label: "E-commerce Payment Guide", href: "/resources/ecommerce" },
         ]}
       />
     </>

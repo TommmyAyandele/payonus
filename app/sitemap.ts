@@ -1,6 +1,14 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "./seo";
 import { JOBS } from "./careers/jobs-data";
+import { getAllPosts } from "./lib/blog";
+
+const TOOL_PATHS = [
+  "/tools/african-gaming-payment-readiness-assessment",
+  "/tools/african-forex-payment-provider-checklist",
+  "/tools/cross-border-ecommerce-payment-cost-settlement-worksheet",
+  "/tools/aviation-payment-provider-evaluation-scorecard",
+];
 
 const STATIC_PATHS = [
   "/",
@@ -36,6 +44,8 @@ const STATIC_PATHS = [
   "/terms",
   "/isms-policy",
   "/whistleblower",
+  "/resources",
+  ...TOOL_PATHS,
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -51,5 +61,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified,
   }));
 
-  return [...staticEntries, ...jobEntries];
+  const resourceEntries = getAllPosts().map((post) => ({
+    url: `${SITE_URL}/resources/${post.slug}`,
+    lastModified,
+  }));
+
+  return [...staticEntries, ...jobEntries, ...resourceEntries];
 }
