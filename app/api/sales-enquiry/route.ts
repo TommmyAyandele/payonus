@@ -9,22 +9,19 @@ interface LeadPayload {
   subject?: string;
   // Compact lead-capture card
   business?: string;
+  // Lead-magnet tool pages
+  leadMagnetName?: string;
+  vertical?: string;
   // Shared
   email: string;
   pageIndustry?: string;
   formName?: string;
 }
 
-function field(label: string, value?: string) {
-  const v = value?.trim();
-  if (!v) return null;
-  return { type: "mrkdwn", text: `*${label}:*\n${v}` };
-}
-
 export async function POST(request: Request) {
-  const webhookUrl = process.env.SLACK_LEADS_WEBHOOK_URL;
+  const webhookUrl = process.env.GOOGLE_SHEET_WEBHOOK_URL;
   if (!webhookUrl) {
-    console.error("SLACK_LEADS_WEBHOOK_URL is not set");
+    console.error("GOOGLE_SHEET_WEBHOOK_URL is not set");
     return Response.json({ ok: false, error: "Not configured" }, { status: 500 });
   }
 
@@ -37,56 +34,40 @@ export async function POST(request: Request) {
 
   const email = payload.email?.trim();
   const name = [payload.firstName, payload.lastName].filter(Boolean).join(" ").trim();
-  const business = (payload.company || payload.business)?.trim();
+  const company = (payload.company || payload.business)?.trim();
 
   // Email is the one thing every form collects; require it plus at least one identifier.
-  if (!email || (!name && !business)) {
+  if (!email || (!name && !company)) {
     return Response.json({ ok: false, error: "Missing required fields" }, { status: 400 });
   }
 
-  const source = payload.formName?.trim() || "Website enquiry";
-  const fields = [
-    field("Business", business),
-    field("Email", email),
-    field("Name", name),
-    field("Role", payload.role),
-    field("Monthly volume", payload.volume),
-    field("Industry", payload.pageIndustry),
-    field("Subject", payload.subject),
+  const messageParts = [
+    payload.message?.trim(),
+    payload.leadMagnetName ? `Lead magnet: ${payload.leadMagnetName}` : null,
+    payload.vertical ? `Vertical: ${payload.vertical}` : null,
+    payload.subject ? `Subject: ${payload.subject}` : null,
   ].filter(Boolean);
 
-  const blocks: unknown[] = [
-    {
-      type: "header",
-      text: { type: "plain_text", text: `🚀 New lead — ${source}`, emoji: true },
-    },
-    { type: "section", fields },
-  ];
-
-  if (payload.message?.trim()) {
-    blocks.push({
-      type: "section",
-      text: { type: "mrkdwn", text: `*Message:*\n${payload.message.trim()}` },
-    });
-  }
-
-  blocks.push({
-    type: "context",
-    elements: [{ type: "mrkdwn", text: `Source: payonus.com • ${source}` }],
-  });
-
   try {
-    const slackRes = await fetch(webhookUrl, {
+    const sheetRes = await fetch(webhookUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        text: `New lead: ${business || name} (${email})`, // notification fallback
-        blocks,
+        timestamp: new Date().toISOString(),
+        pageIndustry: payload.pageIndustry ?? "",
+        formName: payload.formName ?? "",
+        firstName: payload.firstName ?? name,
+        lastName: payload.lastName ?? "",
+        email,
+        company: company ?? "",
+        role: payload.role ?? "",
+        volume: payload.volume ?? "",
+        message: messageParts.join(" | "),
       }),
     });
-    if (!slackRes.ok) throw new Error(`Slack webhook responded ${slackRes.status}`);
+    if (!sheetRes.ok) throw new Error(`Sheet webhook responded ${sheetRes.status}`);
   } catch (err) {
-    console.error("Failed to post lead to Slack:", err);
+    console.error("Failed to record sales enquiry:", err);
     return Response.json({ ok: false, error: "Failed to record enquiry" }, { status: 502 });
   }
 
