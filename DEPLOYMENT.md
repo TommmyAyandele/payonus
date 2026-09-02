@@ -27,7 +27,7 @@ except `.env.example` which documents the shape).
 
 | Variable                   | Required | Purpose                                                                 |
 | -------------------------- | -------- | ----------------------------------------------------------------------- |
-| `SLACK_LEADS_WEBHOOK_URL`  | **Yes**  | Slack Incoming Webhook that receives all website form leads. Without it, form submissions return `500 "Not configured"`. |
+| `GOOGLE_SHEET_WEBHOOK_URL`  | **Yes**  | Google Apps Script webhook (see `scripts/sales-enquiry-sheet-webhook.gs`) that appends all website form leads as sheet rows. Without it, form submissions return `500 "Not configured"`. |
 
 ## 3. Build & run (generic)
 
@@ -71,7 +71,7 @@ Put secrets in a file the process manager loads (never commit it):
 
 ```bash
 # /var/www/payonus-website/.env.production   (chmod 600)
-SLACK_LEADS_WEBHOOK_URL=https://hooks.slack.com/services/XXX/XXX/XXX
+GOOGLE_SHEET_WEBHOOK_URL=https://script.google.com/macros/s/XXXX/exec
 ```
 
 Next.js auto-loads `.env.production` on `next start`.
@@ -116,7 +116,7 @@ pm2 restart payonus-website
 
 > Optional: containerize on the VM instead of PM2 — `node:20-alpine`, `npm ci &&
 > npm run build`, `CMD ["npm","run","start"]`, run with
-> `-e SLACK_LEADS_WEBHOOK_URL=... -p 3000:3000`. Not required.
+> `-e GOOGLE_SHEET_WEBHOOK_URL=... -p 3000:3000`. Not required.
 
 ---
 

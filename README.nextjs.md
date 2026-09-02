@@ -36,7 +36,7 @@ gitignored except `.env.example`).
 
 | Variable | Required | Purpose |
 | --- | --- | --- |
-| `SLACK_LEADS_WEBHOOK_URL` | Yes | Slack Incoming Webhook that receives all website form leads (sales, lead-capture, support). Without it, form submissions return `500 "Not configured"`. |
+| `GOOGLE_SHEET_WEBHOOK_URL` | Yes | Google Apps Script webhook (see scripts/sales-enquiry-sheet-webhook.gs) that appends all website form leads (sales, lead-capture, support) as sheet rows. Without it, form submissions return `500 "Not configured"`. |
 
 ## Project structure
 

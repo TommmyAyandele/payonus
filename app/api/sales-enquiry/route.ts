@@ -42,10 +42,10 @@ export async function POST(request: Request) {
   }
 
   const messageParts = [
+    payload.subject ? `Subject: ${payload.subject}` : null,
     payload.message?.trim(),
     payload.leadMagnetName ? `Lead magnet: ${payload.leadMagnetName}` : null,
     payload.vertical ? `Vertical: ${payload.vertical}` : null,
-    payload.subject ? `Subject: ${payload.subject}` : null,
   ].filter(Boolean);
 
   try {

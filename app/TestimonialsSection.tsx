@@ -23,9 +23,9 @@ const TESTIMONIALS_FR = [
     role: "Marchand Bureau de Change, Crownphix Technologies Limited",
   },
   {
-    quote: `"Avant Payonus, les paiements transfrontaliers étaient un exercice d'urgence hebdomadaire. Maintenant, ça fonctionne, tout simplement. Notre équipe a vraiment cessé de s'en inquiéter."`,
-    name: "John Kent,",
-    role: "Directeur financier, Bet9ja",
+    quote: `"Au moment du paiement, le processus est fluide et simple, et même pour nous en tant qu'encaisseurs, c'est très simple. Je recommande donc Payonus à toute marque en pleine croissance — essayez PAYONUS et vous serez content de l'avoir fait."`,
+    name: "Mofoluwaso Nwamara,",
+    role: "PDG, Boss-Blossoms",
   },
 ];
 

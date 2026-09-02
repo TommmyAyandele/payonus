@@ -54,6 +54,8 @@ export default function SalesPage() {
     role: "", volume: "", message: "",
   });
   const [submitted, setSubmitted] = React.useState(false);
+  const [submitting, setSubmitting] = React.useState(false);
+  const [submitError, setSubmitError] = React.useState(false);
 
   const hPad = isMobile ? 20 : isTablet ? 48 : 80;
 
@@ -73,6 +75,8 @@ export default function SalesPage() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    setSubmitting(true);
+    setSubmitError(false);
     try {
       const res = await fetch("/api/sales-enquiry", {
         method: "POST",
@@ -83,6 +87,9 @@ export default function SalesPage() {
       setSubmitted(true);
     } catch (err) {
       console.error("Sales page submit failed:", err);
+      setSubmitError(true);
+    } finally {
+      setSubmitting(false);
     }
   }
 
@@ -246,20 +253,27 @@ export default function SalesPage() {
                     />
                   </fieldset>
 
+                  {submitError && (
+                    <p style={{ margin: 0, fontFamily: "DM Sans, sans-serif", fontSize: 13, color: "#D14343" }}>
+                      Something went wrong. Please try again.
+                    </p>
+                  )}
+
                   <button
                     type="submit"
+                    disabled={submitting}
                     style={{
                       position:"relative", overflow:"hidden",
                       fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:15,
                       color:T.white, background:T.primary,
                       border:"none", borderRadius:8,
-                      padding:"17px 0", cursor:"pointer",
+                      padding:"17px 0", cursor: submitting ? "default" : "pointer",
                       width:"100%", transition:"opacity .15s",
-                      marginTop:4,
+                      marginTop:4, opacity: submitting ? 0.7 : 1,
                     }}
-                    onMouseEnter={e=>(e.currentTarget.style.opacity="0.88")}
-                    onMouseLeave={e=>(e.currentTarget.style.opacity="1")}
-                  >Send Message</button>
+                    onMouseEnter={e=>{ if (!submitting) e.currentTarget.style.opacity="0.88"; }}
+                    onMouseLeave={e=>{ if (!submitting) e.currentTarget.style.opacity="1"; }}
+                  >{submitting ? "Sending…" : "Send Message"}</button>
 
                 </form>
               )}

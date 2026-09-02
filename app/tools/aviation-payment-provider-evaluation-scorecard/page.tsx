@@ -10,7 +10,7 @@ const data: ToolLandingData = {
   subheadline: "Compare payment providers before payment problems become your problem. Evaluate aviation payment providers across payment coverage, transaction reliability, refunds, risk management, settlement, reconciliation, API capabilities and operational support, so you can identify critical gaps before committing to a provider.",
   ctaLabel: "Get the Free Aviation Payment Provider Evaluation Scorecard",
   builtFor: "Built for airlines, OTAs, travel agencies, flight aggregators and other travel businesses operating across African markets.",
-  introHeading: "What Does the Scorecard Help You Evaluate?",
+  introHeading: "Is Your Payment Provider Ready for Your Travel Business?",
   introBody: [
     "Choosing a payment provider for an airline, OTA, travel agency or flight aggregator involves more than checking whether it can take a card payment.",
     "You need to know whether the provider's coverage, reliability, risk handling, settlement terms and operational support genuinely fit how your business sells and reconciles travel bookings across African markets.",
