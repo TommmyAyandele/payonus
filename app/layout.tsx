@@ -26,9 +26,11 @@ export const metadata: Metadata = {
 // already has the full tag/trigger/variable setup built and confirmed working, so no
 // per-domain split or config transfer is needed at domain cutover.
 const GTM_ID = "GTM-NPHWJ2NK";
-// G-KLBGC7GGSZ is the measurement ID GA4 has bound to the payonustest stream — confirmed
-// accessible and actively receiving data.
-const GA4_MEASUREMENT_ID = "G-KLBGC7GGSZ";
+// G-8W11DS3Q5K is the spec doc's measurement ID. G-KLBGC7GGSZ (tried previously, see git
+// history) 404s at googletagmanager.com/gtag/js — it is not a live GA4 stream, regardless of
+// which Google account's admin UI it appears under. Verify this ID in GA4 Admin > Data Streams
+// before changing it again: confirm the "Measurement ID" field (G-XXXXXXX), not the Stream ID.
+const GA4_MEASUREMENT_ID = "G-8W11DS3Q5K";
 
 export default function RootLayout({
   children,
