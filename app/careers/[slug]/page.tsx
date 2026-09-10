@@ -189,7 +189,7 @@ export default function JobDetailPage() {
 
           <div className="fade-up d3" style={{display:"flex",flexWrap:"wrap",gap:12}}>
             <a
-              href={`mailto:careers@payonus.com?subject=Application: ${encodeURIComponent(job.title)}`}
+              href={`mailto:hr@payonus.com?subject=Application: ${encodeURIComponent(job.title)}`}
               onClick={e => ripple(e as unknown as React.MouseEvent<HTMLAnchorElement>)}
               style={{
                 position:"relative", overflow:"hidden", display:"inline-block",
@@ -305,7 +305,7 @@ export default function JobDetailPage() {
                 Send your CV and a short note about why you're excited about this role to our team.
               </p>
               <a
-                href={`mailto:careers@payonus.com?subject=Application: ${encodeURIComponent(job.title)}`}
+                href={`mailto:hr@payonus.com?subject=Application: ${encodeURIComponent(job.title)}`}
                 style={{
                   display:"block", textAlign:"center",
                   fontFamily:"DM Sans, sans-serif", fontWeight:600, fontSize:14,
@@ -383,7 +383,7 @@ export default function JobDetailPage() {
               </p>
               <div style={{display:"flex",flexWrap:"wrap",gap:12}}>
                 <a
-                  href={`mailto:careers@payonus.com?subject=Application: ${encodeURIComponent(job.title)}`}
+                  href={`mailto:hr@payonus.com?subject=Application: ${encodeURIComponent(job.title)}`}
                   className="cta-pulse"
                   style={{
                     display:"inline-flex", alignItems:"center", gap:8,

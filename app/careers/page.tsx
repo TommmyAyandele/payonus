@@ -44,17 +44,6 @@ const PERKS = [
   {
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-        <circle cx="12" cy="12" r="9" stroke={T.primary} strokeWidth="1.6"/>
-        <path d="M12 3c-3 3-5 6-5 10s2 7 5 10M12 3c3 3 5 6 5 10s-2 7-5 10" stroke={T.primary} strokeWidth="1.4" strokeLinecap="round"/>
-        <path d="M3 12h18" stroke={T.primary} strokeWidth="1.4" strokeLinecap="round"/>
-      </svg>
-    ),
-    title: "Remote Friendly",
-    desc:  "Work from anywhere across Africa. We care about output, not office hours.",
-  },
-  {
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
         <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke={T.primary} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     ),
@@ -397,7 +386,7 @@ export default function CareersPage() {
         <div style={{maxWidth:1440,margin:"0 auto",padding:`0 ${hPad}px`}}>
           <div style={{
             display:"grid",
-            gridTemplateColumns: isMobile ? "1fr" : isTablet ? "1fr" : "2fr 1fr 1fr",
+            gridTemplateColumns: isMobile ? "1fr" : isTablet ? "1fr" : "2fr 1fr",
             gap: isMobile ? 40 : isTablet ? 40 : 56,
             alignItems:"start",
           }}>
@@ -420,7 +409,7 @@ export default function CareersPage() {
               </p>
               <div style={{display:"flex",flexWrap:"wrap",gap:12}}>
                 <a
-                  href="mailto:careers@payonus.com"
+                  href="mailto:hr@payonus.com"
                   className="cta-pulse"
                   style={{
                     display:"inline-flex", alignItems:"center", gap:8,
@@ -457,27 +446,13 @@ export default function CareersPage() {
               <div>
                 <div style={{width:44,height:44,borderRadius:10,background:"#EDE9FF",border:`1px solid ${T.borderLight}`,display:"flex",alignItems:"center",justifyContent:"center",marginBottom:16}}>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke={T.primary} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
-                    <circle cx="9" cy="7" r="4" stroke={T.primary} strokeWidth="1.6"/>
-                    <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke={T.primary} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </div>
-                <p style={{margin:"0 0 8px",fontFamily:"DM Sans, sans-serif",fontWeight:700,fontSize:16,lineHeight:1.3,color:T.dark}}>Remote-first culture</p>
-                <p style={{margin:"0 0 14px",fontFamily:"DM Sans, sans-serif",fontWeight:400,fontSize:13.5,lineHeight:1.65,color:T.muted}}>We hire the best people across Africa, regardless of where they're based.</p>
-                <a href="/careers#perks" className="arrow-link" style={{display:"inline-flex",alignItems:"center",gap:4,fontFamily:"DM Sans, sans-serif",fontWeight:500,fontSize:13,color:T.primary,textDecoration:"none"}}
-                >Why Payonus <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke={T.primary} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg></a>
-              </div>
-
-              <div>
-                <div style={{width:44,height:44,borderRadius:10,background:"#EDE9FF",border:`1px solid ${T.borderLight}`,display:"flex",alignItems:"center",justifyContent:"center",marginBottom:16}}>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.07 11.9 19.79 19.79 0 0 1 1 3.27 2 2 0 0 1 2.96 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21 16z" stroke={T.primary} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </div>
                 <p style={{margin:"0 0 8px",fontFamily:"DM Sans, sans-serif",fontWeight:700,fontSize:16,lineHeight:1.3,color:T.dark}}>Hiring questions?</p>
                 <p style={{margin:"0 0 14px",fontFamily:"DM Sans, sans-serif",fontWeight:400,fontSize:13.5,lineHeight:1.65,color:T.muted}}>Reach our talent team directly. We respond to every inquiry within two business days.</p>
-                <a href="mailto:careers@payonus.com" className="arrow-link" style={{display:"inline-flex",alignItems:"center",gap:4,fontFamily:"DM Sans, sans-serif",fontWeight:500,fontSize:13,color:T.primary,textDecoration:"none"}}
-                >careers@payonus.com <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke={T.primary} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg></a>
+                <a href="mailto:hr@payonus.com" className="arrow-link" style={{display:"inline-flex",alignItems:"center",gap:4,fontFamily:"DM Sans, sans-serif",fontWeight:500,fontSize:13,color:T.primary,textDecoration:"none"}}
+                >hr@payonus.com <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke={T.primary} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg></a>
               </div>
             </>)}
           </div>
