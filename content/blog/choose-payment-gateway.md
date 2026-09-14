@@ -3,8 +3,8 @@ title: "How to Choose a Payment Gateway That Customers Can Actually Use"
 category: "Payment Methods"
 excerpt: "Choosing a payment gateway? Learn how to evaluate payment methods, currencies, customer fit and failed-payment recovery so more customers can complete payment."
 date: "2026-09-08"
-relatedLabel: "Explore Collections"
-relatedHref: "/collections"
+relatedLabel: "Talk to PayOnUs About Your Setup"
+relatedHref: "/sales"
 ---
 
 You have done the hard part.
@@ -145,7 +145,7 @@ The relevant payment setup is not the one with the longest product sheet. It is 
 
 That means looking at three capabilities in particular: payment collection, Payment API connectivity, and analytics and reporting.
 
-Collection is what gives customers the payment routes available at checkout. API connectivity allows those payment flows to sit within your existing checkout or application rather than operating as a disconnected process. Analytics and reporting then give you visibility into how those payment flows are performing.
+[Collection](/collections) is what gives customers the payment routes available at checkout. API connectivity allows those payment flows to sit within your existing checkout or application rather than operating as a disconnected process. [Analytics and reporting](/analytics) then give you visibility into how those payment flows are performing.
 
 Together, these capabilities help you answer two practical questions: can your customers actually complete payment, and can you see when the payment experience is not working as it should?
 

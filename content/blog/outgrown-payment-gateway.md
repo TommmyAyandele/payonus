@@ -87,13 +87,13 @@ Once you know what changed, evaluate your options against that specific requirem
 
 Start with what your current setup can no longer support without extra steps. Then assess potential providers based on what you now need.
 
-If the issue is market access, look at the markets and operating requirements that matter to you. If you're **expanding into another African market**, your payment setup may need to change with the requirements of that market.
+If the issue is market access, look at the markets and operating requirements that matter to you. If you're [**expanding into another African market**](/resources/expanding-across-africa-payment-operations), your payment setup may need to change with the requirements of that market.
 
-If the issue is **bringing money into the business**, assess whether your current setup supports the payment flows you need for collections.
+If the issue is **bringing money into the business**, assess whether your current setup supports the payment flows you need for [collections](/collections).
 
-If the issue is **moving money out of the business**, assess whether your setup supports payouts without requiring a separate process.
+If the issue is **moving money out of the business**, assess whether your setup supports [payouts](/payouts) without requiring a separate process.
 
-If the issue is **settlement**, determine whether the available arrangement fits your requirements.
+If the issue is [**settlement**](/settlements), determine whether the available arrangement fits your requirements.
 
 If the issue is eligibility, establish whether the provider can support your business category under its applicable requirements.
 

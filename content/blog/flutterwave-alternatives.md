@@ -99,11 +99,11 @@ PayOnUs is built around these wider payment requirements, supporting collections
 
 ## PayOnUs: A Payment Setup Built for Broader Requirements
 
-PayOnUs operates across eight African markets: Nigeria, Ghana, Kenya, Côte d'Ivoire, South Africa, Zambia, Senegal and Cameroon. This gives businesses a way to manage collections and payouts across multiple markets, with the specific payment methods and currencies depending on the market and payment flow.
+PayOnUs operates across eight African markets: Nigeria, Ghana, Kenya, Côte d'Ivoire, South Africa, Zambia, Senegal and Cameroon. This gives businesses a way to manage [collections](/collections) and [payouts](/payouts) across multiple markets, with the specific payment methods and currencies depending on the market and payment flow.
 
 If you manage more than one business relationship, PayOnUs supports Merchant and Aggregator models. The Merchant model supports a single business, while the Aggregator model is designed for businesses managing multiple businesses and wallets within the payment operation.
 
-Settlement is another part of the setup. Depending on the arrangement and market, PayOnUs offers daily, weekly and on-demand settlement schedules, alongside visibility into available balances, pending settlements and funds in transit.
+[Settlement](/settlements) is another part of the setup. Depending on the arrangement and market, PayOnUs offers daily, weekly and on-demand settlement schedules, alongside visibility into available balances, pending settlements and funds in transit.
 
 For businesses operating in higher-risk sectors, eligibility can determine whether a provider can support the business in the first place. PayOnUs supports certain higher-risk business models and traffic in regions where mainstream payment providers may not accept the same activity, subject to applicable requirements and review.
 

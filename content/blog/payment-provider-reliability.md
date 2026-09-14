@@ -132,7 +132,7 @@ Where does it stand?
 
 What can I do next?
 
-Your payment infrastructure should give you clear answers to these questions. PayOnUs brings collections, payouts, Payment API connectivity, and analytics and reporting together within the wider payment operation, so you can keep track of payment activity without treating each payment flow as a separate process.
+Your payment infrastructure should give you clear answers to these questions. PayOnUs brings collections, payouts, [Payment API](/payment-api) connectivity, and [analytics and reporting](/analytics) together within the wider payment operation, so you can keep track of payment activity without treating each payment flow as a separate process.
 
 The value for you is in having enough visibility and connection around your payment activity to understand what is happening, where a transaction stands, and what needs to happen next.
 

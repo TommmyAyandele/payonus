@@ -84,7 +84,7 @@ You also need to know whether you can see what is happening to your money and wh
 | Destination | Can funds settle where your business needs them? |
 | Exceptions | Can you see what is happening when a settlement is delayed? |
 
-For Nigerian settlement, PayOnUs supports next-working-day settlement, while also offering same-day settlement for applicable arrangements. Its settlement infrastructure includes flexible daily, weekly or on-demand schedules, configurable minimum thresholds, and real-time visibility into available balances, pending settlements, and in-transit funds.
+For Nigerian settlement, PayOnUs supports next-working-day settlement, while also offering same-day settlement for applicable arrangements. Its [settlement infrastructure](/settlements) includes flexible daily, weekly or on-demand schedules, configurable minimum thresholds, and real-time visibility into available balances, pending settlements, and in-transit funds.
 
 For international payouts, timing can differ, with some transactions taking 2–3 business days.
 
@@ -128,7 +128,7 @@ When both sides matter, evaluate the complete flow.
 
 Expanding into a new market can affect everything from how customers pay you to how you receive, settle and move that money through the business.
 
-PayOnUs supports collections and payouts across its current eight-market footprint, with payment methods varying by market. For example, Nigerian businesses can collect through card and bank transfer, while mobile money is available in relevant supported markets.
+PayOnUs supports collections and [payouts](/payouts) across its current eight-market footprint, with payment methods varying by market. For example, Nigerian businesses can collect through card and bank transfer, while mobile money is available in relevant supported markets.
 
 What matters is whether the provider can support the way money moves through your business, not whether collections and payouts happen to appear on the same product page.
 

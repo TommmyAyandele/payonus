@@ -78,7 +78,7 @@ You may then need to pay a supplier, partner, driver, employee or customer. As t
 
 That is why collections, payouts, payment integration, and analytics and reporting are better understood as parts of the same payment operation.
 
-**Collections handle money coming into the business.** Payouts handle money going out. The Payment API connects payment activity to the systems you already use. **Analytics and reporting** give you visibility into what is happening across those flows.
+**[Collections](/collections) handle money coming into the business.** Payouts handle money going out. The [Payment API](/payment-api) connects payment activity to the systems you already use. **[Analytics and reporting](/analytics)** give you visibility into what is happening across those flows.
 
 As your money movement becomes more complex, keeping these activities connected means you have fewer separate payment processes to manage and fewer places to look when you need to understand what is happening.
 

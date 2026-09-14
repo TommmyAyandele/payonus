@@ -3,8 +3,8 @@ title: "A Successful Payment Isn't Enough: Why African Merchants Need to Start E
 category: "Settlement"
 excerpt: "A successful transaction tells you the payment went through — it doesn't tell you whether the resulting funds are available when your business expects them."
 date: "2026-09-07"
-relatedLabel: "Explore Settlements"
-relatedHref: "/settlements"
+relatedLabel: "Discuss Your Settlement Setup"
+relatedHref: "/sales"
 ---
 
 It is 7:15 in the morning.
@@ -120,7 +120,7 @@ Your provider should make settlement easier to monitor as part of the wider paym
 
 This is where the underlying infrastructure matters.
 
-PayOnUs combines settlement capabilities with collections, payouts, Payment API connectivity, and analytics and reporting, giving you tools that can sit within the wider payment operation rather than treating settlement as a completely separate concern.
+PayOnUs combines [settlement capabilities](/settlements) with collections, payouts, Payment API connectivity, and analytics and reporting, giving you tools that can sit within the wider payment operation rather than treating settlement as a completely separate concern.
 
 For you, the practical question is whether those capabilities give your team enough visibility into payment activity and settlement to manage the money moving through your business with confidence.
 
@@ -142,5 +142,3 @@ You now have something more useful than a general opinion about whether your pro
 You have evidence of how well the settlement process works for your business.
 
 Use that evidence when comparing providers. Ask prospective providers how the same situations would be handled and what information your team would have available when something falls outside the expected pattern.
-
-**[Discuss your settlement and payment setup with PayOnUs]**
