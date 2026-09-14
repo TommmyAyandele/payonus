@@ -6,17 +6,37 @@ import Navbar, { T } from "../../Navbar";
 import Footer from "../../Footer";
 import HeroBg from "../../HeroBg";
 import type { Post } from "../../lib/blog";
+import { trackEvent } from "../../analytics";
+import { useSalesModal } from "../../SalesModalContext";
 
 export default function ArticleView({ post }: { post: Post }) {
   const { isMobile, isTablet } = useBreakpoint();
   const [scrolled, setScrolled] = React.useState(false);
   const hPad = isMobile ? 20 : isTablet ? 48 : 80;
+  const { open: openSalesModal } = useSalesModal();
 
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Contextual links inside the article body are static HTML (rendered from markdown), so
+  // clicks are tracked via delegation rather than per-link handlers.
+  function onBodyClick(e: React.MouseEvent<HTMLDivElement>) {
+    const link = (e.target as HTMLElement).closest("a");
+    if (!link) return;
+    const href = link.getAttribute("href") ?? "";
+    if (!href.startsWith("/")) return;
+    trackEvent("internal_link_click", {
+      page_industry: post.slug,
+      link_name: link.textContent ?? "",
+      link_location: "Article Body",
+      destination: href,
+    });
+  }
+
+  const relatedIsSales = post.relatedHref === "/sales";
 
   return (
     <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", background: T.bg }}>
@@ -56,16 +76,35 @@ export default function ArticleView({ post }: { post: Post }) {
       </section>
 
       <div style={{ flex: 1, maxWidth: 780, margin: "0 auto", padding: `0 ${hPad}px ${isMobile ? 64 : 96}px`, width: "100%", boxSizing: "border-box" }}>
-        <div className="blog-body" dangerouslySetInnerHTML={{ __html: post.html }} />
+        <div className="blog-body" onClick={onBodyClick} dangerouslySetInnerHTML={{ __html: post.html }} />
 
         {post.relatedHref && (
           <div style={{ marginTop: 32, paddingTop: 24, borderTop: `1px solid ${T.borderLight}` }}>
-            <a href={post.relatedHref} style={{ display: "inline-flex", alignItems: "center", gap: 4, fontFamily: "DM Sans, sans-serif", fontWeight: 600, fontSize: 15, color: T.primary, textDecoration: "none" }}>
-              {post.relatedLabel ?? "Learn more"}
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
-                <path d="M9 18l6-6-6-6" stroke={T.primary} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </a>
+            {relatedIsSales ? (
+              <button
+                onClick={() => {
+                  trackEvent("talk_to_sales_click", { page_industry: post.slug, cta_location: "Article Related Link", destination: "Sales Form" });
+                  openSalesModal({ pageIndustry: post.slug, formName: `${post.title} Article Enquiry`, submitEventName: "generate_lead" });
+                }}
+                style={{ display: "inline-flex", alignItems: "center", gap: 4, fontFamily: "DM Sans, sans-serif", fontWeight: 600, fontSize: 15, color: T.primary, background: "none", border: "none", padding: 0, cursor: "pointer" }}
+              >
+                {post.relatedLabel ?? "Talk to a Payments Specialist"}
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+                  <path d="M9 18l6-6-6-6" stroke={T.primary} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+            ) : (
+              <a
+                href={post.relatedHref}
+                onClick={() => trackEvent("internal_link_click", { page_industry: post.slug, link_name: post.relatedLabel ?? "Learn more", link_location: "Article Related Link", destination: post.relatedHref })}
+                style={{ display: "inline-flex", alignItems: "center", gap: 4, fontFamily: "DM Sans, sans-serif", fontWeight: 600, fontSize: 15, color: T.primary, textDecoration: "none" }}
+              >
+                {post.relatedLabel ?? "Learn more"}
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+                  <path d="M9 18l6-6-6-6" stroke={T.primary} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </a>
+            )}
           </div>
         )}
       </div>

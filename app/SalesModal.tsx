@@ -10,6 +10,7 @@ interface SalesModalProps {
   onClose: () => void;
   pageIndustry?: string;
   formName?: string;
+  submitEventName?: string;
 }
 
 const initialForm = {
@@ -17,7 +18,7 @@ const initialForm = {
   role: "", volume: "", message: "",
 };
 
-export default function SalesModal({ isOpen, onClose, pageIndustry, formName }: SalesModalProps) {
+export default function SalesModal({ isOpen, onClose, pageIndustry, formName, submitEventName }: SalesModalProps) {
   const { isMobile } = useBreakpoint();
   const [form, setForm] = React.useState(initialForm);
   const [submitted, setSubmitted] = React.useState(false);
@@ -25,6 +26,7 @@ export default function SalesModal({ isOpen, onClose, pageIndustry, formName }: 
   const [submitError, setSubmitError] = React.useState(false);
   const hasStartedRef = React.useRef(false);
   const resolvedFormName = formName ?? "Sales Enquiry";
+  const resolvedSubmitEventName = submitEventName ?? "form_submit";
 
   React.useEffect(() => {
     if (!isOpen) return;
@@ -68,7 +70,7 @@ export default function SalesModal({ isOpen, onClose, pageIndustry, formName }: 
       });
       if (!res.ok) throw new Error("Submission failed");
       setSubmitted(true);
-      trackEvent("form_submit", { page_industry: pageIndustry, form_name: resolvedFormName });
+      trackEvent(resolvedSubmitEventName, { page_industry: pageIndustry, form_name: resolvedFormName });
     } catch {
       setSubmitError(true);
     } finally {

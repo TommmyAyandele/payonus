@@ -6,6 +6,7 @@ import SalesModal from "./SalesModal";
 interface SalesModalOpenContext {
   pageIndustry?: string;
   formName?: string;
+  submitEventName?: string;
 }
 
 interface SalesModalContextValue {
@@ -25,7 +26,7 @@ export function SalesModalProvider({ children }: { children: React.ReactNode }) 
   return (
     <SalesModalContext.Provider value={{ isOpen, open, close }}>
       {children}
-      <SalesModal isOpen={isOpen} onClose={close} pageIndustry={openContext.pageIndustry} formName={openContext.formName} />
+      <SalesModal isOpen={isOpen} onClose={close} pageIndustry={openContext.pageIndustry} formName={openContext.formName} submitEventName={openContext.submitEventName} />
     </SalesModalContext.Provider>
   );
 }
