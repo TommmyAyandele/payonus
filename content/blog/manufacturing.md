@@ -41,7 +41,7 @@ Traditional bank or SWIFT transfers work for established relationships and large
 
 ## What to check before committing to a provider
 
-Before choosing, it's worth confirming corridor and currency coverage for the specific countries suppliers are in, the all-in cost of a payment (rate, spread, fees, and any deductions along the route), how quickly and reliably funds actually settle, whether finance can link payments to purchase orders and invoices for reconciliation, and whether the provider's API, dashboards, and reporting can connect to the systems already in use rather than becoming another disconnected workflow.
+Before choosing, it's worth confirming corridor and currency coverage for the specific countries suppliers are in, the all-in cost of a payment (rate, spread, fees, and any deductions along the route), how quickly and reliably funds actually settle, whether finance can link payments to purchase orders and invoices for reconciliation, and whether the provider's [Payment API](/payment-api), dashboards, and [reporting](/analytics) can connect to the systems already in use rather than becoming another disconnected workflow.
 
 ## Rolling out a new setup without disrupting existing operations
 

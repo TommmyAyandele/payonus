@@ -37,4 +37,4 @@ There's no single correct way to collect bank transfers. Shared accounts with pa
 
 The transaction fee is the smallest part of the decision. What matters more is whether a provider supports the full workflow: how payments are identified and matched, which statuses are exposed and how updates are delivered, how pending, failed, reversed, and duplicate transactions are handled, and how much of reconciliation and settlement reporting is exposed for finance to actually use. Documentation, sandbox access, and clear webhook behavior determine how much time a team spends debugging the integration versus building on it. Before going live, the full journey should be tested — not just a single successful payment, but pending, failed, reversed, and duplicate cases, and the actual business action each one should trigger.
 
-Payonus builds payment infrastructure — collections, payouts, and reconciliation — for the kind of business that needs a bank transfer to do more than just arrive.
+Payonus builds payment infrastructure — [collections](/collections), [payouts](/payouts), and reconciliation — for the kind of business that needs a bank transfer to do more than just arrive.
