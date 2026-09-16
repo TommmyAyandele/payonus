@@ -27,7 +27,7 @@ except `.env.example` which documents the shape).
 
 | Variable                   | Required | Purpose                                                                 |
 | -------------------------- | -------- | ----------------------------------------------------------------------- |
-| `GOOGLE_SHEET_WEBHOOK_URL`  | **Yes**  | Google Apps Script webhook (see `scripts/sales-enquiry-sheet-webhook.gs`) that appends all website form leads as sheet rows. Without it, form submissions return `500 "Not configured"`. |
+| `GOOGLE_SHEET_WEBHOOK_URL`  | **Yes**  | Name is legacy — leads no longer go to a Google Sheet. This now forwards all website form submissions into Slack via an integration managed outside this repo (ask marketing/ops for the current URL). The endpoint must accept this route's flat JSON payload (see `app/api/sales-enquiry/route.ts`), not raw Slack Block Kit. `scripts/sales-enquiry-sheet-webhook.gs` is the old Google Sheet receiver and is no longer live. Without this var set, form submissions return `500 "Not configured"`. |
 
 ## 3. Build & run (generic)
 
@@ -71,7 +71,8 @@ Put secrets in a file the process manager loads (never commit it):
 
 ```bash
 # /var/www/payonus-website/.env.production   (chmod 600)
-GOOGLE_SHEET_WEBHOOK_URL=https://script.google.com/macros/s/XXXX/exec
+# Current value forwards into Slack, not a Google Sheet — see section 2 above.
+GOOGLE_SHEET_WEBHOOK_URL=https://example.com/lead-intake-webhook
 ```
 
 Next.js auto-loads `.env.production` on `next start`.
@@ -122,8 +123,12 @@ pm2 restart payonus-website
 
 ## 5. Notes
 
-- **Rotate the Slack webhook** before/after go-live if it has been shared around —
-  regenerate it in the Slack app → Incoming Webhooks and update the env var.
+- **Rotate the lead webhook** (`GOOGLE_SHEET_WEBHOOK_URL`) before/after go-live if it
+  has been shared around — it now feeds a Slack integration managed by
+  marketing/ops, not this repo, so get the replacement URL from them and update
+  the env var. Do **not** repoint this at a raw Slack Incoming Webhook URL or
+  reintroduce a Slack Block Kit payload in `route.ts` — that exact swap broke every
+  lead form in production last time (see the "Fix sales-enquiry regression" commit).
 - The build fails if a `webpack` config is present (Turbopack is the default in
   Next 16); this project has none, so builds are clean.
 - Node 18 is **not** supported by Next 16 — use Node 20.9+.

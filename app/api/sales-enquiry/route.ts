@@ -19,6 +19,11 @@ interface LeadPayload {
 }
 
 export async function POST(request: Request) {
+  // Var name is legacy: this now forwards into Slack, not a Google Sheet — the
+  // receiving endpoint is managed outside this repo and expects the flat JSON
+  // shape sent below. Don't switch this to a Slack Block Kit body against a raw
+  // Slack Incoming Webhook URL — that exact change broke every lead form in prod
+  // once already (see git history: "Fix sales-enquiry regression").
   const webhookUrl = process.env.GOOGLE_SHEET_WEBHOOK_URL;
   if (!webhookUrl) {
     console.error("GOOGLE_SHEET_WEBHOOK_URL is not set");

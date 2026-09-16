@@ -1,3 +1,6 @@
+// DEPRECATED: leads no longer go to a Google Sheet — the GOOGLE_SHEET_WEBHOOK_URL
+// env var now points at a Slack-forwarding integration instead. Kept for reference
+// only; do not redeploy this Apps Script as the live receiver. See DEPLOYMENT.md.
 function doPost(e) {
   try {
     var data = JSON.parse(e.postData.contents);
