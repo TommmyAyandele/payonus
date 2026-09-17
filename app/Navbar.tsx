@@ -163,7 +163,7 @@ const NAV_COPY = {
       { label: "Support",    href: "/support"  },
       { label: "Pricing",    href: "/pricing"  },
     ],
-    getStarted: "Get Started", demoCheckout: "Demo Checkout",
+    getStarted: "Get Started", signIn: "Sign In",
     toggleMenu: "Toggle menu", closeMenu: "Close menu",
   },
   fr: {
@@ -175,7 +175,7 @@ const NAV_COPY = {
       { label: "Support",      href: "/support"  },
       { label: "Tarifs",       href: "/pricing"  },
     ],
-    getStarted: "Commencer", demoCheckout: "Démo de paiement",
+    getStarted: "Commencer", signIn: "Se connecter",
     toggleMenu: "Ouvrir le menu", closeMenu: "Fermer le menu",
   },
 } as const;
@@ -462,7 +462,8 @@ export default function Navbar({ scrolled, locale = "en" }: { scrolled: boolean;
                 }}
                 onMouseEnter={e => (e.currentTarget.style.background="#E9DDFF")}
                 onMouseLeave={e => (e.currentTarget.style.background="transparent")}
-              >{nc.demoCheckout}</button>
+                onClick={() => { window.open("https://auth.payonus.com/login","_blank"); }}
+              >{nc.signIn}</button>
             </div>
           </div>
         )}
@@ -506,7 +507,8 @@ export default function Navbar({ scrolled, locale = "en" }: { scrolled: boolean;
                 <button style={{ fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14, color:T.muted, background:"transparent", border:`1px solid ${T.muted}`, borderRadius:4, padding:"9px 14px", cursor:"pointer", transition:"background .15s", whiteSpace:"nowrap" }}
                   onMouseEnter={e => (e.currentTarget.style.background = "#E9DDFF")}
                   onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
-                >{nc.demoCheckout}</button>
+                  onClick={() => { window.open("https://auth.payonus.com/login","_blank"); }}
+                >{nc.signIn}</button>
               )}
               <button style={{ fontFamily:"DM Sans, sans-serif", fontWeight:500, fontSize:14, color:T.white, background:T.primary, border:"none", borderRadius:4, padding:"9px 14px", cursor:"pointer", transition:"opacity .15s", whiteSpace:"nowrap" }}
                 onMouseEnter={e => (e.currentTarget.style.opacity = "0.88")}
