@@ -22,6 +22,7 @@ export const PRODUCTS = [
   { title: "Instant Settlements",   desc: "Move funds to your bank seamlessly", icon: "/icons/icon-settlements.svg", href: "/settlements"  },
   { title: "Payment API",           desc: "Integrate payments in minutes",      icon: "/icons/icon-payment-api.svg", href: "/payment-api"  },
   { title: "Analytics & Reporting", desc: "Insights that drive decisions",      icon: "/icons/icon-analytics.svg",   href: "/analytics"    },
+  { title: "Billonus",              desc: "Digital giftcards, one API",         icon: "/icons/icon-billonus.svg",    href: "https://billonus.vercel.app" },
 ];
 
 const industryIconProps = { width: 22, height: 22, viewBox: "0 0 24 24", fill: "none" as const };
