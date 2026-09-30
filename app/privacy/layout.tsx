@@ -2,7 +2,7 @@ import { pageMetadata } from "../seo";
 
 export const metadata = pageMetadata({
   title: "Privacy Policy",
-  description: "How Payonus collects, uses, discloses, and safeguards your personal information across our payment processing services and digital banking platform.",
+  description: "How Paylode Services Limited, the provider of Payonus, collects, uses, discloses, and safeguards your personal information across our payment processing services and digital banking platform.",
   path: "/privacy",
 });
 

@@ -9,8 +9,8 @@ const SECTIONS: LegalSection[] = [
     content: (
       <>
         <p>
-          The Board and Management of Payonus, which operates in the Information Technology sector,
-          are committed to preserving the confidentiality, integrity and availability of all physical
+          The Board and Management of Paylode Services Limited, the company behind Payonus, which
+          operates in the Information Technology sector, are committed to preserving the confidentiality, integrity and availability of all physical
           and electronic information assets throughout the organization, in order to preserve its
           asset, legal, regulatory as well as contractual, compliance and image. The Information
           Security Management Systems (ISO 27001) requirements will continue to be aligned with
@@ -47,7 +47,7 @@ const SECTIONS: LegalSection[] = [
             stakeholders.
           </li>
           <li>
-            All employees of Payonus and external parties identified in the Management Systems are
+            All employees of Paylode Services Limited working on Payonus, and external parties identified in the Management Systems are
             expected to comply with this policy.
           </li>
           <li>
@@ -73,7 +73,7 @@ export default function ISMSPolicyPage() {
     <LegalPage
       title="ISMS Policy Statement"
       subtitle="Our commitment to preserving the confidentiality, integrity and availability of all information assets."
-      updated="1 May 2026"
+      updated="30 September 2026"
       sections={SECTIONS}
     />
   );

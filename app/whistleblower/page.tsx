@@ -273,7 +273,7 @@ export default function WhistleblowerPage() {
               Submit a Report
             </h3>
             <p style={{ margin:`0 0 ${isMobile ? 28 : 32}px`, fontFamily:"DM Sans, sans-serif", fontWeight:400, fontSize:14, lineHeight:1.65, color:T.muted }}>
-              Your identity is protected — name and email are optional. All submissions are reviewed only by authorised personnel.
+              Your identity is protected — name and email are optional. All submissions are reviewed only by authorised personnel of Paylode Services Limited, the company behind Payonus.
             </p>
 
             <form onSubmit={handleSubmit} noValidate style={{ display:"flex", flexDirection:"column", gap:16 }}>

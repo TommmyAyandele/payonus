@@ -12,7 +12,7 @@ const SECTIONS: LegalSection[] = [
     heading: "Payment Processing — 1. Introduction",
     content: (
       <>
-        <p>These Terms and Conditions ("Agreement") govern your use of the payment processing services provided by Onus Financial Services ("Payonus"), located in Lagos, Nigeria. By accessing or using our services, you agree to comply with and be bound by these terms. Please read this Agreement carefully before using our services.</p>
+        <p>These Terms and Conditions ("Agreement") govern your use of the payment processing services offered under the Payonus brand ("Payonus"). Payonus is a product of Paylode Services Limited ("Paylode" or the "Company"), a Central Bank of Nigeria licensed Payment Service Solution Provider located in Lagos, Nigeria, which provides these services. By accessing or using our services, you agree to comply with and be bound by these terms. Please read this Agreement carefully before using our services.</p>
       </>
     ),
   },
@@ -96,20 +96,20 @@ const SECTIONS: LegalSection[] = [
   },
 
   /* ══════════════════════════════════════
-     PART II — DIGITAL BANK
+     PART II — DIGITAL BANKING (BankOnUs)
   ══════════════════════════════════════ */
   {
     id: "db-intro",
-    heading: "Digital Bank — 1. Introduction",
+    heading: "Digital Banking — 1. Introduction",
     content: (
       <>
-        <p>These Terms and Conditions ("Agreement") govern your use of the digital banking services provided by Onus Financial Services ("BankOnUs"), located in Lagos, Nigeria. By accessing or using our services, you agree to comply with and be bound by these terms. Please read this Agreement carefully before using our services.</p>
+        <p>These Terms and Conditions ("Agreement") govern your use of the digital banking services offered under the BankOnUs brand ("BankOnUs"). BankOnUs is a product of Paylode Services Limited ("Paylode" or the "Company"), a Central Bank of Nigeria licensed Payment Service Solution Provider located in Lagos, Nigeria, which provides these services. BankOnUs is not itself a licensed bank. By accessing or using our services, you agree to comply with and be bound by these terms. Please read this Agreement carefully before using our services.</p>
       </>
     ),
   },
   {
     id: "db-registration",
-    heading: "Digital Bank — 2. Account Registration",
+    heading: "Digital Banking — 2. Account Registration",
     content: (
       <>
         <p><strong>2.1. Eligibility.</strong> In order to use our digital banking services, you must be at least 18 years old and have the legal authority to enter into binding agreements.</p>
@@ -120,7 +120,7 @@ const SECTIONS: LegalSection[] = [
   },
   {
     id: "db-services",
-    heading: "Digital Bank — 3. Account Services",
+    heading: "Digital Banking — 3. Account Services",
     content: (
       <>
         <p><strong>3.1. Deposit and Withdrawal.</strong> Our digital banking services allow you to deposit funds into your account and make withdrawals, subject to any transaction limits and fees that may apply.</p>
@@ -131,7 +131,7 @@ const SECTIONS: LegalSection[] = [
   },
   {
     id: "db-data",
-    heading: "Digital Bank — 4. Data Protection and Privacy",
+    heading: "Digital Banking — 4. Data Protection and Privacy",
     content: (
       <>
         <p><strong>4.1. Privacy Policy.</strong> We value your privacy and handle your personal information in accordance with our Privacy Policy. By using our services, you consent to the collection, use, and disclosure of your personal information as described in our Privacy Policy.</p>
@@ -141,36 +141,36 @@ const SECTIONS: LegalSection[] = [
   },
   {
     id: "db-ip",
-    heading: "Digital Bank — 5. Intellectual Property",
+    heading: "Digital Banking — 5. Intellectual Property",
     content: (
       <>
-        <p><strong>5.1. Ownership.</strong> All intellectual property rights related to our digital banking services, including but not limited to trademarks, logos, and software, are owned by the Bank or its licensors. You may not use our intellectual property without our prior written consent.</p>
+        <p><strong>5.1. Ownership.</strong> All intellectual property rights related to our digital banking services, including but not limited to trademarks, logos, and software, are owned by the Company or its licensors. You may not use our intellectual property without our prior written consent.</p>
       </>
     ),
   },
   {
     id: "db-liability",
-    heading: "Digital Bank — 6. Limitation of Liability",
+    heading: "Digital Banking — 6. Limitation of Liability",
     content: (
       <>
         <p><strong>6.1. Disclaimer of Warranties.</strong> Our digital banking services are provided on an "as is" and "as available" basis. We make no warranties, whether expressed or implied, regarding the reliability, accuracy, or availability of our services.</p>
-        <p><strong>6.2. Limitation of Liability.</strong> To the extent permitted by applicable law, the Bank and its affiliates shall not be liable for any direct, indirect, incidental, special, or consequential damages arising out of or in connection with the use of our services, even if we have been advised of the possibility of such damages.</p>
+        <p><strong>6.2. Limitation of Liability.</strong> To the extent permitted by applicable law, the Company and its affiliates shall not be liable for any direct, indirect, incidental, special, or consequential damages arising out of or in connection with the use of our services, even if we have been advised of the possibility of such damages.</p>
       </>
     ),
   },
   {
     id: "db-termination",
-    heading: "Digital Bank — 7. Termination",
+    heading: "Digital Banking — 7. Termination",
     content: (
       <>
-        <p><strong>7.1. Termination by Bank.</strong> We reserve the right to terminate or suspend your access to our digital banking services at any time, with or without cause, without prior notice.</p>
-        <p><strong>7.2. Termination by User.</strong> You may terminate your account with us at any time by providing written notice to the Bank. Upon termination, you will remain responsible for any outstanding fees or charges.</p>
+        <p><strong>7.1. Termination by Company.</strong> We reserve the right to terminate or suspend your access to our digital banking services at any time, with or without cause, without prior notice.</p>
+        <p><strong>7.2. Termination by User.</strong> You may terminate your account with us at any time by providing written notice to the Company. Upon termination, you will remain responsible for any outstanding fees or charges.</p>
       </>
     ),
   },
   {
     id: "db-governing-law",
-    heading: "Digital Bank — 8. Governing Law and Jurisdiction",
+    heading: "Digital Banking — 8. Governing Law and Jurisdiction",
     content: (
       <>
         <p>This Agreement shall be governed by and construed in accordance with the laws of Nigeria. Any disputes arising out of or in connection with this Agreement shall be subject to the exclusive jurisdiction of the courts in Lagos, Nigeria.</p>
@@ -179,7 +179,7 @@ const SECTIONS: LegalSection[] = [
   },
   {
     id: "db-modifications",
-    heading: "Digital Bank — 9. Modifications to the Agreement",
+    heading: "Digital Banking — 9. Modifications to the Agreement",
     content: (
       <>
         <p>We reserve the right to modify or update these Terms and Conditions at any time. Any changes will be effective upon posting the revised Agreement on our website. Your continued use of our services after the changes will constitute your acceptance of the modified terms.</p>
@@ -197,6 +197,7 @@ const SECTIONS: LegalSection[] = [
       <>
         <p>If you have any questions about these Terms and Conditions, please contact us:</p>
         <ul>
+          <li>Company: Paylode Services Limited (provider of Payonus)</li>
           <li>Email: <a href="mailto:Support@payonus.com">Support@payonus.com</a></li>
           <li>Phone: <a href="tel:+2349132222249">+234 913 222 2249</a></li>
           <li>Address: Lagos, Nigeria</li>
@@ -211,8 +212,8 @@ export default function TermsPage() {
   return (
     <LegalPage
       title="Terms & Conditions"
-      subtitle="These terms govern your use of Payonus payment processing and digital banking services. Please read carefully before using our services."
-      updated="23 June 2026"
+      subtitle="These terms govern your use of Payonus payment processing and digital banking services, provided by Paylode Services Limited, a CBN-licensed Payment Service Solution Provider. Please read carefully before using our services."
+      updated="30 September 2026"
       sections={SECTIONS}
     />
   );

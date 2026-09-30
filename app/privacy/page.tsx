@@ -8,7 +8,7 @@ const SECTIONS: LegalSection[] = [
     heading: "Introduction",
     content: (
       <>
-        <p>At Onus Financial Services, we are committed to protecting the privacy and security of our customers' personal information. This Privacy Policy outlines how we collect, use, disclose, and safeguard the information provided to us when using our payment processing services and digital banking platform. By accessing or using our services, you agree to the terms outlined in this Privacy Policy.</p>
+        <p>Payonus is a product of Paylode Services Limited ("Paylode", "we", "us"), a Central Bank of Nigeria licensed Payment Service Solution Provider. At Paylode, we are committed to protecting the privacy and security of our customers' personal information. This Privacy Policy outlines how we collect, use, disclose, and safeguard the information provided to us when using our payment processing services and digital banking platform. By accessing or using our services, you agree to the terms outlined in this Privacy Policy.</p>
       </>
     ),
   },
@@ -86,6 +86,7 @@ const SECTIONS: LegalSection[] = [
       <>
         <p>If you have any questions, concerns, or requests regarding this Privacy Policy or the use of your personal information, please contact us:</p>
         <ul>
+          <li>Company: Paylode Services Limited (provider of Payonus)</li>
           <li>Email: <a href="mailto:compliance@payonus.com">compliance@payonus.com</a></li>
           <li>Phone: <a href="tel:+2349132222249">+234 913 222 2249</a></li>
           <li>Address: Lagos, Nigeria</li>
@@ -100,8 +101,8 @@ export default function PrivacyPage() {
   return (
     <LegalPage
       title="Privacy Policy"
-      subtitle="At Onus Financial Services, we are committed to protecting the privacy and security of your personal information."
-      updated="23 June 2026"
+      subtitle="Payonus is a product of Paylode Services Limited. At Paylode, we are committed to protecting the privacy and security of your personal information."
+      updated="30 September 2026"
       sections={SECTIONS}
     />
   );
