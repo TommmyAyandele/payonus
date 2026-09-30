@@ -214,18 +214,41 @@ export default function Footer({ locale = "en" }: { locale?: "en" | "fr" }) {
             style={{ display: "block" }}
           />
 
-          {/* Copyright */}
-          <p style={{
-            margin:     0,
-            fontFamily: "DM Sans, sans-serif",
-            fontWeight: 400,
-            fontSize:   14,
-            color:      COPY,
+          {/* Copyright · powered by Paylode */}
+          <div style={{
+            display:       "flex",
+            flexDirection: "column",
+            alignItems:    isMobile ? "flex-start" : "center",
+            gap:           8,
           }}>
-            {locale === "fr"
-              ? "© 2026 Payonus, un produit de Paylode Services Limited. Tous droits réservés"
-              : "© 2026 Payonus, a product of Paylode Services Limited. All Rights Reserved"}
-          </p>
+            <p style={{
+              margin:     0,
+              fontFamily: "DM Sans, sans-serif",
+              fontWeight: 400,
+              fontSize:   14,
+              color:      COPY,
+            }}>
+              {locale === "fr" ? "© 2026 Payonus Tous droits réservés" : "© 2026 Payonus All Rights Reserved"}
+            </p>
+            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <span style={{
+                fontFamily: "DM Sans, sans-serif",
+                fontWeight: 400,
+                fontSize:   13,
+                color:      COPY,
+              }}>
+                {locale === "fr" ? "Propulsé par" : "Powered by"}
+              </span>
+              <img
+                src="/paylode-logo.png"
+                alt="Paylode Services Limited"
+                width={69}
+                height={24}
+                loading="lazy"
+                style={{ display: "block" }}
+              />
+            </div>
+          </div>
 
           {/* Social icons */}
           <div style={{ display: "flex", gap: 10 }}>
