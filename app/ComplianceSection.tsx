@@ -12,7 +12,7 @@ const CARDS_EN = [
   {
     icon: "kyc",
     title: "KYC, Audit & Regulation",
-    desc: "End-to-end digital audit trail on every transaction. Regulated by the Central Bank of Nigeria (CBN) and certified by NDPC — compliance is built in, not bolted on.",
+    desc: "End-to-end digital audit trail on every transaction. Operated by Paylode Services Limited, a CBN-licensed Payment Service Solution Provider, and certified by NDPC — compliance is built in, not bolted on.",
   },
   {
     icon: "audit",
@@ -35,7 +35,7 @@ const CARDS_FR = [
   {
     icon: "kyc",
     title: "KYC, audit & réglementation",
-    desc: "Piste d'audit numérique de bout en bout sur chaque transaction. Régulé par la Banque centrale du Nigéria (CBN) et certifié par le NDPC — la conformité est intégrée, pas ajoutée après coup.",
+    desc: "Piste d'audit numérique de bout en bout sur chaque transaction. Exploité par Paylode Services Limited, prestataire de solutions de paiement agréé par la Banque centrale du Nigéria (CBN), et certifié par le NDPC — la conformité est intégrée, pas ajoutée après coup.",
   },
   {
     icon: "audit",
@@ -53,7 +53,7 @@ export const PILLS = [
   { label: "ISO 27001",        icon: "iso"  },
   { label: "PCIDSS Level 1",   icon: "pci"  },
   { label: "NDPC Trust Mark",  icon: "ndpc" },
-  { label: "CBN Licensed",     icon: "cbn"  },
+  { label: "CBN-Licensed via Paylode", icon: "cbn" },
 ];
 
 const EASE = "cubic-bezier(0.16,1,0.3,1)";

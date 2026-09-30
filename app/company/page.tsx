@@ -227,7 +227,7 @@ export default function CompanyPage() {
                 fontFamily:"Rubik, sans-serif", fontStyle:"italic", fontWeight:400,
                 fontSize: isMobile ? 16 : 20, lineHeight:1.6, color:T.muted, maxWidth:520,
               }}>
-                Payonus is a CBN-licensed Payment Service Solution Provider building payment infrastructure for local and international businesses across Africa. Founded in Lagos, trusted across the continent.
+                Payonus is payment infrastructure for local and international businesses across Africa — a product of Paylode Services Limited, a Central Bank of Nigeria licensed Payment Service Solution Provider. Founded in Lagos, trusted across the continent.
               </p>
 
               <div className="fade-up d3" style={{ display:"flex", flexWrap:"wrap", gap:12 }}>

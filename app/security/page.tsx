@@ -61,8 +61,8 @@ const CERTS = [
   },
   {
     label: "CBN Licensed",
-    sub:   "Central Bank of Nigeria",
-    desc:  "Payonus operates under a CBN Payment Service Provider licence, holding us to the highest regulatory standards in Nigeria.",
+    sub:   "Via Paylode Services Limited",
+    desc:  "Payonus is a product of Paylode Services Limited, a Central Bank of Nigeria licensed Payment Service Solution Provider, holding it to the highest regulatory standards in Nigeria.",
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
         <path d="M3 21h18M3 10h18M5 6l7-3 7 3" stroke={T.primary} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
@@ -126,7 +126,7 @@ const PILLARS = [
 const FAQS = [
   {
     q: "Is Payonus licensed and regulated?",
-    a: "Yes. Payonus is licensed by the Central Bank of Nigeria (CBN) and certified under ISO 27001, PCIDSS Level 1, and the NDPC Trust Mark. These certifications represent the highest standards of financial and data security compliance in the industry.",
+    a: "Payonus is a product of Paylode Services Limited, a Central Bank of Nigeria licensed Payment Service Solution Provider. Payonus is certified under ISO 27001, PCIDSS Level 1, and the NDPC Trust Mark. These certifications represent the highest standards of financial and data security compliance in the industry.",
   },
   {
     q: "How does Payonus protect my transaction data?",

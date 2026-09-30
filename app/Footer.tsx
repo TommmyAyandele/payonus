@@ -222,7 +222,9 @@ export default function Footer({ locale = "en" }: { locale?: "en" | "fr" }) {
             fontSize:   14,
             color:      COPY,
           }}>
-            {locale === "fr" ? "© 2026 Payonus Tous droits réservés" : "© 2026 Payonus All Rights Reserved"}
+            {locale === "fr"
+              ? "© 2026 Payonus, un produit de Paylode Services Limited. Tous droits réservés"
+              : "© 2026 Payonus, a product of Paylode Services Limited. All Rights Reserved"}
           </p>
 
           {/* Social icons */}

@@ -2,7 +2,7 @@ import { pageMetadata } from "../seo";
 
 export const metadata = pageMetadata({
   title: "About Us",
-  description: "Payonus is a CBN-licensed Payment Service Solution Provider building payment infrastructure for local and international businesses across Africa. Founded in Lagos, trusted across the continent.",
+  description: "Payonus is payment infrastructure for local and international businesses across Africa — a product of Paylode Services Limited, a CBN-licensed Payment Service Solution Provider.",
   path: "/company",
 });
 
