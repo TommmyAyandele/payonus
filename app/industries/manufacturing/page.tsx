@@ -170,7 +170,7 @@ export default function ManufacturingPage() {
           { label: "Payment API", href: "/payment-api" },
           { label: "Collections", href: "/collections" },
           { label: "Analytics", href: "/analytics" },
-          { label: "Manufacturing Payment Guide", href: "/resources/manufacturing" },
+          { label: "Manufacturing Payment Guide", href: "/resources/cross-border-payment-solutions-manufacturers" },
         ]}
       />
     </>

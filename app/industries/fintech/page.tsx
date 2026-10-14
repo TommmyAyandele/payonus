@@ -182,7 +182,7 @@ export default function FintechPage() {
           { label: "Payment API", href: "/payment-api" },
           { label: "Payouts", href: "/payouts" },
           { label: "Security", href: "/security" },
-          { label: "Fintech Payment Guide", href: "/resources/fintech" },
+          { label: "Fintech Payment Guide", href: "/resources/bank-transfer-api-nigeria" },
         ]}
       />
     </>

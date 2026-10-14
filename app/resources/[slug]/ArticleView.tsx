@@ -44,11 +44,24 @@ export default function ArticleView({ post }: { post: Post }) {
         .blog-body h2 { font-family:"Rubik",sans-serif; font-style:italic; font-weight:500; font-size:${isMobile ? 20 : 24}px; color:${T.headingBlack}; margin:36px 0 12px; }
         .blog-body h3 { font-family:"Rubik",sans-serif; font-style:italic; font-weight:500; font-size:17px; color:${T.headingBlack}; margin:28px 0 8px; }
         .blog-body p  { font-family:"DM Sans",sans-serif; font-weight:400; font-size:15px; line-height:1.75; color:${T.muted}; margin:0 0 16px; }
-        .blog-body ul { font-family:"DM Sans",sans-serif; font-weight:400; font-size:15px; line-height:1.75; color:${T.muted}; margin:0 0 16px; padding-left:22px; }
+        .blog-body ul { list-style:disc; font-family:"DM Sans",sans-serif; font-weight:400; font-size:15px; line-height:1.75; color:${T.muted}; margin:0 0 16px; padding-left:22px; }
         .blog-body ul li { margin-bottom:6px; }
         .blog-body a  { color:${T.primary}; text-decoration:none; }
         .blog-body a:hover { text-decoration:underline; }
         .blog-body strong { color:${T.dark}; }
+        .blog-body h2 { scroll-margin-top:96px; }
+        .blog-body h4 { font-family:"DM Sans",sans-serif; font-weight:600; font-size:15px; color:${T.dark}; margin:22px 0 8px; }
+        .blog-body ol { list-style:decimal; font-family:"DM Sans",sans-serif; font-weight:400; font-size:15px; line-height:1.75; color:${T.muted}; margin:0 0 16px; padding-left:22px; }
+        .blog-body ol li { margin-bottom:6px; }
+        .blog-body table { width:100%; border-collapse:collapse; margin:8px 0 24px; font-family:"DM Sans",sans-serif; font-size:14px; line-height:1.55; display:block; overflow-x:auto; }
+        .blog-body th { text-align:left; font-weight:600; color:${T.dark}; background:#F3EEFF; padding:10px 12px; border:1px solid #E4DCF7; vertical-align:top; }
+        .blog-body td { color:${T.muted}; padding:10px 12px; border:1px solid #EEE8F7; vertical-align:top; }
+        .blog-toc { margin:0 0 36px; padding:18px 20px; border:1px solid #E4DCF7; border-radius:10px; background:#FBF9FF; }
+        .blog-toc p { margin:0 0 10px; font-family:"DM Sans",sans-serif; font-weight:700; font-size:12px; letter-spacing:0.04em; text-transform:uppercase; color:${T.primary}; }
+        .blog-toc ol { margin:0; padding-left:20px; font-family:"DM Sans",sans-serif; font-size:14px; line-height:1.6; }
+        .blog-toc li { margin-bottom:4px; color:${T.muted}; }
+        .blog-toc a { color:${T.dark}; text-decoration:none; }
+        .blog-toc a:hover { color:${T.primary}; }
       `}</style>
 
       <Navbar scrolled={scrolled} />
@@ -76,6 +89,16 @@ export default function ArticleView({ post }: { post: Post }) {
       </section>
 
       <div style={{ flex: 1, maxWidth: 780, margin: "0 auto", padding: `0 ${hPad}px ${isMobile ? 64 : 96}px`, width: "100%", boxSizing: "border-box" }}>
+        {post.toc.length > 2 && (
+          <nav className="blog-toc" aria-label="Table of contents">
+            <p>Contents</p>
+            <ol>
+              {post.toc.map(item => (
+                <li key={item.id}><a href={`#${item.id}`}>{item.text}</a></li>
+              ))}
+            </ol>
+          </nav>
+        )}
         <div className="blog-body" onClick={onBodyClick} dangerouslySetInnerHTML={{ __html: post.html }} />
 
         {post.relatedHref && (

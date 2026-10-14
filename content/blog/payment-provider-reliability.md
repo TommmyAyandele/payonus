@@ -1,7 +1,8 @@
 ---
 title: "Can You Depend on Your Payment Provider When Things Go Wrong?"
+seoTitle: "Payment Provider Reliability: What Merchants Should Expect | PayOnUs"
 category: "Reliability & Support"
-excerpt: "Uptime is only part of payment reliability — here's what merchants should expect when payments fail, become uncertain, or don't follow the expected path."
+excerpt: "Can you depend on your payment provider when things go wrong? Learn what merchants should expect beyond uptime, including payment failures, fraud, and visibility"
 date: "2026-09-11"
 relatedLabel: "Talk to a Payments Specialist"
 relatedHref: "/sales"
@@ -120,7 +121,7 @@ This is where the design of your payment infrastructure matters.
 
 When something goes wrong, you need more than the ability to attempt the payment again. You need enough information around the transaction to understand its status and determine what to do next.
 
-Payment status visibility, API connectivity, and analytics and reporting all contribute to that.
+Payment status visibility, **API connectivity**, and [analytics and reporting](/analytics) all contribute to that.
 
 An API can connect payment activity to the systems where you already manage orders or transactions. Reporting can give you a broader view of what is happening instead of forcing you to investigate each payment in isolation.
 
@@ -132,7 +133,7 @@ Where does it stand?
 
 What can I do next?
 
-Your payment infrastructure should give you clear answers to these questions. PayOnUs brings collections, payouts, [Payment API](/payment-api) connectivity, and [analytics and reporting](/analytics) together within the wider payment operation, so you can keep track of payment activity without treating each payment flow as a separate process.
+Your payment infrastructure should give you clear answers to these questions. PayOnUs brings collections, payouts, [Payment API](/payment-api) connectivity, and **analytics and reporting** together within the wider payment operation, so you can keep track of payment activity without treating each payment flow as a separate process.
 
 The value for you is in having enough visibility and connection around your payment activity to understand what is happening, where a transaction stands, and what needs to happen next.
 
@@ -157,3 +158,5 @@ A provider earns your trust when something goes wrong and you can still understa
 That is the standard worth applying when choosing payment infrastructure for a business that depends on payments every day.
 
 If you need payment infrastructure that gives your business greater visibility when payments do not follow the expected path, consider discussing your payment setup with PayOnUs.
+
+[Talk to PayOnUs](/sales)

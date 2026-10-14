@@ -43,7 +43,7 @@ const data: ToolLandingData = {
   ],
   closingHeading: "Ready to Assess Your Gaming Payment Readiness?",
   footerNote: "Designed as a practical decision-support tool for gaming businesses evaluating payment readiness across African markets.",
-  resourceHref: "/resources/gaming",
+  resourceHref: "/resources/african-gaming-payments",
   resourceLinkText: "African gaming payment infrastructure",
 };
 

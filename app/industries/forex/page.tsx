@@ -135,7 +135,7 @@ export default function ForexPage() {
           { label: "Payment API", href: "/payment-api" },
           { label: "Payouts", href: "/payouts" },
           { label: "Security", href: "/security" },
-          { label: "Forex Provider Checklist", href: "/resources/forex" },
+          { label: "Forex Provider Checklist", href: "/resources/forex-payment-gateway-africa" },
         ]}
       />
     </>

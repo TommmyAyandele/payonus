@@ -43,7 +43,7 @@ const data: ToolLandingData = {
   ],
   closingHeading: "Get the Free Aviation Payment Provider Evaluation Scorecard",
   footerNote: "The scorecard is a decision-support tool and does not replace legal, regulatory, financial, or commercial due diligence.",
-  resourceHref: "/resources/aviation",
+  resourceHref: "/resources/aviation-payment-providers-africa",
   resourceLinkText: "Payment infrastructure for aviation businesses",
 };
 

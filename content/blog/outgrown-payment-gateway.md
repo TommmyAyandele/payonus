@@ -1,5 +1,6 @@
 ---
 title: "Your Business Has Outgrown Its Payment Gateway: How to Choose the Right Payment Setup"
+seoTitle: "Your Business Has Outgrown Its Payment Gateway: How to Choose the Right One"
 category: "Provider Evaluation"
 excerpt: "Learn when to switch and what to look for across markets, payouts, settlement and business structure."
 date: "2026-09-12"
@@ -13,7 +14,7 @@ This means your business has developed needs that the original setup was never d
 
 You start to see it when your payment setup requires you to do more just to keep things working.
 
-You add another provider because your current one cannot support a market you have entered. You need a separate arrangement for payouts. You use different payment setups for different parts of the business. You have to make recurring manual adjustments to support something that used to be straightforward.
+You add another provider because your current one cannot support a market you have entered. You need a separate arrangement for [payouts](/payouts). You use different payment setups for different parts of the business. You have to make recurring manual adjustments to support something that used to be straightforward.
 
 When these changes become part of how you operate, it is worth asking whether your payment setup still fits the business.
 
@@ -47,10 +48,10 @@ Before searching for another provider, identify what changed in the business.
 It could be:
 
 | What changed | What to investigate |
-| --- | --- |
+|---|---|
 | You entered new markets | Whether the current setup supports the requirements of those markets |
 | Your payment methods changed | Whether the required payment flows are available |
-| You now need payouts as well as collections | Whether the setup supports how money needs to move through the business |
+| You now need payouts as well as [collections](/collections) | Whether the setup supports how money needs to move through the business |
 | You operate multiple businesses or entities | Whether the account structure reflects how the business is organised |
 | Your settlement requirements changed | Whether the current arrangement still suits your needs |
 | Your business model changed | Whether the provider can still support your business category |
@@ -89,9 +90,9 @@ Start with what your current setup can no longer support without extra steps. Th
 
 If the issue is market access, look at the markets and operating requirements that matter to you. If you're [**expanding into another African market**](/resources/expanding-across-africa-payment-operations), your payment setup may need to change with the requirements of that market.
 
-If the issue is **bringing money into the business**, assess whether your current setup supports the payment flows you need for [collections](/collections).
+If the issue is **bringing money into the business**, assess whether your current setup supports the payment flows you need for collections.
 
-If the issue is **moving money out of the business**, assess whether your setup supports [payouts](/payouts) without requiring a separate process.
+If the issue is **moving money out of the business**, assess whether your setup supports payouts without requiring a separate process.
 
 If the issue is [**settlement**](/settlements), determine whether the available arrangement fits your requirements.
 
@@ -121,7 +122,7 @@ Once you have identified the gap, the decision becomes clearer.
 
 The decision should be based on what the business now needs, not on frustration with the current provider or the size of another provider's feature list.
 
-## Reassess before the setup starts dictating the business
+## Reassess Before the Setup Starts Dictating the Business
 
 If your payment setup now requires additional providers, separate arrangements or recurring manual fixes, identify what is driving those changes.
 
@@ -130,3 +131,5 @@ Then look at whether your current setup can support the way your business operat
 If it cannot, look for a payment setup that fits the business you have today and can support where the business is going next.
 
 If you are reassessing your payment setup, talk to PayOnUs about how your business can manage its payment needs as it grows.
+
+[Talk to PayOnUs](/sales)

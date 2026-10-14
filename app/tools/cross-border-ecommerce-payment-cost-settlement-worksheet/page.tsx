@@ -47,7 +47,7 @@ const data: ToolLandingData = {
   ],
   closingHeading: "Find Out Where Your Payment Setup Is Costing You Money",
   footerNote: "Built for e-commerce businesses evaluating the cost, performance and operational impact of payment infrastructure across African markets.",
-  resourceHref: "/resources/ecommerce",
+  resourceHref: "/resources/cross-border-ecommerce-payment-costs",
   resourceLinkText: "Cross-border e-commerce payments in Africa",
 };
 

@@ -167,7 +167,7 @@ export default function LogisticsPage() {
           { label: "Payment API", href: "/payment-api" },
           { label: "Payouts", href: "/payouts" },
           { label: "Security", href: "/security" },
-          { label: "Logistics Payment Guide", href: "/resources/logistics" },
+          { label: "Logistics Payment Guide", href: "/resources/payment-gateway-for-delivery-companies-nigeria" },
         ]}
       />
     </>

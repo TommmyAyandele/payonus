@@ -47,7 +47,7 @@ const data: ToolLandingData = {
   ],
   closingHeading: "Compare Providers With Greater Clarity",
   footerNote: "Built for forex businesses evaluating payment infrastructure across African markets.",
-  resourceHref: "/resources/forex",
+  resourceHref: "/resources/forex-payment-gateway-africa",
   resourceLinkText: "Forex payment providers in Africa",
 };
 

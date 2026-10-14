@@ -41,7 +41,7 @@ That is the real payment challenge of regional expansion, adapting to what each 
 
 A new market changes not only how customers pay, but also how you collect, settle, and manage those payments. Payment methods are usually the most visible difference.
 
-Customers in a new market may expect payment options that are different from those used in your existing market. The currency may also change, along with how funds are collected and settled.
+Customers in a new market may expect payment options that are different from those used in your existing market. The currency may also change, along with **how funds are collected** and [settled](/settlements).
 
 Those differences matter because the payment experience is only one part of the transaction.
 
@@ -93,7 +93,7 @@ Can the provider support payouts if your business requires them?
 
 Can the new market fit into the payment model you already operate, or will it require a separate integration, process, or operating model?
 
-These questions test whether the provider's capabilities actually match your business requirements.
+These questions whether the provider's capabilities actually match your business requirements.
 
 That distinction is particularly important when expansion is part of a wider regional strategy.
 
@@ -112,7 +112,7 @@ Start with the customer side:
 Then look at the movement of funds:
 
 - How will [collections](/collections) work?
-- How and when will funds be [settled](/settlements)?
+- How and when will funds be settled?
 - Will your business need payouts, and to whom?
 
 Finally, assess the operating model:
@@ -139,13 +139,13 @@ Before entering a new market, confirm both what needs to change and what you can
 
 Check the new market for:
 
-- **Payment methods:** Are the options your customers are likely to use available?
-- **Currency:** Can you collect and manage payments in the currency your business requires?
-- **Collections:** Can you receive customer payments in a way that fits your business model?
-- **Settlement:** Do you understand how and when funds will become available?
-- **Payouts:** Can the provider support the recipients your business needs to pay?
-- **Integration:** Can the new market fit your existing technical approach?
-- **Operating model:** How much of your existing payment process can remain consistent?
+- Payment methods: Are the options your customers are likely to use available?
+- Currency: Can you collect and manage payments in the currency your business requires?
+- Collections: Can you receive customer payments in a way that fits your business model?
+- Settlement: Do you understand **how and when funds will become available**?
+- Payouts: Can the provider support the recipients your business needs to pay?
+- Integration: Can the new market fit your existing technical approach?
+- Operating model: How much of your existing payment process can remain consistent?
 
 Then make one final assessment:
 

@@ -13,7 +13,7 @@ export const metadata: Metadata = pageMetadata({
 const breadcrumbs = breadcrumbJsonLd([
   { name: "Home", path: "/" },
   { name: "Resources", path: "/resources" },
-  { name: "Gaming", path: "/resources/gaming" },
+  { name: "Gaming", path: "/resources/african-gaming-payments" },
   { name: "African Gaming Payment Readiness Assessment", path: PATH },
 ]);
 
