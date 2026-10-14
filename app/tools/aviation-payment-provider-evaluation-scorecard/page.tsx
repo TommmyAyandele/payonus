@@ -1,6 +1,8 @@
 import ToolLandingPage, { ToolLandingData } from "../../ToolLandingPage";
+import { getLeadMagnetHtml } from "../../lib/leadMagnets";
 
 const data: ToolLandingData = {
+  contentHtml: getLeadMagnetHtml("aviation-payment-provider-evaluation-scorecard.md"),
   vertical: "aviation",
   leadMagnetName: "Aviation Payment Provider Evaluation Scorecard",
   leadMagnetType: "scorecard",

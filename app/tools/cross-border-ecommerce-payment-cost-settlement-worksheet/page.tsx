@@ -1,6 +1,8 @@
 import ToolLandingPage, { ToolLandingData } from "../../ToolLandingPage";
+import { getLeadMagnetHtml } from "../../lib/leadMagnets";
 
 const data: ToolLandingData = {
+  contentHtml: getLeadMagnetHtml("cross-border-ecommerce-payment-cost-settlement-worksheet.md"),
   vertical: "ecommerce",
   leadMagnetName: "Cross-Border E-commerce Payment Cost & Settlement Worksheet",
   leadMagnetType: "worksheet",

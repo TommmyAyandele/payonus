@@ -6,6 +6,7 @@ import Navbar, { T } from "./Navbar";
 import Footer from "./Footer";
 import HeroBg from "./HeroBg";
 import { trackEvent } from "./analytics";
+import GamingAssessment from "./GamingAssessment";
 
 export interface ToolItem {
   title: string;
@@ -40,6 +41,8 @@ export interface ToolLandingData {
   footerNote: string;
   resourceHref: string;
   resourceLinkText: string;
+  /** The full lead-magnet document, revealed on the page once the form is submitted. */
+  contentHtml?: string;
 }
 
 function ripple(e: React.MouseEvent<HTMLButtonElement>) {
@@ -58,6 +61,35 @@ export default function ToolLandingPage({ data }: { data: ToolLandingData }) {
   const [submitting, setSubmitting] = React.useState(false);
   const [submitted, setSubmitted] = React.useState(false);
   const [submitError, setSubmitError] = React.useState(false);
+  const docRef = React.useRef<HTMLDivElement>(null);
+  const storeKey = `lm:${data.pageSlug}`;
+
+  // Remember that this visitor already unlocked the document, and what they
+  // typed into it, so a refresh doesn't lose their work.
+  React.useEffect(() => {
+    try { if (localStorage.getItem(`${storeKey}:unlocked`)) setSubmitted(true); } catch {}
+  }, [storeKey]);
+
+  React.useEffect(() => {
+    const root = docRef.current;
+    if (!submitted || !root) return;
+    let saved: Record<string, string | boolean> = {};
+    try { saved = JSON.parse(localStorage.getItem(`${storeKey}:values`) || "{}"); } catch {}
+    root.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>("[data-k]").forEach(el => {
+      const v = saved[el.dataset.k!];
+      if (v === undefined) return;
+      if (el instanceof HTMLInputElement && el.type === "checkbox") el.checked = Boolean(v);
+      else el.value = String(v);
+    });
+    const onInput = (e: Event) => {
+      const el = e.target as HTMLInputElement | HTMLTextAreaElement;
+      if (!el.dataset?.k) return;
+      saved[el.dataset.k] = el instanceof HTMLInputElement && el.type === "checkbox" ? el.checked : el.value;
+      try { localStorage.setItem(`${storeKey}:values`, JSON.stringify(saved)); } catch {}
+    };
+    root.addEventListener("input", onInput);
+    return () => root.removeEventListener("input", onInput);
+  }, [submitted, storeKey]);
   const hasStartedRef = React.useRef(false);
   const formRef = React.useRef<HTMLDivElement>(null);
   const hPad = isMobile ? 20 : isTablet ? 48 : 80;
@@ -111,6 +143,8 @@ export default function ToolLandingPage({ data }: { data: ToolLandingData }) {
       });
       if (!res.ok) throw new Error("Submission failed");
       setSubmitted(true);
+      try { localStorage.setItem(`${storeKey}:unlocked`, "1"); } catch {}
+      if (data.contentHtml) setTimeout(() => docRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
       trackEvent("lead_magnet_form_submit", { ...ctaBaseParams("Form"), form_name: data.leadMagnetName });
     } catch {
       setSubmitError(true);
@@ -129,7 +163,37 @@ export default function ToolLandingPage({ data }: { data: ToolLandingData }) {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", background: T.bg }}>
-      <style>{`@keyframes ripple { to { transform: scale(2.5); opacity: 0; } }`}</style>
+      <style>{`@keyframes ripple { to { transform: scale(2.5); opacity: 0; } }
+        .lm-doc { font-family:"DM Sans",sans-serif; color:${T.muted}; font-size:14px; line-height:1.65; }
+        .lm-doc h1, .lm-doc h2 { font-family:"Rubik",sans-serif; font-style:italic; font-weight:500; color:${T.headingBlack}; font-size:${isMobile ? 20 : 24}px; line-height:1.25; margin:36px 0 12px; }
+        .lm-doc h3 { font-family:"Rubik",sans-serif; font-style:italic; font-weight:500; color:${T.headingBlack}; font-size:17px; margin:28px 0 8px; }
+        .lm-doc h4 { font-weight:600; color:${T.dark}; font-size:15px; margin:22px 0 8px; }
+        .lm-doc > :first-child { margin-top:0; }
+        .lm-doc p { margin:0 0 12px; }
+        .lm-doc strong { color:${T.dark}; }
+        .lm-doc ul, .lm-doc ol { margin:0 0 14px; padding-left:22px; }
+        .lm-doc ul { list-style:disc; } .lm-doc ol { list-style:decimal; }
+        .lm-doc li { margin-bottom:4px; }
+        .lm-doc li:has(> .lm-check:first-child) { list-style:none; margin-left:-22px; }
+        .lm-doc a { color:${T.primary}; font-weight:600; text-decoration:none; }
+        .lm-doc table { width:100%; border-collapse:collapse; margin:6px 0 20px; font-size:13px; display:block; overflow-x:auto; }
+        .lm-doc th { text-align:left; font-weight:600; color:${T.dark}; background:#F3EEFF; padding:8px 10px; border:1px solid #E4DCF7; vertical-align:top; }
+        .lm-doc td { padding:6px 10px; border:1px solid #EEE8F7; vertical-align:top; }
+        .lm-doc td:has(> .lm-check:only-child) { text-align:center; }
+        .lm-doc .lm-check:not(:first-child) { margin-left:14px; }
+        .lm-check { width:16px; height:16px; margin:0 6px 0 0; vertical-align:-3px; accent-color:${T.primary}; cursor:pointer; }
+        .lm-blank { display:inline-block; width:200px; min-width:0; }
+        .lm-cell { width:100%; min-width:90px; box-sizing:border-box; font:400 13px "DM Sans",sans-serif; color:${T.dark}; border:none; border-bottom:1px dashed #CFC4E8; background:transparent; padding:4px 2px; }
+        .lm-text { display:block; width:100%; box-sizing:border-box; font:400 14px "DM Sans",sans-serif; color:${T.dark}; border:1px solid ${T.borderLight}; border-radius:6px; padding:10px 12px; margin:0 0 16px; resize:vertical; }
+        .lm-cell:focus, .lm-text:focus { outline:2px solid #C9B5FF; outline-offset:1px; }
+        @media print {
+          body * { visibility:hidden; }
+          .lm-print, .lm-print * { visibility:visible; }
+          .lm-print { position:absolute; left:0; top:0; width:100%; padding:0 !important; border:none !important; }
+          .lm-noprint { display:none !important; }
+          .lm-doc table { display:table; overflow:visible; }
+          .lm-cell, .lm-text { border-color:#999; }
+        }`}</style>
       <Navbar scrolled={scrolled} />
 
       <section style={{ position: "relative", width: "100%", background: T.bg, overflow: "hidden", padding: isMobile ? "64px 0 40px" : "88px 0 56px" }}>
@@ -201,9 +265,13 @@ export default function ToolLandingPage({ data }: { data: ToolLandingData }) {
         <div ref={formRef} style={{ scrollMarginTop: 96, background: T.white, border: `1px solid ${T.borderLight}`, borderRadius: 12, padding: isMobile ? 24 : 32, marginBottom: 64 }}>
           <h2 style={{ ...h2Style, fontSize: isMobile ? 20 : 24 }}>{data.closingHeading}</h2>
 
-          {submitted ? (
+          {data.leadMagnetType === "assessment" ? (
+            <GamingAssessment leadMagnetName={data.leadMagnetName} vertical={data.vertical} pageSlug={data.pageSlug} ctaParams={ctaBaseParams} />
+          ) : submitted ? (
             <p style={{ margin: 0, fontFamily: "DM Sans, sans-serif", fontWeight: 500, fontSize: 15, lineHeight: 1.65, color: T.dark }}>
-              Thanks — we&apos;ve got your details and will send your {data.leadMagnetName} shortly.
+              {data.contentHtml
+                ? <>Thanks — your {data.leadMagnetName} is below. Fill it in on this page, then save or print it as a PDF.</>
+                : <>Thanks — we&apos;ve got your details and will send your {data.leadMagnetName} shortly.</>}
             </p>
           ) : (
             <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 14 }}>
@@ -237,6 +305,23 @@ export default function ToolLandingPage({ data }: { data: ToolLandingData }) {
         <p style={{ fontFamily: "DM Sans, sans-serif", fontStyle: "italic", fontWeight: 400, fontSize: 13, color: "#9CA3AF", marginTop: -32, marginBottom: 64 }}>
           {data.footerNote}
         </p>
+
+        {submitted && data.contentHtml && (
+          <div ref={docRef} className="lm-print" style={{ scrollMarginTop: 96, background: T.white, border: `1px solid ${T.borderLight}`, borderRadius: 12, padding: isMobile ? 20 : 40, marginBottom: 64 }}>
+            <div className="lm-noprint" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12, flexWrap: "wrap", marginBottom: 28, paddingBottom: 20, borderBottom: `1px solid ${T.borderLight}` }}>
+              <span style={{ fontFamily: "DM Sans, sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: "0.04em", textTransform: "uppercase", color: T.primary }}>
+                Your {data.leadMagnetType}
+              </span>
+              <button
+                onClick={() => { trackEvent("lead_magnet_download", ctaBaseParams("Document")); window.print(); }}
+                style={{ fontFamily: "DM Sans, sans-serif", fontWeight: 500, fontSize: 14, color: T.primary, background: "#F3EEFF", border: "1px solid #DDD0FF", borderRadius: 4, padding: "10px 18px", cursor: "pointer" }}
+              >
+                Save as PDF / Print
+              </button>
+            </div>
+            <div className="lm-doc" dangerouslySetInnerHTML={{ __html: data.contentHtml }} />
+          </div>
+        )}
       </div>
 
       <Footer />

@@ -1,6 +1,8 @@
 import ToolLandingPage, { ToolLandingData } from "../../ToolLandingPage";
+import { getLeadMagnetHtml } from "../../lib/leadMagnets";
 
 const data: ToolLandingData = {
+  contentHtml: getLeadMagnetHtml("african-forex-payment-provider-checklist.md"),
   vertical: "forex",
   leadMagnetName: "African Forex Payment Provider Checklist",
   leadMagnetType: "checklist",
