@@ -4,7 +4,7 @@ seoTitle: "Payment Gateway for Delivery Companies in Nigeria | PayOnUs"
 category: "Logistics & Ride-Hailing Payments"
 excerpt: "Explore how Nigerian delivery companies can connect customer payments, COD collections, rider remittances, merchant payouts, and settlement with payment infrastructure built for their operation."
 date: "2026-09-02"
-relatedLabel: "Explore Logistics"
+relatedLabel: "Explore PayOnUs payment infrastructure for logistics and delivery businesses"
 relatedHref: "/industries/logistics"
 ---
 

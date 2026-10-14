@@ -4,7 +4,7 @@ seoTitle: "Aviation Payment Providers in Africa: Reduce Payment Failures & Settl
 category: "Aviation & Travel Payments"
 excerpt: "Compare aviation payment providers in Africa based on payment methods, failures, risk, settlement and reconciliation not just transaction fees."
 date: "2026-09-02"
-relatedLabel: "Explore Aviation"
+relatedLabel: "PayOnUs payment infrastructure for aviation and travel businesses"
 relatedHref: "/industries/aviation"
 ---
 
@@ -41,7 +41,7 @@ Compare collection, payment confirmation, risk management, refunds, settlement, 
 
 ## What should an aviation payment provider actually solve?
 
-At minimum, an aviation payment provider should help your business accept suitable payment methods, confirm transactions reliably, manage payment exceptions, settle funds and reconcile the resulting financial records.
+At minimum, an aviation payment provider should help your business accept suitable payment methods, confirm transactions reliably, [manage payment exceptions](/resources/payment-provider-reliability), settle funds and reconcile the resulting financial records.
 
 The checkout is only one part of the payment journey.
 

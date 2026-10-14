@@ -4,7 +4,7 @@ seoTitle: "African E-commerce Payments: Reduce Costs & Protect Margins"
 category: "E-commerce Payments"
 excerpt: "Learn how African e-commerce merchants can reduce payment costs, recover failed sales, improve settlement and choose payment infrastructure that supports growth."
 date: "2026-09-02"
-relatedLabel: "Explore E-commerce"
+relatedLabel: "Cross-border e-commerce payment infrastructure"
 relatedHref: "/industries/ecommerce"
 ---
 
@@ -212,7 +212,7 @@ The [Cross-Border E-commerce Payment Cost and Settlement Worksheet](/tools/cross
 - reconciliation workload
 - provider performance
 
-[Calculate Your True Cross-Border Payment Cost →](/sales)
+[Calculate Your True Cross-Border Payment Cost →](/tools/cross-border-ecommerce-payment-cost-settlement-worksheet/)
 
 Use actual transaction and settlement data wherever possible. This gives you a clearer basis for deciding whether to optimise your current setup, add another payment route or evaluate a different provider.
 
@@ -693,7 +693,7 @@ Payment failures can reduce revenue by preventing customers from completing othe
 
 ## How should merchants compare African payment gateways?
 
-Compare payment completion, local payment-method coverage, total cost, FX, settlement, payouts, refunds, reconciliation, integration, support and expansion capability, not processing fees alone.
+Compare payment completion, [local payment-method coverage](/resources/choose-payment-gateway), total cost, FX, settlement, payouts, refunds, reconciliation, integration, support and expansion capability, not processing fees alone.
 
 ## What payment methods should e-commerce businesses support across African markets?
 
@@ -726,7 +726,7 @@ The **Cross-Border E-commerce Payment Cost and Settlement Worksheet** helps you 
 - which provider or market creates the biggest problem
 - what action should be taken next
 
-[Calculate Your True Cross-Border Payment Cost](/sales)
+[Calculate Your True Cross-Border Payment Cost](/tools/cross-border-ecommerce-payment-cost-settlement-worksheet/)
 
 ## See Whether PayOnUs Fits Your Payment Requirements
 
@@ -741,7 +741,7 @@ If your analysis identifies problems with:
 - integration
 - multi-market expansion you can evaluate whether PayOnUs fits your requirements.
 
-[See How PayOnUs Supports African E-commerce Payments](/sales)
+[See How PayOnUs Supports African E-commerce Payments](/industries/ecommerce)
 
 ## Request a Cross-Border Payment Infrastructure Review
 

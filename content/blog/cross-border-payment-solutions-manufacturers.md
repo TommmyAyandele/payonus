@@ -4,7 +4,7 @@ seoTitle: "Cross-Border Payment Solutions for Manufacturers | PayOnUs"
 category: "Manufacturing Payments"
 excerpt: "Reduce FX costs and supplier-payment fees with cross-border payment solutions built for manufacturers managing international supplier payments."
 date: "2026-09-02"
-relatedLabel: "Explore Manufacturing"
+relatedLabel: "Evaluate cross-border payment infrastructure for your manufacturing operation"
 relatedHref: "/industries/manufacturing"
 ---
 
@@ -27,7 +27,7 @@ This guide will show you how to look beyond the transfer fee and understand what
 ## Key Takeaways
 
 - The transfer fee is only one part of the cost. FX spreads, intermediary deductions, receiving-bank charges and failed or repeated payments can increase the real cost.
-- The amount you send is not necessarily the amount your supplier receives.
+- The amount you send is not necessarily [the amount your supplier receives](/resources/supplier-payments-africa).
 - Payment delays can become production problems when suppliers are waiting for cleared funds before releasing materials, components or equipment.
 - Supplier payments should be traceable from the invoice through payment, supplier receipt and reconciliation.
 - The right provider depends on your supplier locations, currencies, payment volumes, settlement requirements and total payment cost.

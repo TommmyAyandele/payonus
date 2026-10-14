@@ -4,7 +4,7 @@ seoTitle: "Bank Transfer API Nigeria: Payment Confirmation & Reconciliation"
 category: "Fintech Payments"
 excerpt: "Automate bank transfer payment confirmation and reconciliation in Nigeria. Learn how to connect transfers to customers, orders, wallets, and invoices"
 date: "2026-09-02"
-relatedLabel: "Explore Fintech"
+relatedLabel: "Explore PayOnUs payment infrastructure for fintech businesses"
 relatedHref: "/industries/fintech"
 ---
 
@@ -295,7 +295,7 @@ You may need an API if you need to:
 
 The question you should be asking is, What does my business need to happen after the customer transfers the money? Instead of merely asking, Which payment gateway supports bank transfer?
 
-If the answer includes customer identification, automatic account updates, reconciliation and payouts, evaluate the wider payment infrastructure, not only the checkout experience.
+If the answer includes customer identification, automatic account updates, reconciliation and payouts, [evaluate the wider payment infrastructure](/resources/outgrown-payment-gateway), not only the checkout experience.
 
 ## Choose the Right Bank-Transfer Collection Model
 
@@ -519,7 +519,7 @@ PayOnUs provides **payment APIs** and infrastructure for collections, payouts, a
 
 Use the test environment to evaluate the integration before moving into live processing, subject to applicable onboarding requirements.
 
-[Discuss Your Payment Workflow](/sales)
+### Discuss Your Payment Workflow
 
 If your payment flow is more complex, speak with a **PayOnUs Payments Specialist** about your:
 

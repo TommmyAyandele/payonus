@@ -4,7 +4,7 @@ seoTitle: "Payment Gateway for Gaming Companies in Africa | PayOnUs"
 category: "Gaming Payments"
 excerpt: "Learn how gaming operators can improve deposit success and player payouts across African markets, evaluate payment providers, and build a more reliable payment setup."
 date: "2026-09-02"
-relatedLabel: "Explore Gaming"
+relatedLabel: "Explore PayOnUs payment infrastructure for gaming businesses"
 relatedHref: "/industries/gaming"
 ---
 
