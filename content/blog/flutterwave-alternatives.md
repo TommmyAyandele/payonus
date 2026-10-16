@@ -10,7 +10,7 @@ relatedHref: "/sales"
 
 If you're looking for an alternative to Flutterwave, you are looking for a provider that addresses the specific need your current setup is not meeting.
 
-That could mean a different Nigerian payment experience, stronger bank-transfer collection, cross-border capabilities, [payouts](/payouts), or a payment setup that can support a more complex operating model.
+That could mean a different Nigerian payment experience, stronger bank-transfer collection, cross-border capabilities, payouts, or a payment setup that can support a more complex operating model.
 
 The right alternative is the one that fits what you need from your payment infrastructure and addresses the reason you started looking for another provider in the first place.
 
@@ -20,7 +20,7 @@ The right alternative is the one that fits what you need from your payment infra
 - The right shortlist depends on the countries, payment methods, currencies and payment flows your business needs.
 - Some businesses need more than customer payment acceptance, particularly when they operate across markets or manage multiple payment relationships.
 - For higher-risk business models, whether a provider will support the business can matter before features or pricing.
-- [Settlement](/settlements) arrangements can also distinguish providers when cash availability and payment operations are important to the business.
+- Settlement arrangements can also distinguish providers when cash availability and payment operations are important to the business.
 - Before switching, confirm that the provider supports your actual payment flow rather than relying on broad feature lists.
 
 ## Flutterwave Alternatives at a Glance
@@ -32,7 +32,7 @@ The providers below serve different business requirements, with availability var
 | Monnify | Bank-transfer collection and virtual-account-based payment flows |
 | Paga | Agent-assisted and offline payment access |
 | Interswitch | Established Nigerian payment infrastructure and local payment services |
-| CedaPay | Payment [collections](/collections) across selected African markets |
+| CedaPay | Payment collections across selected African markets |
 | Korapay | Cross-border and multi-currency payment flows |
 | DusuPay | Payout-focused payment operations across supported markets |
 | Onafriq | African cross-border payment connectivity Businesses that need collections, payouts and a broader multi-market payment setup |
@@ -99,15 +99,15 @@ PayOnUs is built around these wider payment requirements, supporting collections
 
 ## PayOnUs: A Payment Setup Built for Broader Requirements
 
-PayOnUs operates across eight African markets: Nigeria, Ghana, Kenya, Côte d’Ivoire, South Africa, Zambia, Senegal and Cameroon. This gives businesses a way to manage **collections** and payouts across multiple markets, with the specific payment methods and currencies depending on the market and payment flow.
+PayOnUs operates across eight African markets: Nigeria, Ghana, Kenya, Côte d’Ivoire, South Africa, Zambia, Senegal and Cameroon. This gives businesses a way to manage [collections](/collections) and payouts across multiple markets, with the specific payment methods and currencies depending on the market and payment flow.
 
 If you manage more than one business relationship, PayOnUs supports Merchant and Aggregator models. The Merchant model supports a single business, while the Aggregator model is designed for businesses managing multiple businesses and wallets within the payment operation.
 
-**Settlement** Settlement is another part of the setup. Depending on the arrangement and market, PayOnUs offers daily, weekly and on-demand settlement schedules, alongside visibility into available balances, pending settlements and funds in transit.
+[Settlement](/settlements) Settlement is another part of the setup. Depending on the arrangement and market, PayOnUs offers daily, weekly and on-demand settlement schedules, alongside visibility into available balances, pending settlements and funds in transit.
 
 For businesses operating in higher-risk sectors, eligibility can determine whether a provider can support the business in the first place. PayOnUs supports certain higher-risk business models and traffic in regions where mainstream payment providers may not accept the same activity, subject to applicable requirements and review.
 
-If your payment needs involve multiple African markets, collections and **payouts**, multiple businesses or wallets, flexible settlement, or a business model that requires broader provider support, PayOnUs provides the infrastructure to manage those requirements within one payment setup.
+If your payment needs involve multiple African markets, collections and [payouts](/payouts), multiple businesses or wallets, flexible settlement, or a business model that requires broader provider support, PayOnUs provides the infrastructure to manage those requirements within one payment setup.
 
 [Explore PayOnUs for your payment requirements](/sales)
 

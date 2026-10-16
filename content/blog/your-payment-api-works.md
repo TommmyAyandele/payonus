@@ -28,9 +28,7 @@ That is why payment infrastructure should be evaluated on more than whether an A
 - Scalable payment infrastructure should make transaction information, reporting, reconciliation, visibility, and exception handling easier to manage as activity grows.
 - Before approving another payment integration, trace what happens to a transaction after the payment succeeds and identify what new work the connection creates.
 
-## The Problem Often Appears Outside the Payment
-
-## Integration
+## The Problem Often Appears Outside the Payment Integration
 
 As your business grows, more money moves through more payment methods, providers, markets, and internal systems. The transaction itself may be processed successfully while the work around that transaction becomes harder to manage.
 
@@ -68,9 +66,7 @@ At low volume, that may be manageable. At higher volume, the same exception can 
 
 This is why payment infrastructure is partly a data-management problem. The infrastructure has to move useful transaction information through the business, not simply move money from one account to another.
 
-## More Payment Connections Can Multiply Operational
-
-## Work
+## More Payment Connections Can Multiply Operational Work
 
 Adding another payment method can solve a genuine customer or market need. The problem is treating the payment method as the entire integration decision.
 
@@ -117,9 +113,7 @@ Payment infrastructure should fit into the systems that already run your busines
 
 The objective is not to eliminate every manual task. It is to prevent payment growth from turning avoidable manual work into a permanent part of your operating model.
 
-## Test Your Next Payment Integration Before You Approve
-
-## It
+## Test Your Next Payment Integration Before You Approve It
 
 The simplest way to understand the operational impact of a payment integration is to follow one transaction all the way through your business.
 
@@ -158,7 +152,7 @@ A payment connection solves the transaction-processing problem. Payment infrastr
 
 This is the distinction PayOnUs is built around.
 
-PayOnUs provides a **Payment API** that gives businesses a common integration layer for supported payment methods, alongside transaction reporting and visibility across payment activity. Its infrastructure supports collections, payouts, and settlement workflows, so payment activity does not have to be treated as an isolated transaction-processing function.
+PayOnUs provides a [Payment API](/payment-api) that gives businesses a common integration layer for supported payment methods, alongside transaction reporting and visibility across payment activity. Its infrastructure supports collections, payouts, and settlement workflows, so payment activity does not have to be treated as an isolated transaction-processing function.
 
 In production, that distinction matters because a payment is rarely the end of a workflow. The business still needs to know what happened, where the transaction belongs, what action should follow, and how the activity can be monitored and reconciled.
 
@@ -168,9 +162,7 @@ Your requirements will depend on the payment methods you need, the markets you o
 
 The important consideration is whether the infrastructure allows those requirements to work together as payment activity grows.
 
-## What the Integration Test Tells You About Your
-
-## Infrastructure
+## What the Integration Test Tells You About Your Infrastructure
 
 The transaction test gives you a practical way to evaluate whether your payment infrastructure is actually scaling with your business.
 

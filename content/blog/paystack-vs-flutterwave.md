@@ -10,7 +10,7 @@ relatedHref: "/sales"
 
 If you're comparing Paystack vs Flutterwave for your business, payment acceptance is only the starting point.
 
-You also need to consider where you operate, how customers pay, when you can access your money, whether you need [payouts](/payouts), how your accounts are structured and particularly if you operate in a higher-risk category, whether the provider can support your business at all.
+You also need to consider where you operate, how customers pay, when you can access your money, whether you need payouts, how your accounts are structured and particularly if you operate in a higher-risk category, whether the provider can support your business at all.
 
 That makes the better question: Which payment provider fits the way your business actually needs to collect, move and settle money?
 
@@ -27,10 +27,9 @@ That makes the better question: Which payment provider fits the way your busines
 
 The right provider depends on what you need the payment setup to handle.
 
-Your Business needs to Pay attention to
-
-| Collect mainly from Nigerian customers | Payment methods, settlement and support |
+| Your Business needs to | Pay attention to |
 |---|---|
+| Collect mainly from Nigerian customers | Payment methods, settlement and support |
 | Sell across African markets | Country coverage, local methods, currencies and settlement |
 | Collect and pay money out | Collections, payouts and settlement |
 | Manage several businesses | Account structure, wallets, currencies and KYC |
@@ -88,7 +87,7 @@ You also need to know whether you can see what is happening to your money and wh
 | Destination | Can funds settle where your business needs them? |
 | Exceptions | Can you see what is happening when a settlement is delayed? |
 
-For Nigerian settlement, PayOnUs supports next-working-day settlement, while also offering same-day settlement for applicable arrangements. Its **[settlement infrastructure](/settlements)** includes flexible daily, weekly or on-demand schedules, configurable minimum thresholds, and real-time visibility into available balances, pending settlements, and in-transit funds.
+For Nigerian settlement, PayOnUs supports next-working-day settlement, while also offering same-day settlement for applicable arrangements. Its [settlement infrastructure](/settlements) includes flexible daily, weekly or on-demand schedules, configurable minimum thresholds, and real-time visibility into available balances, pending settlements, and in-transit funds.
 
 For international payouts, timing can differ, with some transactions taking 2–3 business days.
 
@@ -132,7 +131,7 @@ When both sides matter, evaluate the complete flow.
 
 Expanding into a new market can affect everything from how customers pay you to how you receive, settle and move that money through the business.
 
-PayOnUs supports collections and **payouts** across its current eight-market footprint, with payment methods varying by market. For example, Nigerian businesses can collect through card and bank transfer, while mobile money is available in relevant supported markets.
+PayOnUs supports collections and [payouts](/payouts) across its current eight-market footprint, with payment methods varying by market. For example, Nigerian businesses can collect through card and bank transfer, while mobile money is available in relevant supported markets.
 
 What matters is whether the provider can support the way money moves through your business, not whether collections and payouts happen to appear on the same product page.
 

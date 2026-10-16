@@ -8,385 +8,203 @@ relatedLabel: "Explore PayOnUs payment infrastructure for logistics and delivery
 relatedHref: "/industries/logistics"
 ---
 
-Your delivery operation is moving. Orders are being created, parcels are leaving your hubs, riders are covering routes and merchants are waiting for their money.
+For a delivery company, getting a customer to pay is only the beginning.
 
-This dynamic environment is only set to grow, with **Nigeria's e-commerce market projected to reach $11.08 billion by 2027, with a compound annual growth rate (CAGR) of 13.9% from 2023 to 2027**. From the outside, everything may look like a successful delivery operation. Then finance asks a simple question: Where is the money for this order, and who should receive it?
+The harder questions often come afterwards.
 
-The customer may have paid. The rider may have collected cash. The order may be marked as delivered. Yet the payment may still be difficult to trace, reconcile or settle correctly. That is when payment stops being just a checkout problem. It becomes an operations problem.
+You may know that a customer paid for an order, but can you easily match that payment to the right parcel? Can you tell whether a cash-on-delivery amount was actually collected? If a delivery fails, can you quickly identify what should happen to the customer's payment? And when it is time to settle merchants, can you see exactly what has been collected, deducted and paid out?
 
-For a delivery company handling hundreds or thousands of orders, the financial journey needs to stay connected to the delivery journey. Your team should be able to follow each transaction from the order and parcel through payment collection, delivery and remittance to eventual merchant settlement.
+These problems become harder as your delivery volume, merchant base and number of riders grow.
 
-The goal is straightforward: every delivery should have a clear payment status, every collection should have a traceable reference, and every merchant, rider and partner should receive the correct amount. Finance should also be able to reconcile payment records with delivery records without piecing together information from different spreadsheets and systems.
+That is why choosing a payment gateway for a delivery company in Nigeria should involve more than checking which payment methods it supports. Your payment setup also needs to work with the way your business manages orders, collections, returns and settlement.
 
 ## Key Takeaways
 
-- Payment acceptance is only part of the problem. A delivery company needs payment information to remain connected to the order, parcel, delivery outcome, collection and eventual settlement.
-- COD needs more than payment collection. Your system should compare what a rider was expected to collect with what was actually collected and remitted, with differences becoming visible exceptions for investigation.
-- Prepaid payments should remain connected to delivery outcomes. When an order is delivered, refused or returned, the business should know what financial treatment applies, including settlement, refund or adjustment.
-- Every payment should be traceable across the delivery workflow. Payment references should connect transactions to orders, parcels, merchants, riders or partners so finance and operations do not have to reconstruct transactions manually.
-- Payouts, settlement and reconciliation are part of the payment decision. A suitable payment provider should help the business understand what was collected, what belongs to each party, what has been settled and what still requires attention.
-- The right payment infrastructure should work with your existing logistics systems. APIs, webhooks, reporting and payment-status information can connect payment operations with order management, dispatch, rider, merchant and accounting systems without requiring the entire logistics operation to be replaced.
+- Your payment records should remain connected to the orders and deliveries they relate to rather than existing as isolated transactions.
+- Cash-on-delivery requires a clear way to compare what was expected, collected and remitted.
+- Failed or returned deliveries should not leave you with payments that are difficult to identify or reconcile.
+- Payment references and reporting should make it easy to trace transactions back to the relevant order, parcel and merchant.
+- Your payment infrastructure should work alongside the logistics and order-management systems you already use.
+- Payouts, settlement and reconciliation are important when you collect and distribute money on behalf of merchants.
+- If you plan to expand beyond Nigeria, your payment requirements may change across markets.
 
 ## Why a Standard Payment Gateway May Not Be Enough for a Delivery Company
 
-A standard payment gateway may be enough to accept a card or bank transfer, but it may not solve the wider payment problems created by a delivery operation.
+A standard payment gateway may not be enough because delivery businesses need to manage what happens to a payment after it succeeds, including delivery outcomes, collections, returns and merchant settlement.
 
-Consider a customer paying ₦50,000 for an order.
+If your only requirement is to let a customer pay online, a conventional payment gateway may appear to solve the problem.
 
-That payment may need to be connected to a specific order, parcel or waybill, delivery route, rider, merchant, delivery fee and commission before the correct amount can eventually be settled.
+But delivery businesses have a longer journey.
 
-If your payment system only tells you that ₦50,000 was received, your finance team may still have to determine:
+A customer might pay before the parcel is dispatched. A rider might collect cash when the parcel arrives. A merchant may need to be settled after a successful delivery. A returned order may require a refund or another adjustment.
 
-- Which order generated the payment?
-- Was the parcel delivered?
-- How much belongs to the merchant?
-- What does the delivery company earn?
-- Should the rider or partner receive anything?
-- Does anything need to be refunded or adjusted?
+If your payment system only tells you that a transaction was successful, you may still have to work out what that transaction means in the context of the delivery.
 
-That is why a delivery company should evaluate payment infrastructure based on more than payment acceptance.
+Imagine that a customer paid ₦50,000 for an order. The payment succeeded, but the parcel was returned. You now need to know which order the payment belonged to, what happened to the delivery and what financial action should follow.
 
-The real question is: can the payment operation remain connected to the order, delivery outcome, collection, payout and settlement process?
+The payment itself was successful. The operational problem was not.
 
-## How to Connect Delivery Payments to Merchant Settlement
-
-A delivery payment operation should connect the payment reference to the relevant order or parcel and preserve that connection through delivery, collection, remittance and settlement.
-
-When an order is created, the relevant payment reference should be associated with it. When a parcel is assigned to a rider, the collection responsibility should be clear. When delivery takes place, the business should be able to establish whether the expected payment was received.
-
-For a cash-on-delivery order, the system should also make it possible to compare the amount expected with the amount actually collected and remitted.
-
-Once the money has been collected, the business needs to determine what belongs to the merchant, what the delivery company has earned, what should go to a rider or partner, and whether any adjustment is required before settlement.
-
-When these records remain connected, operations and finance have a much clearer view of the financial status of each delivery.
-
-Without that connection, teams may have to compare delivery reports, bank records, rider updates, and spreadsheets manually. That becomes increasingly difficult as transaction volume grows.
-
-The problem with this, is that the payment information is not moving with the delivery information.
+For a delivery business, your payment setup therefore needs to keep each payment connected to the transaction it belongs to throughout the delivery process.
 
 ## How to Keep Cash-on-Delivery Collections Under Control
 
-COD reconciliation should compare the amount expected for an order with what the rider actually collected and remitted, with any difference becoming a visible exception for investigation.
+You can keep cash-on-delivery collections under control by comparing what was expected from each delivery with what was actually collected and eventually remitted.
 
-Before dispatch, your business needs to know:
+Suppose a customer is expected to pay ₦50,000 when a parcel arrives. You need to establish whether the rider collected the full amount, whether the money was remitted and whether the amount ultimately available for settlement matches what was expected.
 
-- How much the rider is expected to collect.
-- Which order or parcel the collection belongs to.
-- Which rider or delivery partner is responsible.
+When these records are difficult to connect, even a small discrepancy can turn into a manual investigation.
 
-After the delivery attempt, the business needs to know:
+A better setup gives you enough information to identify shortfalls, adjustments or unresolved transactions before they become larger reconciliation problems.
 
-- Whether the parcel was delivered.
-- Whether payment was collected.
-- How much was collected.
-- Whether the expected amount was fully remitted.
-
-If an order is worth ₦35,000 and the rider is expected to collect ₦35,000, but only ₦30,000 is remitted, the ₦5,000 difference should be visible as an exception.
-
-It should not disappear into a spreadsheet or remain unnoticed until a merchant raises a complaint.
-
-The same principle applies when:
-
-- A customer refuses delivery.
-- A delivery fails.
-- A parcel is returned.
-- A rider remits late.
-- A rider remits less than expected.
-
-COD reconciliation is therefore more than counting cash. It is about matching the expected amount to what was actually collected and remitted across riders, routes, branches, merchants and settlement periods.
+This becomes especially important when you handle large numbers of deliveries or collect payments on behalf of multiple merchants.
 
 ## What Happens to Prepaid Payments When a Delivery Fails or Is Returned?
 
-For a prepaid order, the payment should remain linked to the order and its eventual delivery outcome.
+When a prepaid delivery fails or is returned, you should be able to trace the payment back to the order and determine what financial action should follow.
 
-When a customer pays before delivery, the payment should be associated with the relevant order or transaction reference. Your delivery operation should then be able to establish that payment has been received before completing the relevant delivery process.
+Perhaps the customer was unavailable or the address could not be reached. The customer may have rejected the parcel, or the merchant may have requested a return.
 
-If the parcel is delivered, the payment can move into the appropriate settlement process.
+In each case, the customer has already paid even though the original delivery did not go as planned.
 
-But what happens when the customer refuses the parcel? What happens when the order is returned? What happens when delivery fails after the customer has already paid?
+Depending on your business model and policies, the appropriate outcome could be a refund, an adjustment, a different settlement treatment or another action.
 
-Your business needs a defined financial treatment for each situation.
+The important thing is that the failed delivery should not leave you with a payment that is difficult to identify or reconcile.
 
-Depending on the circumstances, the payment may need to remain settled, be refunded, be partially adjusted, or be held for investigation.
+## How to Keep Every Delivery Payment Traceable
 
-The important point is that the payment record and delivery outcome should remain connected so that the financial treatment can be determined without reconstructing the transaction later.
+You can keep delivery payments traceable by connecting each payment to the order, parcel and merchant record it belongs to.
 
-## How Delivery Outcomes Should Affect Payment and Settlement
+If you have ever looked at a transaction and had to ask, Which order is this for?, your payment records are not giving you enough context.
 
-Different delivery outcomes can require different financial treatment.
+A useful payment reference should work alongside the identifiers your delivery business already uses, such as an order number, parcel reference or merchant record.
 
-A paid and delivered order can move into the appropriate settlement process.
+That means when you need to investigate a payment, you can trace it back to the specific order and delivery it relates to rather than searching through separate systems to reconstruct the connection.
 
-A COD order needs to be checked against the amount the rider was expected to collect and remit.
+This matters when you need to establish whether a payment relates to a completed delivery, a failed delivery, a return or a merchant settlement.
 
-A prepaid order that is refused or returned may require a refund or adjustment, depending on the business's policy.
-
-A partial collection should make the difference between the expected and actual amount visible.
-
-A missing collection should become a reconciliation exception rather than another unexplained entry in a spreadsheet.
-
-Your payment infrastructure does not replace your delivery-management process. It provides the payment information that operations and finance need to apply the correct financial treatment to each delivery outcome.
-
-## How to Separate Merchant, Rider and Partner Payments
-
-A delivery company may handle money for several parties in the same transaction.
-
-There may be a customer, online merchant, delivery company, rider, vendor or delivery partner.
-
-These amounts should not be treated as one undifferentiated pool.
-
-A customer payment may contain the product value, delivery charge, commission, service fee or other approved deductions.
-
-Your business therefore needs to know:
-
-- What belongs to the merchant.
-- What belongs to the delivery company.
-- What should be paid to the rider or partner.
-- What should be refunded.
-- What remains unresolved.
-
-This becomes particularly important when your delivery company operates on behalf of multiple merchants.
-
-A merchant may want to know exactly how much was collected from customers, how much was deducted for delivery or other agreed charges, and when the remaining amount will be settled.
-
-Your finance team needs the same information to close the books accurately.
-
-A connected payment and settlement workflow makes these amounts easier to identify and manage.
+The more transactions you process, the more valuable that traceability becomes.
 
 ## What Your Delivery Payment Technology Needs to Connect
 
-A delivery company does not necessarily need to replace the systems already managing its logistics operation.
+Your payment technology needs to connect payment records with the orders, deliveries and financial records your business already relies on.
 
-Your logistics platform may already manage orders, dispatch, riders, routes, and proof of delivery. Your accounting system may already manage financial records.
+Your existing systems may already handle orders, parcels, riders and delivery statuses. You do not necessarily need to replace those systems simply because you need a better payment setup.
 
-The payment infrastructure should connect with these systems and provide the payment information they need.
+### Your payment and order records
 
-### API Integration: Connect Payments to Your Existing Logistics Systems
+Payment information should be associated with the order it relates to, giving you a clear way to establish whether an order has been paid and what happened to that payment afterwards.
 
-[Payment API](/payment-api)s can connect payment functionality with order-management systems, dispatch platforms, rider applications, accounting platforms, merchant portals and customer-facing applications.
+### Your payment and delivery status
 
-This can allow your business to improve payment operations without rebuilding the entire logistics environment.
+Your payment records should remain connected to the delivery outcome. This makes completed, failed and returned deliveries easier to identify and handle correctly.
 
-The right integration depends on how your current systems are structured, what payment events need to move between them, and how your business manages orders, collections, and settlement.
+### Your payment and financial records
 
-### Webhooks: Keep Payment Statuses Moving Between Systems
+If you settle merchants or reconcile collections, your payment records should give you enough information to determine what was collected, what was paid out and what remains outstanding.
 
-Payment-status webhooks can notify connected systems when relevant payment events occur.
+### Your existing systems
 
-Instead of requiring your team to repeatedly check individual transactions, your systems can receive relevant payment updates as they happen.
+APIs and webhooks can allow payment information and payment-status events to move between your payment provider and the systems you already use. This reduces the need to maintain separate, disconnected payment records.
 
-The implementation should also account for delayed notifications, failed payments, reversed payments, duplicate notifications, and unmatched transactions.
+### Your reporting
 
-These details matter because a payment status that does not reach the system managing the order can create another reconciliation problem.
-
-### Payment References: Make Every Collection Traceable
-
-Every payment should contain enough information to connect it to the relevant order, parcel, or transaction.
-
-Depending on your workflow, that may include an order number, parcel or waybill number, transaction reference, merchant reference, or rider or partner reference.
-
-The purpose is straightforward: when finance sees a payment, they should be able to identify what it relates to without manually searching through several systems.
-
-### Reporting and Reconciliation: Stop Chasing Payment Records Across Spreadsheets
-
-Finance and operations need visibility into payment status, expected collection, actual collection, rider remittance, merchant settlement, refunds, returns, deductions, and exceptions.
-
-As delivery volume increases, manually comparing payment records with delivery reports becomes increasingly difficult.
-
-Good reporting should make it easier to identify:
-
-- What has been paid.
-- What has been delivered.
-- What has been collected.
-- What has been remitted.
-- What has been settled.
-- What still needs attention.
-
-### Payouts and Settlement: Make Sure the Right People Get the Right Amount
-
-If your business needs to move money to merchants, riders, vendors or partners, your payment infrastructure should support the required outgoing payment flows.
-
-You should also understand when collected funds become available, how settlement is calculated, which deductions apply, where funds settle, and how settlement records connect to the original payment and delivery records.
-
-This becomes particularly important when one customer payment ultimately needs to be distributed across several parties.
+As transaction volume grows, you need more than a list of successful payments. You need enough visibility to identify transactions, settlement activity and exceptions when something does not match what you expected.
 
 ## What to Look for When Choosing a Payment Gateway for Your Delivery Business
 
-The right payment gateway for a delivery company is not simply the one that accepts cards or transfers. It should support the payment workflows that connect customer collections with orders, delivery outcomes, payouts, settlement, and reconciliation.
+The right payment gateway should support the full payment journey your delivery business needs to manage, not just the initial customer transaction.
 
-Evaluate the complete payment operation rather than choosing a provider based on checkout features or transaction fees alone.
+Instead of only asking whether cuatomers can pay through it, consider what happens after the payment.
 
-### Collections
+### Can you reliably collect customer payments?
 
-Can each payment be connected to the relevant order or parcel?
+The payment provider should support the payment methods your customers actually use and give you a reliable way to confirm successful transactions.
 
-Consider:
+### Can you connect payments to deliveries?
 
-- Which payment methods customers can use.
-- Whether the setup supports prepaid and COD workflows.
-- Whether payments can be associated with useful transaction references.
-- Whether the provider can support your expected transaction volume.
-- Whether the provider supports the markets and currencies you need.
+You should be able to associate payments with the orders and deliveries they belong to so that a successful payment does not become disconnected from what happens next.
 
-### Delivery and Payment Connection
+### Can you manage cash-on-delivery?
 
-Can payment information connect with delivery status?
+If you collect cash from customers, you need enough visibility to compare expected collections with what was actually collected and remitted.
 
-Determine whether the setup can:
+### Can you manage merchant settlement and payouts?
 
-- Distinguish between delivered, refused and returned orders.
-- Compare expected and actual collections.
-- Identify partial or missing collections.
-- Make payment exceptions visible to the relevant teams.
+If you collect money on behalf of merchants, the payment setup should support the way your business calculates and distributes what each merchant is owed.
 
-### Payouts and Settlement
+### Can you reconcile what happened to your money?
 
-Can the business pay merchants, riders and partners?
+You should be able to identify transactions, collections, payouts, settlement activity and exceptions without having to reconstruct every payment manually.
 
-Confirm:
+### Can it work with your existing technology?
 
-- Whether payouts can be processed individually or in bulk where required.
-- How failed or reversed payouts are handled.
-- When collected funds become available.
-- Where funds can settle.
-- What deductions apply.
-- How settlement records relate to the original transactions.
+If your business already uses a logistics, order-management or accounting system, check whether the payment provider can connect with it through APIs, webhooks or other integration options.
 
-### Reporting and Reconciliation
+### Will it still work as your business grows?
 
-Can finance reconcile payment records with delivery records?
+A payment setup that works for a small delivery operation may become difficult to manage as transaction volumes, merchants, riders and markets increase. Consider whether the provider can support the scale and payment complexity you expect to reach.
 
-Look for reporting that helps identify:
+## What Changes When Your Payment Infrastructure Connects to Your Delivery Operation?
 
-- Merchant-level settlement.
-- Unmatched or delayed collections.
-- Refunds and returns.
-- Commissions and deductions.
-- Payment and settlement references.
-- Outstanding exceptions.
+A connected payment setup gives you a way to manage customer collections, payouts and settlement while keeping payment information connected to the systems your delivery business already uses.
 
-### Technology and Support
+That matters when your operation needs more than payment acceptance. You may need to collect from customers, track transactions, reconcile what was collected, settle merchants and connect payment information with your existing business systems.
 
-Can the provider integrate with your existing logistics systems?
+PayOnUs provides customer collections, payouts and settlement alongside Payment APIs and reporting capabilities that can connect with existing business systems.
 
-Check for:
-
-- APIs.
-- Webhooks.
-- Sandbox or test access.
-- Transaction-status visibility.
-- Clear technical documentation.
-- Technical support.
-- Incident-management processes.
-- Escalation procedures.
-
-These questions help you evaluate the entire payment operation rather than choosing a provider simply because it can accept a payment.
+For a delivery business, the relevant question is whether those capabilities fit the way you currently collect payments, manage deliveries and settle merchants.
 
 ## Expanding a Nigerian Delivery Operation Across African Markets
 
-For a delivery company operating only in Nigeria, payment infrastructure may initially appear straightforward.
+Expanding beyond Nigeria can introduce different payment methods, currencies, settlement arrangements and compliance requirements, so the setup that works in Nigeria may not automatically work in your next market.
 
-The complexity can increase when the business begins serving merchants or customers across other African markets.
+PayOnUs operates across Nigeria, Ghana, Kenya, Côte d’Ivoire, South Africa, Zambia, Senegal and Cameroon, with capabilities covering customer collections, merchant onboarding, payouts, settlement, Payment APIs and analytics/reporting.
 
-PayOnUs operates across Nigeria, Ghana, Kenya, Côte d’Ivoire, South Africa, Zambia, Senegal and Cameroon.
-
-Across these markets, PayOnUs provides customer collection, merchant onboarding, payouts, settlement, Payment API capabilities, and analytics and reporting.
-
-For a delivery business expanding across these markets, this creates a payment infrastructure option to evaluate across its operating or expansion markets rather than automatically creating an entirely separate payment relationship in every country.
-
-The applicable payment methods, settlement arrangements, onboarding conditions, and configuration depend on the merchant's business model, transaction flows, and operating requirements.
-
-## What PayOnUs Can Change in Your Delivery Payment Operation
-
-The value is not simply in the payment features PayOnUs provides, but in what those capabilities can change across your delivery operation.
-
-| Delivery- business problem | PayOnUs capability | Potential commercial effect |
-|---|---|---|
-| Digital payments are difficult to confirm against orders | Customer collection and Payment APIs | Faster payment-status updates and fewer manual checks |
-| Merchant funds, delivery charges and deductions are difficult to track | Analytics and reporting | Clearer settlement records and easier reconciliation |
-| Rider, vendor or partner payments are manual | Payout capabilities | More structured disbursement workflows |
-| Collected funds are difficult to monitor | Settlement infrastructure | Better cash-flow and settlement planning |
-| Several markets require separate payment relationships | Multi- market infrastructure | Potentially less provider fragmentation |
-| Existing logistics systems need payment connectivity | API integration | Payment improvement without replacing the entire logistics platform |
-
-For Naira and most mobile-money collections, PayOnUs supports settlement on the following day, with flexible settlement configurations available for some merchants based on their
-
-## Improve Your Payment Operation Without Replacing Your Logistics System
-
-Your logistics platform may already manage your orders, dispatch, riders, routes and proof of delivery.
-
-Your accounting system may already manage your financial records.
-
-You do not necessarily need to replace either one simply because your payment operation needs improvement.
-
-The payment infrastructure can sit alongside these systems and provide the collection, payment, payout, settlement and reporting capabilities they need.
-
-The important requirement is that the systems communicate properly.
-
-When they do, your business can create a clearer connection between payment confirmation, COD reconciliation, merchant settlement, rider and partner payouts, payment visibility and exception handling.
-
-PayOnUs can support this through API-based payment infrastructure designed to connect with existing business systems where integration is required.
-
-## What a Connected Delivery Payment Operation Should Look Like
-
-A connected payment operation should make it possible to answer the financial questions around a delivery without reconstructing the transaction manually.
-
-For every order, your team should be able to establish whether payment was received.
-
-For every cash collection, it should be able to see what was expected and what was actually collected.
-
-For every delivered, refused or returned order, there should be a clear financial treatment.
-
-For every merchant, rider or partner, the business should be able to determine what amount is due.
-
-And for finance, payment and settlement records should be easier to reconcile with the operational records already being used by the business.
-
-That is the real value of connecting payments to delivery operations.
-
-It is not simply about accepting more payment methods.
-
-It is about being able to follow the money from the customer to the order, through delivery and collection, and into the correct settlement.
+If regional expansion is part of your plan, evaluate whether your payment provider can support the specific markets and delivery model you intend to operate.
 
 ## Frequently Asked Questions
 
 ### What should a payment gateway for a delivery company support?
 
-A suitable payment gateway should support the payment methods your customers use while helping your business connect payments with orders, delivery outcomes, collections, payouts, settlement and reconciliation. For delivery businesses, payment acceptance alone may not address the operational problems created by COD, rider remittances, merchant settlement and returned or failed deliveries.
+A suitable payment gateway should support customer collections while also giving you the ability to connect payments with orders and deliveries, manage collections, handle payouts and settlement, reconcile transactions and integrate with your existing systems.
 
-### Can a payment gateway handle cash-on-delivery reconciliation?
+### Can a payment gateway help with cash-on-delivery reconciliation?
 
-A payment gateway or connected payment infrastructure can support the payment information required for COD reconciliation, but the exact workflow depends on how the delivery company's logistics and payment systems are integrated. The business should be able to compare expected collections with actual collections and remittances and identify differences for investigation.
+Yes. A suitable payment setup can give you the transaction and collection information needed to compare what was expected from a delivery with what was actually collected and remitted.
 
-### Can payment APIs connect with an existing logistics platform?
+### Can payment APIs connect to an existing logistics platform?
 
-Yes. Payment APIs can connect payment functionality with existing order-management, dispatch, rider, accounting and merchant systems. The exact integration depends on the systems already used by the business and the payment events that need to move between them.
+Yes. APIs and webhooks can allow payment information and payment-status events to move between your payment provider and an existing logistics or order-management system, depending on the systems involved.
 
-### What happens to prepaid payments when a delivery is returned?
+### What happens to a prepaid payment when a delivery is returned?
 
-The business should have a defined financial treatment for returned prepaid orders. Depending on the circumstances and the company's policies, the payment may remain settled, be refunded, partially adjusted or require investigation. The important requirement is that the payment remains linked to the original order and delivery outcome.
+The payment should remain traceable to the original order so you can determine the appropriate financial outcome under your business policies, such as a refund, adjustment or different settlement treatment.
 
-### Can a delivery company pay merchants, riders and partners through its payment infrastructure?
+### Can a delivery company pay merchants, riders and partners?
 
-Potentially, yes. The appropriate setup depends on the business's payout requirements, recipient types, markets and provider capabilities. Before implementation, the company should confirm how payouts are initiated, processed, tracked and reconciled with the original payment and settlement records.
+Yes, depending on the payment provider and the payout structure your business requires. You should evaluate whether the provider can support the recipients, payment flows and settlement arrangements relevant to your operation.
 
-### What should a delivery company consider when choosing a payment provider in Nigeria?
+### What should I consider when choosing a payment provider for a delivery business in Nigeria?
 
-The company should evaluate payment coverage, COD and collection workflows, payment-status handling, payment references, payouts, settlement, reconciliation, API capabilities, support, transaction limits, merchant eligibility and commercial terms. The provider should be evaluated against the actual payment and delivery workflows of the business rather than checkout features alone.
+Look beyond payment acceptance. Consider customer payment methods, payment traceability, cash-on-delivery handling, merchant settlement, reconciliation, integrations, reporting, scalability and your plans for expansion.
 
 ### Can PayOnUs support delivery businesses operating across multiple African markets?
 
-PayOnUs operates across Nigeria, Ghana, Kenya, Côte d’Ivoire, South Africa, Zambia, Senegal and Cameroon. The applicable payment methods, settlement arrangements, onboarding requirements and configuration depend on the merchant's business model and requirements and should be confirmed with PayOnUs before implementation.
+PayOnUs operates across Nigeria, Ghana, Kenya, Côte d’Ivoire, South Africa, Zambia, Senegal and Cameroon, with payment capabilities that include customer collections, merchant onboarding, payouts, settlement, Payment APIs and analytics/reporting.
 
 ## Ready to Review Your Logistics Payment Setup?
 
-If your business manages customer payments, cash collections, rider remittances, merchant settlements or payment reconciliation across different systems, the next step is to review the payment workflow behind the delivery operation.
+If you are having difficulty matching payments to deliveries, reconciling cash collected by riders or determining what should be settled to merchants, the problem may be bigger than payment acceptance.
 
-A useful conversation should start with how your business actually works.
+Review your current setup and ask:
 
-That includes your payment channels, COD workflow, delivery and dispatch systems, rider and partner payout process, merchant settlement requirements, integration environment, reconciliation process and expansion markets.
+- Can you easily identify which order a payment belongs to?
+- Can you compare what was expected against what was actually collected?
+- Can you trace prepaid payments when deliveries fail or are returned?
+- Can you see what has been collected, paid out and settled?
+- Can your payment system connect with the logistics systems you already use?
+- Will the same setup support your plans for growth or expansion?
 
-[Talk to PayOnUs about your logistics payment requirements →](/sales)
+If the answer to several of these questions is no, it may be time to rethink how payment fits into your delivery operation.
 
-The objective is not simply to find a provider that can process a payment.
-
-It is to determine whether your payment infrastructure can support the way your delivery operation actually works.
+[Talk to PayOnUs about your logistics payment requirements.](/sales)

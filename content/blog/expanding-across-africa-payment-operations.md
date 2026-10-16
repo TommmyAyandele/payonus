@@ -41,7 +41,7 @@ That is the real payment challenge of regional expansion, adapting to what each 
 
 A new market changes not only how customers pay, but also how you collect, settle, and manage those payments. Payment methods are usually the most visible difference.
 
-Customers in a new market may expect payment options that are different from those used in your existing market. The currency may also change, along with **how funds are collected** and [settled](/settlements).
+Customers in a new market may expect payment options that are different from those used in your existing market. The currency may also change, along with [how funds are collected](/collections) and settled.
 
 Those differences matter because the payment experience is only one part of the transaction.
 
@@ -111,7 +111,7 @@ Start with the customer side:
 
 Then look at the movement of funds:
 
-- How will [collections](/collections) work?
+- How will collections work?
 - How and when will funds be settled?
 - Will your business need payouts, and to whom?
 
@@ -142,7 +142,7 @@ Check the new market for:
 - Payment methods: Are the options your customers are likely to use available?
 - Currency: Can you collect and manage payments in the currency your business requires?
 - Collections: Can you receive customer payments in a way that fits your business model?
-- Settlement: Do you understand **how and when funds will become available**?
+- Settlement: Do you understand [how and when funds will become available](/settlements)?
 - Payouts: Can the provider support the recipients your business needs to pay?
 - Integration: Can the new market fit your existing technical approach?
 - Operating model: How much of your existing payment process can remain consistent?

@@ -12,7 +12,7 @@ You have paid the supplier.
 
 The payment record says successful. But the supplier says the amount received is different from the invoice, or the money has not arrived yet.
 
-For a **manufacturer**, that can become more than a payment issue. A supplier may be waiting to release raw materials, confirm an order, ship components or close an outstanding invoice.
+For a [manufacturer](/industries/manufacturing), that can become more than a payment issue. A supplier may be waiting to release raw materials, confirm an order, ship components or close an outstanding invoice.
 
 Your payment record tells you what you instructed and what left your account. It does not always give you the full picture of what happened at the supplier’s end.
 
@@ -143,9 +143,9 @@ This is where the design of the payment infrastructure matters. A payment provid
 
 When you pay a supplier, the payment should remain identifiable and understandable after it leaves your account. You should have enough information around the transaction to understand its outcome without turning every supplier query into a separate investigation.
 
-That is where [payouts](/payouts) and [analytics and reporting](/analytics) serve different but connected purposes.
+That is where payouts and analytics and reporting serve different but connected purposes.
 
-**Payouts** provide the mechanism for moving funds to suppliers. **Analytics and reporting** provide visibility around that activity, helping you monitor payments and investigate what happened across the payment flow.
+[Payouts](/payouts) provide the mechanism for moving funds to suppliers. [Analytics and reporting](/analytics) provide visibility around that activity, helping you monitor payments and investigate what happened across the payment flow.
 
 PayOnUs brings those capabilities together within its payment infrastructure, so the supplier payment is not treated simply as a transfer out of the business. The payment activity remains part of a wider, visible payment operation.
 

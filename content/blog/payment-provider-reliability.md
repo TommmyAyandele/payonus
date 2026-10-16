@@ -121,7 +121,7 @@ This is where the design of your payment infrastructure matters.
 
 When something goes wrong, you need more than the ability to attempt the payment again. You need enough information around the transaction to understand its status and determine what to do next.
 
-Payment status visibility, **API connectivity**, and [analytics and reporting](/analytics) all contribute to that.
+Payment status visibility, [API connectivity](/payment-api), and analytics and reporting all contribute to that.
 
 An API can connect payment activity to the systems where you already manage orders or transactions. Reporting can give you a broader view of what is happening instead of forcing you to investigate each payment in isolation.
 
@@ -133,7 +133,7 @@ Where does it stand?
 
 What can I do next?
 
-Your payment infrastructure should give you clear answers to these questions. PayOnUs brings collections, payouts, [Payment API](/payment-api) connectivity, and **analytics and reporting** together within the wider payment operation, so you can keep track of payment activity without treating each payment flow as a separate process.
+Your payment infrastructure should give you clear answers to these questions. PayOnUs brings collections, payouts, Payment API connectivity, and [analytics and reporting](/analytics) together within the wider payment operation, so you can keep track of payment activity without treating each payment flow as a separate process.
 
 The value for you is in having enough visibility and connection around your payment activity to understand what is happening, where a transaction stands, and what needs to happen next.
 

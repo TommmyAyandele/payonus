@@ -14,7 +14,7 @@ This means your business has developed needs that the original setup was never d
 
 You start to see it when your payment setup requires you to do more just to keep things working.
 
-You add another provider because your current one cannot support a market you have entered. You need a separate arrangement for [payouts](/payouts). You use different payment setups for different parts of the business. You have to make recurring manual adjustments to support something that used to be straightforward.
+You add another provider because your current one cannot support a market you have entered. You need a separate arrangement for payouts. You use different payment setups for different parts of the business. You have to make recurring manual adjustments to support something that used to be straightforward.
 
 When these changes become part of how you operate, it is worth asking whether your payment setup still fits the business.
 
@@ -51,7 +51,7 @@ It could be:
 |---|---|
 | You entered new markets | Whether the current setup supports the requirements of those markets |
 | Your payment methods changed | Whether the required payment flows are available |
-| You now need payouts as well as [collections](/collections) | Whether the setup supports how money needs to move through the business |
+| You now need payouts as well as collections | Whether the setup supports how money needs to move through the business |
 | You operate multiple businesses or entities | Whether the account structure reflects how the business is organised |
 | Your settlement requirements changed | Whether the current arrangement still suits your needs |
 | Your business model changed | Whether the provider can still support your business category |
@@ -88,13 +88,13 @@ Once you know what changed, evaluate your options against that specific requirem
 
 Start with what your current setup can no longer support without extra steps. Then assess potential providers based on what you now need.
 
-If the issue is market access, look at the markets and operating requirements that matter to you. If you're [**expanding into another African market**](/resources/expanding-across-africa-payment-operations), your payment setup may need to change with the requirements of that market.
+If the issue is market access, look at the markets and operating requirements that matter to you. If you're [expanding into another African market](/resources/expanding-across-africa-payment-operations), your payment setup may need to change with the requirements of that market.
 
-If the issue is **bringing money into the business**, assess whether your current setup supports the payment flows you need for collections.
+If the issue is [bringing money into the business](/collections), assess whether your current setup supports the payment flows you need for collections.
 
-If the issue is **moving money out of the business**, assess whether your setup supports payouts without requiring a separate process.
+If the issue is [moving money out of the business](/payouts), assess whether your setup supports payouts without requiring a separate process.
 
-If the issue is [**settlement**](/settlements), determine whether the available arrangement fits your requirements.
+If the issue is [settlement](/settlements), determine whether the available arrangement fits your requirements.
 
 If the issue is eligibility, establish whether the provider can support your business category under its applicable requirements.
 

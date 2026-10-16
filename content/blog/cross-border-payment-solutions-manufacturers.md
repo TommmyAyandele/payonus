@@ -262,4 +262,4 @@ If your business makes recurring supplier payments across borders, the right que
 
 PayOnUs can review your supplier locations, payment currencies, payment volumes, current providers, settlement requirements, finance and reconciliation workflow, integration environment, and expansion plans.
 
-[Review your cross-border supplier-payment setup →](/sales)
+**Review your cross-border supplier-payment setup →**
