@@ -27,7 +27,7 @@ This guide will show you how to look beyond the transfer fee and understand what
 ## Key Takeaways
 
 - The transfer fee is only one part of the cost. FX spreads, intermediary deductions, receiving-bank charges and failed or repeated payments can increase the real cost.
-- The amount you send is not necessarily [the amount your supplier receives](/resources/supplier-payments-africa).
+- The amount you send is not necessarily the amount your supplier receives.
 - Payment delays can become production problems when suppliers are waiting for cleared funds before releasing materials, components or equipment.
 - Supplier payments should be traceable from the invoice through payment, supplier receipt and reconciliation.
 - The right provider depends on your supplier locations, currencies, payment volumes, settlement requirements and total payment cost.
@@ -262,4 +262,4 @@ If your business makes recurring supplier payments across borders, the right que
 
 PayOnUs can review your supplier locations, payment currencies, payment volumes, current providers, settlement requirements, finance and reconciliation workflow, integration environment, and expansion plans.
 
-**Review your cross-border supplier-payment setup →**
+[Review your cross-border supplier-payment setup →](/sales)
